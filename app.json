@@ -1,0 +1,19 @@
+{
+  "name": "UNO-Shareboard",
+  "scripts": {
+  },
+  "env": {
+    "HEROKU_POSTGRESQL_GREEN_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+
+  ]
+}
