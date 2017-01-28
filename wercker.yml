@@ -29,7 +29,7 @@ dev:
 deploy:
   steps:
     - script:
-      name: deploy to heroku
+      name: deploy to Heroku
       code: |
         git push https://git.heroku.com/team-bayou.git HEAD:refs/heads/master -f
 
