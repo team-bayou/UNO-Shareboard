@@ -25,3 +25,13 @@ dev:
       name: mvn test package
       code: |
         ./mvnw package
+# defining the deploy pipeline
+deploy:
+  steps:
+    - script:
+      name: deploy to heroku
+      code: |
+        git push https://git.heroku.com/team-bayou.git HEAD:refs/heads/master -f
+
+
+        
