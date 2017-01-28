@@ -16,8 +16,6 @@
 # http://devcenter.wercker.com/docs/pipelines/index.html
 # docker box definition
 box: java
-
-
 # defining the dev pipeline
 dev:
   steps:
@@ -34,4 +32,4 @@ deploy:
         git push https://git.heroku.com/team-bayou.git HEAD:refs/heads/master -f
 
 
-        
+       
