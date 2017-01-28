@@ -16,11 +16,20 @@
 # http://devcenter.wercker.com/docs/pipelines/index.html
 # docker box definition
 box: java
-
 # defining the dev pipeline
 dev:
   steps:
     - script:
-      name: mvn spring-boot:run
+      name: mvn test package
       code: |
-        mvn spring-boot:run
+        ./mvnw package
+# defining the deploy pipeline
+deploy:
+  steps:
+    - script:
+      name: deploy to Heroku
+      code: |
+        git push https://git.heroku.com/team-bayou.git HEAD:refs/heads/master -f
+
+
+       
