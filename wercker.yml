@@ -23,4 +23,4 @@ dev:
     - script:
       name: mvn spring-boot:run
       code: |
-        ./mvn spring-boot:run
+        mvn spring-boot:run
