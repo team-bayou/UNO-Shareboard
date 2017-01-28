@@ -22,6 +22,6 @@ box: java
 dev:
   steps:
     - script:
-      name: mvn spring-boot:run
+      name: mvn test package
       code: |
-        ./mvnw spring-boot:run
+        ./mvnw package
