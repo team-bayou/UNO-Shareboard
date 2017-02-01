@@ -1,0 +1,151 @@
+{
+	"variables": [],
+	"info": {
+		"name": "UNOshareboard",
+		"_postman_id": "6864b897-c8ce-d321-0dde-c6d68eeb4242",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API - User_DEV",
+			"description": "",
+			"item": [
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+							}
+						}
+					],
+					"request": {
+						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/addUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"jleaton\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - User_Local",
+			"description": "",
+			"item": [
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8090/service/v1/users/addUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"jleaton\"\n}"
+						},
+						"description": "Add a user to postgres"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - User_PROD",
+			"description": "",
+			"item": [
+				{
+					"name": "Add User copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+							}
+						}
+					],
+					"request": {
+						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/addUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"jleaton\"\n}"
+						},
+						"description": "Add a user to postgres"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - User_QA",
+			"description": "",
+			"item": [
+				{
+					"name": "Add User copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+							}
+						}
+					],
+					"request": {
+						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/addUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"jleaton\"\n}"
+						},
+						"description": "Add a user to postgres"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
