@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "UNOshareboard_UserController_DEV",
+		"_postman_id": "6864b897-c8ce-d321-0dde-c6d68eeb4242",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"url": "http://localhost:8090/service/v1/users/addUser",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"jleaton\"\n}"
+				},
+				"description": "Add a user to postgres"
+			},
+			"response": []
+		}
+	]
+}
