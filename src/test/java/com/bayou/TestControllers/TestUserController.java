@@ -1,4 +1,4 @@
-package com.bayou;
+package com.bayou.TestControllers;
 
 import com.bayou.controllers.UserControllerV1;
 import com.bayou.views.impl.UserView;
@@ -17,7 +17,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
 public class TestUserController {
 
     @Autowired
