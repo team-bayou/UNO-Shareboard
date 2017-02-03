@@ -1,0 +1,120 @@
+===============================================================================
+UNO-SHAREBOARD
+===============================================================================
+
+Key features:
+  - Sell/Trade "Advertisments" ("Items" and "Services") of different categories
+
+Future features:
+  - Buy/Seek   "Advertisments" ("Items" and "Services") of different categories
+
+Optional features:
+  - Evaluate a seller/trader
+  - History for each seller/trader about sold/traded advertisments
+
+===============================================================================
+OBJECTS
+===============================================================================
+
+User:
+  - Contact info
+    - First name
+    - Last name
+    - Email
+    - Tel/Mobile number
+    - Social media (Facebook, Twitter, Google,...)
+  - Rating
+  - Avatar (optional)
+
+At least one of email, tel/mobile number, or social media is required.
+
+
+Item:
+  - Title
+  - Description
+  - Category
+  - Published on
+  - Amount
+  - Price (Currency or 'value')
+  - Location
+  - User (Owner)
+
+
+Service:
+  - Title
+  - Description
+  - Category
+  - Published on
+  - Price (Currency or 'value')
+  - Location
+  - User (Owner)
+
+
+Item categories:
+  - Books, magazines
+  - Notes
+    - Science
+      - Computer Science
+      - Biology
+      - Physics
+      - ...
+    - Engineering
+    - Education
+    - ...
+  - Electronics 
+    - Mobile phones
+    - Computers
+    - Tablets
+    - ...
+  - Tools
+  - Clothes
+    - ...
+  - Furnitures
+    - ...
+  - Accessories
+  - ...
+
+
+Service categories:
+  - Craft
+  - Electronic & computer
+  - Garden
+  - Mobility (Driving, shopping,...)
+  - ...
+
+
+Review:
+  - Stars, points/credits, or likes
+  - Number of sucessfully completed transactions
+  - Comments
+  - Review date
+  - User
+
+===============================================================================
+CONTROL FLOW
+===============================================================================
+
+1. Start page
+  - Title, small bio of the app
+  - Sign-in form
+  - Sign-up link
+  - Forgot-your-password? link
+
+2. Main page
+  - 2 buttons, left button "View sell/trade ads", right button "..." (future feature)
+  - Nav bar with options for "Account", "My ads", "Settings",...
+  - Ad feed on the right side showing all subscribed ads
+
+3. View ads page
+  - Filter options on top: Filter categories and subcategories
+  - List of ads
+
+4. Ad details page
+  - Post-like page with title, description, posted on, price, owner
+  - Images/Slideshow of ad
+  - Owner image
+
+5. Account page
+  - User image
+  - Settings for editing account information (e.g., contact info, upload profile image)
+
