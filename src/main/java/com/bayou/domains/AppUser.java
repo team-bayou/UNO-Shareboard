@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
  * Created by joshuaeaton on 1/31/17.
  */
 @Entity
-public class UserApp {
+public class AppUser {
 
 
   @Id //specifies that this is the primary id of this entity
