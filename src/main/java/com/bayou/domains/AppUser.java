@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +20,11 @@ public class AppUser {
   @GeneratedValue(strategy = GenerationType.AUTO) //this ensures that a id is auto generated
   private long userID;
 
+  @Column
   private String username;
-
+  @Column
   private String firstName;
-
+  @Column
   private String lastName;
 
 
