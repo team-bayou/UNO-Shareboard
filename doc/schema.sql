@@ -17,7 +17,7 @@ CREATE TABLE unverified_users (
     password_hash CHARACTER(128) NOT NULL,
     password_salt CHARACTER(64) NOT NULL,
     verification_code integer NOT NULL
-)
+);
 
 CREATE TABLE ads (
 	ad_id serial PRIMARY KEY,
@@ -34,7 +34,7 @@ CREATE TABLE categories (
 	category_id serial PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	description text,
-	parent_category_id integer REFERENCES categories(category_id),
+	parent_category_id integer REFERENCES categories(category_id)
 );
 
 CREATE TABLE review (
