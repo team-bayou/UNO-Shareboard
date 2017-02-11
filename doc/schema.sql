@@ -11,6 +11,14 @@ CREATE TABLE users (
 	twitterHandle VARCHAR(100)
 );
 
+CREATE TABLE unverified_users (
+    unverified_user_id serial PRIMARY KEY,
+    email VARCHAR(120) UNIQUE NOT NULL,
+    password_hash CHARACTER(128) NOT NULL,
+    password_salt CHARACTER(64) NOT NULL,
+    verification_code integer NOT NULL
+);
+
 CREATE TABLE categories (
 	category_id serial PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
