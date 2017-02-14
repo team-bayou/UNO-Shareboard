@@ -16,6 +16,6 @@ public class UserResourceAccessor {
 
     public AppUser addUser(AppUser user) {
 
-        return  userRepo.save(user);//access repo to add user
+        return userRepo.save(user);//access repo to add user
     }
 }
