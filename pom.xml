@@ -137,19 +137,25 @@
 						<id>copy-dependencies</id>
 						<phase>package</phase>
 						<goals><goal>copy</goal></goals>
+
 						<configuration>
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.flywaydb</groupId>
 									<artifactId>flyway-core</artifactId>
 									<version>3.2.1</version>
-									<destFileName>flyway.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-maven-plugin</artifactId>
+			<version>4.1.0</version>
+			<configuration></configuration>
+		</plugin>
 		</plugins>
 	</build>
 

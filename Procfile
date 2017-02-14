@@ -1,0 +1,1 @@
+release: java -cp target/classes/com/bayou/configurations/Migrations.class
