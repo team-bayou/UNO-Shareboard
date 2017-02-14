@@ -1,17 +1,15 @@
-
-
 create schema if not exists shareboard;
 
 CREATE TYPE ad_type AS ENUM ('offer', 'seek');
 
-CREATE TABLE shareboard.images (
+CREATE TABLE images (
     image_id serial PRIMARY KEY,
     image_mime_type VARCHAR(128) NOT NULL,
     image_data bytea NOT NULL,
     description text
 );
 
-CREATE TABLE shareboard.app_users (
+CREATE TABLE app_users (
 	user_id serial PRIMARY KEY,
 	account_name VARCHAR(30) UNIQUE NOT NULL,
 	password_hash CHARACTER(128) NOT NULL,
@@ -25,7 +23,7 @@ CREATE TABLE shareboard.app_users (
 	image_id integer REFERENCES images(image_id) NOT NULL
 );
 
-CREATE TABLE shareboard.unverified_users (
+CREATE TABLE unverified_users (
     unverified_user_id serial PRIMARY KEY,
     email VARCHAR(120) UNIQUE NOT NULL,
     password_hash CHARACTER(128) NOT NULL,
@@ -33,7 +31,7 @@ CREATE TABLE shareboard.unverified_users (
     verification_code integer NOT NULL
 );
 
-CREATE TABLE shareboard.categories (
+CREATE TABLE categories (
 	category_id serial PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
 	color CHARACTER(10) NOT NULL,
@@ -41,7 +39,7 @@ CREATE TABLE shareboard.categories (
 	parent_category_id integer REFERENCES categories(category_id)
 );
 
-CREATE TABLE shareboard.ads (
+CREATE TABLE ads (
 	ad_id serial PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
 	description text,
@@ -54,7 +52,7 @@ CREATE TABLE shareboard.ads (
 	trade_item VARCHAR(100)
 );
 
-CREATE TABLE shareboard.reviews (
+CREATE TABLE reviews (
 	review_id serial PRIMARY KEY,
 	rating integer NOT NULL,
 	comments text,
@@ -62,7 +60,7 @@ CREATE TABLE shareboard.reviews (
 	reviewee integer NOT NULL REFERENCES users(user_id)
 );
 
-CREATE TABLE shareboard.ad_image_xref (
+CREATE TABLE ad_image_xref (
     ad_image_xref_id serial PRIMARY KEY,
     ad_id integer REFERENCES ads(ad_id) NOT NULL,
     image_id integer REFERENCES images(image_id) NOT NULL
