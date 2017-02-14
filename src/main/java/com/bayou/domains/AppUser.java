@@ -19,7 +19,7 @@ public class AppUser {
 
 
   @javax.persistence.Id //specifies that this is the primary id of this entity
-  @GeneratedValue(strategy = GenerationType.AUTO) //this ensures that a id is auto generated
+//  @GeneratedValue(strategy = GenerationType.AUTO) //this ensures that a id is auto generated
   private long userID;
 
   @Column
