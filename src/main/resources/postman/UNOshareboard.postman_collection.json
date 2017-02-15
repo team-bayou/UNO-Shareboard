@@ -58,7 +58,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8090/service/v1/users/addUser",
+						"url": "http://localhost:8090/service/v1/users/id?user_id=212444883",
 						"method": "POST",
 						"header": [
 							{
@@ -69,7 +69,36 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\":\"jleaton\"\n}"
+							"raw": "{\n  \"user_id\": 212444883,\n  \"account_name\": \"jleaton3\",\n  \"password_hash\": \"jjjjjjj3\",\n  \"password_salt\": \"hhhhhhh3\",\n  \"first_Name\": \"Joshua3\",\n  \"last_Name\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phone_number\": \"5046555038\",\n  \"facebook_id\": \"Josh Eaton\",\n  \"twitter_handle\": \"twitterHandleName\"\n}"
+						},
+						"description": "Add a user to postgres"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8090/service/v1/users/id?user_id=212444883",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 212444883,\n  \"account_name\": \"jleaton3\",\n  \"password_hash\": \"jjjjjjj3\",\n  \"password_salt\": \"hhhhhhh3\",\n  \"first_Name\": \"Joshua3\",\n  \"last_Name\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phone_number\": \"5046555038\",\n  \"facebook_id\": \"Josh Eaton\",\n  \"twitter_handle\": \"twitterHandleName\"\n}"
 						},
 						"description": "Add a user to postgres"
 					},
