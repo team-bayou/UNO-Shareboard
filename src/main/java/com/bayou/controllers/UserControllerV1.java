@@ -19,11 +19,27 @@ public class UserControllerV1 {
     UserManager userManager = new UserManager();
 
 
+
     @ApiOperation(value= "Get a user by id" , response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public ResponseEntity<UserView> getUserByID(@RequestParam Long user_id ) {
 
         return new ResponseEntity<>( userManager.getUserByID(user_id), HttpStatus.OK);
+    }
+/*
+    @ApiOperation(value= "Get a user by account_name" , response = ResponseEntity.class)
+    @RequestMapping(value = "/{account_name}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    public ResponseEntity<UserView> getUserByAccountName(@RequestParam String account_name) {
+
+        return new ResponseEntity<>( userManager.getUserByAccountName(account_name), HttpStatus.OK);
+    }
+*/
+
+    @ApiOperation(value= "Get a user by email" , response = ResponseEntity.class)
+    @RequestMapping(value = "/email/{email}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    public ResponseEntity<UserView> getUserByEmail(@RequestParam String email) {
+
+        return new ResponseEntity<>( userManager.getUserByEmail(email), HttpStatus.OK);
     }
 
     @ApiOperation(value= "Add a user" , response = ResponseEntity.class)

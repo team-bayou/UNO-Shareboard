@@ -20,6 +20,11 @@ public class UserManager implements IUserManager{
     UserConverter converter = new UserConverter();
 
 
+    public UserView getUserByEmail(String email) {
+
+        return converter.convertToView(ras.getUserByUserEmail(email));
+    }
+
     public UserView getUserByID(Long user_id) {
 
         return converter.convertToView(ras.getUserByUserId(user_id));
