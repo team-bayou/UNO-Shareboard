@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
  * Created by joshuaeaton on 1/31/17.
  */
 @Entity
-public class AppUser {
+public class User {
 
 
 

@@ -9,7 +9,7 @@ CREATE TABLE images (
     description text
 );
 
-CREATE TABLE app_users (
+CREATE TABLE users (
 	user_id serial PRIMARY KEY,
 	account_name VARCHAR(30) UNIQUE NOT NULL,
 	password_hash CHARACTER(128) NOT NULL,

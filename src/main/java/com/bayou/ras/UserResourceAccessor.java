@@ -1,6 +1,6 @@
 package com.bayou.ras;
 
-import com.bayou.domains.AppUser;
+import com.bayou.domains.User;
 import com.bayou.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class UserResourceAccessor {
     @Autowired
     IUserRepository userRepo;
 
-    public AppUser addUser(AppUser user) {
+    public User addUser(User user) {
 
         return userRepo.save(user);//access repo to add user
     }
