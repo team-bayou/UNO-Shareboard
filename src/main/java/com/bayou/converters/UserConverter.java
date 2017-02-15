@@ -21,7 +21,9 @@ public class UserConverter {
         view.setPassword_hash(user.getPassword_hash());
         view.setPassword_salt(user.getPassword_salt());
         view.setEmail(user.getEmail());
-        view.setFacebookID(user.getFacebookID());
+        view.setPhone_number(user.getPhone_number());
+        view.setFacebook_id(user.getFacebook_id());
+        view.setTwitter_handle(user.getTwitter_handle());
        // view.setImage_id(user.getImage_id());
 
         return view;    //return the View version of the given domain Object
@@ -37,7 +39,9 @@ public class UserConverter {
         domainUser.setPassword_hash(userView.getPassword_hash());
         domainUser.setPassword_salt(userView.getPassword_salt());
         domainUser.setEmail(userView.getEmail());
-        domainUser.setFacebookID(userView.getFacebookID());
+        domainUser.setPhone_number(userView.getPhone_number());
+        domainUser.setFacebook_id(userView.getFacebook_id());
+        domainUser.setTwitter_handle(userView.getTwitter_handle());
        // domainUser.setImage_id(userView.getImage_id());
 
         return domainUser;  //return the Domain version of the given view Object

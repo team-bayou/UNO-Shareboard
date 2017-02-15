@@ -85,19 +85,19 @@ public class UserView implements IView {
         this.phone_number = phone_number;
     }
 
-    public String getFacebookID() {
-        return facebook_id;
+    public String getFacebook_id() {
+        return this.facebook_id;
     }
 
-    public void setFacebookID(String facebookID) {
+    public void setFacebook_id(String facebookID) {
         this.facebook_id = facebookID;
     }
 
-    public String getTwitterHandle() {
+    public String getTwitter_handle() {
         return twitter_handle;
     }
 
-    public void setTwitterHandle(String twitterHandle) {
+    public void setTwitter_handle(String twitterHandle) {
         this.twitter_handle = twitterHandle;
     }
 

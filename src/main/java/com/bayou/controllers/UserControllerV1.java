@@ -22,7 +22,7 @@ public class UserControllerV1 {
     UserManager userManager = new UserManager();
 
     @ApiOperation(value= "Add a user" , response = ResponseEntity.class)
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<UserView> addUser(@RequestBody UserView userView) {
 
         return new ResponseEntity<>( userManager.addUser(userView), HttpStatus.OK);

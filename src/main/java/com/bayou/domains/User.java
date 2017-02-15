@@ -104,24 +104,21 @@ public class User {
     this.phone_number = phone_number;
   }
 
-  public String getFacebookID() {
+  public String getFacebook_id() {
     return facebook_id;
   }
 
-  public void setFacebookID(String facebookID) {
+  public void setFacebook_id(String facebook_id) {
     this.facebook_id = facebook_id;
   }
 
-  public String getTwitterHandle() {
+  public String getTwitter_handle() {
     return twitter_handle;
   }
 
-  public void setTwitterHandle(String twitterHandle) {
-    this.twitter_handle = twitterHandle;
+  public void setTwitter_handle(String twitter_handle) {
+    this.twitter_handle = twitter_handle;
   }
-
-
-
 
 
 }
