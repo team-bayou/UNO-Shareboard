@@ -14,7 +14,15 @@ public class UserConverter {
     public UserView convertToView(User user) {
 
         UserView view = new UserView(); //this will be the newly created View version of the domain Object
-        view.setUsername(user.getUsername());
+        view.setUser_id(user.getUser_id());
+        view.setAccount_name(user.getAccount_name());
+        view.setFirst_Name(user.getFirst_Name());
+        view.setLast_Name(user.getLast_Name());
+        view.setPassword_hash(user.getPassword_hash());
+        view.setPassword_salt(user.getPassword_salt());
+        view.setEmail(user.getEmail());
+        view.setFacebookID(user.getFacebookID());
+       // view.setImage_id(user.getImage_id());
 
         return view;    //return the View version of the given domain Object
     }
@@ -22,7 +30,15 @@ public class UserConverter {
     public User convertToDomain(UserView userView) {
 
         User domainUser = new User();   //this will be the newly created Domain version of the view Object
-        domainUser.setUsername(userView.getUsername());
+        domainUser.setUser_id(userView.getUser_id());
+        domainUser.setAccount_name(userView.getAccount_name());
+        domainUser.setFirst_Name(userView.getFirst_Name());
+        domainUser.setLast_Name(userView.getLast_Name());
+        domainUser.setPassword_hash(userView.getPassword_hash());
+        domainUser.setPassword_salt(userView.getPassword_salt());
+        domainUser.setEmail(userView.getEmail());
+        domainUser.setFacebookID(userView.getFacebookID());
+       // domainUser.setImage_id(userView.getImage_id());
 
         return domainUser;  //return the Domain version of the given view Object
     }

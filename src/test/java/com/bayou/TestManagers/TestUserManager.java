@@ -28,13 +28,13 @@ public class TestUserManager {
     public void testAddUser() {
 
         UserView returnedView = userManager.addUser(createMockPart());
-        assertThat(returnedView.getUsername(), is("jleaton"));
+        assertThat(returnedView.getAccount_name(), is("jleaton"));
     }
 
     private static UserView createMockPart() {
 
         UserView userView = new UserView();
-        userView.setUsername("jleaton");
+        userView.setAccount_name("jleaton");
         return userView;
     }
 }

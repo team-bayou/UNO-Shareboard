@@ -1,4 +1,12 @@
-create schema if not exists shareboard;
+DROP TABLE IF EXISTS schema_version;
+DROP TABLE IF EXISTS ad_image_xref;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS ads;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS unverified_users;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS images;
+DROP TYPE IF EXISTS ad_type;
 
 CREATE TYPE ad_type AS ENUM ('offer', 'seek');
 
@@ -18,9 +26,8 @@ CREATE TABLE users (
 	last_name VARCHAR(20),
 	email VARCHAR(100) UNIQUE NOT NULL,
 	phone_number VARCHAR(30),
-	facebookID VARCHAR(120),
-	twitterHandle VARCHAR(100),
-	image_id integer REFERENCES images(image_id) NOT NULL
+	facebook_id VARCHAR(120),
+	twitter_handle VARCHAR(100)
 );
 
 CREATE TABLE unverified_users (

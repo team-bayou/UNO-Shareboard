@@ -29,12 +29,12 @@ public class TestUserController {
         UserView returnedView = responseEntity.getBody();   //get the response from adding the user
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));  //assert that the status code is 200 OK
-        assertThat(returnedView.getUsername(), is("jleaton"));  //assert that the username is jleaton
+        assertThat(returnedView.getAccount_name(), is("jleaton"));  //assert that the username is jleaton
     }
 
     private UserView getMockUserView() {
         UserView userView = new UserView();
-        userView.setUsername("jleaton");
+        userView.setAccount_name("jleaton");
         return userView;
     }
 
