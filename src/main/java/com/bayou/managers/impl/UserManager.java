@@ -19,6 +19,12 @@ public class UserManager implements IUserManager{
     @Autowired
     UserConverter converter = new UserConverter();
 
+
+    public UserView getUserByID(Long user_id) {
+
+        return converter.convertToView(ras.getUserByUserId(user_id));
+    }
+
     @Override
     public UserView addUser(UserView userView) {
 

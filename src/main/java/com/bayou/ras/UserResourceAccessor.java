@@ -14,8 +14,11 @@ public class UserResourceAccessor {
     @Autowired
     IUserRepository userRepo;
 
-    public User addUser(User user) {
+    public User getUserByUserId(Long user_id) {
+        return userRepo.findOne(user_id);//access repo to get user
+    }
 
+    public User addUser(User user) {
         return userRepo.save(user);//access repo to add user
     }
 }
