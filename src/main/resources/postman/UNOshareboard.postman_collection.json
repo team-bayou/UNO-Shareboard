@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "API - User_DEV",
+			"name": "API - User_LOCAL",
 			"description": "",
 			"item": [
 				{
@@ -18,12 +18,12 @@
 							"listen": "test",
 							"script": {
 								"type": "text/javascript",
-								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
 							}
 						}
 					],
 					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/addUser",
+						"url": "http://localhost:8090/service/v1/users/add",
 						"method": "POST",
 						"header": [
 							{
@@ -34,60 +34,25 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\":\"jleaton\"\n}"
+							"raw": "{\n  \"accountName\": \"jleaton3\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
 						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "API - User_Local",
-			"description": "",
-			"item": [
-				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/users/id?user_id=212444883",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"user_id\": 212444883,\n  \"account_name\": \"jleaton3\",\n  \"password_hash\": \"jjjjjjj3\",\n  \"password_salt\": \"hhhhhhh3\",\n  \"first_Name\": \"Joshua3\",\n  \"last_Name\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phone_number\": \"5046555038\",\n  \"facebook_id\": \"Josh Eaton\",\n  \"twitter_handle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Add a user to postgres"
+						"description": "Add a user"
 					},
 					"response": []
 				},
 				{
-					"name": "Get User By ID",
+					"name": "Get User by ID",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"type": "text/javascript",
-								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
+								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
 							}
 						}
 					],
 					"request": {
-						"url": "http://localhost:8090/service/v1/users/id?user_id=212444883",
+						"url": "http://localhost:8090/service/v1/users/1",
 						"method": "GET",
 						"header": [
 							{
@@ -96,85 +61,191 @@
 								"description": ""
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"user_id\": 212444883,\n  \"account_name\": \"jleaton3\",\n  \"password_hash\": \"jjjjjjj3\",\n  \"password_salt\": \"hhhhhhh3\",\n  \"first_Name\": \"Joshua3\",\n  \"last_Name\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phone_number\": \"5046555038\",\n  \"facebook_id\": \"Josh Eaton\",\n  \"twitter_handle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Add a user to postgres"
+						"description": "Get a user by ID"
 					},
 					"response": []
 				}
 			]
 		},
-		{
-			"name": "API - User_PROD",
-			"description": "",
-			"item": [
-				{
-					"name": "Add User copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/addUser",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\":\"jleaton\"\n}"
-						},
-						"description": "Add a user to postgres"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "API - User_QA",
-			"description": "",
-			"item": [
-				{
-					"name": "Add User copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Username\"] = jsonData.username === \"jleaton\";"
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/addUser",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\":\"jleaton\"\n}"
-						},
-						"description": "Add a user to postgres"
-					},
-					"response": []
-				}
-			]
-		}
+      {
+        "name": "API - User_DEV",
+        "description": "",
+        "item": [
+          {
+            "name": "Add User",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+                }
+              }
+            ],
+            "request": {
+              "url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/add",
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": ""
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"accountName\": \"jleaton3\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+              },
+              "description": "Add a user"
+            },
+            "response": []
+          },
+          {
+            "name": "Get User by ID",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+                }
+              }
+            ],
+            "request": {
+              "url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/1",
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": ""
+                }
+              ],
+              "description": "Get a user by ID"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "API - User_PROD",
+        "description": "",
+        "item": [
+          {
+            "name": "Add User",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+                }
+              }
+            ],
+            "request": {
+              "url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/add",
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": ""
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"accountName\": \"jleaton3\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+              },
+              "description": "Add a user"
+            },
+            "response": []
+          },
+          {
+            "name": "Get User by ID",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+                }
+              }
+            ],
+            "request": {
+              "url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/1",
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": ""
+                }
+              ],
+              "description": "Get a user by ID"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "API - User_QA",
+        "description": "",
+        "item": [
+          {
+            "name": "Add User",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+                }
+              }
+            ],
+            "request": {
+              "url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/add",
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": ""
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"accountName\": \"jleaton3\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu3\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+              },
+              "description": "Add a user"
+            },
+            "response": []
+          },
+          {
+            "name": "Get User by ID",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+                }
+              }
+            ],
+            "request": {
+              "url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/1",
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": ""
+                }
+              ],
+              "description": "Get a user by ID"
+            },
+            "response": []
+          }
+        ]
+      }
 	]
 }
