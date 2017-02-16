@@ -1,6 +1,6 @@
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typename = 'ad_type') THEN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ad_type') THEN
         CREATE TYPE ad_type AS ENUM ('offer', 'seek');
     END IF;
 END$$;
