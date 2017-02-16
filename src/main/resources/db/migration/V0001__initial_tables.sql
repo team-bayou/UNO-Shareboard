@@ -13,9 +13,8 @@ DROP TABLE IF EXISTS ads;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS unverified_users;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS image;
+DROP TABLE IF EXISTS images;
 
-CREATE TYPE ad_type AS ENUM ('offer', 'seek');
 
 CREATE TABLE images (
     image_id serial PRIMARY KEY,
