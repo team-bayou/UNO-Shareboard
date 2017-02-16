@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS schema_version;
+DROP TYPE  IF EXISTS ad_type;
+DROP TABLE IF EXISTS ad_image_xref;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS ads;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS unverified_users;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS image;
+
 CREATE TYPE ad_type AS ENUM ('offer', 'seek');
 
 CREATE TABLE images (
@@ -16,9 +26,9 @@ CREATE TABLE users (
 	last_name VARCHAR(20),
 	email VARCHAR(100) UNIQUE NOT NULL,
 	phone_number VARCHAR(30),
-	facebookID VARCHAR(120),
-	twitterHandle VARCHAR(100),
-	image_id integer REFERENCES images(image_id) NOT NULL
+	facebook_id VARCHAR(120),
+	twitter_handle VARCHAR(100),
+	image_id integer REFERENCES images(image_id)
 );
 
 CREATE TABLE unverified_users (
@@ -41,21 +51,21 @@ CREATE TABLE ads (
 	ad_id serial PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
 	description text,
-	category_id integer NOT NULL REFERENCES categories(category_id),
-	owner integer NOT NULL REFERENCES users(user_id),
+	category_id integer REFERENCES categories(category_id) NOT NULL,
+	owner integer REFERENCES users(user_id) NOT NULL,
 	time_published timestamp NOT NULL,
 	expiration_date timestamp NOT NULL,
 	ad_type ad_type NOT NULL,
 	price money,
-	trade_item VARCHAR(100)	
+	trade_item VARCHAR(100)
 );
 
 CREATE TABLE reviews (
 	review_id serial PRIMARY KEY,
 	rating integer NOT NULL,
 	comments text,
-	reviewer integer NOT NULL REFERENCES users(user_id),
-	reviewee integer NOT NULL REFERENCES users(user_id)	
+	reviewer integer REFERENCES users(user_id) NOT NULL,
+	reviewee integer REFERENCES users(user_id) NOT NULL
 );
 
 CREATE TABLE ad_image_xref (
