@@ -1,72 +1,70 @@
 package com.bayou.views.impl;
 
 import com.bayou.views.IView;
-import lombok.Getter;
-import lombok.Setter;
+
 /**
  * Created by joshuaeaton on 1/31/17.
  */
 public class UserView implements IView {
 
-
-    private long user_id;
-    private String account_name;
-    private String password_hash;
-    private String password_salt;
-    private String first_Name;
-    private String last_Name;
+    private Long id;
+    private String accountName;
+    private String passwordHash;
+    private String passwordSalt;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String phone_number;
-    private String facebook_id;
-    private String twitter_handle;
-  //  private Integer image_id;
+    private String phoneNumber;
+    private String facebookId;
+    private String twitterHandle;
+    private Integer imageId;
 
-    public long getUser_id() {
-        return user_id;
+    public long getId() {
+        return id;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getAccount_name() {
-        return account_name;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setAccount_name(String account_name) {
-        this.account_name = account_name;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
-    public String getPassword_hash() {
-        return password_hash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public String getPassword_salt() {
-        return password_salt;
+    public String getPasswordSalt() {
+        return passwordSalt;
     }
 
-    public void setPassword_salt(String password_salt) {
-        this.password_salt = password_salt;
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 
-    public String getFirst_Name() {
-        return first_Name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_Name(String first_Name) {
-        this.first_Name = first_Name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_Name() {
-        return last_Name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_Name(String last_Name) {
-        this.last_Name = last_Name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -77,38 +75,37 @@ public class UserView implements IView {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getFacebook_id() {
-        return this.facebook_id;
+    public String getFacebookId() {
+        return this.facebookId;
     }
 
-    public void setFacebook_id(String facebookID) {
-        this.facebook_id = facebookID;
+    public void setFacebookId(String facebookID) {
+        this.facebookId = facebookID;
     }
 
-    public String getTwitter_handle() {
-        return twitter_handle;
+    public String getTwitterHandle() {
+        return twitterHandle;
     }
 
-    public void setTwitter_handle(String twitterHandle) {
-        this.twitter_handle = twitterHandle;
+    public void setTwitterHandle(String twitterHandle) {
+        this.twitterHandle = twitterHandle;
     }
 
-   // public Integer getImage_id() {
-        //return image_id;
-  //  }
+    public Integer getImageId() {
+        return imageId;
+    }
 
-   // public void setImage_id(Integer image_id) {
-     //   this.image_id = image_id;
-   // }
-
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
 
     //TODO: the following methods may need to have case by case basis of implementations
     @Override
