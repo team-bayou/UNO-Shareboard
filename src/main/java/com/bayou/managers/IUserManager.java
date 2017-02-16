@@ -7,12 +7,12 @@ import com.bayou.views.impl.UserView;
  */
 public interface IUserManager {
 
-    UserView addUser(UserView userView);
+    UserView add(UserView userView);
 
-    UserView updateUser(UserView userView);
+    UserView update(UserView userView);
 
-    UserView getUser(UserView userView);
+    UserView get(UserView userView);
 
-    UserView deleteUser();
+    UserView delete();
 
 }

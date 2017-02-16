@@ -1,6 +1,6 @@
 package com.bayou.TestControllers;
 
-import com.bayou.controllers.UserControllerV1;
+import com.bayou.controllers.UserController;
 import com.bayou.views.impl.UserView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,23 +18,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestUserController {
-
     @Autowired
-    UserControllerV1 userControllerV1;
+    UserController userController;
 
     @Test
     public void testAddUserSuccess() {
-        ResponseEntity<UserView> responseEntity = userControllerV1.addUser(getMockUserView());  //add a mock user
+        ResponseEntity<UserView> responseEntity = userController.add(getMockUserView());  //add a mock user
 
         UserView returnedView = responseEntity.getBody();   //get the response from adding the user
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));  //assert that the status code is 200 OK
-        assertThat(returnedView.getUsername(), is("jleaton"));  //assert that the username is jleaton
+        assertThat(returnedView.getAccountName(), is("jleaton"));  //assert that the username is jleaton
     }
 
     private UserView getMockUserView() {
         UserView userView = new UserView();
-        userView.setUsername("jleaton");
+        userView.setAccountName("jleaton");
         return userView;
     }
 

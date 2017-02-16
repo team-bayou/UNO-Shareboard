@@ -12,34 +12,44 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserManager implements IUserManager{
-
     @Autowired
     UserResourceAccessor ras = new UserResourceAccessor();
 
     @Autowired
     UserConverter converter = new UserConverter();
 
-    @Override
-    public UserView addUser(UserView userView) {
 
-        return converter.convertToView(ras.addUser(converter.convertToDomain(userView)));
+    public UserView getByEmail(String email) {
+
+        return converter.convertToView(ras.getByEmail(email));
+    }
+
+    public UserView getById(Long id) {
+
+        return converter.convertToView(ras.getById(id));
+    }
+
+    @Override
+    public UserView add(UserView userView) {
+
+        return converter.convertToView(ras.add(converter.convertToDomain(userView)));
     }
 
     //TODO implement
     @Override
-    public UserView updateUser(UserView userView) {
+    public UserView update(UserView userView) {
         return null;
     }
 
     //TODO implement
     @Override
-    public UserView getUser(UserView userView) {
+    public UserView get(UserView userView) {
         return null;
     }
 
     //TODO implement
     @Override
-    public UserView deleteUser() {
+    public UserView delete() {
         return null;
     }
 }

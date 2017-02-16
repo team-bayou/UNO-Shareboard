@@ -1,7 +1,7 @@
 package com.bayou.ras;
 
 import com.bayou.domains.User;
-import com.bayou.repository.UserRepository;
+import com.bayou.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,23 @@ import org.springframework.stereotype.Service;
  */
 @Service    //registers this java class as a Service bean so that the container is aware of it for injection
 public class UserResourceAccessor {
-
     @Autowired
-    UserRepository userRepo = new UserRepository();
+    IUserRepository userRepo;
 
-    public User addUser(User user) {
+    public User getByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+/*
+    public User getByAccountName(String accountName) {
 
-        return userRepo.addUser(user);  //access repo to add user
+         return userRepo.findByAccountName(accountName);//access repo to get user
+    }
+*/
+    public User getById(Long id) {
+        return userRepo.findOne(id);
+    }
+
+    public User add(User user) {
+        return userRepo.save(user);//access repo to add user
     }
 }

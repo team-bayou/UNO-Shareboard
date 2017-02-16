@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UnoshareboardApplication {
+public class UnoShareboardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UnoshareboardApplication.class, args);
+		SpringApplication.run(UnoShareboardApplication.class, args);
 	}
 }
