@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS schema_version;
+DROP TYPE  IF EXISTS ad_type;
+DROP TABLE IF EXISTS ad_image_xref;
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS ads;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS unverified_users;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS image;
+
 CREATE TYPE ad_type AS ENUM ('offer', 'seek');
 
 CREATE TABLE images (
