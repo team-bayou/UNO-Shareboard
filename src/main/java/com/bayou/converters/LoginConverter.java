@@ -14,7 +14,7 @@ public class LoginConverter {
 
         LoginView loginView = new LoginView();
         loginView.setEmail(userView.getEmail());
-        loginView.setAccount_name(userView.getAccountName());
+        loginView.setAccountName(userView.getAccountName());
         loginView.setPasswordHash(userView.getPasswordHash());
         loginView.setPasswordSalt(userView.getPasswordSalt());
 

@@ -6,7 +6,7 @@ package com.bayou.views.impl;
 public class LoginView {
 
     private String email;
-    private String account_name;
+    private String accountName;
     private String passwordSalt;
     private String passwordHash;
 
@@ -18,12 +18,12 @@ public class LoginView {
         this.email = email;
     }
 
-    public String getAccount_name() {
-        return account_name;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setAccount_name(String account_name) {
-        this.account_name = account_name;
+    public void setAccountName(String account_name) {
+        this.accountName = account_name;
     }
 
     public String getPasswordSalt() {
