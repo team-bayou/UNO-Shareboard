@@ -18,15 +18,18 @@ public class UserManager implements IUserManager{
     @Autowired
     UserConverter converter = new UserConverter();
 
+    public UserView login(UserView userView){
+        return converter.convertToView(ras.findByEmail(userView.getEmail()));
+    }
 
     public UserView getByEmail(String email) {
 
-        return converter.convertToView(ras.getByEmail(email));
+        return converter.convertToView(ras.findByEmail(email));
     }
 
     public UserView getById(Long id) {
 
-        return converter.convertToView(ras.getById(id));
+        return converter.convertToView(ras.findById(id));
     }
 
     @Override

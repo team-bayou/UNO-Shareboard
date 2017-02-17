@@ -13,7 +13,7 @@ public class UserResourceAccessor {
     @Autowired
     IUserRepository userRepo;
 
-    public User getByEmail(String email) {
+    public User findByEmail(String email) {
         return userRepo.findByEmail(email);
     }
 /*
@@ -22,7 +22,7 @@ public class UserResourceAccessor {
          return userRepo.findByAccountName(accountName);//access repo to get user
     }
 */
-    public User getById(Long id) {
+    public User findById(Long id) {
         return userRepo.findOne(id);
     }
 

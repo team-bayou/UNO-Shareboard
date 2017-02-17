@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IUserRepository extends CrudRepository <User, Long>{
+    User findByAccountName(String accountName);
 
- //  User findByAccountName(String accountName);
     User findByEmail(String email);
 }
