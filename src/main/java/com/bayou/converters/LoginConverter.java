@@ -1,7 +1,7 @@
 package com.bayou.converters;
 
+import com.bayou.domains.User;
 import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UserView;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Component("LoginConverter") //registers this class as a component bean so that it can be pulled into the application context
 public class LoginConverter {
 
-    public LoginView convertToLoginView(UserView userView) {
+    public LoginView convertToLoginView(User user) {
 
         LoginView loginView = new LoginView();
-        loginView.setEmail(userView.getEmail());
-        loginView.setAccountName(userView.getAccountName());
-        loginView.setPasswordHash(userView.getPasswordHash());
-        loginView.setPasswordSalt(userView.getPasswordSalt());
+        loginView.setEmail(user.getEmail());
+        loginView.setAccountName(user.getAccountName());
+        loginView.setPasswordHash(user.getPasswordHash());
+        loginView.setPasswordSalt(user.getPasswordSalt());
 
         return loginView;
     }
