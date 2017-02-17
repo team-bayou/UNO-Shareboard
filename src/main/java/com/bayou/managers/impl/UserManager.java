@@ -19,16 +19,16 @@ public class UserManager implements IUserManager{
     UserConverter converter = new UserConverter();
 
     public UserView login(UserView userView){
+        // TODO Decide whether to fetch the user by account name or by email.
+
         return converter.convertToView(ras.findByEmail(userView.getEmail()));
     }
 
-    public UserView getByEmail(String email) {
-
-        return converter.convertToView(ras.findByEmail(email));
+    public UserView getByAccountName(String accountName) {
+        return converter.convertToView(ras.findByAccountName(accountName));
     }
 
-    public UserView getById(Long id) {
-
+    public UserView get(Long id) {
         return converter.convertToView(ras.findById(id));
     }
 

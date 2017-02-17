@@ -16,17 +16,16 @@ public class UserResourceAccessor {
     public User findByEmail(String email) {
         return userRepo.findByEmail(email);
     }
-/*
-    public User getByAccountName(String accountName) {
 
-         return userRepo.findByAccountName(accountName);//access repo to get user
+    public User findByAccountName(String accountName) {
+         return userRepo.findByAccountName(accountName);
     }
-*/
+
     public User findById(Long id) {
         return userRepo.findOne(id);
     }
 
     public User add(User user) {
-        return userRepo.save(user);//access repo to add user
+        return userRepo.save(user);
     }
 }
