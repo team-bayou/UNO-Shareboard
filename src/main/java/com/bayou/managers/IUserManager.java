@@ -13,6 +13,6 @@ public interface IUserManager {
 
     public UserView get(Long id);
 
-    UserView delete();
+    void delete(Long id);
 
 }
