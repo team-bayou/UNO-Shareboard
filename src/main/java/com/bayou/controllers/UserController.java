@@ -21,7 +21,7 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public ResponseEntity<UserView> getById(@PathVariable("id") Long id) {
 
-        return new ResponseEntity<>(userManager.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userManager.get(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
