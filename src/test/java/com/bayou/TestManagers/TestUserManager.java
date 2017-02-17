@@ -23,12 +23,21 @@ public class TestUserManager {
     @Test
     public void testAddUser() {
         UserView returnedView = userManager.add(createMockPart());
-        assertThat(returnedView.getAccountName(), is("jleaton"));
+        assertThat(returnedView.getAccountName(), is("jleaton3"));
     }
 
     private static UserView createMockPart() {
         UserView userView = new UserView();
-        userView.setAccountName("jleaton");
+        userView.setAccountName("jleaton3");
+        userView.setPasswordHash("jjjjjjj3");
+        userView.setPasswordSalt("hhhhhhh3");
+        userView.setFirstName("Joshua3");
+        userView.setLastName("Eaton3");
+        userView.setEmail("jleaton@uno.edu3");
+        userView.setPhoneNumber("5046555038");
+        userView.setFacebookId("Josh Eaton");
+        userView.setTwitterHandle("");
+
         return userView;
     }
 }
