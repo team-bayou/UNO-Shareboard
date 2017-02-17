@@ -1,3 +1,4 @@
+DROP TYPE IF EXISTS ad_type;
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ad_type') THEN
@@ -6,7 +7,6 @@ BEGIN
 END$$;
 
 DROP TABLE IF EXISTS schema_version;
-DROP TYPE  IF EXISTS ad_type;
 DROP TABLE IF EXISTS ad_image_xref;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS ads;
@@ -14,7 +14,6 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS unverified_users;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS images;
-
 
 CREATE TABLE images (
     image_id serial PRIMARY KEY,
