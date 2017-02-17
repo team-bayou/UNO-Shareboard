@@ -24,8 +24,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TestUserManager {
     @InjectMocks
     private UserManager userManager;
-
-    private ManagementFactory mainConfig = new MainConfig();
+    @InjectMocks
+    private ManagementFactory mainConfig;
 
     @Test
     public void testAddUser() {

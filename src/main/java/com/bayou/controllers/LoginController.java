@@ -1,8 +1,8 @@
 package com.bayou.controllers;
 
+import com.bayou.converters.LoginConverter;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UserView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,8 @@ public class LoginController {
 
     @Autowired
     UserManager userManager = new UserManager();
+    @Autowired
+    LoginConverter converter = new LoginConverter();
 
 
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)

@@ -3,6 +3,7 @@ package com.bayou.TestControllers;
 import com.bayou.controllers.LoginController;
 import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
+import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TestLoginController {
     LoginController loginController;
 
     @Test
-    public void testLoginUser() {
+    public void testLoginUser() throws NotFoundException {
 
         ResponseEntity<LoginView> responseEntity = loginController.login(getMockLoginView()); //add a mock user
 
