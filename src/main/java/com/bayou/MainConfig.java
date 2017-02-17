@@ -3,6 +3,7 @@ package com.bayou;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -15,6 +16,7 @@ import java.net.URISyntaxException;
  */
 @Configuration
 @EnableWebMvc
+@EnableJpaRepositories
 public class MainConfig extends WebMvcConfigurerAdapter {
     @Bean
     public BasicDataSource dataSource() throws URISyntaxException {
