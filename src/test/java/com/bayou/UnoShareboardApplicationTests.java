@@ -12,5 +12,4 @@ public class UnoShareboardApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
