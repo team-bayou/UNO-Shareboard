@@ -12,7 +12,7 @@
       "description": "",
       "item": [
         {
-          "name": "Login User",
+          "name": "Login User by account name",
           "event": [
             {
               "listen": "test",
@@ -35,6 +35,35 @@
             "body": {
               "mode": "raw",
               "raw": "{\n  \"accountName\": \"jleaton3\"\n}"
+            },
+            "description": "Login user"
+          },
+          "response": []
+        },
+        {
+          "name": "Login User by email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+              }
+            }
+          ],
+          "request": {
+            "url": "http://localhost:8090/service/v1/login",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
             },
             "description": "Login user"
           },
@@ -101,7 +130,7 @@
       "description": "",
       "item": [
         {
-          "name": "Login User",
+          "name": "Login User by account name",
           "event": [
             {
               "listen": "test",
@@ -124,6 +153,35 @@
             "body": {
               "mode": "raw",
               "raw": "{\n  \"accountName\": \"jleaton3\"\n}"
+            },
+            "description": "Login user"
+          },
+          "response": []
+        },
+        {
+          "name": "Login User by email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+              }
+            }
+          ],
+          "request": {
+            "url": "https://uno-shareboard-dev.herokuapp.com/service/v1/login",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
             },
             "description": "Login user"
           },
@@ -190,7 +248,7 @@
       "description": "",
       "item": [
         {
-          "name": "Login User",
+          "name": "Login User by account name",
           "event": [
             {
               "listen": "test",
@@ -213,6 +271,35 @@
             "body": {
               "mode": "raw",
               "raw": "{\n  \"accountName\": \"jleaton3\"\n}"
+            },
+            "description": "Login user"
+          },
+          "response": []
+        },
+        {
+          "name": "Login User by email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+              }
+            }
+          ],
+          "request": {
+            "url": "https://uno-shareboard-prod.herokuapp.com/service/v1/login",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
             },
             "description": "Login user"
           },
@@ -279,7 +366,7 @@
       "description": "",
       "item": [
         {
-          "name": "Login User",
+          "name": "Login User by account name",
           "event": [
             {
               "listen": "test",
@@ -302,6 +389,35 @@
             "body": {
               "mode": "raw",
               "raw": "{\n  \"accountName\": \"jleaton3\"\n}"
+            },
+            "description": "Login user"
+          },
+          "response": []
+        },
+        {
+          "name": "Login User by email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+              }
+            }
+          ],
+          "request": {
+            "url": "https://uno-shareboard-staging.herokuapp.com/service/v1/login",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
             },
             "description": "Login user"
           },
