@@ -14,9 +14,6 @@ public class UnverifiedUser {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "account_name", columnDefinition = "VARCHAR")
-  private String accountName;
-
   @Column(name = "password_hash", columnDefinition = "VARCHAR")
   private String passwordHash;
 
@@ -26,20 +23,15 @@ public class UnverifiedUser {
   @Column(name = "email", columnDefinition = "VARCHAR")
   private String email;
 
+  @Column(name = "verification_code", columnDefinition = "integer")
+  private Integer verificationCode;
+
   public Long getId() {
     return id;
   }
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public String getAccountName() {
-    return accountName;
-  }
-
-  public void setAccountName(String accountName) {
-    this.accountName = accountName;
   }
 
   public String getPasswordHash() {
@@ -64,6 +56,14 @@ public class UnverifiedUser {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public Integer getVerificationCode() {
+    return verificationCode;
+  }
+
+  public void setVerificationCode(Integer verification_code) {
+    this.verificationCode = verification_code;
   }
 
 }
