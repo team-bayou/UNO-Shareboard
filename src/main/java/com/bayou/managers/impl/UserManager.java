@@ -44,15 +44,8 @@ public class UserManager implements IUserManager{
         return null;
     }
 
-    //TODO implement
     @Override
-    public UserView get(UserView userView) {
-        return null;
-    }
-
-    //TODO implement
-    @Override
-    public UserView delete() {
-        return null;
+    public void delete(Long id) {
+        ras.delete(id);
     }
 }
