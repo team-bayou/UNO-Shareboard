@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS Public;
+
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ad_type') THEN
