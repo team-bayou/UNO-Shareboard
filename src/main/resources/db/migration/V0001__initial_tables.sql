@@ -3,6 +3,9 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ad_type') THEN
         CREATE TYPE ad_type AS ENUM ('offer', 'seek');
     END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_type') THEN
+        CREATE TYPE user_type AS ENUM ('admin', 'standard');
+    END IF;
 END$$;
 
 DROP TABLE IF EXISTS schema_version;
@@ -26,6 +29,7 @@ CREATE TABLE users (
 	account_name VARCHAR(30) UNIQUE NOT NULL,
 	password_hash CHARACTER(128) NOT NULL,
 	password_salt CHARACTER(64) NOT NULL,
+	user_type user_type NOT NULL DEFAULT 'standard',
 	first_name VARCHAR(20),
 	last_name VARCHAR(20),
 	email VARCHAR(100) UNIQUE NOT NULL,

@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS image;
 
 CREATE TYPE ad_type AS ENUM ('offer', 'seek');
+CREATE TYPE user_type AS ENUM ('admin', 'standard');
 
 CREATE TABLE images (
     image_id serial PRIMARY KEY,
@@ -22,6 +23,7 @@ CREATE TABLE users (
 	account_name VARCHAR(30) UNIQUE NOT NULL,
 	password_hash CHARACTER(128) NOT NULL,
 	password_salt CHARACTER(64) NOT NULL,
+	user_type user_type NOT NULL DEFAULT 'standard',
 	first_name VARCHAR(20),
 	last_name VARCHAR(20),
 	email VARCHAR(100) UNIQUE NOT NULL,
