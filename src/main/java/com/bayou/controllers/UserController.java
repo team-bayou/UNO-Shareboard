@@ -34,8 +34,9 @@ public class UserController {
            ResponseEntity<UserView> responseEntity = new ResponseEntity<UserView>(userManager.add(userView), HttpStatus.OK);
 
         return responseEntity;
-    }
 
+    }
+    
     @ApiOperation(value = "Delete a user", response = ResponseEntity.class)
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
     public ResponseEntity delete(@PathVariable("id") Long id) {
@@ -45,14 +46,6 @@ public class UserController {
             catch (EmptyResultDataAccessException e) {
                 System.out.println("The user with ID:" + id + " does not exist in the database ");
             }
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    @ApiOperation(value = "Delete a user", response = ResponseEntity.class)
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
-    public ResponseEntity delete(@PathVariable("id") Long id) {
-
-            userManager.delete(id);
             return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
