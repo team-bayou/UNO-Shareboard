@@ -7,7 +7,7 @@ import com.bayou.views.impl.UserView;
  */
 public interface IUserManager {
 
-    UserView add(UserView userView);
+    void add(UserView userView);
 
     UserView update(UserView userView);
 

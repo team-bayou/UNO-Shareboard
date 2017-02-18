@@ -9,6 +9,8 @@ import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -45,14 +47,28 @@ public class UserManager implements IUserManager{
         return converter.convertToView(ras.findByAccountName(accountName));
     }
 
-    public UserView get(Long id) {
-        return converter.convertToView(ras.findById(id));
+    public UserView get(Long id) throws NotFoundException {
+
+        UserView userView;
+        User user = ras.findById(id);
+
+        if(user == null){
+            throw new NotFoundException(String.valueOf(id));
+        }
+        else {
+             userView = converter.convertToView(user);
+        }
+
+        return userView;
     }
 
     @Override
-    public UserView add(UserView userView) {
-
-        return converter.convertToView(ras.add(converter.convertToDomain(userView)));
+    public void add(UserView userView) {
+        try {
+           ras.add(converter.convertToDomain(userView));
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("User: "+ userView.getAccountName() + "already exist");
+        }
     }
 
     //TODO implement
@@ -63,6 +79,11 @@ public class UserManager implements IUserManager{
 
     @Override
     public void delete(Long id) {
-        ras.delete(id);
+        try {
+            ras.delete(id);
+        }
+        catch (EmptyResultDataAccessException e) {
+        System.out.println("The user with ID:" + id + " does not exist in the database ");
+        }
     }
 }

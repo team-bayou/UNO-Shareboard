@@ -33,9 +33,9 @@ public class TestUserManager {
     @Ignore
     @Test
     public void testAddUser() throws URISyntaxException {
-        mainConfig.dataSource();
-        UserView returnedView = userManager.add(createMockUser());
-        assertThat(returnedView.getAccountName(), is("jleaton3"));
+       // mainConfig.dataSource();
+       // UserView returnedView = userManager.add(createMockUser());
+       // assertThat(returnedView.getAccountName(), is("jleaton3"));
     }
     @Ignore
     @Test
