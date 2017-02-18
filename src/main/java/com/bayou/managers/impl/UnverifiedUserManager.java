@@ -1,11 +1,14 @@
 package com.bayou.managers.impl;
 
 import com.bayou.converters.UnverifiedUserConverter;
+import com.bayou.domains.UnverifiedUser;
 import com.bayou.managers.IUnverifiedUserManager;
 import com.bayou.ras.UnverifiedUserResourceAccessor;
-import com.bayou.repository.IUnverifiedUserRepository;
 import com.bayou.views.impl.UnverifiedUserView;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,31 +23,48 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
     UnverifiedUserConverter converter = new UnverifiedUserConverter();
 
 
-    public UnverifiedUserView getByEmail(String email) {
+    public UnverifiedUserView getByEmail(String email) throws NotFoundException {
 
-        return converter.convertToView(ras.getByEmail(email));
+        UnverifiedUserView unvUserView = null;
+        UnverifiedUser unvUser = ras.getByEmail(email);
+        if(unvUser == null) {
+            throw new NotFoundException(email);
+        } else {
+            unvUserView =converter.convertToView(unvUser);
+        }
+        return unvUserView;
     }
 
-    public UnverifiedUserView getById(Long id) {
+    public UnverifiedUserView getById(Long id) throws NotFoundException {
 
-        return converter.convertToView(ras.getById(id));
+        UnverifiedUserView unvUserView = null;
+        UnverifiedUser unvUser = ras.getById(id);
+        if(unvUser == null) {
+            throw new NotFoundException(String.valueOf(id));
+        } else {
+            unvUserView =converter.convertToView(unvUser);
+        }
+        return unvUserView;
     }
 
     @Override
-    public UnverifiedUserView add(UnverifiedUserView userView) {
+    public HttpStatus add(UnverifiedUserView userView) {
 
-        return converter.convertToView(ras.add(converter.convertToDomain(userView)));
+        HttpStatus status = HttpStatus.OK;
+
+        try {
+            ras.add(converter.convertToDomain(userView));
+        } catch (DataIntegrityViolationException dive) {
+            status = HttpStatus.CONFLICT;
+            System.out.println("A user already exist with some of the given data");
+        }
+
+        return status;
     }
 
     //TODO implement
     @Override
     public UnverifiedUserView update(UnverifiedUserView userView) {
-        return null;
-    }
-
-    //TODO implement
-    @Override
-    public UnverifiedUserView get(UnverifiedUserView userView) {
         return null;
     }
 

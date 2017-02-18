@@ -8,10 +8,10 @@ import com.bayou.views.IView;
 public class UnverifiedUserView implements IView {
 
     private Long id;
-    private String accountName;
     private String passwordHash;
     private String passwordSalt;
     private String email;
+    private Integer verificationCode;
 
     public long getId() {
         return id;
@@ -19,14 +19,6 @@ public class UnverifiedUserView implements IView {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getAccountName() {
-        return accountName;
-    }
-
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
     }
 
     public String getPasswordHash() {
@@ -51,6 +43,14 @@ public class UnverifiedUserView implements IView {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(Integer verification_code) {
+        this.verificationCode = verification_code;
     }
 
     //TODO: the following methods may need to have case by case basis of implementations
