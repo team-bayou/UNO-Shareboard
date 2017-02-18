@@ -31,4 +31,12 @@ public class UserController {
         return new ResponseEntity<>(userManager.add(userView), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Delete a user", response = ResponseEntity.class)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
+    public ResponseEntity delete(@PathVariable("id") Long id) {
+
+            userManager.delete(id);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 }

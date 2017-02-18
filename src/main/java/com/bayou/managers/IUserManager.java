@@ -11,8 +11,6 @@ public interface IUserManager {
 
     UserView update(UserView userView);
 
-    public UserView get(Long id);
-
-    UserView delete();
+    void delete(Long id);
 
 }
