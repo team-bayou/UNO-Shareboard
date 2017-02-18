@@ -25,7 +25,9 @@ public class UserResourceAccessor {
         return userRepo.findOne(id);
     }
 
-    public User add(User user) {return userRepo.save(user);}
+    public User add(User user) {
+        return userRepo.save(user);
+    }
 
     public void delete(Long id) {userRepo.delete(id);}
 }
