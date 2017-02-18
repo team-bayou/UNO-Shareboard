@@ -42,7 +42,9 @@ public class UnverifiedUserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<UnverifiedUserView> add(@RequestBody UnverifiedUserView userView) {
 
-        return new ResponseEntity<>(userManager.add(userView), HttpStatus.OK);
+        userManager.add(userView);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

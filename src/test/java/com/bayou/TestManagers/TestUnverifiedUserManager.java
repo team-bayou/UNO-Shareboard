@@ -1,0 +1,46 @@
+package com.bayou.TestManagers;
+
+import com.bayou.MainConfig;
+import com.bayou.managers.impl.UnverifiedUserManager;
+import com.bayou.views.impl.UnverifiedUserView;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.net.URISyntaxException;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+/**
+ * Created by rachel on 2/18/17.
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class TestUnverifiedUserManager {
+    @InjectMocks
+    private UnverifiedUserManager userManager;
+    @InjectMocks
+    private MainConfig mainConfig;
+
+    @Ignore
+    @Test
+    //public void testAddUser() throws URISyntaxException {
+    //    mainConfig.dataSource();
+    //    UnverifiedUserView returnedView = userManager.add(createMockUser());
+    //    assertThat(returnedView.getEmail(), is("jleaton3@uno.edu"));
+    //}
+
+    private static UnverifiedUserView createMockUser() {
+        UnverifiedUserView userView = new UnverifiedUserView();
+        userView.setPasswordHash("jjjjjjj3");
+        userView.setPasswordSalt("hhhhhhh3");
+        userView.setEmail("jleaton3@uno.edu");
+        userView.setVerificationCode(46555038);
+
+        return userView;
+    }
+}

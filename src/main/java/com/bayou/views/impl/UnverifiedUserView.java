@@ -49,7 +49,7 @@ public class UnverifiedUserView implements IView {
         return verificationCode;
     }
 
-    public void setVerification_code(Integer verification_code) {
+    public void setVerificationCode(Integer verification_code) {
         this.verificationCode = verification_code;
     }
 

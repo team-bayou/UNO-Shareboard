@@ -6,6 +6,7 @@ import com.bayou.ras.UnverifiedUserResourceAccessor;
 import com.bayou.repository.IUnverifiedUserRepository;
 import com.bayou.views.impl.UnverifiedUserView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -31,9 +32,15 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
     }
 
     @Override
-    public UnverifiedUserView add(UnverifiedUserView userView) {
+    public void add(UnverifiedUserView userView) {
 
-        return converter.convertToView(ras.add(converter.convertToDomain(userView)));
+        try {
+            ras.add(converter.convertToDomain(userView));
+        } catch (DataIntegrityViolationException dive) {
+            System.out.println("There already exists a user with the email " +
+                    userView.getEmail() + ".");
+            throw dive;
+        }
     }
 
     //TODO implement

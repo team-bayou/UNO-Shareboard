@@ -17,7 +17,7 @@ public class UnverifiedUserConverter {
         view.setPasswordHash(user.getPasswordHash());
         view.setPasswordSalt(user.getPasswordSalt());
         view.setEmail(user.getEmail());
-        view.setVerification_code(user.getVerificationCode());
+        view.setVerificationCode(user.getVerificationCode());
 
 
         return view;    //return the View version of the given domain Object

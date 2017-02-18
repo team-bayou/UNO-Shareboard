@@ -7,7 +7,7 @@ import com.bayou.views.impl.UnverifiedUserView;
  */
 public interface IUnverifiedUserManager {
 
-    UnverifiedUserView add(UnverifiedUserView userView);
+    void add(UnverifiedUserView userView);
 
     UnverifiedUserView update(UnverifiedUserView userView);
 
