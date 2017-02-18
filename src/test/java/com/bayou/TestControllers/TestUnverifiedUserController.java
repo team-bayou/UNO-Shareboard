@@ -23,7 +23,7 @@ public class TestUnverifiedUserController {
 
     @Test
     public void testAddUnverifiedUserSuccess() {
-        ResponseEntity<UnverifiedUserView> responseEntity = userController.add(getMockUserView());  //add a mock user
+        ResponseEntity<HttpStatus> responseEntity = userController.add(getMockUserView());  //add a mock user
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));  //assert that the status code is 200 OK
     }

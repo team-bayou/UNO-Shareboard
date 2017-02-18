@@ -4,11 +4,11 @@ import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
 import com.bayou.managers.IUnverifiedUserManager;
 import com.bayou.ras.UnverifiedUserResourceAccessor;
-import com.bayou.repository.IUnverifiedUserRepository;
 import com.bayou.views.impl.UnverifiedUserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -48,15 +48,18 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
     }
 
     @Override
-    public void add(UnverifiedUserView userView) {
+    public HttpStatus add(UnverifiedUserView userView) {
+
+        HttpStatus status = HttpStatus.OK;
 
         try {
             ras.add(converter.convertToDomain(userView));
         } catch (DataIntegrityViolationException dive) {
-            System.out.println("There already exists a user with the email " +
-                    userView.getEmail() + ".");
-            throw dive;
+            status = HttpStatus.CONFLICT;
+            System.out.println("A user already exist with some of the given data");
         }
+
+        return status;
     }
 
     //TODO implement

@@ -45,11 +45,9 @@ public class UnverifiedUserController {
 
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<UnverifiedUserView> add(@RequestBody UnverifiedUserView userView) {
+    public ResponseEntity<HttpStatus> add(@RequestBody UnverifiedUserView userView) {
 
-        userManager.add(userView);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<> ( userManager.add(userView));    //returns a status code
     }
 
 }
