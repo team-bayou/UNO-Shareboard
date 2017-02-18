@@ -3,7 +3,10 @@ package com.bayou.controllers;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.impl.UserView;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,16 +22,31 @@ public class UserController {
 
     @ApiOperation(value = "Get a user by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
-    public ResponseEntity<UserView> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserView> getById(@PathVariable("id") Long id) throws NotFoundException {
 
-        return new ResponseEntity<>(userManager.get(id), HttpStatus.OK);
+        ResponseEntity<UserView> responseEntity = null;
+        try {responseEntity = new ResponseEntity<>(userManager.get(id), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
     }
 
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<UserView> add(@RequestBody UserView userView) {
+    public ResponseEntity add(@RequestBody UserView userView) {
+        userManager.add(userView);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
-        return new ResponseEntity<>(userManager.add(userView), HttpStatus.OK);
+    @ApiOperation(value = "Delete a user", response = ResponseEntity.class)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
+    public ResponseEntity delete(@PathVariable("id") Long id) {
+
+        userManager.delete(id);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }
