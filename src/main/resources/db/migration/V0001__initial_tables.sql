@@ -1,4 +1,3 @@
-DROP TYPE IF EXISTS ad_type;
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ad_type') THEN
