@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "178f72bd-3882-74a7-b1e3-296dc69d6f12",
+		"_postman_id": "5f0c49ff-8db5-9d9a-f0b4-742db0590a4c",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -195,8 +195,22 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Get a user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/delete/7",
+					"request": {
+						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/delete/7",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
 					},
 					"response": []
 				}
@@ -206,70 +220,6 @@
 			"name": "API - User_LOCAL",
 			"description": "",
 			"item": [
-				{
-					"name": "Login User by account name",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Login User by email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
 				{
 					"name": "Add User",
 					"event": [
@@ -335,63 +285,13 @@
 					"response": []
 				},
 				{
-					"name": "Add Unverified User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
+					"name": "Delete User",
 					"request": {
-						"url": "http://localhost:8090/service/v1/unverified_users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
-						},
-						"description": "Add an unverified user"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Unverified User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/unverified_users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
+						"url": "http://localhost:8090/service/v1/users/delete/7",
+						"method": "DELETE",
+						"header": [],
 						"body": {},
-						"description": "Get an Unverified User by ID"
+						"description": "Deletes a user from the database"
 					},
 					"response": []
 				}
@@ -585,7 +485,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Get an Unverified User by ID"
 					},
 					"response": []
@@ -780,12 +683,214 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Get an Unverified User by ID"
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "API-Login_LOCAL",
+			"description": "",
+			"item": [
+				{
+					"name": "Login User by account name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8090/service/v1/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountName\": \"jleaton3\"\n}"
+						},
+						"description": "Login user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User by email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8090/service/v1/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": "Login user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API-UnvUser_DEV",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Unverified User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/unverified_users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
+						},
+						"description": "Get an Unverified User by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Unverified User",
+					"request": {
+						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/unverified_users/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API-UnvUser_LOCAL",
+			"description": "These endpoints handle database interactions in regards to unverified user operations.",
+			"item": [
+				{
+					"name": "Add Unverified User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8090/service/v1/unverified_users/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
+						},
+						"description": "Add an unverified user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Unverified User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8090/service/v1/unverified_users/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Get an Unverified User by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API-UnvUser_Prod",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "API-UnvUser_QA",
+			"description": "",
+			"item": []
 		}
 	]
 }
