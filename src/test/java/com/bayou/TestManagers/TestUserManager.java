@@ -1,12 +1,20 @@
 package com.bayou.TestManagers;
 
+import com.bayou.MainConfig;
 import com.bayou.managers.impl.UserManager;
+import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
+import javassist.NotFoundException;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.lang.management.ManagementFactory;
+import java.net.URISyntaxException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,14 +27,28 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TestUserManager {
     @InjectMocks
     private UserManager userManager;
+    @InjectMocks
+    private MainConfig mainConfig;
 
+    @Ignore
     @Test
-    public void testAddUser() {
-        UserView returnedView = userManager.add(createMockPart());
+    public void testAddUser() throws URISyntaxException {
+        mainConfig.dataSource();
+        UserView returnedView = userManager.add(createMockUser());
         assertThat(returnedView.getAccountName(), is("jleaton3"));
     }
+    @Ignore
+    @Test
+    public void testLogin() throws NotFoundException, URISyntaxException {
 
-    private static UserView createMockPart() {
+        LoginView returnedLoginView = userManager.login(createMockLoginView());
+        assertThat(returnedLoginView.getAccountName(), is("jleaton"));
+        assertThat(returnedLoginView.getEmail(), is("jleaton@uno.edu"));
+        assertThat(returnedLoginView.getPasswordHash(), is("passwordHash"));
+        assertThat(returnedLoginView.getPasswordSalt(), is("passwordSalt"));
+    }
+
+    private static UserView createMockUser() {
         UserView userView = new UserView();
         userView.setAccountName("jleaton3");
         userView.setPasswordHash("jjjjjjj3");
@@ -39,5 +61,16 @@ public class TestUserManager {
         userView.setTwitterHandle("");
 
         return userView;
+    }
+
+    private static LoginView createMockLoginView() {
+
+        LoginView loginView = new LoginView();
+        loginView.setAccountName("jleaton");
+        loginView.setEmail("jleaton@uno.edu");
+        loginView.setPasswordSalt("passwordSalt");
+        loginView.setPasswordHash("passwordHash");
+
+        return loginView;
     }
 }

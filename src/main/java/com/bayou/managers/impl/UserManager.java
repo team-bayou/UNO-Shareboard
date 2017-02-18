@@ -1,9 +1,13 @@
 package com.bayou.managers.impl;
 
+import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UserConverter;
+import com.bayou.domains.User;
 import com.bayou.managers.IUserManager;
 import com.bayou.ras.UserResourceAccessor;
+import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +22,23 @@ public class UserManager implements IUserManager{
     @Autowired
     UserConverter converter = new UserConverter();
 
-    public UserView login(UserView userView){
-        // TODO Decide whether to fetch the user by account name or by email.
+    @Autowired
+    LoginConverter loginConverter = new LoginConverter();
 
-        return converter.convertToView(ras.findByEmail(userView.getEmail()));
+    public LoginView login(LoginView loginView) throws NotFoundException {
+
+        User returnedUser = null;
+
+        if(!(loginView.getEmail() == null)) { //if email field is not null, get the user by email
+            returnedUser = ras.findByEmail(loginView.getEmail());
+        }
+        else if (!(loginView.getAccountName() == null)) { //if account name is not null, get the user by account name
+            returnedUser = ras.findByAccountName(loginView.getAccountName());
+        } else {
+            throw new NotFoundException("Values of email or account name not found" +"email: "+loginView.getEmail()+" account name: "+loginView.getAccountName());
+        }
+        LoginView newLoginView = loginConverter.convertToLoginView(returnedUser);
+        return newLoginView;
     }
 
     public UserView getByAccountName(String accountName) {
@@ -41,12 +58,6 @@ public class UserManager implements IUserManager{
     //TODO implement
     @Override
     public UserView update(UserView userView) {
-        return null;
-    }
-
-    //TODO implement
-    @Override
-    public UserView get(UserView userView) {
         return null;
     }
 
