@@ -11,8 +11,6 @@ public interface IUnverifiedUserManager {
 
     UnverifiedUserView update(UnverifiedUserView userView);
 
-    UnverifiedUserView get(UnverifiedUserView userView);
-
     UnverifiedUserView delete();
 
 }

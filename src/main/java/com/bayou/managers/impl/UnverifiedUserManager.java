@@ -1,10 +1,12 @@
 package com.bayou.managers.impl;
 
 import com.bayou.converters.UnverifiedUserConverter;
+import com.bayou.domains.UnverifiedUser;
 import com.bayou.managers.IUnverifiedUserManager;
 import com.bayou.ras.UnverifiedUserResourceAccessor;
 import com.bayou.repository.IUnverifiedUserRepository;
 import com.bayou.views.impl.UnverifiedUserView;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,28 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
     UnverifiedUserConverter converter = new UnverifiedUserConverter();
 
 
-    public UnverifiedUserView getByEmail(String email) {
+    public UnverifiedUserView getByEmail(String email) throws NotFoundException {
 
-        return converter.convertToView(ras.getByEmail(email));
+        UnverifiedUserView unvUserView = null;
+        UnverifiedUser unvUser = ras.getByEmail(email);
+        if(unvUser == null) {
+            throw new NotFoundException(email);
+        } else {
+            unvUserView =converter.convertToView(unvUser);
+        }
+        return unvUserView;
     }
 
-    public UnverifiedUserView getById(Long id) {
+    public UnverifiedUserView getById(Long id) throws NotFoundException {
 
-        return converter.convertToView(ras.getById(id));
+        UnverifiedUserView unvUserView = null;
+        UnverifiedUser unvUser = ras.getById(id);
+        if(unvUser == null) {
+            throw new NotFoundException(String.valueOf(id));
+        } else {
+            unvUserView =converter.convertToView(unvUser);
+        }
+        return unvUserView;
     }
 
     @Override
@@ -46,12 +62,6 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
     //TODO implement
     @Override
     public UnverifiedUserView update(UnverifiedUserView userView) {
-        return null;
-    }
-
-    //TODO implement
-    @Override
-    public UnverifiedUserView get(UnverifiedUserView userView) {
         return null;
     }
 
