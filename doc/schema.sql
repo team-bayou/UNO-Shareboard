@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS schema_version;
 DROP TYPE  IF EXISTS ad_type;
+DROP TYPE  IF EXISTS user_type;
 DROP TABLE IF EXISTS ad_image_xref;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS ads;
