@@ -121,7 +121,6 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1206-jdbc42</version>
 		</dependency>
-<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2-->
 				<dependency>
 					<groupId>org.apache.commons</groupId>
