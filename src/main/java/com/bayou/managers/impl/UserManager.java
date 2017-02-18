@@ -61,6 +61,7 @@ public class UserManager implements IUserManager{
         return null;
     }
 
+    @Override
     public void delete(Long id) {
         ras.delete(id);
     }
