@@ -29,9 +29,14 @@ public class LoginController {
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<LoginView> login(@RequestBody LoginView loginView) throws NotFoundException {
+        
+        ResponseEntity<LoginView> responseEntity = null;
+        try {
+            responseEntity = new ResponseEntity<>(userManager.login(loginView), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
-        LoginView returnedLoginView = userManager.login(loginView);
-
-        return new ResponseEntity<>(returnedLoginView, HttpStatus.OK);
+        return responseEntity;
     }
 }

@@ -221,6 +221,26 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Get user by email or account name",
+					"request": {
+						"url": "http://localhost:8090/service/v1/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Add User",
 					"event": [
 						{
