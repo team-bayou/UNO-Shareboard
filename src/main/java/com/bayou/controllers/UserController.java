@@ -33,6 +33,20 @@ public class UserController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "get a user by email or account name", response = ResponseEntity.class)
+    @RequestMapping(value = "", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
+    public ResponseEntity<UserView> getByAccountOrEmail(@RequestBody UserView userView) throws NotFoundException {
+
+        ResponseEntity<UserView> responseEntity = null;
+        try {
+            responseEntity = new ResponseEntity<>(userManager.getUserByAccountOrEmail(userView), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity add(@RequestBody UserView userView) {

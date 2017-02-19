@@ -30,6 +30,7 @@ public class UserManager implements IUserManager{
     public LoginView login(LoginView loginView) throws NotFoundException {
 
         User returnedUser = null;
+        LoginView newLoginView = null;
 
         if(!(loginView.getEmail() == null)) { //if email field is not null, get the user by email
             returnedUser = ras.findByEmail(loginView.getEmail());
@@ -39,8 +40,35 @@ public class UserManager implements IUserManager{
         } else {
             throw new NotFoundException("Values of email or account name not found" +"email: "+loginView.getEmail()+" account name: "+loginView.getAccountName());
         }
-        LoginView newLoginView = loginConverter.convertToLoginView(returnedUser);
+        if(returnedUser == null) {
+            throw new NotFoundException("The requested user does not exist in the database");
+        } else {
+            newLoginView = loginConverter.convertToLoginView(returnedUser);
+        }
+
         return newLoginView;
+    }
+
+    public UserView getUserByAccountOrEmail(UserView userView) throws NotFoundException {
+
+        User returnedUser = null;
+        UserView newUserView = null;
+
+        if(!(userView.getEmail() == null)) { //if email field is not null, get the user by email
+            returnedUser = ras.findByEmail(userView.getEmail());
+        }
+        else if (!(userView.getAccountName() == null)) { //if account name is not null, get the user by account name
+            returnedUser = ras.findByAccountName(userView.getAccountName());
+        } else {
+            throw new NotFoundException("Values of email or account name not found" +"email: "+userView.getEmail()+" account name: "+userView.getAccountName());
+        }
+        if(returnedUser == null) {
+            throw new NotFoundException("The requested user does not exist in the database");
+        } else {
+             newUserView = converter.convertToView(returnedUser);
+        }
+
+        return newUserView;
     }
 
     public UserView getByAccountName(String accountName) {
@@ -86,4 +114,6 @@ public class UserManager implements IUserManager{
         System.out.println("The user with ID:" + id + " does not exist in the database ");
         }
     }
+
+
 }
