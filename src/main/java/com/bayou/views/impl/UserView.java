@@ -1,5 +1,6 @@
 package com.bayou.views.impl;
 
+import com.bayou.types.UserType;
 import com.bayou.views.IView;
 
 /**
@@ -11,7 +12,7 @@ public class UserView implements IView {
     private String accountName;
     private String passwordHash;
     private String passwordSalt;
-    private String userType;
+    private UserType userType;
     private String firstName;
     private String lastName;
     private String email;
@@ -44,7 +45,6 @@ public class UserView implements IView {
         this.passwordHash = passwordHash;
     }
 
-
     public String getPasswordSalt() {
         return passwordSalt;
     }
@@ -53,11 +53,11 @@ public class UserView implements IView {
         this.passwordSalt = passwordSalt;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 
