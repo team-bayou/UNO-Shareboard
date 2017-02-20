@@ -1,31 +1,30 @@
 package com.bayou.ras;
 
-import com.bayou.domains.User;
-import com.bayou.repository.IUserRepository;
+import com.bayou.domains.Advertisement;
+import com.bayou.repository.IAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by joshuaeaton on 1/31/17.
+ * File: AdvertisementResourceAccessor
+ * Package: com.bayou.ras
+ * Author: Stefan Haselwanter
+ * Created on: 2/20/17
  */
 @Service    //registers this java class as a Service bean so that the container is aware of it for injection
-public class UserResourceAccessor {
+public class AdvertisementResourceAccessor {
     @Autowired
-    IUserRepository userRepo;
+    IAdvertisementRepository advertisementRepo;
 
-    public User findByEmail(String email) {
-        return userRepo.findByEmail(email);
+    public Advertisement findById(Long id) {
+        return advertisementRepo.findOne(id);
     }
 
-    public User findByAccountName(String accountName) {
-         return userRepo.findByAccountName(accountName);
+    public void add(Advertisement advertisement) {
+        advertisementRepo.save(advertisement);
     }
 
-    public User findById(Long id) {
-        return userRepo.findOne(id);
+    public void delete(Long id) {
+        advertisementRepo.delete(id);
     }
-
-    public void add(User user) {userRepo.save(user);}
-
-    public void delete(Long id) {userRepo.delete(id);}
 }

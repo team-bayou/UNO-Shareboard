@@ -13,11 +13,11 @@ public class UnverifiedUserResourceAccessor {
     @Autowired
     IUnverifiedUserRepository userRepo;
 
-    public UnverifiedUser getByEmail(String email) {
+    public UnverifiedUser findByEmail(String email) {
         return userRepo.findByEmail(email);
     }
 
-    public UnverifiedUser getById(Long id) {
+    public UnverifiedUser findById(Long id) {
         return userRepo.findOne(id);
     }
 
