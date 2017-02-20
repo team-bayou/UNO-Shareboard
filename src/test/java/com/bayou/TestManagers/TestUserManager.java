@@ -5,7 +5,6 @@ import com.bayou.managers.impl.UserManager;
 import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import javassist.NotFoundException;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.lang.management.ManagementFactory;
 import java.net.URISyntaxException;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -33,10 +31,11 @@ public class TestUserManager {
     @Ignore
     @Test
     public void testAddUser() throws URISyntaxException {
-       // mainConfig.dataSource();
-       // UserView returnedView = userManager.add(createMockUser());
-       // assertThat(returnedView.getAccountName(), is("jleaton3"));
+        // mainConfig.dataSource();
+        // UserView returnedView = userManager.add(createMockUser());
+        // assertThat(returnedView.getAccountName(), is("jleaton3"));
     }
+
     @Ignore
     @Test
     public void testLogin() throws NotFoundException, URISyntaxException {
