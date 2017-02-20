@@ -2,7 +2,7 @@ package com.bayou.types;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.usertype.*;
+import org.hibernate.usertype.ParameterizedType;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -12,14 +12,18 @@ import java.sql.Types;
 import java.util.Properties;
 
 /**
- * Created by rachel on 2/19/17.
+ * File: Advertisement
+ * Package: com.bayou.domains
+ * Author: Stefan Haselwanter
+ * Created on: 2/20/17
+ * <p>
  * Adapted from:
  * http://stackoverflow.com/questions/7603500/trying-to-map-postgres-enum-to-hibernate-jpa-pojo/7614642#7614642
  */
-public class PGEnumUserType<E extends Enum<E>> implements org.hibernate.usertype.UserType, ParameterizedType {
+public class PGEnumAdType<E extends Enum<E>> implements org.hibernate.usertype.UserType, ParameterizedType {
     private Class<Enum> enumClass;
 
-    public PGEnumUserType(){
+    public PGEnumAdType() {
         super();
     }
 
@@ -35,7 +39,7 @@ public class PGEnumUserType<E extends Enum<E>> implements org.hibernate.usertype
     }
 
     public int[] sqlTypes() {
-        return new int[] {Types.VARCHAR};
+        return new int[]{Types.VARCHAR};
     }
 
     public Class returnedClass() {
@@ -43,7 +47,7 @@ public class PGEnumUserType<E extends Enum<E>> implements org.hibernate.usertype
     }
 
     public boolean equals(Object x, Object y) throws HibernateException {
-        return x==y;
+        return x == y;
     }
 
     public int hashCode(Object x) throws HibernateException {
@@ -52,20 +56,19 @@ public class PGEnumUserType<E extends Enum<E>> implements org.hibernate.usertype
 
     public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor ssci, Object value) throws HibernateException, SQLException {
         String name = rs.getString(names[0]);
-        return rs.wasNull() ? null: Enum.valueOf(enumClass,name);
+        return rs.wasNull() ? null : Enum.valueOf(enumClass, name);
     }
 
     public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor ssci) throws HibernateException, SQLException {
         if (value == null) {
             st.setNull(index, Types.OTHER);
-        }
-        else {
+        } else {
             Enum enumValue;
 
-            if(value instanceof String) {
+            if (value instanceof String) {
                 enumValue = Enum.valueOf(enumClass, (String) value);
             } else {
-                enumValue = (Enum)value;
+                enumValue = (Enum) value;
             }
             st.setObject(index, enumValue.name(), Types.OTHER);
         }
@@ -96,11 +99,11 @@ public class PGEnumUserType<E extends Enum<E>> implements org.hibernate.usertype
     }
 
     public String objectToSQLString(Object value) {
-        return '\'' + ( (Enum) value ).name() + '\'';
+        return '\'' + ((Enum) value).name() + '\'';
     }
 
     public String toXMLString(Object value) {
-        return ( (Enum) value ).name();
+        return ((Enum) value).name();
     }
 
 }

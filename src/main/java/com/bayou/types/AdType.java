@@ -1,8 +1,11 @@
 package com.bayou.types;
 
 /**
- * Created by rachel on 2/19/17.
+ * File: AdType
+ * Package: com.bayou.types
+ * Author: Stefan Haselwanter
+ * Created on: 2/20/17
  */
-public enum UserType {
-    standard, admin
+public enum AdType {
+    offer, seek
 }
