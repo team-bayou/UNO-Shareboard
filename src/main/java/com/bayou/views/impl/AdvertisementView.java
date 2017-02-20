@@ -1,6 +1,6 @@
 package com.bayou.views.impl;
 
-import com.bayou.types.UserType;
+import com.bayou.types.AdType;
 import com.bayou.views.IView;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class AdvertisementView implements IView {
     private UserView owner;
     private Date timePublished;
     private Date expirationDate;
-    private UserType adType;
+    private AdType adType;
     private Double price;
     private String tradeItem;
 
@@ -81,11 +81,11 @@ public class AdvertisementView implements IView {
         this.expirationDate = expirationDate;
     }
 
-    public UserType getAdType() {
+    public AdType getAdType() {
         return adType;
     }
 
-    public void setAdType(UserType adType) {
+    public void setAdType(AdType adType) {
         this.adType = adType;
     }
 
