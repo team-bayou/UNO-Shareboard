@@ -5,146 +5,131 @@ import com.bayou.types.UserType;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
- * Created by joshuaeaton on 1/31/17.
+ * File: Advertisement
+ * Package: com.bayou.domains
+ * Author: Stefan Haselwanter
+ * Created on: 2/20/17
  */
-@Entity(name = "User")
-@Table(name = "users")
-public class User {
-  @Id
-  @Column(name="user_id", columnDefinition = "serial")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+@Entity(name = "Advertisement")
+@Table(name = "ads")
+public class Advertisement {
+    @Id
+    @Column(name = "ad_id", columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "account_name", columnDefinition = "VARCHAR")
-  private String accountName;
+    @Column(name = "title", columnDefinition = "VARCHAR")
+    private String title;
 
-  @Column(name = "password_hash", columnDefinition = "VARCHAR")
-  private String passwordHash;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 
-  @Column(name = "password_salt", columnDefinition = "VARCHAR")
-  private String passwordSalt;
+    @Column(name = "category_id", columnDefinition = "INTEGER")
+    private Integer categoryId;
 
-  @Column(name = "userType")
-  @Type(type = "com.bayou.types.PGEnumUserType" , parameters ={@org.hibernate.annotations.Parameter(name = "enumClassName",value = "com.bayou.types.UserType")} )
-  private UserType userType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner", nullable = false)
+    private User owner;
 
-  @Column(name = "first_name", columnDefinition = "VARCHAR")
-  private String firstName;
+    @Column(name = "time_published", columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timePublished;
 
-  @Column(name = "last_name", columnDefinition = "VARCHAR")
-  private String lastName;
+    @Column(name = "expiration_date", columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expirationDate;
 
-  @Column(name = "email", columnDefinition = "VARCHAR")
-  private String email;
+    @Column(name = "ad_type")
+    @Type(type = "com.bayou.types.PGEnumAdType", parameters = {@org.hibernate.annotations.Parameter(name = "enumClassName", value = "com.bayou.types.AdType")})
+    private UserType adType;
 
-  @Column(name = "phone_number", columnDefinition = "VARCHAR")
-  private String phoneNumber;
+    @Column(name = "price", columnDefinition = "MONEY")
+    private Double price;
 
-  @Column(name = "facebook_id", columnDefinition = "VARCHAR")
-  private String facebookId;
-
-  @Column(name = "twitter_handle", columnDefinition = "VARCHAR")
-  private String twitterHandle;
-
-  @Column(name = "image_id", columnDefinition = "INTEGER")
-  private Integer imageId;
+    @Column(name = "trade_item", columnDefinition = "VARCHAR")
+    private String tradeItem;
 
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public String getAccountName() {
-    return accountName;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setAccountName(String accountName) {
-    this.accountName = accountName;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public String getPasswordHash() {
-    return passwordHash;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setPasswordHash(String passwordHash) {
-    this.passwordHash = passwordHash;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public String getPasswordSalt() {
-    return passwordSalt;
-  }
+    public Integer getCategoryId() {
+        return categoryId;
+    }
 
-  public void setPasswordSalt(String passwordSalt) {
-    this.passwordSalt = passwordSalt;
-  }
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
-  public UserType getUserType() {
-    return userType;
-  }
+    public UserType getAdType() {
+        return adType;
+    }
 
-  public void setUserType(UserType userType) {
-    this.userType = userType;
-  }
+    public void setAdType(UserType adType) {
+        this.adType = adType;
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    public User getOwner() {
+        return owner;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    public Date getTimePublished() {
+        return timePublished;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public void setTimePublished(Date timePublished) {
+        this.timePublished = timePublished;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
+    public Double getPrice() {
+        return price;
+    }
 
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
-  public String getFacebookId() {
-    return facebookId;
-  }
+    public String getTradeItem() {
+        return tradeItem;
+    }
 
-  public void setFacebookId(String facebookId) {
-    this.facebookId = facebookId;
-  }
-
-  public String getTwitterHandle() {
-    return twitterHandle;
-  }
-
-  public void setTwitterHandle(String twitterHandle) {
-    this.twitterHandle = twitterHandle;
-  }
-
-  public Integer getImageId() {
-    return imageId;
-  }
-
-  public void setImageId(Integer imageId) {
-    this.imageId = imageId;
-  }
+    public void setTradeItem(String tradeItem) {
+        this.tradeItem = tradeItem;
+    }
 }
