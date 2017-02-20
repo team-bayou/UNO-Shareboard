@@ -38,8 +38,8 @@ public class AdvertisementController {
 
     @ApiOperation(value = "Get an advertisement by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<AdvertisementView> getById(@PathVariable("id") Long id) throws NotFoundException {
-        ResponseEntity<AdvertisementView> responseEntity = null;
+    public ResponseEntity<AdvertisementView> get(@PathVariable("id") Long id) throws NotFoundException {
+        ResponseEntity<AdvertisementView> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(manager.get(id), HttpStatus.OK);
         } catch (NotFoundException e) {
@@ -51,8 +51,16 @@ public class AdvertisementController {
 
     @ApiOperation(value = "Add an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity add(@RequestBody AdvertisementView advertisementView) {
-        return new ResponseEntity(manager.add(advertisementView));
+    public ResponseEntity add(@RequestBody AdvertisementView view) {
+        return new ResponseEntity(manager.add(view));
+    }
+
+    @ApiOperation(value = "Update an advertisement", response = ResponseEntity.class)
+    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    public ResponseEntity update(@RequestBody AdvertisementView view) {
+        manager.update(view);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @ApiOperation(value = "Delete an advertisement", response = ResponseEntity.class)
@@ -62,5 +70,4 @@ public class AdvertisementController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
 }

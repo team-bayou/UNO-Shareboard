@@ -29,16 +29,16 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     AdvertisementConverter converter = new AdvertisementConverter();
 
     public AdvertisementView get(Long id) throws NotFoundException {
-        AdvertisementView userView;
-        Advertisement advertisement = ras.findById(id);
+        AdvertisementView view;
+        Advertisement domain = ras.findById(id);
 
-        if (advertisement == null) {
+        if (domain == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            userView = converter.convertToView(advertisement);
+            view = converter.convertToView(domain);
         }
 
-        return userView;
+        return view;
     }
 
     @Override

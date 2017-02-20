@@ -43,7 +43,7 @@ public class Advertisement {
     private Date expirationDate;
 
     @Column(name = "ad_type")
-    @Type(type = "com.bayou.types.PGEnumAdType", parameters = {@org.hibernate.annotations.Parameter(name = "enumClassName", value = "com.bayou.types.AdType")})
+    @Type(type = "com.bayou.types.PGEnumUserType", parameters = {@org.hibernate.annotations.Parameter(name = "enumClassName", value = "com.bayou.types.AdType")})
     private UserType adType;
 
     @Column(name = "price", columnDefinition = "MONEY")
