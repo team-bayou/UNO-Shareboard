@@ -1,6 +1,5 @@
 package com.bayou.controllers;
 
-import com.bayou.domains.UnverifiedUser;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.views.impl.UnverifiedUserView;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,7 @@ public class UnverifiedUserController {
     public ResponseEntity<UnverifiedUserView> getById(@PathVariable("id") Long id) throws NotFoundException {
 
         ResponseEntity<UnverifiedUserView> responseEntity = null;
-        try { responseEntity = new ResponseEntity<>(userManager.getById(id), HttpStatus.OK);}
+        try { responseEntity = new ResponseEntity<>(userManager.get(id), HttpStatus.OK);}
         catch (NotFoundException e){
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

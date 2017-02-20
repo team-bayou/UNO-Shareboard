@@ -7,7 +7,6 @@ import com.bayou.views.IView;
  * Created by joshuaeaton on 1/31/17.
  */
 public class UserView implements IView {
-
     private Long id;
     private String accountName;
     private String passwordHash;
@@ -21,11 +20,13 @@ public class UserView implements IView {
     private String twitterHandle;
     private Integer imageId;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -117,14 +118,46 @@ public class UserView implements IView {
         this.imageId = imageId;
     }
 
-    //TODO: the following methods may need to have case by case basis of implementations
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserView userView = (UserView) o;
+
+        if (id != null ? !id.equals(userView.id) : userView.id != null) return false;
+        if (accountName != null ? !accountName.equals(userView.accountName) : userView.accountName != null)
+            return false;
+        if (passwordHash != null ? !passwordHash.equals(userView.passwordHash) : userView.passwordHash != null)
+            return false;
+        if (passwordSalt != null ? !passwordSalt.equals(userView.passwordSalt) : userView.passwordSalt != null)
+            return false;
+        if (userType != userView.userType) return false;
+        if (firstName != null ? !firstName.equals(userView.firstName) : userView.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(userView.lastName) : userView.lastName != null) return false;
+        if (email != null ? !email.equals(userView.email) : userView.email != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(userView.phoneNumber) : userView.phoneNumber != null)
+            return false;
+        if (facebookId != null ? !facebookId.equals(userView.facebookId) : userView.facebookId != null) return false;
+        if (twitterHandle != null ? !twitterHandle.equals(userView.twitterHandle) : userView.twitterHandle != null)
+            return false;
+        return imageId != null ? imageId.equals(userView.imageId) : userView.imageId == null;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (accountName != null ? accountName.hashCode() : 0);
+        result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
+        result = 31 * result + (passwordSalt != null ? passwordSalt.hashCode() : 0);
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (facebookId != null ? facebookId.hashCode() : 0);
+        result = 31 * result + (twitterHandle != null ? twitterHandle.hashCode() : 0);
+        result = 31 * result + (imageId != null ? imageId.hashCode() : 0);
+        return result;
     }
 }

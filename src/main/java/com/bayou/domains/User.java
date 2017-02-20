@@ -5,6 +5,7 @@ import com.bayou.types.UserType;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by joshuaeaton on 1/31/17.
@@ -12,139 +13,150 @@ import javax.persistence.*;
 @Entity(name = "User")
 @Table(name = "users")
 public class User {
-  @Id
-  @Column(name="user_id", columnDefinition = "serial")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @Column(name = "user_id", columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "account_name", columnDefinition = "VARCHAR")
-  private String accountName;
+    @Column(name = "account_name", columnDefinition = "VARCHAR")
+    private String accountName;
 
-  @Column(name = "password_hash", columnDefinition = "VARCHAR")
-  private String passwordHash;
+    @Column(name = "password_hash", columnDefinition = "VARCHAR")
+    private String passwordHash;
 
-  @Column(name = "password_salt", columnDefinition = "VARCHAR")
-  private String passwordSalt;
+    @Column(name = "password_salt", columnDefinition = "VARCHAR")
+    private String passwordSalt;
 
-  @Column(name = "userType")
-  @Type(type = "com.bayou.types.PGEnumUserType" , parameters ={@org.hibernate.annotations.Parameter(name = "enumClassName",value = "com.bayou.types.UserType")} )
-  private UserType userType;
+    @Column(name = "userType")
+    @Type(type = "com.bayou.types.PGEnumUserType", parameters = {@org.hibernate.annotations.Parameter(name = "enumClassName", value = "com.bayou.types.UserType")})
+    private UserType userType;
 
-  @Column(name = "first_name", columnDefinition = "VARCHAR")
-  private String firstName;
+    @Column(name = "first_name", columnDefinition = "VARCHAR")
+    private String firstName;
 
-  @Column(name = "last_name", columnDefinition = "VARCHAR")
-  private String lastName;
+    @Column(name = "last_name", columnDefinition = "VARCHAR")
+    private String lastName;
 
-  @Column(name = "email", columnDefinition = "VARCHAR")
-  private String email;
+    @Column(name = "email", columnDefinition = "VARCHAR")
+    private String email;
 
-  @Column(name = "phone_number", columnDefinition = "VARCHAR")
-  private String phoneNumber;
+    @Column(name = "phone_number", columnDefinition = "VARCHAR")
+    private String phoneNumber;
 
-  @Column(name = "facebook_id", columnDefinition = "VARCHAR")
-  private String facebookId;
+    @Column(name = "facebook_id", columnDefinition = "VARCHAR")
+    private String facebookId;
 
-  @Column(name = "twitter_handle", columnDefinition = "VARCHAR")
-  private String twitterHandle;
+    @Column(name = "twitter_handle", columnDefinition = "VARCHAR")
+    private String twitterHandle;
 
-  @Column(name = "image_id", columnDefinition = "INTEGER")
-  private Integer imageId;
+    @Column(name = "image_id", columnDefinition = "INTEGER")
+    private Integer imageId;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    private Set<Advertisement> advertisements;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
 
 
-  public Long getId() {
-    return id;
-  }
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
-  public String getAccountName() {
-    return accountName;
-  }
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 
-  public void setAccountName(String accountName) {
-    this.accountName = accountName;
-  }
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
 
-  public String getPasswordHash() {
-    return passwordHash;
-  }
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
 
-  public void setPasswordHash(String passwordHash) {
-    this.passwordHash = passwordHash;
-  }
+    public UserType getUserType() {
+        return userType;
+    }
 
-  public String getPasswordSalt() {
-    return passwordSalt;
-  }
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 
-  public void setPasswordSalt(String passwordSalt) {
-    this.passwordSalt = passwordSalt;
-  }
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public UserType getUserType() {
-    return userType;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public void setUserType(UserType userType) {
-    this.userType = userType;
-  }
+    public String getLastName() {
+        return lastName;
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public String getFacebookId() {
+        return facebookId;
+    }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
 
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
+    public String getTwitterHandle() {
+        return twitterHandle;
+    }
 
-  public String getFacebookId() {
-    return facebookId;
-  }
+    public void setTwitterHandle(String twitterHandle) {
+        this.twitterHandle = twitterHandle;
+    }
 
-  public void setFacebookId(String facebookId) {
-    this.facebookId = facebookId;
-  }
+    public Integer getImageId() {
+        return imageId;
+    }
 
-  public String getTwitterHandle() {
-    return twitterHandle;
-  }
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
 
-  public void setTwitterHandle(String twitterHandle) {
-    this.twitterHandle = twitterHandle;
-  }
+    public Set<Advertisement> getAdvertisements() {
+        return advertisements;
+    }
 
-  public Integer getImageId() {
-    return imageId;
-  }
-
-  public void setImageId(Integer imageId) {
-    this.imageId = imageId;
-  }
+    public void setAdvertisements(Set<Advertisement> advertisements) {
+        this.advertisements = advertisements;
+    }
 }
