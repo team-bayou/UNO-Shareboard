@@ -19,6 +19,7 @@ public class UserConverter {
         view.setLastName(user.getLastName());
         view.setPasswordHash(user.getPasswordHash());
         view.setPasswordSalt(user.getPasswordSalt());
+        view.setUserType(user.getUserType());
         view.setEmail(user.getEmail());
         view.setPhoneNumber(user.getPhoneNumber());
         view.setFacebookId(user.getFacebookId());
@@ -35,6 +36,7 @@ public class UserConverter {
         domainUser.setLastName(userView.getLastName());
         domainUser.setPasswordHash(userView.getPasswordHash());
         domainUser.setPasswordSalt(userView.getPasswordSalt());
+        domainUser.setUserType(userView.getUserType());
         domainUser.setEmail(userView.getEmail());
         domainUser.setPhoneNumber(userView.getPhoneNumber());
         domainUser.setFacebookId(userView.getFacebookId());

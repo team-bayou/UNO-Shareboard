@@ -16,12 +16,7 @@ public class UnverifiedUserResourceAccessor {
     public UnverifiedUser getByEmail(String email) {
         return userRepo.findByEmail(email);
     }
-/*
-    public User getByAccountName(String accountName) {
 
-         return userRepo.findByAccountName(accountName);//access repo to get user
-    }
-*/
     public UnverifiedUser getById(Long id) {
         return userRepo.findOne(id);
     }
@@ -29,4 +24,6 @@ public class UnverifiedUserResourceAccessor {
     public UnverifiedUser add(UnverifiedUser user) {
         return userRepo.save(user);//access repo to add user
     }
+
+    public void delete(Long id) {userRepo.delete(id);}
 }

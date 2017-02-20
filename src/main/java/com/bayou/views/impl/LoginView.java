@@ -5,10 +5,19 @@ package com.bayou.views.impl;
  */
 public class LoginView {
 
+    private Long id;
     private String email;
     private String accountName;
     private String passwordSalt;
     private String passwordHash;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

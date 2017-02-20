@@ -33,13 +33,25 @@ public class UserController {
         return responseEntity;
     }
 
-    @ApiOperation(value = "get a user by email or account name", response = ResponseEntity.class)
-    @RequestMapping(value = "", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<UserView> getByAccountOrEmail(@RequestBody UserView userView) throws NotFoundException {
+    @ApiOperation(value = "Get a user by account name", response = ResponseEntity.class)
+    @RequestMapping(value = "/accountName/{accountName}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    public ResponseEntity<UserView> getByAccountName(@PathVariable("accountName") String accountName) throws NotFoundException {
 
         ResponseEntity<UserView> responseEntity = null;
-        try {
-            responseEntity = new ResponseEntity<>(userManager.getUserByAccountOrEmail(userView), HttpStatus.OK);
+        try {responseEntity = new ResponseEntity<>(userManager.getByAccountName(accountName), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Get a user by email", response = ResponseEntity.class)
+    @RequestMapping(value = "/email/{email}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    public ResponseEntity<UserView> getByEmail(@PathVariable("email") String email) throws NotFoundException {
+
+        ResponseEntity<UserView> responseEntity = null;
+        try {responseEntity = new ResponseEntity<>(userManager.getByEmail(email), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -50,8 +62,8 @@ public class UserController {
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity add(@RequestBody UserView userView) {
-        userManager.add(userView);
-        return new ResponseEntity(HttpStatus.OK);
+
+        return new ResponseEntity(userManager.add(userView));
     }
 
     @ApiOperation(value = "Delete a user", response = ResponseEntity.class)

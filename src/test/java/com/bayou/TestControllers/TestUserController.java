@@ -34,7 +34,6 @@ public class TestUserController {
     private UserView getMockUserView() {
         UserView userView = new UserView();
         userView.setAccountName("jleaton3");
-        userView.setPasswordHash("jjjjjjj3");
         userView.setPasswordSalt("hhhhhhh3");
         userView.setFirstName("Joshua3");
         userView.setLastName("Eaton3");

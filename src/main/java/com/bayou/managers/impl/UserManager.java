@@ -11,6 +11,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -49,30 +50,36 @@ public class UserManager implements IUserManager{
         return newLoginView;
     }
 
-    public UserView getUserByAccountOrEmail(UserView userView) throws NotFoundException {
+    public UserView getByAccountName(String accountName) throws NotFoundException {
 
         User returnedUser = null;
         UserView newUserView = null;
 
-        if(!(userView.getEmail() == null)) { //if email field is not null, get the user by email
-            returnedUser = ras.findByEmail(userView.getEmail());
-        }
-        else if (!(userView.getAccountName() == null)) { //if account name is not null, get the user by account name
-            returnedUser = ras.findByAccountName(userView.getAccountName());
-        } else {
-            throw new NotFoundException("Values of email or account name not found" +"email: "+userView.getEmail()+" account name: "+userView.getAccountName());
-        }
+        returnedUser = ras.findByAccountName(accountName);
+
         if(returnedUser == null) {
             throw new NotFoundException("The requested user does not exist in the database");
         } else {
-             newUserView = converter.convertToView(returnedUser);
+            newUserView = converter.convertToView(returnedUser);
         }
 
         return newUserView;
     }
 
-    public UserView getByAccountName(String accountName) {
-        return converter.convertToView(ras.findByAccountName(accountName));
+    public UserView getByEmail(String email) throws NotFoundException {
+
+        User returnedUser = null;
+        UserView newUserView = null;
+
+        returnedUser = ras.findByEmail(email);
+
+        if(returnedUser == null) {
+            throw new NotFoundException("The requested user does not exist in the database");
+        } else {
+            newUserView = converter.convertToView(returnedUser);
+        }
+
+        return newUserView;
     }
 
     public UserView get(Long id) throws NotFoundException {
@@ -91,12 +98,18 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public void add(UserView userView) {
+    public HttpStatus add(UserView userView) {
+
+        HttpStatus status = HttpStatus.OK;
+
         try {
            ras.add(converter.convertToDomain(userView));
         } catch (DataIntegrityViolationException e) {
+            status = HttpStatus.CONFLICT;
             System.out.println("User: "+ userView.getAccountName() + "already exist");
         }
+
+        return status;
     }
 
     //TODO implement
@@ -111,7 +124,7 @@ public class UserManager implements IUserManager{
             ras.delete(id);
         }
         catch (EmptyResultDataAccessException e) {
-        System.out.println("The user with ID:" + id + " does not exist in the database ");
+            System.out.println("The user with ID:" + id + " does not exist in the database ");
         }
     }
 
