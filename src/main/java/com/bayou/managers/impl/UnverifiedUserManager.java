@@ -2,7 +2,7 @@ package com.bayou.managers.impl;
 
 import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
-import com.bayou.managers.IUnverifiedUserManager;
+import com.bayou.managers.IManager;
 import com.bayou.ras.UnverifiedUserResourceAccessor;
 import com.bayou.views.impl.UnverifiedUserView;
 import javassist.NotFoundException;
@@ -12,23 +12,26 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by rachelguillory on 2/16/2017.
  */
 @Service
-public class UnverifiedUserManager implements IUnverifiedUserManager {
+public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Autowired
     UnverifiedUserResourceAccessor ras = new UnverifiedUserResourceAccessor();
 
     @Autowired
     UnverifiedUserConverter converter = new UnverifiedUserConverter();
 
-    public UnverifiedUserView getByEmail(String email) throws NotFoundException {
-        UnverifiedUserView unvUserView = null;
-        UnverifiedUser unvUser = ras.findByEmail(email);
+    @Override
+    public UnverifiedUserView get(Long id) throws NotFoundException {
+        UnverifiedUserView unvUserView;
+        UnverifiedUser unvUser = ras.findById(id);
 
         if (unvUser == null) {
-            throw new NotFoundException(email);
+            throw new NotFoundException(String.valueOf(id));
         } else {
             unvUserView = converter.convertToView(unvUser);
         }
@@ -36,12 +39,17 @@ public class UnverifiedUserManager implements IUnverifiedUserManager {
         return unvUserView;
     }
 
-    public UnverifiedUserView getById(Long id) throws NotFoundException {
-        UnverifiedUserView unvUserView = null;
-        UnverifiedUser unvUser = ras.findById(id);
+    @Override
+    public List<UnverifiedUserView> getAll() throws NotFoundException {
+        return null;
+    }
+
+    public UnverifiedUserView getByEmail(String email) throws NotFoundException {
+        UnverifiedUserView unvUserView;
+        UnverifiedUser unvUser = ras.findByEmail(email);
 
         if (unvUser == null) {
-            throw new NotFoundException(String.valueOf(id));
+            throw new NotFoundException(email);
         } else {
             unvUserView = converter.convertToView(unvUser);
         }

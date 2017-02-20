@@ -2,7 +2,7 @@ package com.bayou.managers.impl;
 
 import com.bayou.converters.AdvertisementConverter;
 import com.bayou.domains.Advertisement;
-import com.bayou.managers.IAdvertisementManager;
+import com.bayou.managers.IManager;
 import com.bayou.ras.AdvertisementResourceAccessor;
 import com.bayou.views.impl.AdvertisementView;
 import javassist.NotFoundException;
@@ -21,7 +21,7 @@ import java.util.List;
  * Created on: 2/20/17
  */
 @Service
-public class AdvertisementManager implements IAdvertisementManager {
+public class AdvertisementManager implements IManager<AdvertisementView> {
     @Autowired
     AdvertisementResourceAccessor ras = new AdvertisementResourceAccessor();
 
