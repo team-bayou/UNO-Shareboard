@@ -4,9 +4,7 @@ package com.bayou.views;
  * Created by joshuaeaton on 1/31/17.
  */
 public interface IView {
+    Long getId();
 
-    boolean equals(Object obj);
-
-    int hashCode();
-
+    void setId(Long id);
 }

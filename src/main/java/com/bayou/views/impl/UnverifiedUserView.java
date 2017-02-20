@@ -6,18 +6,19 @@ import com.bayou.views.IView;
  * Created by rachelguillory 2/16/2017.
  */
 public class UnverifiedUserView implements IView {
-
     private Long id;
     private String passwordHash;
     private String passwordSalt;
     private String email;
     private Integer verificationCode;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,14 +54,27 @@ public class UnverifiedUserView implements IView {
         this.verificationCode = verification_code;
     }
 
-    //TODO: the following methods may need to have case by case basis of implementations
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UnverifiedUserView that = (UnverifiedUserView) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (passwordHash != null ? !passwordHash.equals(that.passwordHash) : that.passwordHash != null) return false;
+        if (passwordSalt != null ? !passwordSalt.equals(that.passwordSalt) : that.passwordSalt != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        return verificationCode != null ? verificationCode.equals(that.verificationCode) : that.verificationCode == null;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
+        result = 31 * result + (passwordSalt != null ? passwordSalt.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (verificationCode != null ? verificationCode.hashCode() : 0);
+        return result;
     }
 }
