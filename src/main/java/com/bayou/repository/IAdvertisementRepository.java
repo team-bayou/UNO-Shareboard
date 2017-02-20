@@ -1,15 +1,16 @@
 package com.bayou.repository;
 
-import com.bayou.domains.User;
+import com.bayou.domains.Advertisement;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by joshuaeaton on 1/31/17.
+ * File: IAdvertisementRepository
+ * Package: com.bayou.repository
+ * Author: Stefan Haselwanter
+ * Created on: 2/20/17
  */
 @Repository
-public interface IUserRepository extends CrudRepository <User, Long>{
-    User findByAccountName(String accountName);
+public interface IAdvertisementRepository extends CrudRepository<Advertisement, Long> {
 
-    User findByEmail(String email);
 }

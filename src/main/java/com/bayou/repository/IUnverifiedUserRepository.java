@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
  * Created by rachelguillory on 2/16/2017.
  */
 @Repository
-public interface IUnverifiedUserRepository extends CrudRepository <UnverifiedUser, Long>{
-
- //  User findByAccountName(String accountName);
+public interface IUnverifiedUserRepository extends CrudRepository<UnverifiedUser, Long> {
     UnverifiedUser findByEmail(String email);
 }
