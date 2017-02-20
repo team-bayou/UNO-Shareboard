@@ -43,11 +43,20 @@ public class UnverifiedUserController {
         return responseEntity;
     }
 
-    @ApiOperation(value = "Add a user", response = ResponseEntity.class)
+    @ApiOperation(value = "Add an unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<HttpStatus> add(@RequestBody UnverifiedUserView userView) {
 
-        return new ResponseEntity<> ( userManager.add(userView));    //returns a status code
+        return new ResponseEntity<>(userManager.add(userView));    //returns a status code
+    }
+
+    @ApiOperation(value = "Delete an unverified user", response = ResponseEntity.class)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
+    public ResponseEntity delete(@PathVariable("id") Long id) {
+
+        userManager.delete(id);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
 }

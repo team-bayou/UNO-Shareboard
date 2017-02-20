@@ -11,6 +11,7 @@ public class UserView implements IView {
     private String accountName;
     private String passwordHash;
     private String passwordSalt;
+    private String userType;
     private String firstName;
     private String lastName;
     private String email;
@@ -43,12 +44,21 @@ public class UserView implements IView {
         this.passwordHash = passwordHash;
     }
 
+
     public String getPasswordSalt() {
         return passwordSalt;
     }
 
     public void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getFirstName() {

@@ -8,6 +8,7 @@ import com.bayou.views.impl.UnverifiedUserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,7 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
             ras.add(converter.convertToDomain(userView));
         } catch (DataIntegrityViolationException dive) {
             status = HttpStatus.CONFLICT;
-            System.out.println("A user already exist with some of the given data");
+            System.out.println("A user already exists with the provided email.");
         }
 
         return status;
@@ -68,9 +69,13 @@ public class UnverifiedUserManager implements IUnverifiedUserManager{
         return null;
     }
 
-    //TODO implement
     @Override
-    public UnverifiedUserView delete() {
-        return null;
+    public void delete(Long id) {
+        try {
+            ras.delete(id);
+        }
+        catch (EmptyResultDataAccessException e) {
+            System.out.println("The user with ID:" + id + " does not exist in the database ");
+        }
     }
 }

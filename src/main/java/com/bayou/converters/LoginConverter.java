@@ -15,10 +15,13 @@ public class LoginConverter {
     public LoginView convertToLoginView(User user) {
 
         LoginView loginView = new LoginView();
+
+        loginView.setId(user.getId());
         loginView.setEmail(user.getEmail());
         loginView.setAccountName(user.getAccountName());
         loginView.setPasswordHash(user.getPasswordHash());
         loginView.setPasswordSalt(user.getPasswordSalt());
+
         return loginView;
     }
 

@@ -1,6 +1,8 @@
 package com.bayou.domains;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 /**
@@ -22,6 +24,10 @@ public class User {
 
   @Column(name = "password_salt", columnDefinition = "VARCHAR")
   private String passwordSalt;
+
+  @Column(name = "userType")
+  @Type(type = "com.bayou.types.PGEnumUserType" , parameters ={@org.hibernate.annotations.Parameter(name = "enumClassName",value = "com.bayou.types.UserType")} )
+  private String userType;
 
   @Column(name = "first_name", columnDefinition = "VARCHAR")
   private String firstName;
@@ -75,6 +81,14 @@ public class User {
 
   public void setPasswordSalt(String passwordSalt) {
     this.passwordSalt = passwordSalt;
+  }
+
+  public String getUserType() {
+    return userType;
+  }
+
+  public void setUserType(String userType) {
+    this.userType = userType;
   }
 
   public String getFirstName() {
