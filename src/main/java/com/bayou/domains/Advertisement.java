@@ -1,7 +1,7 @@
 package com.bayou.domains;
 
 
-import com.bayou.types.UserType;
+import com.bayou.types.AdType;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -44,7 +44,7 @@ public class Advertisement {
 
     @Column(name = "ad_type")
     @Type(type = "com.bayou.types.PGEnumUserType", parameters = {@org.hibernate.annotations.Parameter(name = "enumClassName", value = "com.bayou.types.AdType")})
-    private UserType adType;
+    private AdType adType;
 
     @Column(name = "price", columnDefinition = "MONEY")
     private Double price;
@@ -85,11 +85,11 @@ public class Advertisement {
         this.categoryId = categoryId;
     }
 
-    public UserType getAdType() {
+    public AdType getAdType() {
         return adType;
     }
 
-    public void setAdType(UserType adType) {
+    public void setAdType(AdType adType) {
         this.adType = adType;
     }
 
