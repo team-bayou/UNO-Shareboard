@@ -4,6 +4,7 @@ package com.bayou.domains;
 import com.bayou.views.impl.CategoryView;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -30,10 +31,10 @@ public class Category extends BaseEntity {
     private Category parentCategory;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory")
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    private Set<Advertisement> advertisements;
+    private Set<Advertisement> advertisements = new HashSet<>();
 
     public Category() {
         super();
@@ -97,5 +98,28 @@ public class Category extends BaseEntity {
 
     public void setAdvertisements(Set<Advertisement> advertisements) {
         this.advertisements = advertisements;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (title != null ? !title.equals(category.title) : category.title != null) return false;
+        if (color != null ? !color.equals(category.color) : category.color != null) return false;
+        if (description != null ? !description.equals(category.description) : category.description != null)
+            return false;
+        return parentCategory != null ? parentCategory.equals(category.parentCategory) : category.parentCategory == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (parentCategory != null ? parentCategory.hashCode() : 0);
+        return result;
     }
 }

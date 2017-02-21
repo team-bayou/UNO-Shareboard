@@ -32,24 +32,6 @@ public class CategoryControllerTests {
     private TestRestTemplate rest = new TestRestTemplate();
 
     @Test
-    public void testGetCategories() {
-        // Create category view and add category to db.
-        CategoryView view = Mocks.createCategoryView();
-        ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
-        view.setId(entity.getBody());
-
-        // Get list of categories.
-        ResponseEntity<List> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL, List.class);
-
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertTrue(responseEntity.getBody() != null);
-
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
-    }
-
-    @Test
     public void testGetCategoryById() {
         // Create category view and add category to db.
         CategoryView view = Mocks.createCategoryView();
@@ -60,6 +42,24 @@ public class CategoryControllerTests {
         // Get category by id.
         ResponseEntity<CategoryView> responseEntity = rest.getForEntity(
                 Server.url() + RESOURCE_URL + "/" + view.getId(), CategoryView.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+
+        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
+    }
+
+    @Test
+    public void testGetCategories() {
+        // Create category view and add category to db.
+        CategoryView view = Mocks.createCategoryView();
+        ResponseEntity<Long> entity = rest.postForEntity(
+                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+        view.setId(entity.getBody());
+
+        // Get list of categories.
+        ResponseEntity<List> responseEntity = rest.getForEntity(
+                Server.url() + RESOURCE_URL, List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
