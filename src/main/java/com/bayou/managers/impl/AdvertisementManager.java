@@ -3,7 +3,7 @@ package com.bayou.managers.impl;
 import com.bayou.converters.AdvertisementConverter;
 import com.bayou.domains.Advertisement;
 import com.bayou.managers.IManager;
-import com.bayou.ras.AdvertisementResourceAccessor;
+import com.bayou.ras.impl.AdvertisementResourceAccessor;
 import com.bayou.views.impl.AdvertisementView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,16 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     AdvertisementConverter converter = new AdvertisementConverter();
 
     public AdvertisementView get(Long id) throws NotFoundException {
-        AdvertisementView view;
-        Advertisement domain = ras.findById(id);
+        AdvertisementView adView;
+        Advertisement ad = ras.find(id);
 
-        if (domain == null) {
+        if (ad == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            view = converter.convertToView(domain);
+            adView = converter.convertToView(ad);
         }
 
-        return view;
+        return adView;
     }
 
     @Override

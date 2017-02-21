@@ -3,7 +3,7 @@ package com.bayou.managers.impl;
 import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
 import com.bayou.managers.IManager;
-import com.bayou.ras.UnverifiedUserResourceAccessor;
+import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
 import com.bayou.views.impl.UnverifiedUserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Override
     public UnverifiedUserView get(Long id) throws NotFoundException {
         UnverifiedUserView unvUserView;
-        UnverifiedUser unvUser = ras.findById(id);
+        UnverifiedUser unvUser = ras.find(id);
 
         if (unvUser == null) {
             throw new NotFoundException(String.valueOf(id));

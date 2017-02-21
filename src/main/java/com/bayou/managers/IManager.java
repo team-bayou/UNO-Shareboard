@@ -19,7 +19,7 @@ public interface IManager<T extends IView> {
 
     HttpStatus add(T view);
 
-    void delete(Long id);
-
     T update(T view);
+
+    void delete(Long id);
 }

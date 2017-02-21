@@ -4,7 +4,7 @@ import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UserConverter;
 import com.bayou.domains.User;
 import com.bayou.managers.IManager;
-import com.bayou.ras.UserResourceAccessor;
+import com.bayou.ras.impl.UserResourceAccessor;
 import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import javassist.NotFoundException;
@@ -51,9 +51,8 @@ public class UserManager implements IManager<UserView> {
     }
 
     public UserView get(Long id) throws NotFoundException {
-
         UserView userView;
-        User user = ras.findById(id);
+        User user = ras.find(id);
 
         if (user == null) {
             throw new NotFoundException(String.valueOf(id));
