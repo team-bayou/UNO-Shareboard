@@ -1,6 +1,7 @@
 package com.bayou.utils;
 
 import com.bayou.types.UserType;
+import com.bayou.views.impl.CategoryView;
 import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UnverifiedUserView;
 import com.bayou.views.impl.UserView;
@@ -46,6 +47,15 @@ public class Mocks {
         view.setPasswordSalt("hhhhhhh3");
         view.setEmail("jleaton" + rand.nextInt() + "@uno.sa.edu.");
         view.setVerificationCode(46555038);
+
+        return view;
+    }
+
+    public static CategoryView createCategoryView() {
+        CategoryView view = new CategoryView();
+        view.setTitle("Books");
+        view.setColor("#123456");
+        view.setDescription("Different kinds of books");
 
         return view;
     }

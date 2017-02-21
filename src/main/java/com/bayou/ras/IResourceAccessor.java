@@ -2,8 +2,6 @@ package com.bayou.ras;
 
 import com.bayou.domains.BaseEntity;
 
-import java.util.List;
-
 /**
  * File: IResourceAccessor
  * Package: com.bayou.ras
@@ -13,7 +11,7 @@ import java.util.List;
 public interface IResourceAccessor<T extends BaseEntity> {
     T find(Long id);
 
-    List<T> findAll();
+    Iterable<T> findAll();
 
     Long add(T entity);
 
