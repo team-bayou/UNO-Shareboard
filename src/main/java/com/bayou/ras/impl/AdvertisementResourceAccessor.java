@@ -5,6 +5,8 @@ import com.bayou.repository.IAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * File: AdvertisementResourceAccessor
  * Package: com.bayou.ras
@@ -12,19 +14,32 @@ import org.springframework.stereotype.Service;
  * Created on: 2/20/17
  */
 @Service    //registers this java class as a Service bean so that the container is aware of it for injection
-public class AdvertisementResourceAccessor {
+public class AdvertisementResourceAccessor implements IResourceAccessor<Advertisement> {
     @Autowired
-    IAdvertisementRepository advertisementRepo;
+    IAdvertisementRepository repo;
 
-    public Advertisement findById(Long id) {
-        return advertisementRepo.findOne(id);
+    @Override
+    public Advertisement find(Long id) {
+        return repo.findOne(id);
     }
 
-    public void add(Advertisement advertisement) {
-        advertisementRepo.save(advertisement);
+    @Override
+    public List<Advertisement> findAll() {
+        return null;
     }
 
+    @Override
+    public void add(Advertisement entity) {
+        repo.save(entity);
+    }
+
+    @Override
+    public void update(Advertisement entity) {
+
+    }
+
+    @Override
     public void delete(Long id) {
-        advertisementRepo.delete(id);
+        repo.delete(id);
     }
 }
