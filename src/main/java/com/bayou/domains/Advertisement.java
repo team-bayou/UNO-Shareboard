@@ -15,12 +15,8 @@ import java.util.Date;
  */
 @Entity(name = "Advertisement")
 @Table(name = "ads")
-public class Advertisement {
-    @Id
-    @Column(name = "ad_id", columnDefinition = "serial")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@AttributeOverride(name = "id", column = @Column(name = "ad_id"))
+public class Advertisement extends BaseEntity {
     @Column(name = "title", columnDefinition = "VARCHAR")
     private String title;
 
@@ -51,15 +47,6 @@ public class Advertisement {
 
     @Column(name = "trade_item", columnDefinition = "VARCHAR")
     private String tradeItem;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

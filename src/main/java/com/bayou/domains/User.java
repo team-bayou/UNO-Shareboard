@@ -12,12 +12,8 @@ import java.util.Set;
  */
 @Entity(name = "User")
 @Table(name = "users")
-public class User {
-    @Id
-    @Column(name = "user_id", columnDefinition = "serial")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@AttributeOverride(name = "id", column = @Column(name = "user_id"))
+public class User extends BaseEntity {
     @Column(name = "account_name", columnDefinition = "VARCHAR")
     private String accountName;
 
@@ -55,18 +51,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
     private Set<Advertisement> advertisements;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getAccountName() {
         return accountName;
     }
-
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
