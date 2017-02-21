@@ -25,7 +25,6 @@ public class AuthenticationEngine {
         UserView userView;
         UnverifiedUserView unverifiedUserView = unverifiedUserManager.getByEmail(verifyUserView.getEmail());
         verifyUserView.setPasswordHash(unverifiedUserView.getPasswordHash());
-        verifyUserView.setPasswordSalt(unverifiedUserView.getPasswordSalt());
         if(verifyUserView.login() && unverifiedUserView.getVerificationCode().equals(verifyUserView.getEnteredVerificationCode())) {
             Long id = userManager.add(verifyUserView);
             userView = userManager.get(id);
@@ -47,7 +46,6 @@ public class AuthenticationEngine {
             return null;
         }
         verifyUserView.setPasswordHash(userView.getPasswordHash());
-        verifyUserView.setPasswordSalt(userView.getPasswordSalt());
         if(verifyUserView.login()) {
             return userView;
         } else {
