@@ -2,7 +2,6 @@ package com.bayou.managers;
 
 import com.bayou.views.IView;
 import javassist.NotFoundException;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface IManager<T extends IView> {
 
     List<T> getAll() throws NotFoundException;
 
-    HttpStatus add(T view);
+    Long add(T view);
 
     T update(T view);
 

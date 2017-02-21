@@ -17,13 +17,13 @@ public class User extends BaseEntity {
     @Column(name = "account_name", columnDefinition = "VARCHAR")
     private String accountName;
 
-    @Column(name = "password_hash", columnDefinition = "VARCHAR")
+    @Column(name = "password_hash", columnDefinition = "CHARACTER")
     private String passwordHash;
 
-    @Column(name = "password_salt", columnDefinition = "VARCHAR")
+    @Column(name = "password_salt", columnDefinition = "CHARACTER")
     private String passwordSalt;
 
-    @Column(name = "userType")
+    @Column(name = "user_type")
     @Type(type = "com.bayou.types.PGEnumUserType", parameters = {@org.hibernate.annotations.Parameter(name = "enumClassName", value = "com.bayou.types.UserType")})
     private UserType userType;
 

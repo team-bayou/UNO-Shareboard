@@ -15,7 +15,7 @@ public interface IResourceAccessor<T extends BaseEntity> {
 
     List<T> findAll();
 
-    void add(T entity);
+    Long add(T entity);
 
     void update(T entity);
 

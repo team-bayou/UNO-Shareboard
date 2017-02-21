@@ -35,8 +35,8 @@ public class UserResourceAccessor implements IResourceAccessor<User> {
     }
 
     @Override
-    public void add(User entity) {
-        repo.save(entity);
+    public Long add(User entity) {
+        return repo.save(entity).getId();
     }
 
     @Override

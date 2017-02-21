@@ -31,8 +31,8 @@ public class UnverifiedUserResourceAccessor implements IResourceAccessor<Unverif
     }
 
     @Override
-    public void add(UnverifiedUser entity) {
-        repo.save(entity);
+    public Long add(UnverifiedUser entity) {
+        return repo.save(entity).getId();
     }
 
     @Override
