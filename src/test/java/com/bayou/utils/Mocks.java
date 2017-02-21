@@ -15,16 +15,15 @@ import java.util.Random;
 public class Mocks {
     private static Random rand = new Random();
 
-    public static LoginView getLoginView() {
+    public static LoginView createLoginView() {
         LoginView view = new LoginView();
-        view.setEmail("jleaton@uno.edu3");
-        view.setAccountName("jleaton3");
+        view.setEmail("jleaton" + rand.nextInt() + "@uno.edu3");
+        view.setAccountName("jleaton" + rand.nextInt());
 
         return view;
     }
 
-
-    public static UserView getUserView() {
+    public static UserView createUserView() {
         UserView view = new UserView();
         view.setAccountName("jleaton" + rand.nextInt());
         view.setPasswordHash("jjjjjjj3");

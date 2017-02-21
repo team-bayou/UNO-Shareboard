@@ -3,6 +3,7 @@ package com.bayou.ControllerTests;
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
 import com.bayou.views.impl.LoginView;
+import com.bayou.views.impl.UserView;
 import javassist.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +26,20 @@ public class LoginControllerTests {
 
     @Test
     public void testLoginUser() throws NotFoundException {
-        final LoginView mockView = Mocks.getLoginView();
-        HttpEntity<LoginView> entity = new HttpEntity<>(mockView, Server.createHeadersJson());
+        // Create user view and add user to db.
+        UserView userView = Mocks.createUserView();
+        ResponseEntity<Long> entity = rest.postForEntity(
+                Server.url() + "/users/add", new HttpEntity<>(userView, Server.createHeadersJson()), Long.class);
+        userView.setId(entity.getBody());
 
-        final ResponseEntity<LoginView> responseEntity = rest.postForEntity(
-                Server.url() + "/login", entity, LoginView.class);
+        // Create login view from user view and perform login.
+        LoginView view = new LoginView();
+        view.setAccountName(userView.getAccountName());
+        view.setEmail(userView.getEmail());
 
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        ResponseEntity<LoginView> responseEntity = rest.postForEntity(
+                Server.url() + "/login", new HttpEntity<>(view, Server.createHeadersJson()), LoginView.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 }
