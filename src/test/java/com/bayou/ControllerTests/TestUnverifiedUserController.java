@@ -1,4 +1,4 @@
-package com.bayou.TestControllers;
+package com.bayou.ControllerTests;
 
 import com.bayou.controllers.UnverifiedUserController;
 import com.bayou.views.impl.UnverifiedUserView;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,11 +20,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestUnverifiedUserController {
     @Autowired
-    UnverifiedUserController userController;
+    private UnverifiedUserController userController;
 
     @Test
     public void testAddUnverifiedUserSuccess() {
-        ResponseEntity<HttpStatus> responseEntity = userController.add(getMockUserView());  //add a mock user
+        ResponseEntity<Long> responseEntity = userController.add(getMockUserView());  //add a mock user
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));  //assert that the status code is 200 OK
     }
