@@ -1,10 +1,10 @@
 package com.bayou.managers.impl;
 
-import com.bayou.converters.AdvertisementConverter;
-import com.bayou.domains.Advertisement;
+import com.bayou.converters.CategoryConverter;
+import com.bayou.domains.Category;
 import com.bayou.managers.IManager;
-import com.bayou.ras.impl.AdvertisementResourceAccessor;
-import com.bayou.views.impl.AdvertisementView;
+import com.bayou.ras.impl.CategoryResourceAccessor;
+import com.bayou.views.impl.CategoryView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,33 +20,33 @@ import java.util.List;
  * Created on: 2/20/17
  */
 @Service
-public class AdvertisementManager implements IManager<AdvertisementView> {
+public class CategoryManager implements IManager<CategoryView> {
     @Autowired
-    AdvertisementResourceAccessor ras = new AdvertisementResourceAccessor();
+    CategoryResourceAccessor ras = new CategoryResourceAccessor();
 
     @Autowired
-    AdvertisementConverter converter = new AdvertisementConverter();
+    CategoryConverter converter = new CategoryConverter();
 
-    public AdvertisementView get(Long id) throws NotFoundException {
-        AdvertisementView adView;
-        Advertisement ad = ras.find(id);
+    public CategoryView get(Long id) throws NotFoundException {
+        CategoryView categoryView;
+        Category category = ras.find(id);
 
-        if (ad == null) {
+        if (category == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            adView = converter.convertToView(ad);
+            categoryView = converter.convertToView(category);
         }
 
-        return adView;
+        return categoryView;
     }
 
     @Override
-    public List<AdvertisementView> getAll() throws NotFoundException {
+    public List<CategoryView> getAll() throws NotFoundException {
         return null;
     }
 
     @Override
-    public Long add(AdvertisementView view) {
+    public Long add(CategoryView view) {
         Long id = -1L;
         try {
             id = ras.add(converter.convertToDomain(view));
@@ -58,7 +58,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     }
 
     @Override
-    public AdvertisementView update(AdvertisementView view) {
+    public CategoryView update(CategoryView view) {
         return null;
     }
 
@@ -67,7 +67,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         try {
             ras.delete(id);
         } catch (EmptyResultDataAccessException e) {
-            System.err.println("The advertisement with ID:" + id + " does not exist in the database ");
+            System.err.println("The category with ID:" + id + " does not exist in the database ");
         }
     }
 }

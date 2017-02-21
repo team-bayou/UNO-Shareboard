@@ -1,41 +1,41 @@
 package com.bayou.ras.impl;
 
-import com.bayou.domains.Advertisement;
+import com.bayou.domains.Category;
 import com.bayou.ras.IResourceAccessor;
-import com.bayou.repository.IAdvertisementRepository;
+import com.bayou.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * File: AdvertisementResourceAccessor
+ * File: CategoryResourceAccessor
  * Package: com.bayou.ras.impl
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */
-@Service    //registers this java class as a Service bean so that the container is aware of it for injection
-public class AdvertisementResourceAccessor implements IResourceAccessor<Advertisement> {
+@Service
+public class CategoryResourceAccessor implements IResourceAccessor<Category> {
     @Autowired
-    IAdvertisementRepository repo;
+    ICategoryRepository repo;
 
     @Override
-    public Advertisement find(Long id) {
+    public Category find(Long id) {
         return repo.findOne(id);
     }
 
     @Override
-    public List<Advertisement> findAll() {
+    public List<Category> findAll() {
         return null;
     }
 
     @Override
-    public Long add(Advertisement entity) {
+    public Long add(Category entity) {
         return repo.save(entity).getId();
     }
 
     @Override
-    public void update(Advertisement entity) {
+    public void update(Category entity) {
 
     }
 

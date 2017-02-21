@@ -11,7 +11,6 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -99,18 +98,15 @@ public class UserManager implements IManager<UserView> {
     }
 
     @Override
-    public HttpStatus add(UserView userView) {
-
-        HttpStatus status = HttpStatus.OK;
-
+    public Long add(UserView userView) {
+        Long id = -1L;
         try {
-            ras.add(converter.convertToDomain(userView));
+            id = ras.add(converter.convertToDomain(userView));
         } catch (DataIntegrityViolationException e) {
-            status = HttpStatus.CONFLICT;
-            System.out.println("User: " + userView.getAccountName() + "already exist");
+            System.err.println("User: " + userView.getAccountName() + " already exist");
         }
 
-        return status;
+        return id;
     }
 
     //TODO implement
@@ -124,7 +120,7 @@ public class UserManager implements IManager<UserView> {
         try {
             ras.delete(id);
         } catch (EmptyResultDataAccessException e) {
-            System.out.println("The user with ID:" + id + " does not exist in the database ");
+            System.err.println("The user with ID:" + id + " does not exist in the database");
         }
     }
 

@@ -1,13 +1,11 @@
 package com.bayou.views.impl;
 
 import com.bayou.types.UserType;
-import com.bayou.views.IView;
 
 /**
  * Created by joshuaeaton on 1/31/17.
  */
-public class UserView implements IView {
-    private Long id;
+public class UserView extends BaseEntityView {
     private String accountName;
     private String passwordHash;
     private String passwordSalt;
@@ -19,16 +17,6 @@ public class UserView implements IView {
     private String facebookId;
     private String twitterHandle;
     private Integer imageId;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getAccountName() {
         return accountName;
@@ -122,10 +110,10 @@ public class UserView implements IView {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         UserView userView = (UserView) o;
 
-        if (id != null ? !id.equals(userView.id) : userView.id != null) return false;
         if (accountName != null ? !accountName.equals(userView.accountName) : userView.accountName != null)
             return false;
         if (passwordHash != null ? !passwordHash.equals(userView.passwordHash) : userView.passwordHash != null)
@@ -146,7 +134,7 @@ public class UserView implements IView {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
         result = 31 * result + (accountName != null ? accountName.hashCode() : 0);
         result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
         result = 31 * result + (passwordSalt != null ? passwordSalt.hashCode() : 0);

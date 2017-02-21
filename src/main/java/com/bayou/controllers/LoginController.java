@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("service/v1/login")
 public class LoginController {
-
     @Autowired
     UserManager userManager = new UserManager();
+
     @Autowired
     LoginConverter converter = new LoginConverter();
 
@@ -29,8 +29,7 @@ public class LoginController {
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<LoginView> login(@RequestBody LoginView loginView) throws NotFoundException {
-        
-        ResponseEntity<LoginView> responseEntity = null;
+        ResponseEntity<LoginView> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(userManager.login(loginView), HttpStatus.OK);
         } catch (NotFoundException e) {

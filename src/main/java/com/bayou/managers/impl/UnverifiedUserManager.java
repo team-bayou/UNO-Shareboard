@@ -9,7 +9,6 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,17 +57,15 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     }
 
     @Override
-    public HttpStatus add(UnverifiedUserView userView) {
-        HttpStatus status = HttpStatus.OK;
-
+    public Long add(UnverifiedUserView userView) {
+        Long id = -1L;
         try {
-            ras.add(converter.convertToDomain(userView));
-        } catch (DataIntegrityViolationException dive) {
-            status = HttpStatus.CONFLICT;
-            System.out.println("A user already exists with the provided email.");
+            id = ras.add(converter.convertToDomain(userView));
+        } catch (DataIntegrityViolationException e) {
+            System.err.println("A user already exists with the provided email.");
         }
 
-        return status;
+        return id;
     }
 
     //TODO implement
@@ -82,7 +79,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
         try {
             ras.delete(id);
         } catch (EmptyResultDataAccessException e) {
-            System.out.println("The user with ID:" + id + " does not exist in the database ");
+            System.err.println("The user with ID:" + id + " does not exist in the database ");
         }
     }
 }
