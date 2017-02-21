@@ -9,7 +9,6 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,17 +46,15 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     }
 
     @Override
-    public HttpStatus add(AdvertisementView view) {
-        HttpStatus status = HttpStatus.OK;
-
+    public Long add(AdvertisementView view) {
+        Long id = -1L;
         try {
-            ras.add(converter.convertToDomain(view));
+            id = ras.add(converter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
-            status = HttpStatus.CONFLICT;
-            System.out.println("Advertisement: " + view.getTitle() + "already exist");
+            System.err.println("Advertisement: " + view.getTitle() + "already exist");
         }
 
-        return status;
+        return id;
     }
 
     @Override
@@ -70,7 +67,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         try {
             ras.delete(id);
         } catch (EmptyResultDataAccessException e) {
-            System.out.println("The advertisement with ID:" + id + " does not exist in the database ");
+            System.err.println("The advertisement with ID:" + id + " does not exist in the database ");
         }
     }
 }

@@ -16,12 +16,15 @@ public class AdvertisementConverter {
     @Autowired
     UserConverter userConverter = new UserConverter();
 
+    @Autowired
+    CategoryConverter categoryConverter = new CategoryConverter();
+
     public AdvertisementView convertToView(Advertisement domain) {
         AdvertisementView view = new AdvertisementView();
         view.setId(domain.getId());
         view.setTitle(domain.getTitle());
         view.setDescription(domain.getDescription());
-        view.setCategoryId(domain.getCategoryId());
+        view.setCategory(categoryConverter.convertToView(domain.getCategory()));
         view.setOwner(userConverter.convertToView(domain.getOwner()));
         view.setTimePublished(domain.getTimePublished());
         view.setExpirationDate(domain.getExpirationDate());
@@ -37,7 +40,7 @@ public class AdvertisementConverter {
         domain.setId(view.getId());
         domain.setTitle(view.getTitle());
         domain.setDescription(view.getDescription());
-        domain.setCategoryId(view.getCategoryId());
+        domain.setCategory(categoryConverter.convertToDomain(view.getCategory()));
         domain.setOwner(userConverter.convertToDomain(view.getOwner()));
         domain.setTimePublished(view.getTimePublished());
         domain.setExpirationDate(view.getExpirationDate());

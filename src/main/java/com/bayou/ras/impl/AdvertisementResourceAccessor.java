@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * File: AdvertisementResourceAccessor
- * Package: com.bayou.ras
+ * Package: com.bayou.ras.impl
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */
@@ -30,8 +30,8 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     }
 
     @Override
-    public void add(Advertisement entity) {
-        repo.save(entity);
+    public Long add(Advertisement entity) {
+        return repo.save(entity).getId();
     }
 
     @Override

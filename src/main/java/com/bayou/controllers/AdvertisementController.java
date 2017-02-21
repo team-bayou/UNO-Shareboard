@@ -51,8 +51,16 @@ public class AdvertisementController {
 
     @ApiOperation(value = "Add an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity add(@RequestBody AdvertisementView view) {
-        return new ResponseEntity(manager.add(view));
+    public ResponseEntity<Long> add(@RequestBody AdvertisementView view) {
+        Long id = manager.add(view);
+
+        ResponseEntity<Long> responseEntity;
+        if (id > 0)
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        else
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+
+        return responseEntity;
     }
 
     @ApiOperation(value = "Update an advertisement", response = ResponseEntity.class)
