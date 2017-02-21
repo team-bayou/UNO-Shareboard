@@ -1,4 +1,4 @@
-package com.bayou.ControllerTests;
+package com.bayou.controllers;
 
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
@@ -17,7 +17,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by joshuaeaton on 2/1/17.
+ * File: UserControllerTests
+ * Package: com.bayou.controllers
+ * Author: Stefan Haselwanter
+ * Created on: 2/21/17
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
