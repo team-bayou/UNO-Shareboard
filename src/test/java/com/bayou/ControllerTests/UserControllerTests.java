@@ -26,11 +26,13 @@ public class UserControllerTests {
 
     @Test
     public void testGetUserById() {
-        UserView view = Mocks.getUserView();
+        // Create user view and add user to db.
+        UserView view = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + "/users/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
+        // Get user by id.
         ResponseEntity<UserView> responseEntity = rest.getForEntity(
                 Server.url() + "/users/" + view.getId(), UserView.class);
 
@@ -42,11 +44,13 @@ public class UserControllerTests {
 
     @Test
     public void testGetUserByAccountName() {
-        UserView view = Mocks.getUserView();
+        // Create user view and add user to db.
+        UserView view = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + "/users/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
+        // Get user by account name.
         ResponseEntity<UserView> responseEntity = rest.getForEntity(
                 Server.url() + "/users/accountName/" + view.getAccountName(), UserView.class);
 
@@ -58,11 +62,13 @@ public class UserControllerTests {
 
     @Test
     public void testGetUserByEmail() {
-        UserView view = Mocks.getUserView();
+        // Create user view and add user to db.
+        UserView view = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + "/users/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
+        // Get user by email.
         ResponseEntity<UserView> responseEntity = rest.getForEntity(
                 Server.url() + "/users/email/" + view.getEmail(), UserView.class);
 
@@ -74,7 +80,8 @@ public class UserControllerTests {
 
     @Test
     public void testAddUser() {
-        UserView view = Mocks.getUserView();
+        // Create user view and add user to db.
+        UserView view = Mocks.createUserView();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
                 Server.url() + "/users/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
 
@@ -84,11 +91,13 @@ public class UserControllerTests {
 
     @Test
     public void testDeleteUser() {
-        UserView view = Mocks.getUserView();
+        // Create user view and add user to db.
+        UserView view = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + "/users/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
+        // Delete user by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + "/users/" + view.getId() + "/delete",
                 HttpMethod.DELETE, new HttpEntity<>(view, Server.createHeadersJson()), String.class);
