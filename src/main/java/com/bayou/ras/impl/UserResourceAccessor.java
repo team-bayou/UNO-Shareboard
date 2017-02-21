@@ -1,6 +1,7 @@
-package com.bayou.ras;
+package com.bayou.ras.impl;
 
 import com.bayou.domains.User;
+import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
