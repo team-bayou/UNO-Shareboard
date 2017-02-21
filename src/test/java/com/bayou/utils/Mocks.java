@@ -2,6 +2,7 @@ package com.bayou.utils;
 
 import com.bayou.types.UserType;
 import com.bayou.views.impl.LoginView;
+import com.bayou.views.impl.UnverifiedUserView;
 import com.bayou.views.impl.UserView;
 
 import java.util.Random;
@@ -35,6 +36,16 @@ public class Mocks {
         view.setPhoneNumber("5046555038");
         view.setFacebookId("Josh Eaton");
         view.setTwitterHandle("");
+
+        return view;
+    }
+
+    public static UnverifiedUserView createUnverifiedUserView() {
+        UnverifiedUserView view = new UnverifiedUserView();
+        view.setPasswordHash("jjjjjjj3");
+        view.setPasswordSalt("hhhhhhh3");
+        view.setEmail("jleaton" + rand.nextInt() + "@uno.sa.edu.");
+        view.setVerificationCode(46555038);
 
         return view;
     }

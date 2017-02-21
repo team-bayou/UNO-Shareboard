@@ -2,7 +2,7 @@ package com.bayou.ControllerTests;
 
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
-import com.bayou.views.impl.UserView;
+import com.bayou.views.impl.UnverifiedUserView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,26 +17,26 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by joshuaeaton on 2/1/17.
+ * Created by rachelguillory on 2/18/17.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class UserControllerTests {
-    private static final String RESOURCE_URL = "/users";
+public class UnverifiedUserControllerTests {
+    private static final String RESOURCE_URL = "/unverified_users";
 
     private TestRestTemplate rest = new TestRestTemplate();
 
     @Test
-    public void testGetUserById() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+    public void testGetUnverifiedUserById() {
+        // Create unverified user view and add unverified user to db.
+        UnverifiedUserView view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
-        // Get user by id.
-        ResponseEntity<UserView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/" + view.getId(), UserView.class);
+        // Get unverified user by id.
+        ResponseEntity<UnverifiedUserView> responseEntity = rest.getForEntity(
+                Server.url() + RESOURCE_URL + "/" + view.getId(), UnverifiedUserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -45,16 +45,16 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testGetUserByAccountName() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+    public void testGetUnverifiedUserByEmail() {
+        // Create unverified user view and add unverified user to db.
+        UnverifiedUserView view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
-        // Get user by account name.
-        ResponseEntity<UserView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/accountName/" + view.getAccountName(), UserView.class);
+        // Get unverified user by email.
+        ResponseEntity<UnverifiedUserView> responseEntity = rest.getForEntity(
+                Server.url() + RESOURCE_URL + "/email/" + view.getEmail(), UnverifiedUserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -63,27 +63,9 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testGetUserByEmail() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
-        ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
-        view.setId(entity.getBody());
-
-        // Get user by email.
-        ResponseEntity<UserView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/email/" + view.getEmail(), UserView.class);
-
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertTrue(responseEntity.getBody() != null);
-
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
-    }
-
-    @Test
-    public void testAddUser() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+    public void testAddUnverifiedUser() {
+        // Create unverified user view and add unverified user to db.
+        UnverifiedUserView view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
 
@@ -92,14 +74,14 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testDeleteUser() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+    public void testDeleteUnverifiedUser() {
+        // Create unverified user view and add user to db.
+        UnverifiedUserView view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
 
-        // Delete user by id.
+        // Delete unverified user by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
                 HttpMethod.DELETE, new HttpEntity<>(view, Server.createHeadersJson()), String.class);
