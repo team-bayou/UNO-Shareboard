@@ -1,7 +1,6 @@
 package com.bayou.views.impl;
 
 import com.bayou.types.AdType;
-import com.bayou.views.IView;
 
 import java.util.Date;
 
@@ -11,27 +10,16 @@ import java.util.Date;
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */
-public class AdvertisementView implements IView {
-    private Long id;
+public class AdvertisementView extends BaseEntityView {
     private String title;
     private String description;
-    private Integer categoryId;
+    private CategoryView category;
     private UserView owner;
     private Date timePublished;
     private Date expirationDate;
     private AdType adType;
     private Double price;
     private String tradeItem;
-
-    @Override
-    public Long getId() {
-        return null;
-    }
-
-    @Override
-    public void setId(Long id) {
-
-    }
 
     public String getTitle() {
         return title;
@@ -49,12 +37,12 @@ public class AdvertisementView implements IView {
         this.description = description;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public CategoryView getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(CategoryView category) {
+        this.category = category;
     }
 
     public UserView getOwner() {
@@ -109,13 +97,13 @@ public class AdvertisementView implements IView {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         AdvertisementView that = (AdvertisementView) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
+        if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (owner != null ? !owner.equals(that.owner) : that.owner != null) return false;
         if (timePublished != null ? !timePublished.equals(that.timePublished) : that.timePublished != null)
             return false;
@@ -128,10 +116,10 @@ public class AdvertisementView implements IView {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         result = 31 * result + (timePublished != null ? timePublished.hashCode() : 0);
         result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
