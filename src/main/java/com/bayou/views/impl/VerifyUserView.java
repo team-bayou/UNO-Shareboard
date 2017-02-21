@@ -8,7 +8,6 @@ import com.bayou.types.UserType;
 public class VerifyUserView extends UserView {
 
     private String enteredPasswordHash;
-    private String enteredPasswordSalt;
     private Integer enteredVerificationCode;
 
     public String getEnteredPasswordHash() {
@@ -17,14 +16,6 @@ public class VerifyUserView extends UserView {
 
     public void setEnteredPasswordHash(String enteredPasswordHash) {
         this.enteredPasswordHash = enteredPasswordHash;
-    }
-
-    public String getEnteredPasswordSalt() {
-        return enteredPasswordSalt;
-    }
-
-    public void setEnteredPasswordSalt(String enteredPasswordSalt) {
-        this.enteredPasswordSalt = enteredPasswordSalt;
     }
 
     public Integer getEnteredVerificationCode() {
@@ -36,11 +27,10 @@ public class VerifyUserView extends UserView {
     }
 
     public boolean login() {
-        if(enteredPasswordHash == null || enteredPasswordSalt == null ||
-              getPasswordHash()== null || getPasswordSalt()   == null) {
+        if(enteredPasswordHash == null || getPasswordHash()== null) {
             return false;
         }
-        return enteredPasswordHash.equals(getPasswordHash()) && enteredPasswordSalt.equals(getPasswordSalt());
+        return enteredPasswordHash.equals(getPasswordHash());
     }
 
     public LoginView convertToLoginView() {
