@@ -2,17 +2,116 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "2b00dbb9-5faf-3b2b-f189-e1aea9424c1d",
+		"_postman_id": "b71fa387-947a-2416-ac1b-47837a6aebfe",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "API - User_DEV",
+			"name": "API - Ads",
 			"description": "",
 			"item": [
 				{
-					"name": "Login User by account name",
+					"name": "Get Advertisements",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets a list of all active advertisements"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets a specific ad by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Advertisement",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryID\" : \"1\",\n\t\"owner\": \"1\",\n\t\"timePublished\" : \"09/10/17\",\n\t\"expirationDate\" : \"09/15/17\",\n\t\"adType\" : \"offer\"\n}"
+						},
+						"description": "Adds a advertisement"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/auth/login/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\": \"hjjjjjj3                                                                                                                        \"\n}\n"
+						},
+						"description": "Login as a user by email or account name"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/auth/verify/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"accountName\" : \"jleaton\",\n\t\"userType\" : \"standard\",\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\" : \"hjjjjjj3                                                                                                                        \",\n\t\"enteredVerificationCode\" : 12345678\n}"
+						},
+						"description": "Verify an unverified user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - Categories",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "API - Login",
+			"description": "",
+			"item": [
+				{
+					"name": "Login By account name",
 					"event": [
 						{
 							"listen": "test",
@@ -26,7 +125,7 @@
 						}
 					],
 					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/login",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/login",
 						"method": "POST",
 						"header": [
 							{
@@ -44,7 +143,7 @@
 					"response": []
 				},
 				{
-					"name": "Login User by email",
+					"name": "Login By email",
 					"event": [
 						{
 							"listen": "test",
@@ -58,7 +157,7 @@
 						}
 					],
 					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/login",
+						"url": "http://{{unoshareboard.api.host}}service/v1/login",
 						"method": "POST",
 						"header": [
 							{
@@ -74,761 +173,11 @@
 						"description": "Login user"
 					},
 					"response": []
-				},
-				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Add a user"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/delete/7",
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get a user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by accountName",
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/accountName/jleaton3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by email",
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/email/jleaton@uno.edu3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
 				}
 			]
 		},
 		{
-			"name": "API - User_LOCAL",
-			"description": "",
-			"item": [
-				{
-					"name": "Login User by account name",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Login User by email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Add a user"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"url": "http://localhost:8090/service/v1/users/delete/7",
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes a user from the database"
-					},
-					"response": []
-				},
-				{
-					"name": "Get User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "http://localhost:8090/service/v1/users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get a user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by accountName",
-					"request": {
-						"url": "http://localhost:8090/service/v1/users/accountName/jleaton3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by email",
-					"request": {
-						"url": "http://localhost:8090/service/v1/users/email/jleaton@uno.edu3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "API - User_PROD",
-			"description": "",
-			"item": [
-				{
-					"name": "Login User by account name",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Login User by email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Add a user"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/delete/7",
-						"method": "DELETE",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get a user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by accountName",
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/accountName/jleaton3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by email",
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/users/email/jleaton@uno.edu3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "API - User_QA",
-			"description": "",
-			"item": [
-				{
-					"name": "Login User by account name",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Login User by email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Login user"
-					},
-					"response": []
-				},
-				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Add a user"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/delete/7",
-						"method": "DELETE",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get a user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by accountName",
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/accountName/jleaton3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by email",
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/users/email/jleaton@uno.edu3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "API-UnvUser_DEV",
-			"description": "",
-			"item": [
-				{
-					"name": "Add Unverified User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/unverified_users",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
-						},
-						"description": "Get an Unverified User by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get a Unverified User by ID",
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/unverified_users/1",
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Get a Unverified User by Email",
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/unverified_users/email/jleaton3@uno.edu/",
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Unverified User",
-					"request": {
-						"url": "https://uno-shareboard-dev.herokuapp.com/service/v1/users/delete/7",
-						"method": "DELETE",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "API-UnvUser_LOCAL",
+			"name": "API - Unverified Users",
 			"description": "These endpoints handle database interactions in regards to unverified user operations.",
 			"item": [
 				{
@@ -846,7 +195,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8090/service/v1/unverified_users/add",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/unverified_users/add",
 						"method": "POST",
 						"header": [
 							{
@@ -857,14 +206,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
+							"raw": "{\n  \"passwordHash\": \"hjjjjjj3                                                                                                                        \",\n  \"passwordSalt\": \"hhhhhhh3                                                        \",\n  \"email\": \"jleaton@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
 						},
 						"description": "Add an unverified user"
 					},
 					"response": []
 				},
 				{
-					"name": "Get Unverified User by ID",
+					"name": "Get By ID",
 					"event": [
 						{
 							"listen": "test",
@@ -878,7 +227,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8090/service/v1/unverified_users/1",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/unverified_users/1",
 						"method": "GET",
 						"header": [
 							{
@@ -896,7 +245,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Unverified User by Email",
+					"name": "Get By Email",
 					"event": [
 						{
 							"listen": "test",
@@ -910,7 +259,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8090/service/v1/unverified_users/email/jleaton3@uno.edu/",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/unverified_users/email/jleaton3@uno.edu/",
 						"method": "GET",
 						"header": [
 							{
@@ -930,10 +279,13 @@
 				{
 					"name": "Delete Unverified User",
 					"request": {
-						"url": "http://localhost:8090/service/v1/unverified_users/delete/7",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/unverified_users/delete/7",
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -941,11 +293,11 @@
 			]
 		},
 		{
-			"name": "API-UnvUser_Prod",
+			"name": "API - Users",
 			"description": "",
 			"item": [
 				{
-					"name": "Add Unverified User",
+					"name": "Add User",
 					"event": [
 						{
 							"listen": "test",
@@ -953,13 +305,13 @@
 								"type": "text/javascript",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
 								]
 							}
 						}
 					],
 					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/unverified_users/add",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/users/add",
 						"method": "POST",
 						"header": [
 							{
@@ -970,141 +322,82 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
+							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
 						},
-						"description": "Add an Unverified User"
+						"description": "Add a user"
 					},
 					"response": []
 				},
 				{
-					"name": "Get Unverified User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
+					"name": "Delete User",
 					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/unverified_users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get an Unverified User by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Unverified User by Email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/unverified_users/email/jleaton3@uno.edu/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get an Unverified User by Email"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Unverified User",
-					"request": {
-						"url": "https://uno-shareboard-prod.herokuapp.com/service/v1/unverified_users/delete/7",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/users/delete/7",
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a user from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/users/5",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Get a user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Acount Name",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
 						"description": ""
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "API-UnvUser_QA",
-			"description": "",
-			"item": [
-				{
-					"name": "Add Unverified User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/unverified_users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
-						},
-						"description": "Add an Unverified User"
-					},
-					"response": []
 				},
 				{
-					"name": "Get Unverified User by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
+					"name": "Get By Email",
 					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/unverified_users/email/jleaton3@uno.edu/",
+						"url": "http://{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu/",
 						"method": "GET",
 						"header": [
 							{
@@ -1115,51 +408,8 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
 						},
-						"description": "Get an Unverified User by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Unverified User by Email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/unverified_users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Get an Unverified User by Email"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Unverified User",
-					"request": {
-						"url": "https://uno-shareboard-staging.herokuapp.com/service/v1/unverified_users/delete/7",
-						"method": "DELETE",
-						"header": [],
-						"body": {},
 						"description": ""
 					},
 					"response": []
