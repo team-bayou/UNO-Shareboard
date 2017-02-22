@@ -23,13 +23,11 @@ public class Advertisement extends BaseEntity {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @Column(name = "category_id", nullable = false)
+    private Long categoryId;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner", nullable = false)
-    private User owner;
+    @Column(name = "owner", nullable = false)
+    private Long owner;
 
     @Column(name = "time_published", columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -65,12 +63,12 @@ public class Advertisement extends BaseEntity {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public AdType getAdType() {
@@ -81,11 +79,11 @@ public class Advertisement extends BaseEntity {
         this.adType = adType;
     }
 
-    public User getOwner() {
+    public Long getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Long owner) {
         this.owner = owner;
     }
 
@@ -156,7 +154,7 @@ public class Advertisement extends BaseEntity {
         return "Advertisement{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", category=" + category +
+                ", category=" + categoryId +
                 ", owner=" + owner +
                 ", timePublished=" + timePublished +
                 ", expirationDate=" + expirationDate +

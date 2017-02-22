@@ -1,0 +1,1 @@
+ALTER TABLE ads ALTER COLUMN price TYPE numeric(5,2);

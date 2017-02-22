@@ -18,10 +18,7 @@ public class CategoryConverter {
         view.setTitle(domain.getTitle());
         view.setColor(domain.getColor());
         view.setDescription(domain.getDescription());
-
-        Category parent = domain.getParentCategory();
-        if (parent != null)
-            view.setParentCategory(new CategoryView(parent));
+        view.setParentCategoryId(domain.getParentCategoryId());
 
         return view;
     }
@@ -32,10 +29,7 @@ public class CategoryConverter {
         domain.setTitle(view.getTitle());
         domain.setColor(view.getColor());
         domain.setDescription(view.getDescription());
-
-        CategoryView parent = view.getParentCategory();
-        if (parent != null)
-            domain.setParentCategory(new Category(parent));
+        domain.setParentCategoryId(view.getParentCategoryId());
 
         return domain;
     }

@@ -2,9 +2,6 @@ package com.bayou.views.impl;
 
 import com.bayou.types.UserType;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by joshuaeaton on 1/31/17.
  */
@@ -20,8 +17,6 @@ public class UserView extends BaseEntityView {
     private String facebookId;
     private String twitterHandle;
     private Integer imageId;
-
-    private Set<AdvertisementView> advertisements = new HashSet<>();
 
     public String getAccountName() {
         return accountName;
@@ -109,14 +104,6 @@ public class UserView extends BaseEntityView {
 
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
-    }
-
-    public Set<AdvertisementView> getAdvertisements() {
-        return advertisements;
-    }
-
-    public void setAdvertisements(Set<AdvertisementView> advertisements) {
-        this.advertisements = advertisements;
     }
 
     @Override

@@ -4,9 +4,10 @@ package com.bayou.domains;
 import com.bayou.types.UserType;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by joshuaeaton on 1/31/17.
@@ -48,9 +49,6 @@ public class User extends BaseEntity {
 
     @Column(name = "image_id", columnDefinition = "INTEGER")
     private Integer imageId;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Advertisement> advertisements = new HashSet<>();
 
     public String getAccountName() {
         return accountName;
@@ -138,14 +136,6 @@ public class User extends BaseEntity {
 
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
-    }
-
-    public Set<Advertisement> getAdvertisements() {
-        return advertisements;
-    }
-
-    public void setAdvertisements(Set<Advertisement> advertisements) {
-        this.advertisements = advertisements;
     }
 
     @Override

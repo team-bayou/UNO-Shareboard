@@ -1,11 +1,10 @@
 package com.bayou.domains;
 
 
-import com.bayou.views.impl.CategoryView;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * File: Category
@@ -26,31 +25,8 @@ public class Category extends BaseEntity {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent_category_id")
-    private Category parentCategory;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentCategory", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Category> categories = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Advertisement> advertisements = new HashSet<>();
-
-    public Category() {
-        super();
-    }
-
-    public Category(CategoryView view) {
-        setId(view.getId());
-        setTitle(view.getTitle());
-        setColor(view.getColor());
-        setDescription(view.getDescription());
-
-        CategoryView parent = view.getParentCategory();
-        // Be aware of recursion!!
-        if (parent != null)
-            setParentCategory(new Category(parent));
-    }
+    @Column(name = "parent_category_id")
+    private Long parentCategoryId;
 
     public String getTitle() {
         return title;
@@ -76,28 +52,12 @@ public class Category extends BaseEntity {
         this.description = description;
     }
 
-    public Category getParentCategory() {
-        return parentCategory;
+    public Long getParentCategoryId() {
+        return parentCategoryId;
     }
 
-    public void setParentCategory(Category parentCategory) {
-        this.parentCategory = parentCategory;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
-
-    public Set<Advertisement> getAdvertisements() {
-        return advertisements;
-    }
-
-    public void setAdvertisements(Set<Advertisement> advertisements) {
-        this.advertisements = advertisements;
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 
     @Override
@@ -111,7 +71,7 @@ public class Category extends BaseEntity {
         if (color != null ? !color.equals(category.color) : category.color != null) return false;
         if (description != null ? !description.equals(category.description) : category.description != null)
             return false;
-        return parentCategory != null ? parentCategory.equals(category.parentCategory) : category.parentCategory == null;
+        return parentCategoryId != null ? parentCategoryId.equals(category.parentCategoryId) : category.parentCategoryId == null;
     }
 
     @Override
@@ -119,7 +79,17 @@ public class Category extends BaseEntity {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (parentCategory != null ? parentCategory.hashCode() : 0);
+        result = 31 * result + (parentCategoryId != null ? parentCategoryId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "title='" + title + '\'' +
+                ", color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", parentCategoryId=" + parentCategoryId +
+                "} " + super.toString();
     }
 }
