@@ -1,4 +1,4 @@
-package com.bayou.ControllerTests;
+package com.bayou.controllers;
 
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
@@ -17,7 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by joshuaeaton on 2/17/17.
+ * File: LoginControllerTests
+ * Package: com.bayou.controllers
+ * Author: Stefan Haselwanter
+ * Created on: 2/21/17
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

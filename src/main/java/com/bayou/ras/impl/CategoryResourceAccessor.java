@@ -6,8 +6,6 @@ import com.bayou.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * File: CategoryResourceAccessor
  * Package: com.bayou.ras.impl
@@ -25,8 +23,8 @@ public class CategoryResourceAccessor implements IResourceAccessor<Category> {
     }
 
     @Override
-    public List<Category> findAll() {
-        return null;
+    public Iterable<Category> findAll() {
+        return repo.findAll();
     }
 
     @Override

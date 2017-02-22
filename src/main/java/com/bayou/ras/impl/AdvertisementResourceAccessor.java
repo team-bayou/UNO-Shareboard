@@ -6,8 +6,6 @@ import com.bayou.repository.IAdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * File: AdvertisementResourceAccessor
  * Package: com.bayou.ras.impl
@@ -25,8 +23,8 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     }
 
     @Override
-    public List<Advertisement> findAll() {
-        return null;
+    public Iterable<Advertisement> findAll() {
+        return repo.findAll();
     }
 
     @Override

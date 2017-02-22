@@ -19,28 +19,28 @@ public class UnverifiedUserController {
     UnverifiedUserManager manager = new UnverifiedUserManager();
 
     @ApiOperation(value = "Get an unverified user by id", response = ResponseEntity.class)
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UnverifiedUserView> getById(@PathVariable("id") Long id) throws NotFoundException {
-
-        ResponseEntity<UnverifiedUserView> responseEntity = null;
+        ResponseEntity<UnverifiedUserView> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(manager.get(id), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+
         return responseEntity;
     }
 
     @ApiOperation(value = "Get an unverified user by email", response = ResponseEntity.class)
-    @RequestMapping(value = "/email/{email}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET)
     public ResponseEntity<UnverifiedUserView> getByEmail(@PathVariable("email") String email) throws NotFoundException {
-
-        ResponseEntity<UnverifiedUserView> responseEntity = null;
+        ResponseEntity<UnverifiedUserView> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(manager.getByEmail(email), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+
         return responseEntity;
     }
 
@@ -59,9 +59,8 @@ public class UnverifiedUserController {
     }
 
     @ApiOperation(value = "Delete an unverified user", response = ResponseEntity.class)
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
     public ResponseEntity delete(@PathVariable("id") Long id) {
-
         manager.delete(id);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);

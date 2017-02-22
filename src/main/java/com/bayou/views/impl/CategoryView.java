@@ -85,4 +85,14 @@ public class CategoryView extends BaseEntityView {
         result = 31 * result + (parentCategory != null ? parentCategory.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CategoryView{" +
+                "title='" + title + '\'' +
+                ", color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", parentCategory=" + parentCategory +
+                '}' + super.toString();
+    }
 }
