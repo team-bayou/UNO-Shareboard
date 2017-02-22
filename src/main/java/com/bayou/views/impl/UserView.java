@@ -2,6 +2,9 @@ package com.bayou.views.impl;
 
 import com.bayou.types.UserType;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by joshuaeaton on 1/31/17.
  */
@@ -17,6 +20,8 @@ public class UserView extends BaseEntityView {
     private String facebookId;
     private String twitterHandle;
     private Integer imageId;
+
+    private Set<AdvertisementView> advertisements = new HashSet<>();
 
     public String getAccountName() {
         return accountName;
@@ -106,6 +111,14 @@ public class UserView extends BaseEntityView {
         this.imageId = imageId;
     }
 
+    public Set<AdvertisementView> getAdvertisements() {
+        return advertisements;
+    }
+
+    public void setAdvertisements(Set<AdvertisementView> advertisements) {
+        this.advertisements = advertisements;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -147,5 +160,22 @@ public class UserView extends BaseEntityView {
         result = 31 * result + (twitterHandle != null ? twitterHandle.hashCode() : 0);
         result = 31 * result + (imageId != null ? imageId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UserView{" +
+                "accountName='" + accountName + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", passwordSalt='" + passwordSalt + '\'' +
+                ", userType=" + userType +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", facebookId='" + facebookId + '\'' +
+                ", twitterHandle='" + twitterHandle + '\'' +
+                ", imageId=" + imageId +
+                "} " + super.toString();
     }
 }

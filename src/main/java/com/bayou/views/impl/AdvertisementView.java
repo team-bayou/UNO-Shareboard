@@ -128,4 +128,19 @@ public class AdvertisementView extends BaseEntityView {
         result = 31 * result + (tradeItem != null ? tradeItem.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "AdvertisementView{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", owner=" + owner +
+                ", timePublished=" + timePublished +
+                ", expirationDate=" + expirationDate +
+                ", adType=" + adType +
+                ", price=" + price +
+                ", tradeItem='" + tradeItem + '\'' +
+                "} " + super.toString();
+    }
 }

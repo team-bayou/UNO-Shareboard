@@ -2,6 +2,9 @@ package com.bayou.views.impl;
 
 import com.bayou.domains.Category;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * File: CategoryView
  * Package: com.bayou.views.impl
@@ -13,6 +16,9 @@ public class CategoryView extends BaseEntityView {
     private String color;
     private String description;
     private CategoryView parentCategory;
+
+    private Set<CategoryView> categories = new HashSet<>();
+    private Set<AdvertisementView> advertisements = new HashSet<>();
 
     public CategoryView() {
         super();
@@ -62,6 +68,22 @@ public class CategoryView extends BaseEntityView {
         this.parentCategory = parentCategory;
     }
 
+    public Set<CategoryView> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryView> categories) {
+        this.categories = categories;
+    }
+
+    public Set<AdvertisementView> getAdvertisements() {
+        return advertisements;
+    }
+
+    public void setAdvertisements(Set<AdvertisementView> advertisements) {
+        this.advertisements = advertisements;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,6 +115,6 @@ public class CategoryView extends BaseEntityView {
                 ", color='" + color + '\'' +
                 ", description='" + description + '\'' +
                 ", parentCategory=" + parentCategory +
-                '}' + super.toString();
+                "} " + super.toString();
     }
 }

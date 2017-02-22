@@ -23,11 +23,11 @@ public class Advertisement extends BaseEntity {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "owner", nullable = false)
     private User owner;
 
@@ -119,5 +119,50 @@ public class Advertisement extends BaseEntity {
 
     public void setTradeItem(String tradeItem) {
         this.tradeItem = tradeItem;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Advertisement that = (Advertisement) o;
+
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (timePublished != null ? !timePublished.equals(that.timePublished) : that.timePublished != null)
+            return false;
+        if (expirationDate != null ? !expirationDate.equals(that.expirationDate) : that.expirationDate != null)
+            return false;
+        if (adType != that.adType) return false;
+        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+        return tradeItem != null ? tradeItem.equals(that.tradeItem) : that.tradeItem == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (timePublished != null ? timePublished.hashCode() : 0);
+        result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
+        result = 31 * result + (adType != null ? adType.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (tradeItem != null ? tradeItem.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", owner=" + owner +
+                ", timePublished=" + timePublished +
+                ", expirationDate=" + expirationDate +
+                ", adType=" + adType +
+                ", price=" + price +
+                ", tradeItem='" + tradeItem + '\'' +
+                "} " + super.toString();
     }
 }
