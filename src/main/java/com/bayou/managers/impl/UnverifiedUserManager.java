@@ -2,9 +2,12 @@ package com.bayou.managers.impl;
 
 import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
+import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
 import com.bayou.views.impl.UnverifiedUserView;
+import com.bayou.views.impl.UserView;
+import com.bayou.views.impl.VerifyUserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,6 +26,26 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
     @Autowired
     UnverifiedUserConverter converter = new UnverifiedUserConverter();
+
+    @Autowired
+    UserManager userManager = new UserManager();
+
+    public UserView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
+       UnverifiedUser unverifiedUser = ras.findByEmail(verifyUserView.getEmail());
+       UserView userView;
+
+       verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
+       verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
+       if(verifyUserView.login() && verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode())) {
+           Long id = userManager.add(verifyUserView);
+           userView = userManager.get(id);
+           delete(unverifiedUser.getId());
+       } else {
+           throw new VerificationException();
+       }
+
+       return userView;
+    }
 
     @Override
     public UnverifiedUserView get(Long id) throws NotFoundException {
