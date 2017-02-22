@@ -3,6 +3,7 @@ package com.bayou.TestManagers;
 import com.bayou.MainConfig;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.views.impl.UnverifiedUserView;
+import javassist.NotFoundException;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,11 +29,17 @@ public class TestUnverifiedUserManager {
 
     @Ignore
     @Test
-    //public void testAddUser() throws URISyntaxException {
-    //    mainConfig.dataSource();
-    //    UnverifiedUserView returnedView = userManager.add(createMockUser());
-    //    assertThat(returnedView.getEmail(), is("jleaton3@uno.edu"));
-    //}
+    public void testAddUser() throws URISyntaxException {
+        mainConfig.dataSource();
+        Long id = userManager.add(createMockUser());
+        UnverifiedUserView returnedView;
+        try {
+            returnedView = userManager.get(id);
+            assertThat(returnedView.getEmail(), is("jleaton3@uno.edu"));
+        } catch(NotFoundException e) {
+
+        }
+    }
 
     private static UnverifiedUserView createMockUser() {
         UnverifiedUserView userView = new UnverifiedUserView();
