@@ -1,10 +1,8 @@
 package com.bayou.controllers;
 
-import com.bayou.engines.AuthenticationEngine;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.managers.impl.UserManager;
-import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import com.bayou.views.impl.VerifyUserView;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("service/v1/auth")
 public class AuthenticationController {
     @Autowired
-    AuthenticationEngine authenticationEngine = new AuthenticationEngine();
+    UserManager userManager = new UserManager();
+    @Autowired
+    UnverifiedUserManager unverifiedUserManager = new UnverifiedUserManager();
 
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
@@ -34,7 +34,7 @@ public class AuthenticationController {
         ResponseEntity<UserView> responseEntity;
 
         try {
-            responseEntity = new ResponseEntity<>(authenticationEngine.login(verifyUserView), HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(userManager.login(verifyUserView), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (VerificationException e) {
@@ -50,7 +50,7 @@ public class AuthenticationController {
         ResponseEntity<UserView> responseEntity;
 
         try {
-            responseEntity = new ResponseEntity<>(authenticationEngine.verify(verifyUserView), HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(unverifiedUserManager.verify(verifyUserView), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (VerificationException e) {
