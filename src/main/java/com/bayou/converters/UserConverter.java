@@ -31,6 +31,7 @@ public class UserConverter {
 
     public User convertToDomain(UserView userView) {
         User domainUser = new User();   //this will be the newly created Domain version of the view Object
+        domainUser.setId(userView.getId());
         domainUser.setAccountName(userView.getAccountName());
         domainUser.setFirstName(userView.getFirstName());
         domainUser.setLastName(userView.getLastName());
