@@ -6,6 +6,7 @@ import com.bayou.domains.User;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UserResourceAccessor;
+import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import com.bayou.views.impl.VerifyUserView;
 import javassist.NotFoundException;
@@ -30,7 +31,7 @@ public class UserManager implements IManager<UserView> {
     @Autowired
     LoginConverter loginConverter = new LoginConverter();
 
-    public UserView login(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
+    public LoginView login(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
         User returnedUser;
 
         if(verifyUserView.getEmail() != null) { //if email field is not null, get the user by email
@@ -46,9 +47,9 @@ public class UserManager implements IManager<UserView> {
             verifyUserView.setPasswordHash(returnedUser.getPasswordHash());
         }
         if(verifyUserView.login()) {
-            return converter.convertToView(returnedUser);
+            return loginConverter.convertToLoginView(returnedUser);
         } else {
-            throw new VerificationException();
+            throw new VerificationException("password");
         }
     }
 

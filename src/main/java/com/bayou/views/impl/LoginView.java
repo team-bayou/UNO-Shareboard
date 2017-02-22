@@ -10,7 +10,7 @@ public class LoginView implements IView {
     private String email;
     private String accountName;
     private String passwordSalt;
-    private String passwordHash;
+    private String errorMessage;
 
     @Override
     public Long getId() {
@@ -46,12 +46,12 @@ public class LoginView implements IView {
         this.passwordSalt = passwordSalt;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class LoginView implements IView {
             return false;
         if (passwordSalt != null ? !passwordSalt.equals(loginView.passwordSalt) : loginView.passwordSalt != null)
             return false;
-        return passwordHash != null ? passwordHash.equals(loginView.passwordHash) : loginView.passwordHash == null;
+        return errorMessage != null ? errorMessage.equals(loginView.errorMessage) : loginView.errorMessage == null;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class LoginView implements IView {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (accountName != null ? accountName.hashCode() : 0);
         result = 31 * result + (passwordSalt != null ? passwordSalt.hashCode() : 0);
-        result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
+        result = 31 * result + (errorMessage != null ? errorMessage.hashCode() : 0);
         return result;
     }
 }

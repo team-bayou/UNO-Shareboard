@@ -3,6 +3,7 @@ package com.bayou.controllers;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.managers.impl.UserManager;
+import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import com.bayou.views.impl.VerifyUserView;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +31,8 @@ public class AuthenticationController {
 
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<UserView> login(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
-        ResponseEntity<UserView> responseEntity;
+    public ResponseEntity<LoginView> login(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
+        ResponseEntity<LoginView> responseEntity;
 
         try {
             responseEntity = new ResponseEntity<>(userManager.login(verifyUserView), HttpStatus.OK);
@@ -46,15 +47,17 @@ public class AuthenticationController {
 
     @ApiOperation(value = "Verify unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/verify", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<UserView> verify(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
-        ResponseEntity<UserView> responseEntity;
+    public ResponseEntity<LoginView> verify(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
+        ResponseEntity<LoginView> responseEntity;
 
         try {
             responseEntity = new ResponseEntity<>(unverifiedUserManager.verify(verifyUserView), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (VerificationException e) {
-            responseEntity = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            LoginView errorView = new LoginView();
+            errorView.setErrorMessage(e.getMessage());
+            responseEntity = new ResponseEntity<LoginView>(errorView, HttpStatus.UNAUTHORIZED);
         }
 
         return responseEntity;

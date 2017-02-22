@@ -67,7 +67,7 @@ public class TestUserManager {
         loginView.setAccountName("jleaton");
         loginView.setEmail("jleaton@uno.edu");
         loginView.setPasswordSalt("passwordSalt");
-        loginView.setPasswordHash("passwordHash");
+        loginView.setErrorMessage("both");
 
         return loginView;
     }
