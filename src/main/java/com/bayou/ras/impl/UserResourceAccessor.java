@@ -6,8 +6,6 @@ import com.bayou.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created by joshuaeaton on 1/31/17.
  */
@@ -22,8 +20,8 @@ public class UserResourceAccessor implements IResourceAccessor<User> {
     }
 
     @Override
-    public List<User> findAll() {
-        return null;
+    public Iterable<User> findAll() {
+        return repo.findAll();
     }
 
     public User findByEmail(String email) {

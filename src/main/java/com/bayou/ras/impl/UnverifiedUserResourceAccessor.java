@@ -6,8 +6,6 @@ import com.bayou.repository.IUnverifiedUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created by rachelguillory 2/16/2017.
  */
@@ -22,8 +20,8 @@ public class UnverifiedUserResourceAccessor implements IResourceAccessor<Unverif
     }
 
     @Override
-    public List<UnverifiedUser> findAll() {
-        return null;
+    public Iterable<UnverifiedUser> findAll() {
+        return repo.findAll();
     }
 
     public UnverifiedUser findByEmail(String email) {

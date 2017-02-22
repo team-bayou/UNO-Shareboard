@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,12 @@ public class CategoryManager implements IManager<CategoryView> {
 
     @Override
     public List<CategoryView> getAll() throws NotFoundException {
-        return null;
+        List<CategoryView> views = new ArrayList<>();
+
+        for (Category c : ras.findAll())
+            views.add(converter.convertToView(c));
+
+        return views;
     }
 
     @Override
