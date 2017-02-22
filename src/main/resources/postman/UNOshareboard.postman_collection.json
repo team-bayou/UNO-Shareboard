@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "8f2a6d8b-e4bd-39db-ff91-27a7dc18000e",
+		"_postman_id": "b71fa387-947a-2416-ac1b-47837a6aebfe",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -10,7 +10,96 @@
 		{
 			"name": "API - Ads",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "Get Advertisements",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets a list of all active advertisements"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets a specific ad by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Advertisement",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryID\" : \"1\",\n\t\"owner\": \"1\",\n\t\"timePublished\" : \"09/10/17\",\n\t\"expirationDate\" : \"09/15/17\",\n\t\"adType\" : \"offer\"\n}"
+						},
+						"description": "Adds a advertisement"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/auth/login/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\": \"hjjjjjj3                                                                                                                        \"\n}\n"
+						},
+						"description": "Login as a user by email or account name"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"url": "http://{{unoshareboard.api.host}}/service/v1/auth/verify/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\" : \"hjjjjjj3                                                                                                                        \",\n\t\"enteredVerificationCode\" : 12345678\n}"
+						},
+						"description": "Verify an unverified user"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "API - Categories",
@@ -117,7 +206,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"email\": \"jleaton3@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
+							"raw": "{\n  \"passwordHash\": \"hjjjjjj3                                                                                                                        \",\n  \"passwordSalt\": \"hhhhhhh3                                                        \",\n  \"email\": \"jleaton@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
 						},
 						"description": "Add an unverified user"
 					},
@@ -193,7 +282,10 @@
 						"url": "http://{{unoshareboard.api.host}}/service/v1/unverified_users/delete/7",
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
