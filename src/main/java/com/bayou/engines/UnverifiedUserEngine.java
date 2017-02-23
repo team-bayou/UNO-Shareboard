@@ -32,6 +32,5 @@ public class UnverifiedUserEngine {
         } catch (IOException ex) {  //handles IO exceptions
             throw ex; //throw an exception if there was a IO exception generated
         }
-    }
 
 }
