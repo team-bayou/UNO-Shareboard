@@ -25,11 +25,11 @@ public class UserResourceAccessor implements IResourceAccessor<User> {
     }
 
     public User findByEmail(String email) {
-        return repo.findByEmail(email);
+        return repo.findByEmailIgnoreCase(email);
     }
 
     public User findByAccountName(String accountName) {
-        return repo.findByAccountName(accountName);
+        return repo.findByAccountNameIgnoreCase(accountName);
     }
 
     @Override

@@ -9,5 +9,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IUnverifiedUserRepository extends CrudRepository<UnverifiedUser, Long> {
+
     UnverifiedUser findByEmail(String email);
+
+    UnverifiedUser findByEmailIgnoreCase(String email);
 }
