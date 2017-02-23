@@ -25,7 +25,7 @@ public class UnverifiedUserResourceAccessor implements IResourceAccessor<Unverif
     }
 
     public UnverifiedUser findByEmail(String email) {
-        return repo.findByEmail(email);
+        return repo.findByEmailIgnoreCase(email);
     }
 
     @Override

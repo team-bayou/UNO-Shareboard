@@ -12,4 +12,8 @@ public interface IUserRepository extends CrudRepository<User, Long> {
     User findByAccountName(String accountName);
 
     User findByEmail(String email);
+
+    User findByAccountNameIgnoreCase(String accountName);
+
+    User findByEmailIgnoreCase(String email);
 }
