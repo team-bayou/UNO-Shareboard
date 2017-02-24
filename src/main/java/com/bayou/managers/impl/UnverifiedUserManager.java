@@ -4,12 +4,12 @@ import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.converters.UserConverter;
 import com.bayou.domains.UnverifiedUser;
+import com.bayou.engines.UnverifiedUserEngine;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
 import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UnverifiedUserView;
-import com.bayou.views.impl.UserView;
 import com.bayou.views.impl.VerifyUserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,6 +39,9 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
     @Autowired
     UserManager userManager = new UserManager();
+
+    @Autowired
+    UnverifiedUserEngine unvEngine = new UnverifiedUserEngine();
 
     public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
        UnverifiedUser unverifiedUser = ras.findByEmail(verifyUserView.getEmail());
@@ -102,7 +106,12 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     public Long add(UnverifiedUserView userView) {
         Long id = -1L;
         try {
-            id = ras.add(converter.convertToDomain(userView));
+            id = ras.add(converter.convertToDomain(userView));  //add the unverified user to the database
+            try {   //try to send the verification code to the email of the unverified user
+                unvEngine.sendVerificationCode(userView.getVerificationCode().toString() , userView.getEmail());
+            } catch (IOException e) {   //catch a IO exception if an issue occured performing this operation
+                e.printStackTrace();
+            }
         } catch (DataIntegrityViolationException e) {
             System.err.println("A user already exists with the provided email.");
         }
