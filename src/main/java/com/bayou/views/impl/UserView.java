@@ -148,4 +148,21 @@ public class UserView extends BaseEntityView {
         result = 31 * result + (imageId != null ? imageId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UserView{" +
+                "accountName='" + accountName + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", passwordSalt='" + passwordSalt + '\'' +
+                ", userType=" + userType +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", facebookId='" + facebookId + '\'' +
+                ", twitterHandle='" + twitterHandle + '\'' +
+                ", imageId=" + imageId +
+                "} " + super.toString();
+    }
 }

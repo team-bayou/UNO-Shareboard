@@ -2,7 +2,6 @@ package com.bayou.converters;
 
 import com.bayou.domains.Advertisement;
 import com.bayou.views.impl.AdvertisementView;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,19 +12,14 @@ import org.springframework.stereotype.Component;
  */
 @Component("AdvertisementConverter")
 public class AdvertisementConverter {
-    @Autowired
-    UserConverter userConverter = new UserConverter();
-
-    @Autowired
-    CategoryConverter categoryConverter = new CategoryConverter();
 
     public AdvertisementView convertToView(Advertisement domain) {
         AdvertisementView view = new AdvertisementView();
         view.setId(domain.getId());
         view.setTitle(domain.getTitle());
         view.setDescription(domain.getDescription());
-        view.setCategory(categoryConverter.convertToView(domain.getCategory()));
-        view.setOwner(userConverter.convertToView(domain.getOwner()));
+        view.setCategoryId(domain.getCategoryId());
+        view.setOwner(domain.getOwner());
         view.setTimePublished(domain.getTimePublished());
         view.setExpirationDate(domain.getExpirationDate());
         view.setAdType(domain.getAdType());
@@ -40,8 +34,8 @@ public class AdvertisementConverter {
         domain.setId(view.getId());
         domain.setTitle(view.getTitle());
         domain.setDescription(view.getDescription());
-        domain.setCategory(categoryConverter.convertToDomain(view.getCategory()));
-        domain.setOwner(userConverter.convertToDomain(view.getOwner()));
+        domain.setCategoryId(view.getCategoryId());
+        domain.setOwner(view.getOwner());
         domain.setTimePublished(view.getTimePublished());
         domain.setExpirationDate(view.getExpirationDate());
         domain.setAdType(view.getAdType());

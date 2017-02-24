@@ -13,8 +13,8 @@ import java.util.Date;
 public class AdvertisementView extends BaseEntityView {
     private String title;
     private String description;
-    private CategoryView category;
-    private UserView owner;
+    private Long categoryId;
+    private Long owner;
     private Date timePublished;
     private Date expirationDate;
     private AdType adType;
@@ -37,19 +37,19 @@ public class AdvertisementView extends BaseEntityView {
         this.description = description;
     }
 
-    public CategoryView getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(CategoryView category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public UserView getOwner() {
+    public Long getOwner() {
         return owner;
     }
 
-    public void setOwner(UserView owner) {
+    public void setOwner(Long owner) {
         this.owner = owner;
     }
 
@@ -103,7 +103,7 @@ public class AdvertisementView extends BaseEntityView {
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (category != null ? !category.equals(that.category) : that.category != null) return false;
+        if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
         if (owner != null ? !owner.equals(that.owner) : that.owner != null) return false;
         if (timePublished != null ? !timePublished.equals(that.timePublished) : that.timePublished != null)
             return false;
@@ -119,7 +119,7 @@ public class AdvertisementView extends BaseEntityView {
         int result = super.hashCode();
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         result = 31 * result + (timePublished != null ? timePublished.hashCode() : 0);
         result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
@@ -127,5 +127,20 @@ public class AdvertisementView extends BaseEntityView {
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (tradeItem != null ? tradeItem.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "AdvertisementView{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + categoryId +
+                ", owner=" + owner +
+                ", timePublished=" + timePublished +
+                ", expirationDate=" + expirationDate +
+                ", adType=" + adType +
+                ", price=" + price +
+                ", tradeItem='" + tradeItem + '\'' +
+                "} " + super.toString();
     }
 }

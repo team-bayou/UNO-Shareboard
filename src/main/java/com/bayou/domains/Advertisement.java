@@ -23,13 +23,11 @@ public class Advertisement extends BaseEntity {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @Column(name = "category_id", nullable = false)
+    private Long categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner", nullable = false)
-    private User owner;
+    @Column(name = "owner", nullable = false)
+    private Long owner;
 
     @Column(name = "time_published", columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -65,12 +63,12 @@ public class Advertisement extends BaseEntity {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public AdType getAdType() {
@@ -81,11 +79,11 @@ public class Advertisement extends BaseEntity {
         this.adType = adType;
     }
 
-    public User getOwner() {
+    public Long getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Long owner) {
         this.owner = owner;
     }
 
@@ -119,5 +117,50 @@ public class Advertisement extends BaseEntity {
 
     public void setTradeItem(String tradeItem) {
         this.tradeItem = tradeItem;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Advertisement that = (Advertisement) o;
+
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (timePublished != null ? !timePublished.equals(that.timePublished) : that.timePublished != null)
+            return false;
+        if (expirationDate != null ? !expirationDate.equals(that.expirationDate) : that.expirationDate != null)
+            return false;
+        if (adType != that.adType) return false;
+        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+        return tradeItem != null ? tradeItem.equals(that.tradeItem) : that.tradeItem == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (timePublished != null ? timePublished.hashCode() : 0);
+        result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
+        result = 31 * result + (adType != null ? adType.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (tradeItem != null ? tradeItem.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + categoryId +
+                ", owner=" + owner +
+                ", timePublished=" + timePublished +
+                ", expirationDate=" + expirationDate +
+                ", adType=" + adType +
+                ", price=" + price +
+                ", tradeItem='" + tradeItem + '\'' +
+                "} " + super.toString();
     }
 }

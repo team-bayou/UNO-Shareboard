@@ -166,7 +166,11 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>4.1.0</version>
-                <configuration></configuration>
+                <configuration>
+                    <url>${env.DATABASE_JDBC_URL}</url>
+                    <user>${env.DATABASE_USER}</user>
+                    <password>${env.DATABASE_PASSWORD}</password>
+                </configuration>
             </plugin>
         </plugins>
     </build>

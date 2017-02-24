@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,12 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
 
     @Override
     public List<AdvertisementView> getAll() throws NotFoundException {
-        return null;
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement a : ras.findAll())
+            views.add(converter.convertToView(a));
+
+        return views;
     }
 
     @Override
@@ -51,7 +57,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         try {
             id = ras.add(converter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
-            System.err.println("Advertisement: " + view.getTitle() + "already exist");
+            System.err.println("Advertisement: " + view.getTitle() + " already exist");
         }
 
         return id;
@@ -67,7 +73,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         try {
             ras.delete(id);
         } catch (EmptyResultDataAccessException e) {
-            System.err.println("The advertisement with ID:" + id + " does not exist in the database ");
+            System.err.println("The advertisement with ID:" + id + " does not exist in the database");
         }
     }
 }

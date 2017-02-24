@@ -1,7 +1,5 @@
 package com.bayou.views.impl;
 
-import com.bayou.domains.Category;
-
 /**
  * File: CategoryView
  * Package: com.bayou.views.impl
@@ -12,23 +10,7 @@ public class CategoryView extends BaseEntityView {
     private String title;
     private String color;
     private String description;
-    private CategoryView parentCategory;
-
-    public CategoryView() {
-        super();
-    }
-
-    public CategoryView(Category domain) {
-        setId(domain.getId());
-        setTitle(domain.getTitle());
-        setColor(domain.getColor());
-        setDescription(domain.getDescription());
-
-        Category parent = domain.getParentCategory();
-        // Be aware of recursion!!
-        if (parent != null)
-            setParentCategory(new CategoryView(parent));
-    }
+    private Long parentCategoryId;
 
     public String getTitle() {
         return title;
@@ -54,12 +36,12 @@ public class CategoryView extends BaseEntityView {
         this.description = description;
     }
 
-    public CategoryView getParentCategory() {
-        return parentCategory;
+    public Long getParentCategoryId() {
+        return parentCategoryId;
     }
 
-    public void setParentCategory(CategoryView parentCategory) {
-        this.parentCategory = parentCategory;
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 
     @Override
@@ -73,7 +55,7 @@ public class CategoryView extends BaseEntityView {
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (color != null ? !color.equals(that.color) : that.color != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        return parentCategory != null ? parentCategory.equals(that.parentCategory) : that.parentCategory == null;
+        return parentCategoryId != null ? parentCategoryId.equals(that.parentCategoryId) : that.parentCategoryId == null;
     }
 
     @Override
@@ -82,7 +64,7 @@ public class CategoryView extends BaseEntityView {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (parentCategory != null ? parentCategory.hashCode() : 0);
+        result = 31 * result + (parentCategoryId != null ? parentCategoryId.hashCode() : 0);
         return result;
     }
 
@@ -92,7 +74,7 @@ public class CategoryView extends BaseEntityView {
                 "title='" + title + '\'' +
                 ", color='" + color + '\'' +
                 ", description='" + description + '\'' +
-                ", parentCategory=" + parentCategory +
-                '}' + super.toString();
+                ", parentCategory=" + parentCategoryId +
+                "} " + super.toString();
     }
 }

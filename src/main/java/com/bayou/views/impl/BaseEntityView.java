@@ -35,4 +35,11 @@ public abstract class BaseEntityView implements IView {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return "BaseEntityView{" +
+                "id=" + id +
+                '}';
+    }
 }

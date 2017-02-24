@@ -4,8 +4,10 @@ package com.bayou.domains;
 import com.bayou.types.UserType;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by joshuaeaton on 1/31/17.
@@ -47,9 +49,6 @@ public class User extends BaseEntity {
 
     @Column(name = "image_id", columnDefinition = "INTEGER")
     private Integer imageId;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
-    private Set<Advertisement> advertisements;
 
     public String getAccountName() {
         return accountName;
@@ -139,11 +138,57 @@ public class User extends BaseEntity {
         this.imageId = imageId;
     }
 
-    public Set<Advertisement> getAdvertisements() {
-        return advertisements;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (accountName != null ? !accountName.equals(user.accountName) : user.accountName != null) return false;
+        if (passwordHash != null ? !passwordHash.equals(user.passwordHash) : user.passwordHash != null) return false;
+        if (passwordSalt != null ? !passwordSalt.equals(user.passwordSalt) : user.passwordSalt != null) return false;
+        if (userType != user.userType) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
+        if (facebookId != null ? !facebookId.equals(user.facebookId) : user.facebookId != null) return false;
+        if (twitterHandle != null ? !twitterHandle.equals(user.twitterHandle) : user.twitterHandle != null)
+            return false;
+        return imageId != null ? imageId.equals(user.imageId) : user.imageId == null;
     }
 
-    public void setAdvertisements(Set<Advertisement> advertisements) {
-        this.advertisements = advertisements;
+    @Override
+    public int hashCode() {
+        int result = accountName != null ? accountName.hashCode() : 0;
+        result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
+        result = 31 * result + (passwordSalt != null ? passwordSalt.hashCode() : 0);
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (facebookId != null ? facebookId.hashCode() : 0);
+        result = 31 * result + (twitterHandle != null ? twitterHandle.hashCode() : 0);
+        result = 31 * result + (imageId != null ? imageId.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "accountName='" + accountName + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", passwordSalt='" + passwordSalt + '\'' +
+                ", userType=" + userType +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", facebookId='" + facebookId + '\'' +
+                ", twitterHandle='" + twitterHandle + '\'' +
+                ", imageId=" + imageId +
+                "} " + super.toString();
     }
 }
