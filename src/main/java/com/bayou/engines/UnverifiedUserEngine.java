@@ -1,5 +1,6 @@
 package com.bayou.engines;
 
+
 import com.sendgrid.*;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
@@ -33,4 +34,5 @@ public class UnverifiedUserEngine {
             throw ex; //throw an exception if there was a IO exception generated
         }
 
+    }
 }
