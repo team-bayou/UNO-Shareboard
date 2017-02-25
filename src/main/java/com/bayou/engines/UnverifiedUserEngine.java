@@ -16,8 +16,8 @@ public class UnverifiedUserEngine {
         Email from = new Email("unoshareboard@uno.edu");   //set who the email is from
         String subject = "UNO Shareboard Verification Code"; //set the subject of the email
         Email to = new Email(recipient); //set who the email is to be sent to
-        Content content = new Content("text/plain", "Verification Code: " +verCode+
-                "\nVerification Page: https://uno-shareboard-prod.herokuapp.com/ ");   //set the content of the email
+        Content content = new Content("text/plain", "Verification Code: " +verCode+"\nVerification Link: "
+                +System.getenv("HEROKU_ENV")+"/verify?email="+ recipient);   //set the content of the email
         Mail mail = new Mail(from, subject, to, content); //initialize a mail Object
 
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY")); //gets the api key for auth from env var
