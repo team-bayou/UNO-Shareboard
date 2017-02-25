@@ -14,9 +14,9 @@ public class UnverifiedUserEngine {
 
 
     public void sendVerificationCode(String verCode , String recipient ) throws IOException {
-        Email from = new Email("UNO Shareboard");   //set who the email is from
-        String subject = "Verification Code"; //set the subject of the email
-        Email to = new Email("5046555038@vtext.com"); //set who the email is to be sent to
+        Email from = new Email("unoshareboard@uno.edu");   //set who the email is from
+        String subject = "UNO Shareboard Verification Code"; //set the subject of the email
+        Email to = new Email(recipient); //set who the email is to be sent to
         Content content = new Content("text/plain", "Verification Code: " + verCode);   //set the content of the email
         Mail mail = new Mail(from, subject, to, content); //initialize a mail Object
 
