@@ -10,11 +10,16 @@ import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UserView;
 import com.bayou.views.impl.VerifyUserView;
 import javassist.NotFoundException;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -113,10 +118,18 @@ public class UserManager implements IManager<UserView> {
         return id;
     }
 
-    //TODO implement
+
     @Override
-    public UserView update(UserView userView) {
-        return null;
+    public Long update(UserView userView) {
+        User user = converter.convertToDomain(userView);    //converts the user view to the user domain Object
+        User retrievedUser = ras.find(userView.getId());    //get the user we are updating
+        user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
+
+        if(retrievedUser == null){	//if the requested user doesn't exist
+            throw new ClientErrorException("Requested User Not Found", Response.Status.NOT_FOUND);
+        }
+
+        return ras.update(user);
     }
 
     @Override

@@ -64,7 +64,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     }
 
     @Override
-    public AdvertisementView update(AdvertisementView view) {
+    public Long update(AdvertisementView view) {
         return null;
     }
 

@@ -15,7 +15,7 @@ public interface IResourceAccessor<T extends BaseEntity> {
 
     Long add(T entity);
 
-    void update(T entity);
+    Long update(T entity);
 
     void delete(Long id);
 }

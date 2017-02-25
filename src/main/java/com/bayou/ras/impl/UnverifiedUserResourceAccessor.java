@@ -33,10 +33,9 @@ public class UnverifiedUserResourceAccessor implements IResourceAccessor<Unverif
         return repo.save(entity).getId();
     }
 
+    //TODO:implement
     @Override
-    public void update(UnverifiedUser entity) {
-
-    }
+    public Long update(UnverifiedUser entity) { return null;}
 
     public void delete(Long id) {
         repo.delete(id);

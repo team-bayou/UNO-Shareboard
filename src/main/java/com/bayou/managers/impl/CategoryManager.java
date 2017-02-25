@@ -64,7 +64,7 @@ public class CategoryManager implements IManager<CategoryView> {
     }
 
     @Override
-    public CategoryView update(CategoryView view) {
+    public Long update(CategoryView view) {
         return null;
     }
 

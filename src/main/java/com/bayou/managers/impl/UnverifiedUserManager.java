@@ -9,7 +9,6 @@ import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
 import com.bayou.views.impl.LoginView;
 import com.bayou.views.impl.UnverifiedUserView;
-import com.bayou.views.impl.UserView;
 import com.bayou.views.impl.VerifyUserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,7 +111,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
     //TODO implement
     @Override
-    public UnverifiedUserView update(UnverifiedUserView userView) {
+    public Long update(UnverifiedUserView userView) {
         return null;
     }
 

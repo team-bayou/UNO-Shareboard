@@ -32,10 +32,9 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
         return repo.save(entity).getId();
     }
 
+    //TODO:implement
     @Override
-    public void update(Advertisement entity) {
-
-    }
+    public Long update(Advertisement entity) { return null;}
 
     @Override
     public void delete(Long id) {
