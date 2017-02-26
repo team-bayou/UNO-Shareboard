@@ -32,10 +32,9 @@ public class CategoryResourceAccessor implements IResourceAccessor<Category> {
         return repo.save(entity).getId();
     }
 
+    //TODO:implement
     @Override
-    public void update(Category entity) {
-
-    }
+    public Long update(Category entity) { return null;}
 
     @Override
     public void delete(Long id) {

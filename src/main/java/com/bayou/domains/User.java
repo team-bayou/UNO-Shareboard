@@ -3,11 +3,9 @@ package com.bayou.domains;
 
 import com.bayou.types.UserType;
 import org.hibernate.annotations.Type;
+import org.springframework.data.domain.Persistable;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by joshuaeaton on 1/31/17.
@@ -15,7 +13,7 @@ import javax.persistence.Table;
 @Entity(name = "User")
 @Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Persistable<Long> {
     @Column(name = "account_name", columnDefinition = "VARCHAR")
     private String accountName;
 
@@ -190,5 +188,11 @@ public class User extends BaseEntity {
                 ", twitterHandle='" + twitterHandle + '\'' +
                 ", imageId=" + imageId +
                 "} " + super.toString();
+    }
+
+    @Override
+    @Transient
+    public boolean isNew() {
+        return this.getId() == null;
     }
 }

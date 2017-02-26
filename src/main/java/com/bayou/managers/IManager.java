@@ -18,7 +18,7 @@ public interface IManager<T extends IView> {
 
     Long add(T view);
 
-    T update(T view);
+    Long update(T view);
 
     void delete(Long id);
 }
