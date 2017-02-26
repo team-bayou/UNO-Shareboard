@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "86785c37-b472-20db-3e56-44d1862f4e47",
+		"_postman_id": "eddc8d3b-984d-ecbd-8bae-eced9fb3122c",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -65,7 +65,10 @@
 						"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements/2",
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets a specific ad by id"
 					},
 					"response": []
@@ -162,7 +165,10 @@
 						"url": "http://{{unoshareboard.api.host}}/service/v1/categories/1",
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets a specific ad by id"
 					},
 					"response": []
@@ -173,7 +179,10 @@
 						"url": "http://{{unoshareboard.api.host}}/service/v1/categories",
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets a list of all active advertisements"
 					},
 					"response": []
@@ -416,7 +425,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+							"raw": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
 						},
 						"description": "Updates a user"
 					},
