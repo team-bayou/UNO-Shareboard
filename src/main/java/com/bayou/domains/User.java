@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity(name = "User")
 @Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
-public class User extends BaseEntity  {
+public class User extends BaseEntity implements Persistable<Long> {
     @Column(name = "account_name", columnDefinition = "VARCHAR")
     private String accountName;
 
@@ -190,9 +190,9 @@ public class User extends BaseEntity  {
                 "} " + super.toString();
     }
 
-  //  @Override
-   // @Transient
-   // public boolean isNew() {
-    //    return this.getId() == null;
-    //}
+    @Override
+    @Transient
+    public boolean isNew() {
+        return this.getId() == null;
+    }
 }
