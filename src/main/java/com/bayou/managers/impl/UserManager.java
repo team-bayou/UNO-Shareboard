@@ -122,9 +122,12 @@ public class UserManager implements IManager<UserView> {
     @Override
     public Long update(UserView userView) {
         User user = converter.convertToDomain(userView);    //converts the user view to the user domain Object
+        if(userView.getId() == null)    //triggers a no content if the id is null
+        { return -1L; }
+
         User retrievedUser = ras.find(userView.getId());    //get the user we are updating
         user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
-
+        
         if(retrievedUser == null){	//if the requested user doesn't exist
             throw new ClientErrorException("Requested User Not Found", Response.Status.NOT_FOUND);
         }

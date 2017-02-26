@@ -19,6 +19,7 @@ public class UserResourceAccessor implements IResourceAccessor<User> {
 
     @Override
     public User find(Long id) {
+
         return repo.findOne(id);
     }
 
@@ -44,7 +45,9 @@ public class UserResourceAccessor implements IResourceAccessor<User> {
     public Long update(User entity) {
 
         Long returnedID = -1L;
-
+        if(entity.getId() == null) {    //handles the case of a null id being given for a update
+            return -1L;
+        }
         try{
             entity = repo.save(entity);
             returnedID = entity.getId();
