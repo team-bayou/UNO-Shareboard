@@ -51,7 +51,7 @@ public class AdvertisementControllerTests {
 
         // Create advertisement view and add advertisement to db.
         AdvertisementView view = Mocks.createAdvertisementView();
-        view.setOwner(userView.getId());
+        view.setOwnerId(userView.getId());
         view.setCategoryId(categoryView.getId());
         entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
@@ -83,7 +83,7 @@ public class AdvertisementControllerTests {
 
         // Create advertisement view and add advertisement to db.
         AdvertisementView view = Mocks.createAdvertisementView();
-        view.setOwner(userView.getId());
+        view.setOwnerId(userView.getId());
         view.setCategoryId(categoryView.getId());
 
         entity = rest.postForEntity(
@@ -116,7 +116,7 @@ public class AdvertisementControllerTests {
 
         // Create advertisement view and add advertisement to db.
         AdvertisementView view = Mocks.createAdvertisementView();
-        view.setOwner(userView.getId());
+        view.setOwnerId(userView.getId());
         view.setCategoryId(categoryView.getId());
         entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
@@ -146,7 +146,7 @@ public class AdvertisementControllerTests {
 
         // Create advertisement view and add advertisement to db.
         AdvertisementView view = Mocks.createAdvertisementView();
-        view.setOwner(userView.getId());
+        view.setOwnerId(userView.getId());
         view.setCategoryId(categoryView.getId());
         entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
