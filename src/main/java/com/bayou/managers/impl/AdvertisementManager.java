@@ -1,10 +1,16 @@
 package com.bayou.managers.impl;
 
 import com.bayou.converters.AdvertisementConverter;
+import com.bayou.converters.CategoryConverter;
+import com.bayou.converters.UserConverter;
 import com.bayou.domains.Advertisement;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.AdvertisementResourceAccessor;
+import com.bayou.ras.impl.CategoryResourceAccessor;
+import com.bayou.ras.impl.UserResourceAccessor;
 import com.bayou.views.impl.AdvertisementView;
+import com.bayou.views.impl.CategoryView;
+import com.bayou.views.impl.UserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,19 +29,31 @@ import java.util.List;
 @Service
 public class AdvertisementManager implements IManager<AdvertisementView> {
     @Autowired
-    AdvertisementResourceAccessor ras = new AdvertisementResourceAccessor();
+    AdvertisementResourceAccessor advertisementRas = new AdvertisementResourceAccessor();
+
+    @Autowired
+    CategoryResourceAccessor categoryRas = new CategoryResourceAccessor();
+
+    @Autowired
+    UserResourceAccessor userRas = new UserResourceAccessor();
 
     @Autowired
     AdvertisementConverter converter = new AdvertisementConverter();
 
+    @Autowired
+    CategoryConverter categoryConverter = new CategoryConverter();
+
+    @Autowired
+    UserConverter userConverter = new UserConverter();
+
     public AdvertisementView get(Long id) throws NotFoundException {
         AdvertisementView adView;
-        Advertisement ad = ras.find(id);
+        Advertisement ad = advertisementRas.find(id);
 
         if (ad == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            adView = converter.convertToView(ad);
+            adView = prepare(ad);
         }
 
         return adView;
@@ -45,8 +63,8 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     public List<AdvertisementView> getAll() throws NotFoundException {
         List<AdvertisementView> views = new ArrayList<>();
 
-        for (Advertisement a : ras.findAll())
-            views.add(converter.convertToView(a));
+        for (Advertisement ad : advertisementRas.findAll())
+            views.add(prepare(ad));
 
         return views;
     }
@@ -55,7 +73,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     public Long add(AdvertisementView view) {
         Long id = -1L;
         try {
-            id = ras.add(converter.convertToDomain(view));
+            id = advertisementRas.add(converter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
             System.err.println("Advertisement: " + view.getTitle() + " already exist");
         }
@@ -71,9 +89,21 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     @Override
     public void delete(Long id) {
         try {
-            ras.delete(id);
+            advertisementRas.delete(id);
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The advertisement with ID:" + id + " does not exist in the database");
         }
+    }
+
+    private AdvertisementView prepare(Advertisement ad) {
+        AdvertisementView adView = converter.convertToView(ad);
+
+        CategoryView catView = categoryConverter.convertToView(categoryRas.find(ad.getCategoryId()));
+        adView.setCategory(catView);
+
+        UserView userView = userConverter.convertToView(userRas.find(ad.getOwner()));
+        adView.setOwner(userView);
+
+        return adView;
     }
 }

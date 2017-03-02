@@ -19,7 +19,7 @@ public class AdvertisementConverter {
         view.setTitle(domain.getTitle());
         view.setDescription(domain.getDescription());
         view.setCategoryId(domain.getCategoryId());
-        view.setOwner(domain.getOwner());
+        view.setOwnerId(domain.getOwner());
         view.setTimePublished(domain.getTimePublished());
         view.setExpirationDate(domain.getExpirationDate());
         view.setAdType(domain.getAdType());
@@ -35,7 +35,7 @@ public class AdvertisementConverter {
         domain.setTitle(view.getTitle());
         domain.setDescription(view.getDescription());
         domain.setCategoryId(view.getCategoryId());
-        domain.setOwner(view.getOwner());
+        domain.setOwner(view.getOwnerId());
         domain.setTimePublished(view.getTimePublished());
         domain.setExpirationDate(view.getExpirationDate());
         domain.setAdType(view.getAdType());

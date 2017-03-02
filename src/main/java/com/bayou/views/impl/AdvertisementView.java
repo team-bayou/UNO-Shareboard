@@ -14,12 +14,15 @@ public class AdvertisementView extends BaseEntityView {
     private String title;
     private String description;
     private Long categoryId;
-    private Long owner;
+    private Long ownerId;
     private Date timePublished;
     private Date expirationDate;
     private AdType adType;
     private Double price;
     private String tradeItem;
+
+    private CategoryView category;
+    private UserView owner;
 
     public String getTitle() {
         return title;
@@ -45,12 +48,12 @@ public class AdvertisementView extends BaseEntityView {
         this.categoryId = categoryId;
     }
 
-    public Long getOwner() {
-        return owner;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(Long owner) {
-        this.owner = owner;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public Date getTimePublished() {
@@ -93,6 +96,22 @@ public class AdvertisementView extends BaseEntityView {
         this.tradeItem = tradeItem;
     }
 
+    public CategoryView getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryView category) {
+        this.category = category;
+    }
+
+    public UserView getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserView owner) {
+        this.owner = owner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,7 +123,7 @@ public class AdvertisementView extends BaseEntityView {
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
-        if (owner != null ? !owner.equals(that.owner) : that.owner != null) return false;
+        if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
         if (timePublished != null ? !timePublished.equals(that.timePublished) : that.timePublished != null)
             return false;
         if (expirationDate != null ? !expirationDate.equals(that.expirationDate) : that.expirationDate != null)
@@ -120,7 +139,7 @@ public class AdvertisementView extends BaseEntityView {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
-        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
         result = 31 * result + (timePublished != null ? timePublished.hashCode() : 0);
         result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
         result = 31 * result + (adType != null ? adType.hashCode() : 0);
@@ -135,7 +154,7 @@ public class AdvertisementView extends BaseEntityView {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", category=" + categoryId +
-                ", owner=" + owner +
+                ", owner=" + ownerId +
                 ", timePublished=" + timePublished +
                 ", expirationDate=" + expirationDate +
                 ", adType=" + adType +
