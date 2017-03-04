@@ -49,6 +49,19 @@ public class AdvertisementController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a list of user's advertisements", response = ResponseEntity.class)
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getAdvertisements(@PathVariable("id") Long id) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByOwner(id), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Add an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Long> add(@RequestBody AdvertisementView view) {
