@@ -27,6 +27,10 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
         return repo.findAll();
     }
 
+    public Iterable<Advertisement> findByOwner(Long id) {
+        return repo.findByOwner(id);
+    }
+
     @Override
     public Long add(Advertisement entity) {
         return repo.save(entity).getId();
@@ -34,7 +38,9 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
 
     //TODO:implement
     @Override
-    public Long update(Advertisement entity) { return null;}
+    public Long update(Advertisement entity) {
+        return null;
+    }
 
     @Override
     public void delete(Long id) {

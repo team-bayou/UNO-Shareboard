@@ -69,6 +69,15 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAllByOwner(Long ownerId) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByOwner(ownerId))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     @Override
     public Long add(AdvertisementView view) {
         Long id = -1L;

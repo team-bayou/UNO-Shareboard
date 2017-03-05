@@ -12,7 +12,8 @@
 				"b1000c75-9c64-33e0-29f4-bdc4a3fc57d5",
 				"ba272989-da0c-a7fd-0f31-9c8e30f16259",
 				"6e5f3c0b-05e3-cd12-024a-2beeb016505b",
-				"e6dcc867-15c6-b4ce-3ac9-885cb2c98717"
+				"e6dcc867-15c6-b4ce-3ac9-885cb2c98717",
+				"7f819d5e-a9e0-dffa-a764-d89dc4fcea54"
 			],
 			"owner": 0
 		},
@@ -75,8 +76,9 @@
 			"owner": 0
 		}
 	],
+	"timestamp": 0,
 	"owner": 0,
-	"hasRequests": true,
+	"public": false,
 	"requests": [
 		{
 			"id": "05139265-e2d5-fc4e-35c7-2ac18973e9d7",
@@ -225,6 +227,25 @@
 			"url": "http://{{unoshareboard.api.host}}/service/v1/unverified_users/1",
 			"responses": [],
 			"folder": "c4913631-2c3b-27a3-19c8-71dbc8337d45"
+		},
+		{
+			"id": "7f819d5e-a9e0-dffa-a764-d89dc4fcea54",
+			"headers": "",
+			"url": "http://{{unoshareboard.api.host}}/service/v1/advertisements/users/1",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1488657714588,
+			"name": "Get Advertisements by Owner",
+			"description": "Gets a list of all active advertisements of a specific owner",
+			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
+			"responses": [],
+			"rawModeData": ""
 		},
 		{
 			"id": "8d24e938-aaef-96ef-7e73-87fca32865ff",

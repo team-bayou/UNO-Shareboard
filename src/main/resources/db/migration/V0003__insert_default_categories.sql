@@ -1,0 +1,10 @@
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Books', '#004499', 'Different books', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Magazines', '#004499', 'Different magazines', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Notes', '#ff3300', 'Different lecture notes', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Electronics', '#ffcc00', 'Different electronic stuff', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Tools', '#009933', 'Different tools', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Clothes', '#ff0066', 'Different clothes', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Furnitures', '#006699', 'Different furnitures', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Accessories', '#cc00cc', 'Different accessories', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Outdoor', '#804000', 'Different outdoor stuff', NULL);
+INSERT INTO categories(title, color, description, parent_category_id) VALUES ('Others', '#666666', '', NULL);
