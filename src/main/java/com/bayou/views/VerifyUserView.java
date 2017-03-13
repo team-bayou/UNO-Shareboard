@@ -1,6 +1,4 @@
-package com.bayou.views.impl;
-
-import com.bayou.types.UserType;
+package com.bayou.views;
 
 /**
  * Created by Rachel on 2/21/2017.
@@ -27,17 +25,9 @@ public class VerifyUserView extends UserView {
     }
 
     public boolean login() {
-        if(enteredPasswordHash == null || getPasswordHash()== null) {
+        if (enteredPasswordHash == null || getPasswordHash() == null) {
             return false;
         }
         return enteredPasswordHash.equals(getPasswordHash());
     }
-
-    public LoginView convertToLoginView() {
-        LoginView loginView = new LoginView();
-        loginView.setAccountName(getAccountName());
-        loginView.setEmail(getEmail());
-        return loginView;
-    }
-
 }

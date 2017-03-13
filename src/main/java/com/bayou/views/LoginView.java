@@ -1,26 +1,13 @@
-package com.bayou.views.impl;
-
-import com.bayou.views.IView;
+package com.bayou.views;
 
 /**
  * Created by joshuaeaton on 2/17/17.
  */
-public class LoginView implements IView {
-    private Long id;
+public class LoginView extends BaseEntityView {
     private String email;
     private String accountName;
     private String passwordSalt;
     private String errorMessage;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -58,10 +45,10 @@ public class LoginView implements IView {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         LoginView loginView = (LoginView) o;
 
-        if (id != null ? !id.equals(loginView.id) : loginView.id != null) return false;
         if (email != null ? !email.equals(loginView.email) : loginView.email != null) return false;
         if (accountName != null ? !accountName.equals(loginView.accountName) : loginView.accountName != null)
             return false;
@@ -72,7 +59,7 @@ public class LoginView implements IView {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (accountName != null ? accountName.hashCode() : 0);
         result = 31 * result + (passwordSalt != null ? passwordSalt.hashCode() : 0);
