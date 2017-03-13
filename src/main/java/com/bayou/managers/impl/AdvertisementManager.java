@@ -69,10 +69,19 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
-    public List<AdvertisementView> getAllByOwner(Long ownerId) throws NotFoundException {
+    public List<AdvertisementView> getAllByOwner(Long id) throws NotFoundException {
         List<AdvertisementView> views = new ArrayList<>();
 
-        for (Advertisement ad : advertisementRas.findByOwner(ownerId))
+        for (Advertisement ad : advertisementRas.findByOwner(id))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
+    public List<AdvertisementView> getAllByCategory(Long id) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByCategory(id))
             views.add(prepare(ad));
 
         return views;

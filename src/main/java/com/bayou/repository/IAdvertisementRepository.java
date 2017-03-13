@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IAdvertisementRepository extends CrudRepository<Advertisement, Long> {
     Iterable<Advertisement> findByOwner(Long id);
+
+    Iterable<Advertisement> findByCategoryId(Long id);
 }
