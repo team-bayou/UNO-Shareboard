@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * Created on: 3/13/17
  */
 @Entity(name = "Review")
-@Table(name = "ads")
+@Table(name = "reviews")
 @AttributeOverride(name = "id", column = @Column(name = "review_id"))
 public class Review extends BaseEntity {
     @Column(name = "rating", columnDefinition = "INTEGER")

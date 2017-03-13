@@ -70,4 +70,12 @@ public class Mocks {
 
         return view;
     }
+
+    public static ReviewView createReviewView() {
+        ReviewView view = new ReviewView();
+        view.setRating(3);
+        view.setComments("Some text with comments which describes some quality aspects about the reviewee");
+
+        return view;
+    }
 }

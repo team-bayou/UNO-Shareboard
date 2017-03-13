@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("service/v1/reviews")
 public class ReviewController {
     @Autowired
-    ReviewManager manager;
+    private ReviewManager manager = new ReviewManager();
 
     @ApiOperation(value = "Get a list of reviews", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)
