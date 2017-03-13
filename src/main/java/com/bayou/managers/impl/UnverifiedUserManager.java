@@ -44,30 +44,30 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     UnverifiedUserEngine unvEngine = new UnverifiedUserEngine();
 
     public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
-       UnverifiedUser unverifiedUser = ras.findByEmail(verifyUserView.getEmail());
-       LoginView userView;
+        UnverifiedUser unverifiedUser = ras.findByEmail(verifyUserView.getEmail());
+        LoginView userView;
 
-       verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
-       verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
-       boolean passwordFail = verifyUserView.login();
-       boolean verifFail = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
-       if(passwordFail && verifFail) {
-           Long id = userManager.add(verifyUserView);
-           userView = loginConverter.convertToLoginView(userConverter.convertToDomain(userManager.get(id)));
-           delete(unverifiedUser.getId());
-       } else {
-           String message;
-           if(!passwordFail && !verifFail) {
-               message = "both";
-           } else if(!passwordFail) {
-               message = "password";
-           } else {
-               message = "verify";
-           }
-           throw new VerificationException(message);
-       }
+        verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
+        verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
+        boolean passwordFail = verifyUserView.login();
+        boolean verifFail = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
+        if (passwordFail && verifFail) {
+            Long id = userManager.add(verifyUserView);
+            userView = loginConverter.convertToLoginView(userConverter.convertToDomain(userManager.get(id)));
+            delete(unverifiedUser.getId());
+        } else {
+            String message;
+            if (!passwordFail && !verifFail) {
+                message = "both";
+            } else if (!passwordFail) {
+                message = "password";
+            } else {
+                message = "verify";
+            }
+            throw new VerificationException(message);
+        }
 
-       return userView;
+        return userView;
     }
 
     @Override
@@ -108,9 +108,9 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
         try {
             id = ras.add(converter.convertToDomain(userView));  //add the unverified user to the database
             try {   //try to send the verification code to the email of the unverified user
-                unvEngine.sendVerificationCode(userView.getVerificationCode().toString() , userView.getEmail());
+                unvEngine.sendVerificationCode(userView.getVerificationCode().toString(), userView.getEmail());
             } catch (IOException e) {   //catch a IO exception if an issue occured performing this operation
-                e.printStackTrace();
+                System.err.println("Email could not be sent due to:\n\t" + e.getMessage());
             }
         } catch (DataIntegrityViolationException e) {
             System.err.println("A user already exists with the provided email.");
