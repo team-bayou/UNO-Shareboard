@@ -3,9 +3,13 @@ package com.bayou.controllers;
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
 import com.bayou.views.impl.UserView;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -27,60 +31,55 @@ import static org.junit.Assert.assertTrue;
 public class UserControllerTests {
     private static final String RESOURCE_URL = "/users";
 
-    private TestRestTemplate rest = new TestRestTemplate();
+    @Autowired
+    private TestRestTemplate rest;
 
-    @Test
-    public void testGetUserById() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+    @MockBean
+    private UserView view;
+
+    @Before
+    public void prepare() {
+        // Create category view and add category to db.
+        view = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
         view.setId(entity.getBody());
+    }
 
+    @After
+    public void cleanUp() {
+        // Delete test data.
+        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
+    }
+
+    @Test
+    public void testGetUserById() {
         // Get user by id.
         ResponseEntity<UserView> responseEntity = rest.getForEntity(
                 Server.url() + RESOURCE_URL + "/" + view.getId(), UserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
-
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
     }
 
     @Test
     public void testGetUserByAccountName() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
-        ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
-        view.setId(entity.getBody());
-
         // Get user by account name.
         ResponseEntity<UserView> responseEntity = rest.getForEntity(
                 Server.url() + RESOURCE_URL + "/accountName/" + view.getAccountName(), UserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
-
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
     }
 
     @Test
     public void testGetUserByEmail() {
-        // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
-        ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
-        view.setId(entity.getBody());
-
         // Get user by email.
         ResponseEntity<UserView> responseEntity = rest.getForEntity(
                 Server.url() + RESOURCE_URL + "/email/" + view.getEmail(), UserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
-
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
     }
 
     @Test
@@ -89,9 +88,13 @@ public class UserControllerTests {
         UserView view = Mocks.createUserView();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+        view.setId(responseEntity.getBody());
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
+
+        // Delete test data.
+        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
     }
 
     @Test
