@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -34,11 +33,10 @@ public class UnverifiedUserControllerTests {
     @Autowired
     private TestRestTemplate rest;
 
-    @MockBean
     private UnverifiedUserView view;
 
     @Before
-    public void prepare() {
+    public void setup() {
         // Create category view and add category to db.
         view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
@@ -47,7 +45,7 @@ public class UnverifiedUserControllerTests {
     }
 
     @After
-    public void cleanUp() {
+    public void cleanup() {
         // Delete test data.
         rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
     }

@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -40,15 +39,12 @@ public class AdvertisementControllerTests {
     @Autowired
     private TestRestTemplate rest;
 
-    @MockBean
     private UserView userView;
-    @MockBean
     private CategoryView categoryView;
-    @MockBean
     private AdvertisementView advertisementView;
 
     @Before
-    public void prepare() {
+    public void setup() {
         // Create user view and add user to db.
         userView = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
@@ -71,7 +67,7 @@ public class AdvertisementControllerTests {
     }
 
     @After
-    public void cleanUp() {
+    public void cleanup() {
         // Delete test data.
         rest.delete(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete", String.class);
         rest.delete(Server.url() + USERS_URL + "/" + userView.getId() + "/delete", String.class);
