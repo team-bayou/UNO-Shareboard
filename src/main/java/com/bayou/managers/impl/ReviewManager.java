@@ -26,16 +26,16 @@ import java.util.List;
 @Service
 public class ReviewManager implements IManager<ReviewView> {
     @Autowired
-    ReviewResourceAccessor reviewRas = new ReviewResourceAccessor();
+    private ReviewResourceAccessor reviewRas;
 
     @Autowired
-    UserResourceAccessor userRas = new UserResourceAccessor();
+    private UserResourceAccessor userRas;
 
     @Autowired
-    ReviewConverter reviewConverter = new ReviewConverter();
+    private ReviewConverter reviewConverter;
 
     @Autowired
-    UserConverter userConverter = new UserConverter();
+    private UserConverter userConverter;
 
     public ReviewView get(Long id) throws NotFoundException {
         ReviewView reviewView;

@@ -19,7 +19,7 @@ import javax.ws.rs.ClientErrorException;
 @RequestMapping("service/v1/users")
 public class UserController {
     @Autowired
-    UserManager manager = new UserManager();
+    private UserManager manager;
 
     @ApiOperation(value = "Get a user by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method

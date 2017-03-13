@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("service/v1/unverified_users")
 public class UnverifiedUserController {
     @Autowired
-    UnverifiedUserManager manager = new UnverifiedUserManager();
+    private UnverifiedUserManager manager;
 
     @ApiOperation(value = "Get an unverified user by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

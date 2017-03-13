@@ -24,9 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("service/v1/auth")
 public class AuthenticationController {
     @Autowired
-    UserManager userManager = new UserManager();
+    private UserManager userManager;
+
     @Autowired
-    UnverifiedUserManager unverifiedUserManager = new UnverifiedUserManager();
+    private UnverifiedUserManager unverifiedUserManager;
 
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST)   //sets the mapping url and the HTTP method

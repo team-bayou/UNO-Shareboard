@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("service/v1/categories")
 public class CategoryController {
     @Autowired
-    CategoryManager manager = new CategoryManager();
+    private CategoryManager manager;
 
     @ApiOperation(value = "Get a list of categories", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)

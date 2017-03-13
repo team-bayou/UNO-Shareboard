@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("service/v1/advertisements")
 public class AdvertisementController {
     @Autowired
-    AdvertisementManager manager = new AdvertisementManager();
+    private AdvertisementManager manager;
 
     @ApiOperation(value = "Get a list of advertisements", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)

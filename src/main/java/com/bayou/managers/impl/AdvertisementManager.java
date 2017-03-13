@@ -29,22 +29,22 @@ import java.util.List;
 @Service
 public class AdvertisementManager implements IManager<AdvertisementView> {
     @Autowired
-    AdvertisementResourceAccessor advertisementRas = new AdvertisementResourceAccessor();
+    private AdvertisementResourceAccessor advertisementRas;
 
     @Autowired
-    CategoryResourceAccessor categoryRas = new CategoryResourceAccessor();
+    private CategoryResourceAccessor categoryRas;
 
     @Autowired
-    UserResourceAccessor userRas = new UserResourceAccessor();
+    private UserResourceAccessor userRas;
 
     @Autowired
-    AdvertisementConverter converter = new AdvertisementConverter();
+    private AdvertisementConverter advertisementConverter;
 
     @Autowired
-    CategoryConverter categoryConverter = new CategoryConverter();
+    private CategoryConverter categoryConverter;
 
     @Autowired
-    UserConverter userConverter = new UserConverter();
+    private UserConverter userConverter;
 
     public AdvertisementView get(Long id) throws NotFoundException {
         AdvertisementView adView;
@@ -91,7 +91,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     public Long add(AdvertisementView view) {
         Long id = -1L;
         try {
-            id = advertisementRas.add(converter.convertToDomain(view));
+            id = advertisementRas.add(advertisementConverter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
             System.err.println("Advertisement: " + view.getTitle() + " already exist");
         }
@@ -114,7 +114,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     }
 
     private AdvertisementView prepare(Advertisement ad) {
-        AdvertisementView adView = converter.convertToView(ad);
+        AdvertisementView adView = advertisementConverter.convertToView(ad);
 
         CategoryView catView = categoryConverter.convertToView(categoryRas.find(ad.getCategoryId()));
         adView.setCategory(catView);

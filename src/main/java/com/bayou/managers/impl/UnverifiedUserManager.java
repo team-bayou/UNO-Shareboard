@@ -26,25 +26,25 @@ import java.util.List;
 @Service
 public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Autowired
-    UnverifiedUserResourceAccessor ras = new UnverifiedUserResourceAccessor();
+    private UnverifiedUserResourceAccessor unverifiedUserRas;
 
     @Autowired
-    UnverifiedUserConverter converter = new UnverifiedUserConverter();
+    private UnverifiedUserConverter unverifiedUserConverter;
 
     @Autowired
-    LoginConverter loginConverter = new LoginConverter();
+    private LoginConverter loginConverter;
 
     @Autowired
-    UserConverter userConverter = new UserConverter();
+    private UserConverter userConverter;
 
     @Autowired
-    UserManager userManager = new UserManager();
+    private UserManager userManager;
 
     @Autowired
-    UnverifiedUserEngine unvEngine = new UnverifiedUserEngine();
+    private UnverifiedUserEngine unvEngine;
 
     public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
-        UnverifiedUser unverifiedUser = ras.findByEmail(verifyUserView.getEmail());
+        UnverifiedUser unverifiedUser = unverifiedUserRas.findByEmail(verifyUserView.getEmail());
         LoginView userView;
 
         verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
@@ -73,12 +73,12 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Override
     public UnverifiedUserView get(Long id) throws NotFoundException {
         UnverifiedUserView unvUserView;
-        UnverifiedUser unvUser = ras.find(id);
+        UnverifiedUser unvUser = unverifiedUserRas.find(id);
 
         if (unvUser == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            unvUserView = converter.convertToView(unvUser);
+            unvUserView = unverifiedUserConverter.convertToView(unvUser);
         }
 
         return unvUserView;
@@ -91,12 +91,12 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
     public UnverifiedUserView getByEmail(String email) throws NotFoundException {
         UnverifiedUserView unvUserView;
-        UnverifiedUser unvUser = ras.findByEmail(email);
+        UnverifiedUser unvUser = unverifiedUserRas.findByEmail(email);
 
         if (unvUser == null) {
             throw new NotFoundException(email);
         } else {
-            unvUserView = converter.convertToView(unvUser);
+            unvUserView = unverifiedUserConverter.convertToView(unvUser);
         }
 
         return unvUserView;
@@ -106,7 +106,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     public Long add(UnverifiedUserView userView) {
         Long id = -1L;
         try {
-            id = ras.add(converter.convertToDomain(userView));  //add the unverified user to the database
+            id = unverifiedUserRas.add(unverifiedUserConverter.convertToDomain(userView));  //add the unverified user to the database
             try {   //try to send the verification code to the email of the unverified user
                 unvEngine.sendVerificationCode(userView.getVerificationCode().toString(), userView.getEmail());
             } catch (IOException e) {   //catch a IO exception if an issue occured performing this operation
@@ -128,7 +128,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Override
     public void delete(Long id) {
         try {
-            ras.delete(id);
+            unverifiedUserRas.delete(id);
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The user with ID:" + id + " does not exist in the database ");
         }
