@@ -4,7 +4,7 @@ import com.bayou.converters.CategoryConverter;
 import com.bayou.domains.Category;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.CategoryResourceAccessor;
-import com.bayou.views.impl.CategoryView;
+import com.bayou.views.CategoryView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

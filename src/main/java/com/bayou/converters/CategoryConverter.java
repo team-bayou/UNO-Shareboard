@@ -1,7 +1,7 @@
 package com.bayou.converters;
 
 import com.bayou.domains.Category;
-import com.bayou.views.impl.CategoryView;
+import com.bayou.views.CategoryView;
 import org.springframework.stereotype.Component;
 
 /**

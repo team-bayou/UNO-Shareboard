@@ -1,15 +1,13 @@
 package com.bayou.controllers;
 
 import com.bayou.managers.impl.UserManager;
-import com.bayou.views.impl.UserView;
+import com.bayou.views.UserView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
-import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.ClientErrorException;

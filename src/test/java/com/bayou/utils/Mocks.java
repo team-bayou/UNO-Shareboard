@@ -2,7 +2,7 @@ package com.bayou.utils;
 
 import com.bayou.types.AdType;
 import com.bayou.types.UserType;
-import com.bayou.views.impl.*;
+import com.bayou.views.*;
 
 import java.util.Calendar;
 import java.util.Random;

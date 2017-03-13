@@ -1,6 +1,6 @@
 package com.bayou.managers;
 
-import com.bayou.views.IView;
+import com.bayou.views.BaseEntityView;
 import javassist.NotFoundException;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */
-public interface IManager<T extends IView> {
+public interface IManager<T extends BaseEntityView> {
     T get(Long id) throws NotFoundException;
 
     List<T> getAll() throws NotFoundException;

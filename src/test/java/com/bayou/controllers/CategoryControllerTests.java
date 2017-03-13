@@ -2,7 +2,7 @@ package com.bayou.controllers;
 
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
-import com.bayou.views.impl.CategoryView;
+import com.bayou.views.CategoryView;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package com.bayou.converters;
 
 import com.bayou.domains.Advertisement;
-import com.bayou.views.impl.AdvertisementView;
+import com.bayou.views.AdvertisementView;
 import org.springframework.stereotype.Component;
 
 /**

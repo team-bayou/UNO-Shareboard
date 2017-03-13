@@ -2,7 +2,7 @@ package com.bayou.TestManagers;
 
 import com.bayou.MainConfig;
 import com.bayou.managers.impl.UnverifiedUserManager;
-import com.bayou.views.impl.UnverifiedUserView;
+import com.bayou.views.UnverifiedUserView;
 import javassist.NotFoundException;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -2,8 +2,8 @@ package com.bayou.controllers;
 
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
-import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UserView;
+import com.bayou.views.LoginView;
+import com.bayou.views.UserView;
 import javassist.NotFoundException;
 import org.junit.Ignore;
 import org.junit.Test;

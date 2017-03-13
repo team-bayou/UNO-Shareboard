@@ -1,7 +1,7 @@
 package com.bayou.converters;
 
 import com.bayou.domains.User;
-import com.bayou.views.impl.UserView;
+import com.bayou.views.UserView;
 import org.springframework.stereotype.Component;
 
 /**
