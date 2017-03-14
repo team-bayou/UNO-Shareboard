@@ -2,7 +2,7 @@ package com.bayou.utils;
 
 import com.bayou.types.AdType;
 import com.bayou.types.UserType;
-import com.bayou.views.impl.*;
+import com.bayou.views.*;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -67,6 +67,14 @@ public class Mocks {
         view.setExpirationDate(Calendar.getInstance().getTime());
         view.setAdType(AdType.offer);
         view.setPrice(150.95);
+
+        return view;
+    }
+
+    public static ReviewView createReviewView() {
+        ReviewView view = new ReviewView();
+        view.setRating(3);
+        view.setComments("Some text with comments which describes some quality aspects about the reviewee");
 
         return view;
     }

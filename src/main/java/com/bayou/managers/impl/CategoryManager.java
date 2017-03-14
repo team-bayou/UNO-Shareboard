@@ -4,7 +4,7 @@ import com.bayou.converters.CategoryConverter;
 import com.bayou.domains.Category;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.CategoryResourceAccessor;
-import com.bayou.views.impl.CategoryView;
+import com.bayou.views.CategoryView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,19 +23,19 @@ import java.util.List;
 @Service
 public class CategoryManager implements IManager<CategoryView> {
     @Autowired
-    CategoryResourceAccessor ras = new CategoryResourceAccessor();
+    private CategoryResourceAccessor categoryRas;
 
     @Autowired
-    CategoryConverter converter = new CategoryConverter();
+    private CategoryConverter categoryConverter;
 
     public CategoryView get(Long id) throws NotFoundException {
         CategoryView categoryView;
-        Category category = ras.find(id);
+        Category category = categoryRas.find(id);
 
         if (category == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            categoryView = converter.convertToView(category);
+            categoryView = categoryConverter.convertToView(category);
         }
 
         return categoryView;
@@ -45,8 +45,8 @@ public class CategoryManager implements IManager<CategoryView> {
     public List<CategoryView> getAll() throws NotFoundException {
         List<CategoryView> views = new ArrayList<>();
 
-        for (Category c : ras.findAll())
-            views.add(converter.convertToView(c));
+        for (Category c : categoryRas.findAll())
+            views.add(categoryConverter.convertToView(c));
 
         return views;
     }
@@ -55,7 +55,7 @@ public class CategoryManager implements IManager<CategoryView> {
     public Long add(CategoryView view) {
         Long id = -1L;
         try {
-            id = ras.add(converter.convertToDomain(view));
+            id = categoryRas.add(categoryConverter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
             System.err.println("Advertisement: " + view.getTitle() + "already exist");
         }
@@ -71,7 +71,7 @@ public class CategoryManager implements IManager<CategoryView> {
     @Override
     public void delete(Long id) {
         try {
-            ras.delete(id);
+            categoryRas.delete(id);
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The category with ID:" + id + " does not exist in the database ");
         }

@@ -6,20 +6,14 @@ import com.bayou.domains.User;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UserResourceAccessor;
-import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UserView;
-import com.bayou.views.impl.VerifyUserView;
-import javassist.NotFoundException;
-import org.hibernate.StaleObjectStateException;
+import com.bayou.views.LoginView;
+import com.bayou.views.UserView;
+import com.bayou.views.VerifyUserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
-
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -28,21 +22,21 @@ import java.util.List;
 @Service
 public class UserManager implements IManager<UserView> {
     @Autowired
-    UserResourceAccessor ras = new UserResourceAccessor();
+    private UserResourceAccessor userRas;
 
     @Autowired
-    UserConverter converter = new UserConverter();
+    private UserConverter userConverter;
 
     @Autowired
-    LoginConverter loginConverter = new LoginConverter();
+    private LoginConverter loginConverter;
 
     public LoginView login(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
         User returnedUser;
 
-        if(verifyUserView.getEmail() != null) { //if email field is not null, get the user by email
-            returnedUser = ras.findByEmail(verifyUserView.getEmail());
-        } else if(verifyUserView.getAccountName() != null) { //if account name is not null, get the user by account name
-            returnedUser = ras.findByAccountName(verifyUserView.getAccountName());
+        if (verifyUserView.getEmail() != null) { //if email field is not null, get the user by email
+            returnedUser = userRas.findByEmail(verifyUserView.getEmail());
+        } else if (verifyUserView.getAccountName() != null) { //if account name is not null, get the user by account name
+            returnedUser = userRas.findByAccountName(verifyUserView.getAccountName());
         } else {
             throw new NotFoundException("Values of email or account name not found" + "email: " + verifyUserView.getEmail() + " account name: " + verifyUserView.getAccountName());
         }
@@ -51,7 +45,7 @@ public class UserManager implements IManager<UserView> {
         } else {
             verifyUserView.setPasswordHash(returnedUser.getPasswordHash());
         }
-        if(verifyUserView.login()) {
+        if (verifyUserView.login()) {
             return loginConverter.convertToLoginView(returnedUser);
         } else {
             throw new VerificationException("password");
@@ -60,12 +54,12 @@ public class UserManager implements IManager<UserView> {
 
     public UserView get(Long id) throws NotFoundException {
         UserView userView;
-        User user = ras.find(id);
+        User user = userRas.find(id);
 
         if (user == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            userView = converter.convertToView(user);
+            userView = userConverter.convertToView(user);
         }
 
         return userView;
@@ -80,12 +74,12 @@ public class UserManager implements IManager<UserView> {
         User returnedUser;
         UserView newUserView;
 
-        returnedUser = ras.findByAccountName(accountName);
+        returnedUser = userRas.findByAccountName(accountName);
 
         if (returnedUser == null) {
             throw new NotFoundException("The requested user does not exist in the database");
         } else {
-            newUserView = converter.convertToView(returnedUser);
+            newUserView = userConverter.convertToView(returnedUser);
         }
 
         return newUserView;
@@ -95,12 +89,12 @@ public class UserManager implements IManager<UserView> {
         User returnedUser;
         UserView newUserView;
 
-        returnedUser = ras.findByEmail(email);
+        returnedUser = userRas.findByEmail(email);
 
         if (returnedUser == null) {
             throw new NotFoundException("The requested user does not exist in the database");
         } else {
-            newUserView = converter.convertToView(returnedUser);
+            newUserView = userConverter.convertToView(returnedUser);
         }
 
         return newUserView;
@@ -110,7 +104,7 @@ public class UserManager implements IManager<UserView> {
     public Long add(UserView userView) {
         Long id = -1L;
         try {
-            id = ras.add(converter.convertToDomain(userView));
+            id = userRas.add(userConverter.convertToDomain(userView));
         } catch (DataIntegrityViolationException e) {
             System.err.println("User: " + userView.getAccountName() + " already exist");
         }
@@ -121,24 +115,27 @@ public class UserManager implements IManager<UserView> {
 
     @Override
     public Long update(UserView userView) {
-        User user = converter.convertToDomain(userView);    //converts the user view to the user domain Object
-        if(userView.getId() == null)    //triggers a no content if the id is null
-        { return -1L; }
-
-        User retrievedUser = ras.find(userView.getId());    //get the user we are updating
-        user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
-        
-        if(retrievedUser == null){	//if the requested user doesn't exist
-            throw new ClientErrorException("Requested User Not Found", Response.Status.NOT_FOUND);
+        User user = userConverter.convertToDomain(userView);    //converts the user view to the user domain Object
+        if (userView.getId() == null)    //triggers a no content if the id is null
+        {
+            return -1L;
         }
 
-        return ras.update(user);
+        User retrievedUser = userRas.find(userView.getId());    //get the user we are updating
+
+        if (retrievedUser == null) {    //if the requested user doesn't exist
+            throw new NotFoundException();
+        }
+
+        user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
+
+        return userRas.update(user);
     }
 
     @Override
     public void delete(Long id) {
         try {
-            ras.delete(id);
+            userRas.delete(id);
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The user with ID:" + id + " does not exist in the database");
         }

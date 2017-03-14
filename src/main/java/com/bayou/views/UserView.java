@@ -1,4 +1,4 @@
-package com.bayou.views.impl;
+package com.bayou.views;
 
 import com.bayou.types.UserType;
 
@@ -6,9 +6,6 @@ import com.bayou.types.UserType;
  * Created by joshuaeaton on 1/31/17.
  */
 public class UserView extends BaseEntityView {
-
-
-    private Long id;
     private String accountName;
     private String passwordHash;
     private String passwordSalt;
@@ -20,11 +17,6 @@ public class UserView extends BaseEntityView {
     private String facebookId;
     private String twitterHandle;
     private Integer imageId;
-
-
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
 
     public String getAccountName() {
         return accountName;

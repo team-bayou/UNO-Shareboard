@@ -1,22 +1,18 @@
-package com.bayou.views.impl;
-
-import com.bayou.views.IView;
+package com.bayou.views;
 
 /**
  * File: BaseEntityView
- * Package: com.bayou.views.impl
+ * Package: com.bayou.views
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */
-public abstract class BaseEntityView implements IView {
+public abstract class BaseEntityView {
     private Long id;
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

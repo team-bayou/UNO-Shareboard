@@ -1,8 +1,8 @@
-package com.bayou.views.impl;
+package com.bayou.views;
 
 /**
  * File: CategoryView
- * Package: com.bayou.views.impl
+ * Package: com.bayou.views
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */

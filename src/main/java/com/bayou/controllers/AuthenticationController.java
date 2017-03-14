@@ -3,11 +3,10 @@ package com.bayou.controllers;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.managers.impl.UserManager;
-import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UserView;
-import com.bayou.views.impl.VerifyUserView;
+import com.bayou.views.LoginView;
+import com.bayou.views.VerifyUserView;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.ws.rs.NotFoundException;
 
 /**
  * Created by Rachel on 2/21/2017.
@@ -25,9 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("service/v1/auth")
 public class AuthenticationController {
     @Autowired
-    UserManager userManager = new UserManager();
+    private UserManager userManager;
+
     @Autowired
-    UnverifiedUserManager unverifiedUserManager = new UnverifiedUserManager();
+    private UnverifiedUserManager unverifiedUserManager;
 
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST)   //sets the mapping url and the HTTP method

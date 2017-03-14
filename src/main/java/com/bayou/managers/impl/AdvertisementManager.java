@@ -8,9 +8,9 @@ import com.bayou.managers.IManager;
 import com.bayou.ras.impl.AdvertisementResourceAccessor;
 import com.bayou.ras.impl.CategoryResourceAccessor;
 import com.bayou.ras.impl.UserResourceAccessor;
-import com.bayou.views.impl.AdvertisementView;
-import com.bayou.views.impl.CategoryView;
-import com.bayou.views.impl.UserView;
+import com.bayou.views.AdvertisementView;
+import com.bayou.views.CategoryView;
+import com.bayou.views.UserView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,22 +29,22 @@ import java.util.List;
 @Service
 public class AdvertisementManager implements IManager<AdvertisementView> {
     @Autowired
-    AdvertisementResourceAccessor advertisementRas = new AdvertisementResourceAccessor();
+    private AdvertisementResourceAccessor advertisementRas;
 
     @Autowired
-    CategoryResourceAccessor categoryRas = new CategoryResourceAccessor();
+    private CategoryResourceAccessor categoryRas;
 
     @Autowired
-    UserResourceAccessor userRas = new UserResourceAccessor();
+    private UserResourceAccessor userRas;
 
     @Autowired
-    AdvertisementConverter converter = new AdvertisementConverter();
+    private AdvertisementConverter advertisementConverter;
 
     @Autowired
-    CategoryConverter categoryConverter = new CategoryConverter();
+    private CategoryConverter categoryConverter;
 
     @Autowired
-    UserConverter userConverter = new UserConverter();
+    private UserConverter userConverter;
 
     public AdvertisementView get(Long id) throws NotFoundException {
         AdvertisementView adView;
@@ -69,10 +69,19 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
-    public List<AdvertisementView> getAllByOwner(Long ownerId) throws NotFoundException {
+    public List<AdvertisementView> getAllByOwner(Long id) throws NotFoundException {
         List<AdvertisementView> views = new ArrayList<>();
 
-        for (Advertisement ad : advertisementRas.findByOwner(ownerId))
+        for (Advertisement ad : advertisementRas.findByOwner(id))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
+    public List<AdvertisementView> getAllByCategory(Long id) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByCategory(id))
             views.add(prepare(ad));
 
         return views;
@@ -82,7 +91,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     public Long add(AdvertisementView view) {
         Long id = -1L;
         try {
-            id = advertisementRas.add(converter.convertToDomain(view));
+            id = advertisementRas.add(advertisementConverter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
             System.err.println("Advertisement: " + view.getTitle() + " already exist");
         }
@@ -105,7 +114,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     }
 
     private AdvertisementView prepare(Advertisement ad) {
-        AdvertisementView adView = converter.convertToView(ad);
+        AdvertisementView adView = advertisementConverter.convertToView(ad);
 
         CategoryView catView = categoryConverter.convertToView(categoryRas.find(ad.getCategoryId()));
         adView.setCategory(catView);

@@ -31,6 +31,10 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
         return repo.findByOwner(id);
     }
 
+    public Iterable<Advertisement> findByCategory(Long id) {
+        return repo.findByCategoryId(id);
+    }
+
     @Override
     public Long add(Advertisement entity) {
         return repo.save(entity).getId();

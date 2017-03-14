@@ -2,8 +2,8 @@ package com.bayou.TestManagers;
 
 import com.bayou.MainConfig;
 import com.bayou.managers.impl.UserManager;
-import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UserView;
+import com.bayou.views.LoginView;
+import com.bayou.views.UserView;
 import javassist.NotFoundException;
 import org.junit.Ignore;
 import org.junit.Test;

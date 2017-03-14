@@ -1,7 +1,7 @@
 package com.bayou.controllers;
 
 import com.bayou.managers.impl.CategoryManager;
-import com.bayou.views.impl.CategoryView;
+import com.bayou.views.CategoryView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("service/v1/categories")
 public class CategoryController {
     @Autowired
-    CategoryManager manager = new CategoryManager();
+    private CategoryManager manager;
 
     @ApiOperation(value = "Get a list of categories", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)

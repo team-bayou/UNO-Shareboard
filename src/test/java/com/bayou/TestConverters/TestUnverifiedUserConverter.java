@@ -2,7 +2,7 @@ package com.bayou.TestConverters;
 
 import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
-import com.bayou.views.impl.UnverifiedUserView;
+import com.bayou.views.UnverifiedUserView;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.CoreMatchers.is;

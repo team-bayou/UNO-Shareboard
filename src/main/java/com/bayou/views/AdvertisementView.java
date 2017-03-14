@@ -1,4 +1,4 @@
-package com.bayou.views.impl;
+package com.bayou.views;
 
 import com.bayou.types.AdType;
 
@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * File: AdvertisementView
- * Package: com.bayou.views.impl
+ * Package: com.bayou.views
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */

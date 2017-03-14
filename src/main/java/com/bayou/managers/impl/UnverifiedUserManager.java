@@ -8,15 +8,14 @@ import com.bayou.engines.UnverifiedUserEngine;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
-import com.bayou.views.impl.LoginView;
-import com.bayou.views.impl.UnverifiedUserView;
-import com.bayou.views.impl.VerifyUserView;
-import javassist.NotFoundException;
+import com.bayou.views.LoginView;
+import com.bayou.views.UnverifiedUserView;
+import com.bayou.views.VerifyUserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
+import javax.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,59 +25,59 @@ import java.util.List;
 @Service
 public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Autowired
-    UnverifiedUserResourceAccessor ras = new UnverifiedUserResourceAccessor();
+    private UnverifiedUserResourceAccessor unverifiedUserRas;
 
     @Autowired
-    UnverifiedUserConverter converter = new UnverifiedUserConverter();
+    private UnverifiedUserConverter unverifiedUserConverter;
 
     @Autowired
-    LoginConverter loginConverter = new LoginConverter();
+    private LoginConverter loginConverter;
 
     @Autowired
-    UserConverter userConverter = new UserConverter();
+    private UserConverter userConverter;
 
     @Autowired
-    UserManager userManager = new UserManager();
+    private UserManager userManager;
 
     @Autowired
-    UnverifiedUserEngine unvEngine = new UnverifiedUserEngine();
+    private UnverifiedUserEngine unvEngine;
 
     public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
-       UnverifiedUser unverifiedUser = ras.findByEmail(verifyUserView.getEmail());
-       LoginView userView;
+        UnverifiedUser unverifiedUser = unverifiedUserRas.findByEmail(verifyUserView.getEmail());
+        LoginView userView;
 
-       verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
-       verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
-       boolean passwordFail = verifyUserView.login();
-       boolean verifFail = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
-       if(passwordFail && verifFail) {
-           Long id = userManager.add(verifyUserView);
-           userView = loginConverter.convertToLoginView(userConverter.convertToDomain(userManager.get(id)));
-           delete(unverifiedUser.getId());
-       } else {
-           String message;
-           if(!passwordFail && !verifFail) {
-               message = "both";
-           } else if(!passwordFail) {
-               message = "password";
-           } else {
-               message = "verify";
-           }
-           throw new VerificationException(message);
-       }
+        verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
+        verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
+        boolean passwordFail = verifyUserView.login();
+        boolean verifFail = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
+        if (passwordFail && verifFail) {
+            Long id = userManager.add(verifyUserView);
+            userView = loginConverter.convertToLoginView(userConverter.convertToDomain(userManager.get(id)));
+            delete(unverifiedUser.getId());
+        } else {
+            String message;
+            if (!passwordFail && !verifFail) {
+                message = "both";
+            } else if (!passwordFail) {
+                message = "password";
+            } else {
+                message = "verify";
+            }
+            throw new VerificationException(message);
+        }
 
-       return userView;
+        return userView;
     }
 
     @Override
     public UnverifiedUserView get(Long id) throws NotFoundException {
         UnverifiedUserView unvUserView;
-        UnverifiedUser unvUser = ras.find(id);
+        UnverifiedUser unvUser = unverifiedUserRas.find(id);
 
         if (unvUser == null) {
             throw new NotFoundException(String.valueOf(id));
         } else {
-            unvUserView = converter.convertToView(unvUser);
+            unvUserView = unverifiedUserConverter.convertToView(unvUser);
         }
 
         return unvUserView;
@@ -91,12 +90,12 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
     public UnverifiedUserView getByEmail(String email) throws NotFoundException {
         UnverifiedUserView unvUserView;
-        UnverifiedUser unvUser = ras.findByEmail(email);
+        UnverifiedUser unvUser = unverifiedUserRas.findByEmail(email);
 
         if (unvUser == null) {
             throw new NotFoundException(email);
         } else {
-            unvUserView = converter.convertToView(unvUser);
+            unvUserView = unverifiedUserConverter.convertToView(unvUser);
         }
 
         return unvUserView;
@@ -106,11 +105,11 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     public Long add(UnverifiedUserView userView) {
         Long id = -1L;
         try {
-            id = ras.add(converter.convertToDomain(userView));  //add the unverified user to the database
+            id = unverifiedUserRas.add(unverifiedUserConverter.convertToDomain(userView));  //add the unverified user to the database
             try {   //try to send the verification code to the email of the unverified user
-                unvEngine.sendVerificationCode(userView.getVerificationCode().toString() , userView.getEmail());
+                unvEngine.sendVerificationCode(userView.getVerificationCode().toString(), userView.getEmail());
             } catch (IOException e) {   //catch a IO exception if an issue occured performing this operation
-                e.printStackTrace();
+                System.err.println("Email could not be sent due to:\n\t" + e.getMessage());
             }
         } catch (DataIntegrityViolationException e) {
             System.err.println("A user already exists with the provided email.");
@@ -128,7 +127,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Override
     public void delete(Long id) {
         try {
-            ras.delete(id);
+            unverifiedUserRas.delete(id);
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The user with ID:" + id + " does not exist in the database ");
         }
