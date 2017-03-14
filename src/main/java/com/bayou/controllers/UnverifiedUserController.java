@@ -3,7 +3,7 @@ package com.bayou.controllers;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.views.UnverifiedUserView;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
+import javax.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

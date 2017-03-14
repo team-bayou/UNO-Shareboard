@@ -11,12 +11,11 @@ import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
 import com.bayou.views.LoginView;
 import com.bayou.views.UnverifiedUserView;
 import com.bayou.views.VerifyUserView;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
+import javax.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.util.List;
 

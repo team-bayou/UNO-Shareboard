@@ -3,13 +3,12 @@ package com.bayou.controllers;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.UserView;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.ClientErrorException;
 
 /**
@@ -85,11 +84,12 @@ public class UserController {
 
         ResponseEntity<Long> responseEntity;
         HttpStatus status;
-        Long id = manager.update(view); //update the user, returns -1 if data is stale
+        Long id = 0L;
 
         try {
+            manager.update(view); //update the user, returns -1 if data is stale
             responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
-        } catch (ClientErrorException e) {  //catches the case of non-existent user
+        } catch (NotFoundException e) {  //catches the case of non-existent user
             System.out.println("Error: requested user does not exist");
             responseEntity = new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
         } catch (DataIntegrityViolationException e) {   //catches the case where for example an id is null thus implying a insert

@@ -6,7 +6,7 @@ import com.bayou.managers.impl.UserManager;
 import com.bayou.views.LoginView;
 import com.bayou.views.VerifyUserView;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.ws.rs.NotFoundException;
 
 /**
  * Created by Rachel on 2/21/2017.

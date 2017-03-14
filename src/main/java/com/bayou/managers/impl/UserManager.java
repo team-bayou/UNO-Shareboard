@@ -9,14 +9,11 @@ import com.bayou.ras.impl.UserResourceAccessor;
 import com.bayou.views.LoginView;
 import com.bayou.views.UserView;
 import com.bayou.views.VerifyUserView;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -125,11 +122,12 @@ public class UserManager implements IManager<UserView> {
         }
 
         User retrievedUser = userRas.find(userView.getId());    //get the user we are updating
-        user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
 
         if (retrievedUser == null) {    //if the requested user doesn't exist
-            throw new ClientErrorException("Requested User Not Found", Response.Status.NOT_FOUND);
+            throw new NotFoundException();
         }
+
+        user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
 
         return userRas.update(user);
     }
