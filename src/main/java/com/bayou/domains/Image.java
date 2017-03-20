@@ -2,7 +2,12 @@ package com.bayou.domains;
 
 
 import javax.persistence.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 
 /**
  * Created by Rachel on 3/17/2017.
@@ -19,8 +24,7 @@ public class Image extends BaseEntity {
     private String description;
 
     @Column(name = "image_data", columnDefinition = "bytea")
-    @Lob
-    private Blob imageData;
+    private byte[] imageData;
 
     public String getImageMimeType() {
         return imageMimeType;
@@ -38,11 +42,11 @@ public class Image extends BaseEntity {
         this.description = description;
     }
 
-    public Blob getImageData() {
+    public byte[] getImageData() {
         return imageData;
     }
 
-    public void setImageData(Blob imageData) {
+    public void setImageData(byte[] imageData) {
         this.imageData = imageData;
     }
 
