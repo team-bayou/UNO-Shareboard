@@ -4,10 +4,12 @@ import com.bayou.domains.Image;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Rachel on 3/19/2017.
  */
+@Service
 public class ImageResourceAccessor implements IResourceAccessor<Image> {
 
     @Autowired

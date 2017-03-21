@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 @Entity(name = "Image")
 @Table(name = "images")
-@AttributeOverride(name = "id", column = @Column(name = "user_id"))
+@AttributeOverride(name = "id", column = @Column(name = "image_id"))
 public class Image extends BaseEntity {
 
     @Column(name = "image_mime_type", columnDefinition = "VARCHAR")

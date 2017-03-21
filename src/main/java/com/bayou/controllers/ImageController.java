@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -60,5 +58,25 @@ public class ImageController {
             response.setStatus(204);//HttpState.NO_CONTENT
             return;
         }
+    }
+
+    @ApiOperation(value = "Add an image", response = ResponseEntity.class)
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
+    public ResponseEntity<Long> uploadImage(@RequestParam("description") String desc, @RequestParam("image_data") MultipartFile file) {
+        ImageView view = new ImageView();
+        try {
+            view.setImageData(file.getBytes());
+        } catch (IOException ioe) {
+            return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        view.setDescription(desc);
+        String contentType = file.getContentType();
+        if(contentType.lastIndexOf("image/") == 0) {
+            view.setImageMimeType(file.getContentType());
+        } else {
+            return new ResponseEntity<Long>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        }
+        Long id = manager.add(view);
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 }
