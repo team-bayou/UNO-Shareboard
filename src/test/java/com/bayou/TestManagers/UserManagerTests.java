@@ -22,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestUserManager {
+public class UserManagerTests {
     @InjectMocks
     private UserManager userManager;
     @InjectMocks
