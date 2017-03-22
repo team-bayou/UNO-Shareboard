@@ -38,6 +38,7 @@ public class UserControllerTests {
     @Before
     public void setup() {
         // Create category view and add category to db.
+        rest.withBasicAuth(System.getenv("USERNAME"),System.getenv("PASSWORD"));
         view = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
