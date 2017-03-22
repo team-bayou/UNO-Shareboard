@@ -2,6 +2,7 @@ package com.bayou.domains;
 
 
 import com.bayou.types.UserType;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.springframework.data.domain.Persistable;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity(name = "User")
 @Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
+@DynamicUpdate(value=true)
 public class User extends BaseEntity implements Persistable<Long> {
     @Column(name = "account_name", columnDefinition = "VARCHAR")
     private String accountName;
