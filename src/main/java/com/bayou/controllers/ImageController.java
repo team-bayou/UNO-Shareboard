@@ -34,7 +34,7 @@ public class ImageController {
 
         ResponseEntity<ImageInfoView> responseEntity;
         try {
-            responseEntity = new ResponseEntity<>(manager.get(id), HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(manager.getInfo(id), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

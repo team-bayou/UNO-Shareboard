@@ -4,6 +4,7 @@ import com.bayou.converters.ImageConverter;
 import com.bayou.domains.Image;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.ImageResourceAccessor;
+import com.bayou.views.ImageInfoView;
 import com.bayou.views.ImageView;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,10 @@ public class ImageManager implements IManager<ImageView> {
         }
 
         return imageView;
+    }
+
+    public ImageInfoView getInfo(Long id) throws NotFoundException {
+        return imageConverter.convertToInfoView(this.get(id));
     }
 
     @Override
