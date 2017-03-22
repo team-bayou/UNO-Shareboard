@@ -29,7 +29,7 @@ public class ImageController {
     private ImageManager manager;
 
     @ApiOperation(value = "Get a image info by id", response = ResponseEntity.class)
-    @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/{id}/info", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public ResponseEntity<ImageInfoView> getInfoById(@PathVariable("id") Long id) throws NotFoundException {
 
         ResponseEntity<ImageInfoView> responseEntity;
@@ -52,10 +52,10 @@ public class ImageController {
             response.setContentType(MediaType.parseMediaType(view.getImageMimeType()).toString());
             IOUtils.copy(in, response.getOutputStream());
         } catch (NotFoundException e) {
-            response.setStatus(204); //HttpStatus.NO_CONTENT);
+            response.setStatus(404); //HttpStatus.NOT_FOUND);
             return;
         } catch (IOException ioe) {
-            response.setStatus(204);//HttpState.NO_CONTENT
+            response.setStatus(404);//HttpState.NOT_FOUND
             return;
         }
     }
