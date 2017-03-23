@@ -129,6 +129,8 @@ public class UserManager implements IManager<UserView> {
 
         user.setVersion(retrievedUser.getVersion());   //gets the record's we are updating version number
 
+        user = userConverter.updateConversion(user, retrievedUser); //adds values to any null properties that were not sent in the request on a partial update
+
         return userRas.update(user);
     }
 
@@ -140,6 +142,5 @@ public class UserManager implements IManager<UserView> {
             System.err.println("The user with ID:" + id + " does not exist in the database");
         }
     }
-
 
 }
