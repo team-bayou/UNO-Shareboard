@@ -33,5 +33,15 @@ public class CategoryConverter {
 
         return domain;
     }
+
+    public Category updateConversion(Category updatedCategoryState, Category oldCategoryState) {
+
+        if(updatedCategoryState.getTitle() == null ) { updatedCategoryState.setTitle(oldCategoryState.getTitle()); }
+        if(updatedCategoryState.getColor() == null ) { updatedCategoryState.setColor(oldCategoryState.getColor()); }
+        if(updatedCategoryState.getDescription() == null) { updatedCategoryState.setDescription(oldCategoryState.getDescription());}
+        if(updatedCategoryState.getParentCategoryId() == null) { updatedCategoryState.setParentCategoryId(oldCategoryState.getParentCategoryId());}
+
+        return updatedCategoryState;
+    }
 }
 
