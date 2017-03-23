@@ -64,8 +64,25 @@ public class CategoryManager implements IManager<CategoryView> {
     }
 
     @Override
-    public Long update(CategoryView view) {
-        return null;
+    public Long update(CategoryView categoryView) {
+
+        Category category = categoryConverter.convertToDomain(categoryView);    //converts the category view to the category domain Object
+
+        if (categoryView.getId() == null) {  //triggers a no content if the id is null
+            return -1L;
+        }
+
+        Category retrievedCategory = categoryRas.find(categoryView.getId());    //get the category we are updating
+
+        if (retrievedCategory == null) {    //if the requested category doesn't exist
+            throw new javax.ws.rs.NotFoundException();
+        }
+
+        category.setVersion(retrievedCategory.getVersion());   //gets the record's we are updating version number
+
+        category = categoryConverter.updateConversion(category, retrievedCategory);
+
+        return categoryRas.update(category);
     }
 
     @Override
