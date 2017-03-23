@@ -91,7 +91,6 @@ public class CategoryControllerTests {
     }
 
     //TODO:needs work
-    @Ignore
     @Test
     public void testUpdateCategory() throws URISyntaxException {
         // Create category view and add category to db.
@@ -102,9 +101,11 @@ public class CategoryControllerTests {
 
         view.setDescription("Description updated");
 
-        URI uri = new URI(Server.url() + RESOURCE_URL + "/put");
+        URI uri = new URI(Server.url() + RESOURCE_URL + "/update");
 
-        ResponseEntity<CategoryView> updatedResponseEntity =  rest.exchange(uri , HttpMethod.PUT, new HttpEntity<CategoryView> (view, Server.createHeadersJson()) , CategoryView.class);
+        HttpEntity entity =  new HttpEntity<> (view, Server.createHeadersJson());
+
+        ResponseEntity<CategoryView> updatedResponseEntity =  rest.exchange(uri , HttpMethod.PUT, entity, CategoryView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(updatedResponseEntity.getBody().getDescription().equals("Description update"));
