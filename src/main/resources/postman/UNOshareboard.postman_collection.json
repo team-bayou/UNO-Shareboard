@@ -12,40 +12,6 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Add Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
-						},
-						"description": "Adds an advertisement"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes an advertisement"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Advertisements",
 					"request": {
 						"url": "{{unoshareboard.api.host}}/service/v1/advertisements",
@@ -98,6 +64,60 @@
 							"raw": ""
 						},
 						"description": "Gets a list of all advertisements of a category"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Advertisement",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
+						},
+						"description": "Adds an advertisement"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Advertisement",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"164\",\n\t\"title\": \"Test Add Update\",\n\t\"description\":\"This is a test add update\",\n\t\"categoryId\" : \"2\",\n\t\"ownerId\": \"34\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
+						},
+						"description": "Updates a given advertisement based on the given json body"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Advertisement",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes an advertisement"
 					},
 					"response": []
 				}
@@ -242,40 +262,6 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Add Review",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/review/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
-						},
-						"description": "Adds a review"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Review",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/5/delete",
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes a review"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Reviews",
 					"request": {
 						"url": "{{unoshareboard.api.host}}/service/v1/reviews",
@@ -328,6 +314,60 @@
 							"raw": ""
 						},
 						"description": "Gets a list of all reviews of a user"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Review",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/review/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
+						},
+						"description": "Adds a review"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"comments\":\"Some text with comments updated\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
+						},
+						"description": "Updates a review based off of the given json body."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/5/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a review"
 					},
 					"response": []
 				}
