@@ -33,5 +33,15 @@ public class ReviewConverter {
 
         return domain;
     }
+
+    public Review updateConversion(Review updatedReviewState, Review oldReviewState) {
+
+        if(updatedReviewState.getRating() == null ) {updatedReviewState.setRating(oldReviewState.getRating());}
+        if(updatedReviewState.getComments() == null) {updatedReviewState.setComments(oldReviewState.getComments());}
+        if(updatedReviewState.getReviewer() == null) {updatedReviewState.setReviewer(oldReviewState.getReviewer());}
+        if(updatedReviewState.getReviewee() == null) {updatedReviewState.setReviewee(oldReviewState.getReviewee());}
+
+        return updatedReviewState;
+    }
 }
 

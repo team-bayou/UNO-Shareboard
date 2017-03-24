@@ -5,6 +5,7 @@ import com.bayou.views.ReviewView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,11 +91,28 @@ public class ReviewController {
     }
 
     @ApiOperation(value = "Update a review", response = ResponseEntity.class)
-    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody ReviewView view) {
-        manager.update(view);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        ResponseEntity<Long> responseEntity;
+        HttpStatus status;
+        Long id = 0L;
+
+        try {
+            manager.update(view); //update the review, returns -1 if data is stale
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent review
+            System.out.println("Error: requested user does not exist");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        } catch (DataIntegrityViolationException e) {   //catches the case where for example an id is null thus implying a insert
+            System.out.println("Error: can not determine if insert or update");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.BAD_REQUEST);
+        }
+        if (id == -1L) {    //catches the case if there was an attempt to update outdated information
+            System.out.println("Error: stale data detected");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 
     @ApiOperation(value = "Delete a review", response = ResponseEntity.class)

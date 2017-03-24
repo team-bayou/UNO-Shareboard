@@ -92,7 +92,24 @@ public class ReviewManager implements IManager<ReviewView> {
 
     @Override
     public Long update(ReviewView view) {
-        return null;
+
+        Review review = reviewConverter.convertToDomain(view);    //converts the review view to the review domain Object
+        if (view.getId() == null)    //triggers a no content if the id is null
+        {
+            return -1L;
+        }
+
+        Review retrievedReview = reviewRas.find(view.getId());    //get the review we are updating
+
+        if (retrievedReview == null) {    //if the requested review doesn't exist
+            throw new javax.ws.rs.NotFoundException();
+        }
+
+        review.setVersion(retrievedReview.getVersion());   //gets the record's we are updating version number
+
+        review = reviewConverter.updateConversion(review, retrievedReview); //adds values to any null properties that were not sent in the request on a partial update
+
+        return reviewRas.update(review);
     }
 
     @Override
