@@ -101,7 +101,22 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
 
     @Override
     public Long update(AdvertisementView view) {
-        return null;
+        Advertisement ad = advertisementConverter.convertToDomain(view);    //converts the ad view to the user domain Object
+        if (view.getId() == null) {   //triggers a no content if the id is null
+            return -1L;
+        }
+
+        Advertisement retrievedAd = advertisementRas.find(view.getId());    //get the ad we are updating
+
+        if (retrievedAd == null) {    //if the requested ad doesn't exist
+            throw new javax.ws.rs.NotFoundException();
+        }
+
+        ad.setVersion(retrievedAd.getVersion());   //gets the record's we are updating version number
+
+        ad = advertisementConverter.updateConversion(ad, retrievedAd); //adds values to any null properties that were not sent in the request on a partial update
+
+        return advertisementRas.update(ad);
     }
 
     @Override
