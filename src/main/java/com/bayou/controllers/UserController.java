@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.ClientErrorException;
+import java.util.List;
 
 /**
  * Created by joshuaeaton on 1/31/17.
@@ -19,6 +20,19 @@ import javax.ws.rs.ClientErrorException;
 public class UserController {
     @Autowired
     private UserManager manager;
+
+    @ApiOperation(value = "Get a list of all Users in the system", response = ResponseEntity.class)
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<List<UserView>> getAll() throws NotFoundException {
+        ResponseEntity<List<UserView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAll(), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
 
     @ApiOperation(value = "Get a user by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
