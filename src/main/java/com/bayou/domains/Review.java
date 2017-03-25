@@ -15,16 +15,16 @@ import javax.persistence.Table;
 @Table(name = "reviews")
 @AttributeOverride(name = "id", column = @Column(name = "review_id"))
 public class Review extends BaseEntity {
-    @Column(name = "rating", columnDefinition = "INTEGER")
+    @Column(name = "rating", columnDefinition = "INTEGER", nullable = false)
     private Integer rating;
 
     @Column(name = "comments", columnDefinition = "TEXT")
     private String comments;
 
-    @Column(name = "reviewer", nullable = false)
+    @Column(name = "reviewer", columnDefinition = "INTEGER", nullable = false)
     private Long reviewer;
 
-    @Column(name = "reviewee", nullable = false)
+    @Column(name = "reviewee", columnDefinition = "INTEGER", nullable = false)
     private Long reviewee;
 
     public Integer getRating() {

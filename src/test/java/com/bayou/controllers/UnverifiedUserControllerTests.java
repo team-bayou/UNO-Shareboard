@@ -10,10 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -32,6 +29,7 @@ public class UnverifiedUserControllerTests {
 
     @Autowired
     private TestRestTemplate rest;
+    private HttpHeaders headers = Server.createHeadersAuthJson();
 
     private UnverifiedUserView view;
 
@@ -40,21 +38,23 @@ public class UnverifiedUserControllerTests {
         // Create category view and add category to db.
         view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
     }
 
     @After
     public void cleanup() {
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
     }
 
     @Test
     public void testGetUnverifiedUserById() {
         // Get unverified user by id.
-        ResponseEntity<UnverifiedUserView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/" + view.getId(), UnverifiedUserView.class);
+        ResponseEntity<UnverifiedUserView> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/" + view.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), UnverifiedUserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -63,8 +63,9 @@ public class UnverifiedUserControllerTests {
     @Test
     public void testGetUnverifiedUserByEmail() {
         // Get unverified user by email.
-        ResponseEntity<UnverifiedUserView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/email/" + view.getEmail(), UnverifiedUserView.class);
+        ResponseEntity<UnverifiedUserView> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/email/" + view.getEmail(),
+                HttpMethod.GET, new HttpEntity<>(headers), UnverifiedUserView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -75,14 +76,15 @@ public class UnverifiedUserControllerTests {
         // Create unverified user view and add unverified user to db.
         UnverifiedUserView view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(responseEntity.getBody());
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
 
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
     }
 
     @Test
@@ -90,13 +92,13 @@ public class UnverifiedUserControllerTests {
         // Create unverified user view and add user to db.
         UnverifiedUserView view = Mocks.createUnverifiedUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
 
         // Delete unverified user by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, Server.createHeadersJson()), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
