@@ -10,10 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -34,6 +31,7 @@ public class CategoryControllerTests {
 
     @Autowired
     private TestRestTemplate rest;
+    private HttpHeaders headers = Server.createHeadersAuthJson();
 
     private CategoryView view;
 
@@ -42,21 +40,24 @@ public class CategoryControllerTests {
         // Create category view and add category to db.
         view = Mocks.createCategoryView();
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
     }
 
     @After
     public void cleanup() {
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
     }
 
     @Test
     public void testGetCategories() {
         // Get list of categories.
-        ResponseEntity<List> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL, List.class);
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -65,8 +66,9 @@ public class CategoryControllerTests {
     @Test
     public void testGetCategoryById() {
         // Get category by id.
-        ResponseEntity<CategoryView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/" + view.getId(), CategoryView.class);
+        ResponseEntity<CategoryView> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/" + view.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), CategoryView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -77,13 +79,15 @@ public class CategoryControllerTests {
         // Create category view and add category to db.
         CategoryView view = Mocks.createCategoryView();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(view, headers), Long.class);
         view.setId(responseEntity.getBody());
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
 
-        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
     }
 
     @Test
@@ -96,13 +100,14 @@ public class CategoryControllerTests {
         // Create category view and add category to db.
         CategoryView view = Mocks.createCategoryView();
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
 
         // Delete category by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, Server.createHeadersJson()), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

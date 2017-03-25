@@ -12,10 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -38,6 +35,7 @@ public class AdvertisementControllerTests {
 
     @Autowired
     private TestRestTemplate rest;
+    private HttpHeaders headers = Server.createHeadersAuthJson();
 
     private UserView userView;
     private CategoryView categoryView;
@@ -48,13 +46,13 @@ public class AdvertisementControllerTests {
         // Create user view and add user to db.
         userView = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + USERS_URL + "/add", new HttpEntity<>(userView, Server.createHeadersJson()), Long.class);
+                Server.url() + USERS_URL + "/add", new HttpEntity<>(userView, headers), Long.class);
         userView.setId(entity.getBody());
 
         // Create category view and add category to db.
         categoryView = Mocks.createCategoryView();
         entity = rest.postForEntity(
-                Server.url() + CATEGORIES_URL + "/add", new HttpEntity<>(categoryView, Server.createHeadersJson()), Long.class);
+                Server.url() + CATEGORIES_URL + "/add", new HttpEntity<>(categoryView, headers), Long.class);
         categoryView.setId(entity.getBody());
 
         // Create advertisement view and add advertisement to db.
@@ -62,23 +60,27 @@ public class AdvertisementControllerTests {
         advertisementView.setOwnerId(userView.getId());
         advertisementView.setCategoryId(categoryView.getId());
         entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(advertisementView, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(advertisementView, headers), Long.class);
         advertisementView.setId(entity.getBody());
     }
 
     @After
     public void cleanup() {
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete", String.class);
-        rest.delete(Server.url() + USERS_URL + "/" + userView.getId() + "/delete", String.class);
-        rest.delete(Server.url() + CATEGORIES_URL + "/" + categoryView.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(advertisementView, headers), String.class);
+        rest.exchange(Server.url() + USERS_URL + "/" + userView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(userView, headers), String.class);
+        rest.exchange(Server.url() + CATEGORIES_URL + "/" + categoryView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(categoryView, headers), String.class);
     }
 
     @Test
     public void testGetAdvertisements() {
         // Get list of advertisements.
-        ResponseEntity<List> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL, List.class);
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -87,8 +89,9 @@ public class AdvertisementControllerTests {
     @Test
     public void testGetAdvertisementById() {
         // Get advertisement by id.
-        ResponseEntity<AdvertisementView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/" + advertisementView.getId(), AdvertisementView.class);
+        ResponseEntity<AdvertisementView> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/" + advertisementView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), AdvertisementView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -102,14 +105,16 @@ public class AdvertisementControllerTests {
         advertisementView.setCategoryId(categoryView.getId());
 
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(advertisementView, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(advertisementView, headers), Long.class);
         advertisementView.setId(entity.getBody());
 
         assertEquals(HttpStatus.OK, entity.getStatusCode());
         assertTrue(entity.getBody() != null);
 
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(advertisementView, headers), String.class);
     }
 
     @Test
@@ -125,13 +130,14 @@ public class AdvertisementControllerTests {
         advertisementView.setCategoryId(categoryView.getId());
 
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(advertisementView, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(advertisementView, headers), Long.class);
         advertisementView.setId(entity.getBody());
 
         // Delete advertisement by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(advertisementView, Server.createHeadersJson()), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(advertisementView, headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
