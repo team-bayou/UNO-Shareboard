@@ -3,7 +3,9 @@ package com.bayou.ras.impl;
 import com.bayou.domains.Advertisement;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IAdvertisementRepository;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -43,7 +45,20 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     //TODO:implement
     @Override
     public Long update(Advertisement entity) {
-        return null;
+
+        Long returnedID = -1L;
+        if (entity.getId() == null) {    //handles the case of a null id being given for a update
+            return -1L;
+        }
+        try {
+            entity = repo.save(entity);
+            returnedID = entity.getId();
+        }   //below catches the exceptions, need not do anything as returnedID will now stay -1L which is the flag for stale data
+        catch (ObjectOptimisticLockingFailureException | StaleObjectStateException e) {
+            // Ignore
+        }
+
+        return returnedID;
     }
 
     @Override

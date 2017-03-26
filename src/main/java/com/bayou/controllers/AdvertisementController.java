@@ -5,6 +5,7 @@ import com.bayou.views.AdvertisementView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,11 +91,27 @@ public class AdvertisementController {
     }
 
     @ApiOperation(value = "Update an advertisement", response = ResponseEntity.class)
-    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody AdvertisementView view) {
-        manager.update(view);
+        ResponseEntity<Long> responseEntity;
+        HttpStatus status;
+        Long id = 0L;
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        try {
+            manager.update(view); //update the advertisement, returns -1 if data is stale
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent ad
+            System.out.println("Error: requested user does not exist");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        } catch (DataIntegrityViolationException e) {   //catches the case where for example an id is null thus implying a insert
+            System.out.println("Error: can not determine if insert or update");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.BAD_REQUEST);
+        }
+        if (id == -1L) {    //catches the case if there was an attempt to update outdated information
+            System.out.println("Error: stale data detected");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 
     @ApiOperation(value = "Delete an advertisement", response = ResponseEntity.class)
