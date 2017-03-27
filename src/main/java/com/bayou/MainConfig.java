@@ -1,15 +1,12 @@
 package com.bayou;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.http.client.methods.HttpOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -46,7 +43,4 @@ public class MainConfig extends WebMvcConfigurerAdapter {
     //add the below back once a postman whitelist solution is found
     //.allowedOrigins("http://localhost:3000","https://uno-shareboard-webapp-dev.herokuapp.com/","https://uno-shareboard-webapp-staging.herokuapp.com/","https://uno-shareboard-webapp-prod.herokuapp.com/")
 
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-    }
 }
