@@ -119,7 +119,14 @@ public class AdvertisementControllerTests {
 
     @Test
     public void testUpdateAdvertisement() {
-        // TODO Implement
+        // Update some information of advertisement and save it to db.
+        advertisementView.setTitle(advertisementView.getTitle() + " updated");
+        ResponseEntity<Long> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/update",
+                HttpMethod.PUT, new HttpEntity<>(advertisementView, headers), Long.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(responseEntity.getBody(), advertisementView.getId());
     }
 
     @Test

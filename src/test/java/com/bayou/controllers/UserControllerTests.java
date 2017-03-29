@@ -13,6 +13,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -47,6 +49,17 @@ public class UserControllerTests {
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
                 HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+    }
+
+    @Test
+    public void testGetUsers() {
+        // Get list of users.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
     }
 
     @Test
@@ -96,6 +109,18 @@ public class UserControllerTests {
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
                 HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+    }
+
+    @Test
+    public void testUpdateUser() {
+        // Update some information of user and save it to db.
+        view.setFirstName(view.getFirstName() + " updated");
+        ResponseEntity<Long> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/update",
+                HttpMethod.PUT, new HttpEntity<>(view, headers), Long.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(responseEntity.getBody(), view.getId());
     }
 
     @Test
