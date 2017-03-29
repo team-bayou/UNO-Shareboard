@@ -1,10 +1,12 @@
 package com.bayou.controllers;
 
+import com.bayou.domains.Category;
 import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
 import com.bayou.views.CategoryView;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -90,9 +94,29 @@ public class CategoryControllerTests {
                 HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
     }
 
+    //TODO:needs work
+    @Ignore
     @Test
-    public void testUpdateCategory() {
-        // TODO Implement
+    public void testUpdateCategory() throws URISyntaxException {
+        // Create category view and add category to db.
+        CategoryView view = Mocks.createCategoryView();
+        ResponseEntity<Long> responseEntity = rest.postForEntity(
+                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, Server.createHeadersJson()), Long.class);
+        view.setId(responseEntity.getBody());
+
+        view.setDescription("Description updated");
+
+        URI uri = new URI(Server.url() + RESOURCE_URL + "/update");
+
+        HttpEntity entity =  new HttpEntity<> (view, Server.createHeadersJson());
+
+        ResponseEntity<CategoryView> updatedResponseEntity =  rest.exchange(uri , HttpMethod.PUT, entity, CategoryView.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(updatedResponseEntity.getBody().getDescription().equals("Description update"));
+
+        // Delete test data.
+        rest.delete(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete", String.class);
     }
 
     @Test

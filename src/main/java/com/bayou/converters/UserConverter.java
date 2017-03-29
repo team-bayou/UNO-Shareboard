@@ -45,5 +45,26 @@ public class UserConverter {
 
         return domain;  //return the Domain version of the given view Object
     }
+
+    //if user is given partial data on update
+    //do a null check
+    //if value from view is null
+    //set the new domain objects value to the one that was retrieved from datasource
+    public User updateConversion(User updatedUserState, User oldUserState) {
+
+        if(updatedUserState.getAccountName() == null) { updatedUserState.setAccountName(oldUserState.getAccountName());}
+        if(updatedUserState.getFirstName() == null) { updatedUserState.setFirstName(oldUserState.getFirstName()); }
+        if(updatedUserState.getLastName() == null ) { updatedUserState.setLastName(oldUserState.getLastName()); }
+        if(updatedUserState.getPasswordHash() == null) { updatedUserState.setPasswordHash(oldUserState.getPasswordHash()); }
+        if(updatedUserState.getPasswordSalt() == null) { updatedUserState.setPasswordSalt(oldUserState.getPasswordSalt()); }
+        if(updatedUserState.getUserType() == null) { updatedUserState.setUserType(oldUserState.getUserType());}
+        if(updatedUserState.getEmail() == null) { updatedUserState.setEmail(oldUserState.getEmail()); }
+        if(updatedUserState.getPhoneNumber() == null) { updatedUserState.setPhoneNumber(oldUserState.getPhoneNumber()); }
+        if(updatedUserState.getFacebookId() == null) { updatedUserState.setFacebookId(oldUserState.getFacebookId()); }
+        if(updatedUserState.getTwitterHandle() == null) { updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle()); }
+        if(updatedUserState.getImageId() == null) { updatedUserState.setImageId(oldUserState.getImageId()); }
+
+        return updatedUserState;
+    }
 }
 

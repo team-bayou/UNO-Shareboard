@@ -1,621 +1,637 @@
 {
-	"id": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-	"name": "UNOshareboard",
-	"description": "",
-	"order": [],
-	"folders": [
+	"variables": [],
+	"info": {
+		"name": "UNOshareboard",
+		"_postman_id": "0a9debce-af75-0a83-8511-bca20db112bd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "8dbe782f-7e16-5ef8-9e12-0651afbda441",
 			"name": "API - Advertisements",
 			"description": "",
-			"order": [
-				"b1000c75-9c64-33e0-29f4-bdc4a3fc57d5",
-				"ba272989-da0c-a7fd-0f31-9c8e30f16259",
-				"6e5f3c0b-05e3-cd12-024a-2beeb016505b",
-				"e6dcc867-15c6-b4ce-3ac9-885cb2c98717",
-				"7f819d5e-a9e0-dffa-a764-d89dc4fcea54",
-				"18e416ab-0a66-fcf4-6330-231c0420d798"
-			],
-			"owner": 0
+			"item": [
+				{
+					"name": "Get Advertisements",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all advertisements"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/2",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets an advertisement by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Advertisements by Owner",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all advertisements of an user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Advertisements by Category",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all advertisements of a category"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Advertisement",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
+						},
+						"description": "Adds an advertisement"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Advertisement",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"164\",\n\t\"title\": \"Test Add Update\",\n\t\"description\":\"This is a test add update\",\n\t\"categoryId\" : \"2\",\n\t\"ownerId\": \"34\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
+						},
+						"description": "Updates a given advertisement based on the given json body"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Advertisement",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes an advertisement"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "d87d6bc1-a172-7c0f-6231-d84e6062f878",
 			"name": "API - Auth",
 			"description": "",
-			"order": [
-				"af3a40a5-3963-818f-9c96-7050d9167966",
-				"5dbc92cd-f7c8-5c05-ed7f-1ae1b757c0c4"
-			],
-			"owner": 0
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/auth/login/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\": \"hjjjjjj3                                                                                                                        \"\n}\n"
+						},
+						"description": "Login as an user by email or account name"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/auth/verify/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"accountName\" : \"jleaton\",\n\t\"userType\" : \"standard\",\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\" : \"hjjjjjj3                                                                                                                        \",\n\t\"enteredVerificationCode\" : 12345678\n}"
+						},
+						"description": "Verify an unverified user"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "01ca6ad7-cfab-4f60-ebc1-0b1c2515dd70",
 			"name": "API - Categories",
 			"description": "",
-			"order": [
-				"32040e1c-3971-1093-14b3-c745712419a5",
-				"5aa25db1-80f8-03fc-c3d0-f2df1abfabca",
-				"8d57dd0c-68d0-32ea-405a-fd49478856b8",
-				"1d08d9bd-100e-1b57-50a6-8dffd18fafc8"
-			],
-			"owner": 0
+			"item": [
+				{
+					"name": "Get By ID",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/categories/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a category by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/categories",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/categories/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Category\",\n\t\"color\": \"#123456\",\n\t\"description\":\"This is a test category\"\n}"
+						},
+						"description": "Adds a category"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/categories/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"59\",\n\t\"description\":\"This is a test category update\"\n}"
+						},
+						"description": "Updates a category with given json body"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/categories/4/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a category"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "eb44778e-3589-3087-69be-e4eadb64e34e",
 			"name": "API - Reviews",
 			"description": "",
-			"order": [
-				"8112e798-e507-cbad-7319-b6038197816d",
-				"7270bfb6-f062-88ab-bfd9-6efce6574455",
-				"50236f76-2fd4-c386-c24b-e6363480cc5f",
-				"2aa102b3-1666-b552-0ed2-2d1878f40335",
-				"e282a486-ae24-a3b8-1935-b52e75478944",
-				"b0b6512f-9794-6110-0982-06c98f4df433"
-			],
-			"owner": 0
+			"item": [
+				{
+					"name": "Get Reviews",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all reviews"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/2",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a review by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Review by Reviewer",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewer/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all reviews made by a reviewer"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reviews by Reviewee",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets a list of all reviews of a user"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Review",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/review/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
+						},
+						"description": "Adds a review"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"comments\":\"Some text with comments updated\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
+						},
+						"description": "Updates a review based off of the given json body."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/5/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a review"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "c4913631-2c3b-27a3-19c8-71dbc8337d45",
 			"name": "API - Unverified Users",
 			"description": "These endpoints handle database interactions in regards to unverified user operations.",
-			"order": [
-				"ae5c9166-0aec-0a3e-a951-5fa579e4b7bf",
-				"7ec26fc3-3591-5f28-ab73-ec6a459cf6f8",
-				"ee467c8a-3807-c56e-63e4-6a5d759059ab",
-				"8d24e938-aaef-96ef-7e73-87fca32865ff"
-			],
-			"owner": 0
+			"item": [
+				{
+					"name": "Add Unverified User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passwordHash\": \"hjjjjjj3                                                                                                                        \",\n  \"passwordSalt\": \"hhhhhhh3                                                        \",\n  \"email\": \"jleaton@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
+						},
+						"description": "Adds an unverified user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets an unverified user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/email/jleaton3@uno.edu/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets an unverified user by email"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Unverified User",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/7/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes an unverified user"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "67fd9b93-097a-e1f6-8ebc-5ccf3bd434c0",
 			"name": "API - Users",
 			"description": "",
-			"order": [
-				"62fee5b7-6e47-4a2a-e135-e4daebbd1842",
-				"d5b6de11-1b4a-f6b7-1b6d-6c45aa319b16",
-				"d1d6efce-79cf-329a-1430-6a6ded67101e",
-				"7189ad08-40ba-db77-8438-e59d49f62282",
-				"a5a104f5-3bcb-c328-321b-c8cb77d16c68",
-				"d1ddf1ce-8328-5b52-66db-894ad208c73a"
-			],
-			"owner": 0
-		}
-	],
-	"timestamp": 0,
-	"owner": 0,
-	"public": false,
-	"requests": [
-		{
-			"id": "18e416ab-0a66-fcf4-6330-231c0420d798",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421905916,
-			"name": "Get Advertisements by Category",
-			"description": "Gets a list of all advertisements of a category",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "1d08d9bd-100e-1b57-50a6-8dffd18fafc8",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/categories",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421943849,
-			"name": "Get Categories",
-			"description": "Gets a list of all categories",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "2aa102b3-1666-b552-0ed2-2d1878f40335",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/reviews/2",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489445729164,
-			"name": "Get By ID",
-			"description": "Gets a review by id",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "32040e1c-3971-1093-14b3-c745712419a5",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/categories/add",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421925476,
-			"name": "Add Category",
-			"description": "Adds a category",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"title\": \"Test Category\",\n\t\"color\": \"#123456\",\n\t\"description\":\"This is a test category\"\n}"
-		},
-		{
-			"id": "50236f76-2fd4-c386-c24b-e6363480cc5f",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/reviews",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489445715433,
-			"name": "Get Reviews",
-			"description": "Gets a list of all reviews",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "5aa25db1-80f8-03fc-c3d0-f2df1abfabca",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/categories/4/delete",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421931771,
-			"name": "Delete Category",
-			"description": "Deletes a category",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "5dbc92cd-f7c8-5c05-ed7f-1ae1b757c0c4",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/auth/verify/",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421917763,
-			"name": "Verify",
-			"description": "Verify an unverified user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"accountName\" : \"jleaton\",\n\t\"userType\" : \"standard\",\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\" : \"hjjjjjj3                                                                                                                        \",\n\t\"enteredVerificationCode\" : 12345678\n}"
-		},
-		{
-			"id": "62fee5b7-6e47-4a2a-e135-e4daebbd1842",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/users/add",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422035758,
-			"name": "Add User",
-			"description": "Adds an user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-		},
-		{
-			"id": "6e5f3c0b-05e3-cd12-024a-2beeb016505b",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/advertisements",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421885064,
-			"name": "Get Advertisements",
-			"description": "Gets a list of all advertisements",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "7189ad08-40ba-db77-8438-e59d49f62282",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3/",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422048443,
-			"name": "Get By Acount Name",
-			"description": "Gets an user by account name",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-		},
-		{
-			"id": "7270bfb6-f062-88ab-bfd9-6efce6574455",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/reviews/5/delete",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489445681193,
-			"name": "Delete Review",
-			"description": "Deletes a review",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "7ec26fc3-3591-5f28-ab73-ec6a459cf6f8",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/1",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422007487,
-			"name": "Get By ID",
-			"description": "Gets an unverified user by ID",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "7f819d5e-a9e0-dffa-a764-d89dc4fcea54",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421900617,
-			"name": "Get Advertisements by Owner",
-			"description": "Gets a list of all advertisements of an user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "8112e798-e507-cbad-7319-b6038197816d",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/review/add",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489445663610,
-			"name": "Add Review",
-			"description": "Adds a review",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
-		},
-		{
-			"id": "8d24e938-aaef-96ef-7e73-87fca32865ff",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/7/delete",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422018124,
-			"name": "Delete Unverified User",
-			"description": "Deletes an unverified user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "8d57dd0c-68d0-32ea-405a-fd49478856b8",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/categories/1",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421935737,
-			"name": "Get By ID",
-			"description": "Gets a category by ID",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "a5a104f5-3bcb-c328-321b-c8cb77d16c68",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu/",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422052759,
-			"name": "Get By Email",
-			"description": "Gets an user by email",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-		},
-		{
-			"id": "ae5c9166-0aec-0a3e-a951-5fa579e4b7bf",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/add",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422001818,
-			"name": "Add Unverified User",
-			"description": "Adds an unverified user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n  \"passwordHash\": \"hjjjjjj3                                                                                                                        \",\n  \"passwordSalt\": \"hhhhhhh3                                                        \",\n  \"email\": \"jleaton@uno.edu\",\n  \"verificationCode\": \"12345678\"\n}"
-		},
-		{
-			"id": "af3a40a5-3963-818f-9c96-7050d9167966",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/auth/login/",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421912640,
-			"name": "Login",
-			"description": "Login as an user by email or account name",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\": \"hjjjjjj3                                                                                                                        \"\n}\n"
-		},
-		{
-			"id": "b0b6512f-9794-6110-0982-06c98f4df433",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489445813886,
-			"name": "Get Reviews by Reviewee",
-			"description": "Gets a list of all reviews of a user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "b1000c75-9c64-33e0-29f4-bdc4a3fc57d5",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421874870,
-			"name": "Add Advertisement",
-			"description": "Adds an advertisement",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
-		},
-		{
-			"id": "ba272989-da0c-a7fd-0f31-9c8e30f16259",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421879571,
-			"name": "Delete Advertisement",
-			"description": "Deletes an advertisement",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "d1d6efce-79cf-329a-1430-6a6ded67101e",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/users/5",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422044459,
-			"name": "Get By ID",
-			"description": "Gets an user by ID",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "d1ddf1ce-8328-5b52-66db-894ad208c73a",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/users/7/delete",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422058378,
-			"name": "Delete User",
-			"description": "Deletes an user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "d5b6de11-1b4a-f6b7-1b6d-6c45aa319b16",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/users/update",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422040468,
-			"name": "Update User",
-			"description": "Updates an user",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-		},
-		{
-			"id": "e282a486-ae24-a3b8-1935-b52e75478944",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewer/1",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489445775790,
-			"name": "Get Review by Reviewer",
-			"description": "Gets a list of all reviews made by a reviewer",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "e6dcc867-15c6-b4ce-3ac9-885cb2c98717",
-			"headers": "",
-			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/2",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489421894389,
-			"name": "Get By ID",
-			"description": "Gets an advertisement by ID",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "ee467c8a-3807-c56e-63e4-6a5d759059ab",
-			"headers": "Content-Type: application/json\n",
-			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/email/jleaton3@uno.edu/",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1489422013594,
-			"name": "Get By Email",
-			"description": "Gets an unverified user by email",
-			"collectionId": "02d561a4-6ca0-2882-0fb8-ffbffefcda60",
-			"responses": [],
-			"rawModeData": ""
+			"item": [
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+						},
+						"description": "Adds an user"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+						},
+						"description": "Updates an user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/5",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets an user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Acount Name",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": "Gets an user by account name"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Email",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": "Gets an user by email"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/7/delete",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes an user"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
