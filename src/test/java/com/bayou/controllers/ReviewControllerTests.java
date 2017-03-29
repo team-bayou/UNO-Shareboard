@@ -142,7 +142,14 @@ public class ReviewControllerTests {
 
     @Test
     public void testUpdateReview() {
-        // TODO Implement
+        // Update some information of user and save it to db.
+        reviewView.setComments(reviewView.getComments() + " updated");
+        ResponseEntity<Long> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/update",
+                HttpMethod.PUT, new HttpEntity<>(reviewView, headers), Long.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(responseEntity.getBody(), reviewView.getId());
     }
 
     @Test

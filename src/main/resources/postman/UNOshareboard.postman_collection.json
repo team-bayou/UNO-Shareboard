@@ -494,6 +494,89 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Get By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/5",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets an user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets all users in the system."
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Acount Name",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": "Gets an user by account name"
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Email",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": "Gets an user by email"
+					},
+					"response": []
+				},
+				{
 					"name": "Add User",
 					"event": [
 						{
@@ -542,78 +625,6 @@
 							"raw": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
 						},
 						"description": "Updates an user"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/5",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets an user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Acount Name",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Gets an user by account name"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Email",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Gets an user by email"
 					},
 					"response": []
 				},

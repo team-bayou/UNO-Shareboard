@@ -94,11 +94,10 @@ public class AdvertisementController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody AdvertisementView view) {
         ResponseEntity<Long> responseEntity;
-        HttpStatus status;
-        Long id = 0L;
+        Long id = -1L;
 
         try {
-            manager.update(view); //update the advertisement, returns -1 if data is stale
+            id = manager.update(view); //update the advertisement, returns -1 if data is stale
             responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
         } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent ad
             System.out.println("Error: requested user does not exist");

@@ -14,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import javax.ws.rs.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,7 +68,13 @@ public class UserManager implements IManager<UserView> {
 
     @Override
     public List<UserView> getAll() throws NotFoundException {
-        return null;
+        List<UserView> views = new ArrayList<>();
+
+        for (User u : userRas.findAll()) {   //convert each domain Object in the returned list to a view
+            views.add(userConverter.convertToView(u));
+        }
+
+        return views;
     }
 
     public UserView getByAccountName(String accountName) throws NotFoundException {
