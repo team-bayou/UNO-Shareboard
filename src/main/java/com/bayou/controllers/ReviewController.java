@@ -95,11 +95,10 @@ public class ReviewController {
     public ResponseEntity update(@RequestBody ReviewView view) {
 
         ResponseEntity<Long> responseEntity;
-        HttpStatus status;
-        Long id = 0L;
+        Long id = -1L;
 
         try {
-            manager.update(view); //update the review, returns -1 if data is stale
+            id = manager.update(view); //update the review, returns -1 if data is stale
             responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
         } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent review
             System.out.println("Error: requested user does not exist");

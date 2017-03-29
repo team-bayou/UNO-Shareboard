@@ -69,11 +69,10 @@ public class CategoryController {
     public ResponseEntity<Long> update(@RequestBody CategoryView view) {
 
         ResponseEntity<Long> responseEntity;
-        HttpStatus status;
-        Long id = 0L;
+        Long id = -1L;
 
         try {
-            manager.update(view); //update the category, returns -1 if data is stale
+            id = manager.update(view); //update the category, returns -1 if data is stale
             responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
         } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent category
             System.out.println("Error: requested category does not exist");

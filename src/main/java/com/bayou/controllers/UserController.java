@@ -8,8 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.ClientErrorException;
 import java.util.List;
 
 /**
@@ -64,7 +64,8 @@ public class UserController {
     }
 
     @ApiOperation(value = "Get a user by email", response = ResponseEntity.class)
-    @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET)
+    //sets the mapping url and the HTTP method
     public ResponseEntity<UserView> getByEmail(@PathVariable("email") String email) throws NotFoundException {
         ResponseEntity<UserView> responseEntity;
 
@@ -85,8 +86,7 @@ public class UserController {
         ResponseEntity<Long> responseEntity;
         if (id > 0) {
             responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
-        }
-        else {
+        } else {
             responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
         }
         return responseEntity;
@@ -95,13 +95,11 @@ public class UserController {
     @ApiOperation(value = "Update a user", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> update(@RequestBody UserView view) {
-
         ResponseEntity<Long> responseEntity;
-        HttpStatus status;
-        Long id = 0L;
+        Long id = -1L;
 
         try {
-            manager.update(view); //update the user, returns -1 if data is stale
+            id = manager.update(view); //update the user, returns -1 if data is stale
             responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
         } catch (NotFoundException e) {  //catches the case of non-existent user
             System.out.println("Error: requested user does not exist");

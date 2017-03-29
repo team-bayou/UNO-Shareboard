@@ -59,7 +59,7 @@ public class AuthenticationController {
         } catch (VerificationException e) {
             LoginView errorView = new LoginView();
             errorView.setErrorMessage(e.getMessage());
-            responseEntity = new ResponseEntity<LoginView>(errorView, HttpStatus.UNAUTHORIZED);
+            responseEntity = new ResponseEntity<>(errorView, HttpStatus.UNAUTHORIZED);
         }
 
         return responseEntity;
