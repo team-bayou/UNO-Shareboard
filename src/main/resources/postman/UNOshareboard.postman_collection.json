@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "0a9debce-af75-0a83-8511-bca20db112bd",
+		"_postman_id": "6d86922a-ed81-3749-8bd0-ca6de59b4ef1",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -320,7 +320,7 @@
 				{
 					"name": "Add Review",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/review/add",
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/add",
 						"method": "POST",
 						"header": [
 							{
@@ -331,7 +331,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
+							"raw": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewerId\": \"34\",\n\t\"revieweeId\": \"197\"\n}"
 						},
 						"description": "Adds a review"
 					},
@@ -351,7 +351,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"comments\":\"Some text with comments updated\",\n\t\"reviewer\" : \"1\",\n\t\"reviewee\": \"2\"\n}"
+							"raw": "{\n\t\"id\":\"184\",\n\t\"rating\": \"4\",\n\t\"comments\":\"Some text with comments update\",\n\t\"reviewerId\": \"34\",\n\t\"revieweeId\": \"197\"\n}"
 						},
 						"description": "Updates a review based off of the given json body."
 					},
