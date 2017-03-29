@@ -11,10 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -36,6 +33,7 @@ public class ReviewControllerTests {
 
     @Autowired
     private TestRestTemplate rest;
+    private HttpHeaders headers = Server.createHeadersAuthJson();
 
     private UserView reviewerView;
     private UserView revieweeView;
@@ -46,13 +44,15 @@ public class ReviewControllerTests {
         // Create user view and add user to db.
         reviewerView = Mocks.createUserView();
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + USERS_URL + "/add", new HttpEntity<>(reviewerView, Server.createHeadersJson()), Long.class);
+                Server.url() + USERS_URL + "/add",
+                new HttpEntity<>(reviewerView, headers), Long.class);
         reviewerView.setId(entity.getBody());
 
         // Create user view and add user to db.
         revieweeView = Mocks.createUserView();
         entity = rest.postForEntity(
-                Server.url() + USERS_URL + "/add", new HttpEntity<>(revieweeView, Server.createHeadersJson()), Long.class);
+                Server.url() + USERS_URL + "/add",
+                new HttpEntity<>(revieweeView, headers), Long.class);
         revieweeView.setId(entity.getBody());
 
         // Create review view and add review to db.
@@ -60,23 +60,28 @@ public class ReviewControllerTests {
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
         entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(reviewView, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(reviewView, headers), Long.class);
         reviewView.setId(entity.getBody());
     }
 
     @After
     public void cleanup() {
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete", String.class);
-        rest.delete(Server.url() + USERS_URL + "/" + reviewerView.getId() + "/delete", String.class);
-        rest.delete(Server.url() + USERS_URL + "/" + revieweeView.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(reviewView, headers), String.class);
+        rest.exchange(Server.url() + USERS_URL + "/" + reviewerView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(reviewerView, headers), String.class);
+        rest.exchange(Server.url() + USERS_URL + "/" + revieweeView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(revieweeView, headers), String.class);
     }
 
     @Test
     public void testGetReviews() {
         // Get list of reviews.
-        ResponseEntity<List> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL, List.class);
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -85,8 +90,9 @@ public class ReviewControllerTests {
     @Test
     public void testGetReviewById() {
         // Get review by id.
-        ResponseEntity<ReviewView> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/" + reviewView.getId(), ReviewView.class);
+        ResponseEntity<ReviewView> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/" + reviewView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), ReviewView.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -95,8 +101,9 @@ public class ReviewControllerTests {
     @Test
     public void testGetReviewsByReviewer() {
         // Get review by id.
-        ResponseEntity<List> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/reviewer/" + reviewerView.getId(), List.class);
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/reviewer/" + reviewerView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -105,8 +112,9 @@ public class ReviewControllerTests {
     @Test
     public void testGetReviewsByReviewee() {
         // Get review by id.
-        ResponseEntity<List> responseEntity = rest.getForEntity(
-                Server.url() + RESOURCE_URL + "/reviewee/" + revieweeView.getId(), List.class);
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/reviewee/" + revieweeView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
@@ -120,14 +128,16 @@ public class ReviewControllerTests {
         reviewView.setRevieweeId(revieweeView.getId());
 
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(reviewView, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(reviewView, headers), Long.class);
         reviewView.setId(entity.getBody());
 
         assertEquals(HttpStatus.OK, entity.getStatusCode());
         assertTrue(entity.getBody() != null);
 
         // Delete test data.
-        rest.delete(Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete", String.class);
+        rest.exchange(Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(reviewView, headers), String.class);
     }
 
     @Test
@@ -143,13 +153,14 @@ public class ReviewControllerTests {
         reviewView.setRevieweeId(revieweeView.getId());
 
         ResponseEntity<Long> entity = rest.postForEntity(
-                Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(reviewView, Server.createHeadersJson()), Long.class);
+                Server.url() + RESOURCE_URL + "/add",
+                new HttpEntity<>(reviewView, headers), Long.class);
         reviewView.setId(entity.getBody());
 
         // Delete review by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(reviewView, Server.createHeadersJson()), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(reviewView, headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
