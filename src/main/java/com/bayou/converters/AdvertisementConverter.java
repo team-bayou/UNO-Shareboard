@@ -44,5 +44,20 @@ public class AdvertisementConverter {
 
         return domain;
     }
+
+    public Advertisement updateConversion(Advertisement updatedAdState, Advertisement oldAdState) {
+
+        if(updatedAdState.getTitle() == null) {updatedAdState.setTitle(oldAdState.getTitle());}
+        if(updatedAdState.getDescription() == null) updatedAdState.setDescription(oldAdState.getDescription());
+        if(updatedAdState.getCategoryId() == null) updatedAdState.setCategoryId(oldAdState.getCategoryId());
+        if(updatedAdState.getOwner() == null) updatedAdState.setOwner(oldAdState.getOwner());
+        if(updatedAdState.getTimePublished() == null)  updatedAdState.setTimePublished(oldAdState.getTimePublished());
+        if(updatedAdState.getExpirationDate() == null) updatedAdState.setExpirationDate(oldAdState.getExpirationDate());
+        if(updatedAdState.getAdType() == null)  updatedAdState.setAdType(oldAdState.getAdType());
+        if(updatedAdState.getPrice() == null)  updatedAdState.setPrice(oldAdState.getPrice());
+        if(updatedAdState.getTradeItem() == null)  updatedAdState.setTradeItem(oldAdState.getTradeItem());
+
+        return updatedAdState;
+    }
 }
 
