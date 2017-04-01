@@ -114,6 +114,10 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public Integer countByOwner(Long ownerID) {
+        return advertisementRas.countByOwner(ownerID);
+    }
+
     @Override
     public Long add(AdvertisementView view) {
         Long id = -1L;
@@ -124,6 +128,18 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         }
 
         return id;
+    }
+
+    public void addImage(Long adID, Long imageID) throws NotFoundException {
+        AdvertisementView view = get(adID);
+        view.addImage(imageID);
+        update(view);
+    }
+
+    public void removeImage(Long adID, Long imageID) throws NotFoundException {
+        AdvertisementView view = get(adID);
+        view.removeImage(imageID);
+        update(view);
     }
 
     @Override
