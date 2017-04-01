@@ -76,12 +76,40 @@ public class AdvertisementController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a list of user's advertisements by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/users/{id}/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getUserAdvertisements(@PathVariable("id") Long id,
+                                                                         @PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByOwner(id, page), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Get a list of category's advertisements", response = ResponseEntity.class)
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<AdvertisementView>> getCategoryAdvertisements(@PathVariable("id") Long id) throws NotFoundException {
         ResponseEntity<List<AdvertisementView>> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(manager.getAllByCategory(id), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Get a list of category's advertisements by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/categories/{id}/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getCategoryAdvertisements(@PathVariable("id") Long id,
+                                                                             @PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByCategory(id, page), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

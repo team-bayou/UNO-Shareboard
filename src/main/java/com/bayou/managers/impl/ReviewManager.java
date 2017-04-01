@@ -60,15 +60,6 @@ public class ReviewManager implements IManager<ReviewView> {
         return views;
     }
 
-    public List<ReviewView> getAll(Integer page) throws NotFoundException {
-        List<ReviewView> views = new ArrayList<>();
-
-        for (Review ad : reviewRas.findAll(page))
-            views.add(prepare(ad));
-
-        return views;
-    }
-
     public List<ReviewView> getAllByReviewer(Long id) throws NotFoundException {
         List<ReviewView> views = new ArrayList<>();
 
@@ -78,10 +69,28 @@ public class ReviewManager implements IManager<ReviewView> {
         return views;
     }
 
+    public List<ReviewView> getAllByReviewer(Long id, Integer page) throws NotFoundException {
+        List<ReviewView> views = new ArrayList<>();
+
+        for (Review ad : reviewRas.findByReviewer(id, page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public List<ReviewView> getAllByReviewee(Long id) throws NotFoundException {
         List<ReviewView> views = new ArrayList<>();
 
         for (Review ad : reviewRas.findByReviewee(id))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
+    public List<ReviewView> getAllByReviewee(Long id, Integer page) throws NotFoundException {
+        List<ReviewView> views = new ArrayList<>();
+
+        for (Review ad : reviewRas.findByReviewee(id, page))
             views.add(prepare(ad));
 
         return views;
