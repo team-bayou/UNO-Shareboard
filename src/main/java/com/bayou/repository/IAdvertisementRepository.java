@@ -15,4 +15,6 @@ public interface IAdvertisementRepository extends CrudRepository<Advertisement, 
     Iterable<Advertisement> findByOwner(Long id);
 
     Iterable<Advertisement> findByCategoryId(Long id);
+
+    Integer countByOwner(Long id);
 }

@@ -4,6 +4,7 @@ import com.bayou.managers.impl.AdvertisementManager;
 import com.bayou.views.AdvertisementView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,12 @@ public class AdvertisementController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a count of user's advertisements", response = ResponseEntity.class)
+    @RequestMapping(value = "/users/count/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Integer> getUserAdvertisementCount(@PathVariable("id") Long id) throws NotFoundException {
+        return new ResponseEntity<Integer>(manager.countByOwner(id), HttpStatus.OK);
+    }
+
     @ApiOperation(value = "Get a list of category's advertisements", response = ResponseEntity.class)
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<AdvertisementView>> getCategoryAdvertisements(@PathVariable("id") Long id) throws NotFoundException {
@@ -88,6 +95,28 @@ public class AdvertisementController {
             responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
 
         return responseEntity;
+    }
+
+    @ApiOperation(value = "Add Image to an Advertisement", response = ResponseEntity.class)
+    @RequestMapping(value = "/addImage/{adID}/{imageID}", method = RequestMethod.PUT)
+    public ResponseEntity<Integer> addImage(@PathVariable("adID") Long adID, @PathVariable("imageID") Long imageID) {
+        try {
+            manager.addImage(adID, imageID);
+        } catch(NotFoundException nfe) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Remove Image from an Advertisement", response = ResponseEntity.class)
+    @RequestMapping(value = "/removeImage/{adID}/{imageID}", method = RequestMethod.PUT)
+    public ResponseEntity<Integer> removeImage(@PathVariable("adID") Long adID, @PathVariable("imageID") Long imageID) {
+        try {
+            manager.removeImage(adID, imageID);
+        } catch(NotFoundException nfe) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update an advertisement", response = ResponseEntity.class)

@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * File: Advertisement
@@ -46,6 +47,11 @@ public class Advertisement extends BaseEntity {
 
     @Column(name = "trade_item", columnDefinition = "VARCHAR")
     private String tradeItem;
+
+    @ElementCollection
+    @CollectionTable(name="ad_image_xref", joinColumns=@JoinColumn(name="ad_id"))
+    @Column(name="image_id")
+    private Set<Long> imageIDs;
 
     public String getTitle() {
         return title;
@@ -117,6 +123,22 @@ public class Advertisement extends BaseEntity {
 
     public void setTradeItem(String tradeItem) {
         this.tradeItem = tradeItem;
+    }
+
+    public Set<Long> getImageIDs() {
+        return imageIDs;
+    }
+
+    public void setImageIDs(Set<Long> imageIDs) {
+        this.imageIDs = imageIDs;
+    }
+
+    public void addImage(Long imageID) {
+       imageIDs.add(imageID);
+    }
+
+    public void removeImage(Long imageID) {
+        imageIDs.remove(imageID);
     }
 
     @Override

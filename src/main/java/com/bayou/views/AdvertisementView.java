@@ -3,6 +3,7 @@ package com.bayou.views;
 import com.bayou.types.AdType;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * File: AdvertisementView
@@ -20,6 +21,7 @@ public class AdvertisementView extends BaseEntityView {
     private AdType adType;
     private Double price;
     private String tradeItem;
+    private Set<Long> imageIDs;
 
     private CategoryView category;
     private UserView owner;
@@ -110,6 +112,22 @@ public class AdvertisementView extends BaseEntityView {
 
     public void setOwner(UserView owner) {
         this.owner = owner;
+    }
+
+    public Set<Long> getImageIDs() {
+        return imageIDs;
+    }
+
+    public void setImageIDs(Set<Long> imageIDs) {
+        this.imageIDs = imageIDs;
+    }
+
+    public void addImage(Long imageID) {
+        imageIDs.add(imageID);
+    }
+
+    public void removeImage(Long imageID) {
+        imageIDs.remove(imageID);
     }
 
     @Override
