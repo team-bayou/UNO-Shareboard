@@ -30,6 +30,9 @@ import static org.junit.Assert.assertTrue;
 public class ReviewControllerTests {
     private static final String USERS_URL = "/users";
     private static final String RESOURCE_URL = "/reviews";
+    private static final String REVIEWER_URL = "/reviewer";
+    private static final String REVIEWEE_URL = "/reviewee";
+    private static final String PAGE_URL = "/page/1";
 
     @Autowired
     private TestRestTemplate rest;
@@ -88,17 +91,6 @@ public class ReviewControllerTests {
     }
 
     @Test
-    public void testGetReviewsByPage() {
-        // Get list of reviews.
-        ResponseEntity<List> responseEntity = rest.exchange(
-                Server.url() + RESOURCE_URL + "/page/1",
-                HttpMethod.GET, new HttpEntity<>(headers), List.class);
-
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertTrue(responseEntity.getBody() != null);
-    }
-
-    @Test
     public void testGetReviewById() {
         // Get review by id.
         ResponseEntity<ReviewView> responseEntity = rest.exchange(
@@ -111,9 +103,20 @@ public class ReviewControllerTests {
 
     @Test
     public void testGetReviewsByReviewer() {
-        // Get review by id.
+        // Get list of reviewer's reviews.
         ResponseEntity<List> responseEntity = rest.exchange(
-                Server.url() + RESOURCE_URL + "/reviewer/" + reviewerView.getId(),
+                Server.url() + RESOURCE_URL + REVIEWER_URL + "/" + reviewerView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetReviewsByReviewerByPage() {
+        // Get list of reviewer's reviews by page.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + REVIEWER_URL + "/" + reviewerView.getId() + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -122,9 +125,20 @@ public class ReviewControllerTests {
 
     @Test
     public void testGetReviewsByReviewee() {
-        // Get review by id.
+        // Get list of reviewee's reviews.
         ResponseEntity<List> responseEntity = rest.exchange(
-                Server.url() + RESOURCE_URL + "/reviewee/" + revieweeView.getId(),
+                Server.url() + RESOURCE_URL + REVIEWEE_URL + "/" + revieweeView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetReviewsByRevieweeByPage() {
+        // Get list of reviewee's reviews by page.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + REVIEWEE_URL + "/" + revieweeView.getId() + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());

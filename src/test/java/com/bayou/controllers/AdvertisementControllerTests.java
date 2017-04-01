@@ -32,6 +32,7 @@ public class AdvertisementControllerTests {
     private static final String USERS_URL = "/users";
     private static final String CATEGORIES_URL = "/categories";
     private static final String RESOURCE_URL = "/advertisements";
+    private static final String PAGE_URL = "/page/1";
 
     @Autowired
     private TestRestTemplate rest;
@@ -90,7 +91,7 @@ public class AdvertisementControllerTests {
     public void testGetAdvertisementsByPage() {
         // Get list of advertisements.
         ResponseEntity<List> responseEntity = rest.exchange(
-                Server.url() + RESOURCE_URL + "/page/1",
+                Server.url() + RESOURCE_URL + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -103,6 +104,50 @@ public class AdvertisementControllerTests {
         ResponseEntity<AdvertisementView> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + advertisementView.getId(),
                 HttpMethod.GET, new HttpEntity<>(headers), AdvertisementView.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetUserAdvertisements() {
+        // Get list of user's advertisements.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + USERS_URL + "/" + userView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetUserAdvertisementsByPage() {
+        // Get list of user's advertisements by page number.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + USERS_URL + "/" + userView.getId() + PAGE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetCategoryAdvertisements() {
+        // Get list of category's advertisements.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + CATEGORIES_URL + "/" + categoryView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetCategoryAdvertisementsByPage() {
+        // Get list of category's advertisements by page number.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + CATEGORIES_URL + "/" + categoryView.getId() + PAGE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
