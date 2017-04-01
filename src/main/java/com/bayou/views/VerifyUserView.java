@@ -30,4 +30,12 @@ public class VerifyUserView extends UserView {
         }
         return enteredPasswordHash.equals(getPasswordHash());
     }
+
+    @Override
+    public String toString() {
+        return "VerifyUserView{" +
+                "enteredPasswordHash='" + enteredPasswordHash + '\'' +
+                ", enteredVerificationCode=" + enteredVerificationCode +
+                "} " + super.toString();
+    }
 }
