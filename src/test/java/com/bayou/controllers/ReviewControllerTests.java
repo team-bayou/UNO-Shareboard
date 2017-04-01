@@ -88,6 +88,17 @@ public class ReviewControllerTests {
     }
 
     @Test
+    public void testGetReviewsByPage() {
+        // Get list of reviews.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/page/1",
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
     public void testGetReviewById() {
         // Get review by id.
         ResponseEntity<ReviewView> responseEntity = rest.exchange(

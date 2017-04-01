@@ -1,4 +1,4 @@
-package com.bayou.TestManagers;
+package com.bayou.managers;
 
 import com.bayou.MainConfig;
 import com.bayou.managers.impl.UnverifiedUserManager;

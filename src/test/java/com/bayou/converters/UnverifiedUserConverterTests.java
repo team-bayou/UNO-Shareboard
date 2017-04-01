@@ -1,6 +1,5 @@
-package com.bayou.TestConverters;
+package com.bayou.converters;
 
-import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
 import com.bayou.views.UnverifiedUserView;
 import org.junit.Test;

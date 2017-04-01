@@ -87,6 +87,17 @@ public class AdvertisementControllerTests {
     }
 
     @Test
+    public void testGetAdvertisementsByPage() {
+        // Get list of advertisements.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/page/1",
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
     public void testGetAdvertisementById() {
         // Get advertisement by id.
         ResponseEntity<AdvertisementView> responseEntity = rest.exchange(
