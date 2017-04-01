@@ -37,6 +37,19 @@ public class AdvertisementController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a list of advertisements by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getAll(@PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAll(page), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Get an advertisement by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<AdvertisementView> get(@PathVariable("id") Long id) throws NotFoundException {

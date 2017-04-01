@@ -5,6 +5,7 @@ import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IReviewRepository;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ReviewResourceAccessor implements IResourceAccessor<Review> {
+    private static final int MAX_RESULTS = 10;
+
     @Autowired
     IReviewRepository repo;
 
@@ -27,6 +30,10 @@ public class ReviewResourceAccessor implements IResourceAccessor<Review> {
     @Override
     public Iterable<Review> findAll() {
         return repo.findAll();
+    }
+
+    public Iterable<Review> findAll(Integer page) {
+        return repo.findAll(new PageRequest(page - 1, MAX_RESULTS));
     }
 
     public Iterable<Review> findByReviewer(Long id) {

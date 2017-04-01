@@ -69,6 +69,15 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAll(Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findAll(page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public List<AdvertisementView> getAllByOwner(Long id) throws NotFoundException {
         List<AdvertisementView> views = new ArrayList<>();
 

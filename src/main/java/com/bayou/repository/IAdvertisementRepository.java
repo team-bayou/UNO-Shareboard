@@ -1,7 +1,7 @@
 package com.bayou.repository;
 
 import com.bayou.domains.Advertisement;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created on: 2/20/17
  */
 @Repository
-public interface IAdvertisementRepository extends CrudRepository<Advertisement, Long> {
+public interface IAdvertisementRepository extends PagingAndSortingRepository<Advertisement, Long> {
     Iterable<Advertisement> findByOwner(Long id);
 
     Iterable<Advertisement> findByCategoryId(Long id);

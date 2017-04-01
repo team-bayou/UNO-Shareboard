@@ -1,7 +1,7 @@
 package com.bayou.repository;
 
 import com.bayou.domains.Review;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created on: 3/13/17
  */
 @Repository
-public interface IReviewRepository extends CrudRepository<Review, Long> {
+public interface IReviewRepository extends PagingAndSortingRepository<Review, Long> {
     Iterable<Review> findByReviewer(Long id);
 
     Iterable<Review> findByReviewee(Long id);

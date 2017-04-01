@@ -5,6 +5,7 @@ import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IAdvertisementRepository;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service    //registers this java class as a Service bean so that the container is aware of it for injection
 public class AdvertisementResourceAccessor implements IResourceAccessor<Advertisement> {
+    private static final int MAX_RESULTS = 10;
+
     @Autowired
     IAdvertisementRepository repo;
 
@@ -27,6 +30,10 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     @Override
     public Iterable<Advertisement> findAll() {
         return repo.findAll();
+    }
+
+    public Iterable<Advertisement> findAll(Integer page) {
+        return repo.findAll(new PageRequest(page - 1, MAX_RESULTS));
     }
 
     public Iterable<Advertisement> findByOwner(Long id) {

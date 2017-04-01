@@ -37,6 +37,19 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a list of reviews by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<ReviewView>> getAll(@PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<ReviewView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAll(page), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Get an review by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ReviewView> get(@PathVariable("id") Long id) throws NotFoundException {
