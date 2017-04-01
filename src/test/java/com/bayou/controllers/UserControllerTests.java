@@ -36,9 +36,8 @@ public class UserControllerTests {
 
     @Before
     public void setup() {
-        // Create category view and add category to db.
+        // Create user view and add user to db.
         view = Mocks.createUserView();
-
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
@@ -48,7 +47,7 @@ public class UserControllerTests {
     public void cleanup() {
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -108,7 +107,7 @@ public class UserControllerTests {
 
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -135,7 +134,7 @@ public class UserControllerTests {
         // Delete user by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

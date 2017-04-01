@@ -50,7 +50,7 @@ public class CategoryControllerTests {
     public void cleanup() {
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class CategoryControllerTests {
         assertTrue(responseEntity.getBody() != null);
 
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class CategoryControllerTests {
         // Delete category by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(view, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

@@ -69,11 +69,11 @@ public class AdvertisementControllerTests {
     public void cleanup() {
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(advertisementView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
         rest.exchange(Server.url() + USERS_URL + "/" + userView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(userView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
         rest.exchange(Server.url() + CATEGORIES_URL + "/" + categoryView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(categoryView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -170,7 +170,7 @@ public class AdvertisementControllerTests {
 
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(advertisementView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -200,7 +200,7 @@ public class AdvertisementControllerTests {
         // Delete advertisement by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + advertisementView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(advertisementView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

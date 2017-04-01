@@ -72,11 +72,11 @@ public class ReviewControllerTests {
     public void cleanup() {
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(reviewView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
         rest.exchange(Server.url() + USERS_URL + "/" + reviewerView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(reviewerView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
         rest.exchange(Server.url() + USERS_URL + "/" + revieweeView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(revieweeView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class ReviewControllerTests {
 
         // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(reviewView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
@@ -192,7 +192,7 @@ public class ReviewControllerTests {
         // Delete review by id.
         ResponseEntity responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/" + reviewView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(reviewView, headers), String.class);
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

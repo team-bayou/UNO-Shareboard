@@ -19,8 +19,8 @@ public class Mocks {
     public static UserView createUserView() {
         UserView view = new UserView();
         view.setAccountName("jleaton" + rand.nextInt());
-        view.setPasswordHash("jjjjjjj3");
-        view.setPasswordSalt("hhhhhhh3");
+        view.setPasswordHash("jjjjjjj3                                                                                                                        ");
+        view.setPasswordSalt("hhhhhhh3                                                        ");
         view.setUserType(UserType.standard);
         view.setFirstName("Joshua3");
         view.setLastName("Eaton3");
@@ -34,10 +34,29 @@ public class Mocks {
 
     public static UnverifiedUserView createUnverifiedUserView() {
         UnverifiedUserView view = new UnverifiedUserView();
-        view.setPasswordHash("jjjjjjj3");
-        view.setPasswordSalt("hhhhhhh3");
+        view.setPasswordHash("jjjjjjj3                                                                                                                        ");
+        view.setPasswordSalt("hhhhhhh3                                                        ");
         view.setEmail("jleaton" + rand.nextInt() + "@uno.edu");
         view.setVerificationCode(46555038);
+
+        return view;
+    }
+
+    public static VerifyUserView createVerifyUserView(UserView userView) {
+        VerifyUserView view = new VerifyUserView();
+        view.setEmail(userView.getEmail());
+        view.setEnteredPasswordHash(userView.getPasswordHash());
+
+        return view;
+    }
+
+    public static VerifyUserView createVerifyUserView(UnverifiedUserView unverifiedUserView) {
+        VerifyUserView view = new VerifyUserView();
+        view.setAccountName("jleaton" + rand.nextInt());
+        view.setEmail(unverifiedUserView.getEmail());
+        view.setUserType(UserType.standard);
+        view.setEnteredPasswordHash(unverifiedUserView.getPasswordHash());
+        view.setEnteredVerificationCode(unverifiedUserView.getVerificationCode());
 
         return view;
     }
