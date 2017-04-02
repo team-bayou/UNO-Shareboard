@@ -50,7 +50,7 @@ public class ReviewResourceAccessor implements IResourceAccessor<Review> {
     }
 
     public Iterable<Review> findByReviewee(Long id, Integer page) {
-        return repo.findByReviewer(id, pageAndSortByIdDesc(page));
+        return repo.findByReviewee(id, pageAndSortByIdDesc(page));
     }
 
     @Override
