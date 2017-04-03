@@ -5,6 +5,8 @@ import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IAdvertisementRepository;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
  */
 @Service    //registers this java class as a Service bean so that the container is aware of it for injection
 public class AdvertisementResourceAccessor implements IResourceAccessor<Advertisement> {
+    private static final int MAX_RESULTS = 10;
+
     @Autowired
     IAdvertisementRepository repo;
 
@@ -29,12 +33,24 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
         return repo.findAll();
     }
 
+    public Iterable<Advertisement> findAll(Integer page) {
+        return repo.findAll(pageAndSortByIdDesc(page));
+    }
+
     public Iterable<Advertisement> findByOwner(Long id) {
         return repo.findByOwner(id);
     }
 
+    public Iterable<Advertisement> findByOwner(Long id, Integer page) {
+        return repo.findByOwner(id, pageAndSortByIdDesc(page));
+    }
+
     public Iterable<Advertisement> findByCategory(Long id) {
         return repo.findByCategoryId(id);
+    }
+
+    public Iterable<Advertisement> findByCategory(Long id, Integer page) {
+        return repo.findByCategoryId(id, pageAndSortByIdDesc(page));
     }
 
     @Override
@@ -64,5 +80,10 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     @Override
     public void delete(Long id) {
         repo.delete(id);
+    }
+
+    private PageRequest pageAndSortByIdDesc(Integer page) {
+        return new PageRequest(page - 1, MAX_RESULTS,
+                new Sort(Sort.Direction.DESC, "id"));
     }
 }

@@ -61,6 +61,22 @@ public class ReviewController {
         }
 
         return responseEntity;
+
+    }
+
+    @ApiOperation(value = "Get a list of user's given reviews by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/reviewer/{id}/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<ReviewView>> getReviewerReviews(@PathVariable("id") Long id,
+                                                               @PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<ReviewView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByReviewer(id, page), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+
     }
 
     @ApiOperation(value = "Get a list of user's received reviews", response = ResponseEntity.class)
@@ -69,6 +85,20 @@ public class ReviewController {
         ResponseEntity<List<ReviewView>> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(manager.getAllByReviewee(id), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Get a list of user's received reviews by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/reviewee/{id}/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<ReviewView>> getRevieweeReviews(@PathVariable("id") Long id,
+                                                               @PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<ReviewView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByReviewee(id, page), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

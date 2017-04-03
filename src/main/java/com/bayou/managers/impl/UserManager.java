@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
 import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,20 +33,22 @@ public class UserManager implements IManager<UserView> {
     private LoginConverter loginConverter;
 
     public LoginView login(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
-        User returnedUser;
+        UserView returnedUser;
 
         if (verifyUserView.getEmail() != null) { //if email field is not null, get the user by email
-            returnedUser = userRas.findByEmail(verifyUserView.getEmail());
+            returnedUser = getByEmail(verifyUserView.getEmail());
         } else if (verifyUserView.getAccountName() != null) { //if account name is not null, get the user by account name
-            returnedUser = userRas.findByAccountName(verifyUserView.getAccountName());
+            returnedUser = getByAccountName(verifyUserView.getAccountName());
         } else {
             throw new NotFoundException("Values of email or account name not found" + "email: " + verifyUserView.getEmail() + " account name: " + verifyUserView.getAccountName());
         }
+
         if (returnedUser == null) {
             throw new NotFoundException("The requested user does not exist in the database");
         } else {
             verifyUserView.setPasswordHash(returnedUser.getPasswordHash());
         }
+
         if (verifyUserView.login()) {
             return loginConverter.convertToLoginView(returnedUser);
         } else {

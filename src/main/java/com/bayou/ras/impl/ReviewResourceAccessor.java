@@ -5,6 +5,8 @@ import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IReviewRepository;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ReviewResourceAccessor implements IResourceAccessor<Review> {
+    private static final int MAX_RESULTS = 10;
+
     @Autowired
     IReviewRepository repo;
 
@@ -29,12 +33,24 @@ public class ReviewResourceAccessor implements IResourceAccessor<Review> {
         return repo.findAll();
     }
 
+    public Iterable<Review> findAll(Integer page) {
+        return repo.findAll(pageAndSortByIdDesc(page));
+    }
+
     public Iterable<Review> findByReviewer(Long id) {
         return repo.findByReviewer(id);
     }
 
+    public Iterable<Review> findByReviewer(Long id, Integer page) {
+        return repo.findByReviewer(id, pageAndSortByIdDesc(page));
+    }
+
     public Iterable<Review> findByReviewee(Long id) {
         return repo.findByReviewee(id);
+    }
+
+    public Iterable<Review> findByReviewee(Long id, Integer page) {
+        return repo.findByReviewee(id, pageAndSortByIdDesc(page));
     }
 
     @Override
@@ -64,5 +80,10 @@ public class ReviewResourceAccessor implements IResourceAccessor<Review> {
     @Override
     public void delete(Long id) {
         repo.delete(id);
+    }
+
+    private PageRequest pageAndSortByIdDesc(Integer page) {
+        return new PageRequest(page - 1, MAX_RESULTS,
+                new Sort(Sort.Direction.DESC, "id"));
     }
 }

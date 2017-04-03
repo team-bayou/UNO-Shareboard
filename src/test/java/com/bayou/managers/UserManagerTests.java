@@ -1,4 +1,4 @@
-package com.bayou.TestManagers;
+package com.bayou.managers;
 
 import com.bayou.MainConfig;
 import com.bayou.managers.impl.UserManager;
@@ -13,9 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URISyntaxException;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by joshuaeaton on 2/1/17.

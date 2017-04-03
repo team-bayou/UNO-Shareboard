@@ -69,6 +69,15 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAll(Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findAll(page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public List<AdvertisementView> getAllByOwner(Long id) throws NotFoundException {
         List<AdvertisementView> views = new ArrayList<>();
 
@@ -78,10 +87,28 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAllByOwner(Long id, Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByOwner(id, page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public List<AdvertisementView> getAllByCategory(Long id) throws NotFoundException {
         List<AdvertisementView> views = new ArrayList<>();
 
         for (Advertisement ad : advertisementRas.findByCategory(id))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
+    public List<AdvertisementView> getAllByCategory(Long id, Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByCategory(id, page))
             views.add(prepare(ad));
 
         return views;

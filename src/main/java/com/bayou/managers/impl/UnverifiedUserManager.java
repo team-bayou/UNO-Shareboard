@@ -2,7 +2,6 @@ package com.bayou.managers.impl;
 
 import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UnverifiedUserConverter;
-import com.bayou.converters.UserConverter;
 import com.bayou.domains.UnverifiedUser;
 import com.bayou.engines.UnverifiedUserEngine;
 import com.bayou.exceptions.VerificationException;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
 import javax.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -34,31 +34,29 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     private LoginConverter loginConverter;
 
     @Autowired
-    private UserConverter userConverter;
-
-    @Autowired
     private UserManager userManager;
 
     @Autowired
     private UnverifiedUserEngine unvEngine;
 
     public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
-        UnverifiedUser unverifiedUser = unverifiedUserRas.findByEmail(verifyUserView.getEmail());
-        LoginView userView;
+        UnverifiedUserView unverifiedUser = getByEmail(verifyUserView.getEmail());
 
         verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
         verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
-        boolean passwordFail = verifyUserView.login();
-        boolean verifFail = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
-        if (passwordFail && verifFail) {
+        boolean passwordSuccess = verifyUserView.login();
+        boolean verifySuccess = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
+
+        LoginView userView;
+        if (passwordSuccess && verifySuccess) {
             Long id = userManager.add(verifyUserView);
-            userView = loginConverter.convertToLoginView(userConverter.convertToDomain(userManager.get(id)));
+            userView = loginConverter.convertToLoginView(userManager.get(id));
             delete(unverifiedUser.getId());
         } else {
             String message;
-            if (!passwordFail && !verifFail) {
+            if (!passwordSuccess && !verifySuccess) {
                 message = "both";
-            } else if (!passwordFail) {
+            } else if (!passwordSuccess) {
                 message = "password";
             } else {
                 message = "verify";
