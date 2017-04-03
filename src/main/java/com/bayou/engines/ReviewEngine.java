@@ -42,7 +42,7 @@ public class ReviewEngine {
 
         return (5*fiveStarCount + 4*fourStarCount + 3*threeStarCount + 2*twoStarCount + oneStarCount)/
                 (fiveStarCount + fourStarCount + threeStarCount + twoStarCount + oneStarCount);
-        
+
     }
 
 }
