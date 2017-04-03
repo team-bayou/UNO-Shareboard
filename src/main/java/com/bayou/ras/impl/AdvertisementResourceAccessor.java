@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import static com.bayou.Constants.MAX_RESULTS;
+
 /**
  * File: AdvertisementResourceAccessor
  * Package: com.bayou.ras.impl
@@ -18,8 +20,6 @@ import org.springframework.stereotype.Service;
  */
 @Service    //registers this java class as a Service bean so that the container is aware of it for injection
 public class AdvertisementResourceAccessor implements IResourceAccessor<Advertisement> {
-    private static final int MAX_RESULTS = 10;
-
     @Autowired
     IAdvertisementRepository repo;
 
