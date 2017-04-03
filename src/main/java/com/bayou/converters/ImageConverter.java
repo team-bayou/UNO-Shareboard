@@ -18,6 +18,7 @@ public class ImageConverter {
         view.setImageMimeType(image.getImageMimeType());
         view.setDescription(image.getDescription());
         view.setImageData(image.getImageData());
+        view.setOwner(image.getOwner());
         return view;
     }
 
@@ -27,6 +28,7 @@ public class ImageConverter {
         image.setImageMimeType(view.getImageMimeType());
         image.setDescription(view.getDescription());
         image.setImageData(view.getImageData());
+        image.setOwner(view.getOwner());
         return image;
     }
 
@@ -35,6 +37,7 @@ public class ImageConverter {
         infoView.setImageMimeType(view.getImageMimeType());
         infoView.setDescription(view.getDescription());
         infoView.setId(view.getId());
+        infoView.setOwner(view.getOwner());
         return infoView;
     }
 

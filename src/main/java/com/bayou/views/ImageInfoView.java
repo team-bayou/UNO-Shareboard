@@ -7,6 +7,7 @@ public class ImageInfoView extends BaseEntityView {
 
     private String description;
     private String imageMimeType;
+    private Long owner;
 
     public String getDescription() {
         return description;
@@ -22,5 +23,13 @@ public class ImageInfoView extends BaseEntityView {
 
     public void setImageMimeType(String imageMimeType) {
         this.imageMimeType = imageMimeType;
+    }
+
+    public Long getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,14 @@ public class ImageManager implements IManager<ImageView> {
 
     public ImageInfoView getInfo(Long id) throws NotFoundException {
         return imageConverter.convertToInfoView(this.get(id));
+    }
+
+    public List<ImageInfoView> findByOwner(Long id) throws NotFoundException {
+        List<ImageInfoView> images = new ArrayList<ImageInfoView>();
+        for(Image i : imageRas.findByOwner(id)) {
+            images.add(imageConverter.convertToInfoView(imageConverter.convertToView(i)));
+        }
+        return images;
     }
 
     @Override
