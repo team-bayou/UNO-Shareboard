@@ -26,6 +26,9 @@ public class Image extends BaseEntity {
     @Column(name = "image_data", columnDefinition = "bytea")
     private byte[] imageData;
 
+    @Column(name = "owner", columnDefinition = "integer")
+    private Long owner;
+
     public String getImageMimeType() {
         return imageMimeType;
     }
@@ -50,4 +53,11 @@ public class Image extends BaseEntity {
         this.imageData = imageData;
     }
 
+    public Long getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
+    }
 }

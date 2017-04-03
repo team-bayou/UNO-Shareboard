@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Rachel on 3/19/2017.
@@ -36,6 +37,19 @@ public class ImageController {
         try {
             responseEntity = new ResponseEntity<>(manager.getInfo(id), HttpStatus.OK);
         } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Get image info by owner", response = ResponseEntity.class)
+    @RequestMapping(value = "/owner/{id}/info", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    public ResponseEntity<List<ImageInfoView>> getInfoByOwner(@PathVariable("id") Long id) throws NotFoundException {
+        ResponseEntity<List<ImageInfoView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<List<ImageInfoView>>(manager.findByOwner(id), HttpStatus.OK);
+        } catch(NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
@@ -62,7 +76,7 @@ public class ImageController {
 
     @ApiOperation(value = "Add an image", response = ResponseEntity.class)
     @RequestMapping(value = "/upload", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<Long> uploadImage(@RequestParam("description") String desc, @RequestParam("image_data") MultipartFile file) {
+    public ResponseEntity<Long> uploadImage(@RequestParam("description") String desc, @RequestParam("owner") Long owner_id, @RequestParam("image_data") MultipartFile file) {
         ImageView view = new ImageView();
         try {
             view.setImageData(file.getBytes());
@@ -73,6 +87,7 @@ public class ImageController {
         String contentType = file.getContentType();
         if(contentType.lastIndexOf("image/") == 0) {
             view.setImageMimeType(file.getContentType());
+            view.setOwner(owner_id);
         } else {
             return new ResponseEntity<Long>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }

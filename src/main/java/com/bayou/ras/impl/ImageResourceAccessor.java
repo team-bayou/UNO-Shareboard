@@ -40,4 +40,5 @@ public class ImageResourceAccessor implements IResourceAccessor<Image> {
         return repo.findOne(id);
     }
 
+    public Iterable<Image> findByOwner(Long id) { return repo.findByOwner(id); }
 }

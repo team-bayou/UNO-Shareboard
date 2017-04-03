@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface IImageRepository extends CrudRepository<Image, Long> {
 
+    Iterable<Image> findByOwner(Long id);
+
 }
