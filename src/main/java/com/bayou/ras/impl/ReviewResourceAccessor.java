@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import static com.bayou.Constants.MAX_RESULTS;
+
 /**
  * File: ReviewResourceAccessor
  * Package: com.bayou.ras.impl
@@ -18,8 +20,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ReviewResourceAccessor implements IResourceAccessor<Review> {
-    private static final int MAX_RESULTS = 10;
-
     @Autowired
     IReviewRepository repo;
 
