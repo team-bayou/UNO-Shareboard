@@ -8,3 +8,4 @@ ALTER TABLE ads ADD constraint ads_owner_fkey FOREIGN KEY (owner) REFERENCES use
 ALTER TABLE ads DROP constraint ads_category_id_fkey;
 ALTER TABLE ads ALTER COLUMN category_id SET DEFAULT 10;
 ALTER TABLE ads ADD constraint ads_category_id_fkey FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET DEFAULT;
+ALTER TABLE images ADD COLUMN image_order integer DEFAULT 1;

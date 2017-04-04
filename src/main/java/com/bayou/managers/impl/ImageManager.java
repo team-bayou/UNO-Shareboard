@@ -71,7 +71,22 @@ public class ImageManager implements IManager<ImageView> {
 
     @Override
     public Long update(ImageView view) {
-        return null;
+        Image image = imageConverter.convertToDomain(view);    //converts the image info view to the user domain Object
+        if (view.getId() == null) {   //triggers a no content if the id is null
+            return -1L;
+        }
+
+        Image retrievedImage = imageRas.find(view.getId());    //get the image we are updating
+
+        if (retrievedImage == null) {    //if the requested image doesn't exist
+            throw new javax.ws.rs.NotFoundException();
+        }
+
+        image.setVersion(retrievedImage.getVersion());   //gets the record's we are updating version number
+
+        image = imageConverter.updateConversion(image, retrievedImage); //adds values to any null properties that were not sent in the request on a partial update
+
+        return imageRas.update(image);
     }
 
     @Override

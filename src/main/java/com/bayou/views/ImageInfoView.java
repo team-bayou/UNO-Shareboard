@@ -8,6 +8,7 @@ public class ImageInfoView extends BaseEntityView {
     private String description;
     private String imageMimeType;
     private Long owner;
+    private Integer order;
 
     public String getDescription() {
         return description;
@@ -31,5 +32,13 @@ public class ImageInfoView extends BaseEntityView {
 
     public void setOwner(Long owner) {
         this.owner = owner;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 }

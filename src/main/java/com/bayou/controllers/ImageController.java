@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -93,5 +94,27 @@ public class ImageController {
         }
         Long id = manager.add(view);
         return new ResponseEntity<Long>(id, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Update an image", response = ResponseEntity.class)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity update(@RequestBody ImageView view) { // Image data and MIME type will not be changed
+        ResponseEntity<Long> responseEntity;
+        Long id = -1L;
+        try {
+            id = manager.update(view); //update the image, returns -1 if data is stale
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent image
+            System.out.println("Error: requested user does not exist");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        } catch (DataIntegrityViolationException e) {   //catches the case where for example an id is null thus implying a insert
+            System.out.println("Error: can not determine if insert or update");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.BAD_REQUEST);
+        }
+        if (id == -1L) {    //catches the case if there was an attempt to update outdated information
+            System.out.println("Error: stale data detected");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 }

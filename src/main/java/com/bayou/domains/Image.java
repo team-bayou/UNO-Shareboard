@@ -29,6 +29,9 @@ public class Image extends BaseEntity {
     @Column(name = "owner", columnDefinition = "integer")
     private Long owner;
 
+    @Column(name = "image_order", columnDefinition = "integer")
+    private Integer order;
+
     public String getImageMimeType() {
         return imageMimeType;
     }
@@ -59,5 +62,13 @@ public class Image extends BaseEntity {
 
     public void setOwner(Long owner) {
         this.owner = owner;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 }

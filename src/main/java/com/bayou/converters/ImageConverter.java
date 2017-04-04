@@ -19,6 +19,7 @@ public class ImageConverter {
         view.setDescription(image.getDescription());
         view.setImageData(image.getImageData());
         view.setOwner(image.getOwner());
+        view.setOrder(image.getOrder());
         return view;
     }
 
@@ -29,6 +30,7 @@ public class ImageConverter {
         image.setDescription(view.getDescription());
         image.setImageData(view.getImageData());
         image.setOwner(view.getOwner());
+        image.setOrder(view.getOrder());
         return image;
     }
 
@@ -38,7 +40,20 @@ public class ImageConverter {
         infoView.setDescription(view.getDescription());
         infoView.setId(view.getId());
         infoView.setOwner(view.getOwner());
+        infoView.setOrder(view.getOrder());
         return infoView;
     }
 
+    public Image updateConversion(Image updatedImageState, Image oldImageState) {
+
+        if(updatedImageState.getDescription() == null) updatedImageState.setDescription(oldImageState.getDescription());
+        if(updatedImageState.getOwner() == null) updatedImageState.setOwner(oldImageState.getOwner());
+        if(updatedImageState.getOrder() == null)  updatedImageState.setOrder(oldImageState.getOrder());
+
+        // Image MIME type shouldn't be changed as it is based on the image_data field that is immutable.
+        updatedImageState.setImageMimeType(oldImageState.getImageMimeType());
+        updatedImageState.setImageData(oldImageState.getImageData());
+
+        return updatedImageState;
+    }
 }
