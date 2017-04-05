@@ -108,6 +108,30 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get average star rating for a given user id", response = ResponseEntity.class)
+    @RequestMapping(value = "/reviewee/{id}/rating", method = RequestMethod.GET)
+    public ResponseEntity getUserAverageRating(@PathVariable("id") Long id) {
+
+        ResponseEntity<Integer> responseEntity;
+        try {
+            int avgRating = manager.getUserAverageRating(id);
+
+            if(avgRating != 0) {
+                responseEntity = new ResponseEntity<>(avgRating, HttpStatus.OK);
+            } else {
+                responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (javax.ws.rs.NotFoundException e) {
+            System.out.println("Error: user with given id does not exist");
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (java.lang.ArithmeticException ae) {
+            System.out.println("No reviews found for this user");
+            responseEntity = new ResponseEntity<>(BAD_REQUEST);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Add a review", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Long> add(@RequestBody ReviewView view) {
@@ -152,31 +176,5 @@ public class ReviewController {
         manager.delete(id);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    @ApiOperation(value = "Get average star rating for a given user id", response = ResponseEntity.class)
-    @RequestMapping(value = "/reviewee_rating/{id}", method = RequestMethod.GET)
-    public ResponseEntity getUserAverageRating(@PathVariable("id") Long id) {
-
-        ResponseEntity<Integer> responseEntity = null;
-
-
-        try {
-            int avgRating = manager.getUserAverageRating(id);
-
-            if(avgRating != 0) {
-                responseEntity = new ResponseEntity(avgRating, HttpStatus.OK);
-            } else {
-                responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
-            }
-        } catch (javax.ws.rs.NotFoundException e) {
-            System.out.println("Error: user with given id does not exist");
-            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (java.lang.ArithmeticException ae) {
-            System.out.println("No reviews found for this user");
-            responseEntity = new ResponseEntity<>(BAD_REQUEST);
-        }
-
-        return responseEntity;
     }
 }
