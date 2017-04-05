@@ -3,6 +3,7 @@ package com.bayou.managers.impl;
 import com.bayou.converters.ReviewConverter;
 import com.bayou.converters.UserConverter;
 import com.bayou.domains.Review;
+import com.bayou.engines.ReviewEngine;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.ReviewResourceAccessor;
 import com.bayou.ras.impl.UserResourceAccessor;
@@ -36,6 +37,9 @@ public class ReviewManager implements IManager<ReviewView> {
 
     @Autowired
     private UserConverter userConverter;
+
+    @Autowired
+    private ReviewEngine reviewEngine;
 
     public ReviewView get(Long id) throws NotFoundException {
         ReviewView reviewView;
@@ -137,6 +141,18 @@ public class ReviewManager implements IManager<ReviewView> {
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The review with ID:" + id + " does not exist in the database");
         }
+    }
+
+    public int getUserAverageRating(Long id) {
+
+        int avgRating = -1;
+        try {
+          avgRating = reviewEngine.avgUserRating(getAllByReviewee(id)); //pass in list of reviews belong to given user id
+        } catch (NotFoundException e) {
+            throw new javax.ws.rs.NotFoundException();
+        }
+
+        return avgRating;
     }
 
     private ReviewView prepare(Review ad) {
