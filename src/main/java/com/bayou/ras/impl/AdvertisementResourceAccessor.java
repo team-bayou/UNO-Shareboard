@@ -53,6 +53,10 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
         return repo.findByCategoryId(id, pageAndSortByIdDesc(page));
     }
 
+    public Integer countByOwner(Long id) {
+        return repo.countByOwner(id);
+    }
+
     @Override
     public Long add(Advertisement entity) {
         return repo.save(entity).getId();

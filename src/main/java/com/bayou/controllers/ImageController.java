@@ -8,15 +8,19 @@ import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Rachel on 3/19/2017.
@@ -36,6 +40,19 @@ public class ImageController {
         try {
             responseEntity = new ResponseEntity<>(manager.getInfo(id), HttpStatus.OK);
         } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Get image info by owner", response = ResponseEntity.class)
+    @RequestMapping(value = "/owner/{id}/info", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    public ResponseEntity<List<ImageInfoView>> getInfoByOwner(@PathVariable("id") Long id) throws NotFoundException {
+        ResponseEntity<List<ImageInfoView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<List<ImageInfoView>>(manager.findByOwner(id), HttpStatus.OK);
+        } catch(NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
@@ -62,7 +79,7 @@ public class ImageController {
 
     @ApiOperation(value = "Add an image", response = ResponseEntity.class)
     @RequestMapping(value = "/upload", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<Long> uploadImage(@RequestParam("description") String desc, @RequestParam("image_data") MultipartFile file) {
+    public ResponseEntity<Long> uploadImage(@RequestParam("description") String desc, @RequestParam("owner") Long owner_id, @RequestParam("image_data") MultipartFile file) {
         ImageView view = new ImageView();
         try {
             view.setImageData(file.getBytes());
@@ -73,10 +90,43 @@ public class ImageController {
         String contentType = file.getContentType();
         if(contentType.lastIndexOf("image/") == 0) {
             view.setImageMimeType(file.getContentType());
+            view.setOwner(owner_id);
         } else {
             return new ResponseEntity<Long>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
         Long id = manager.add(view);
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        ResponseEntity<Long> responseEntity;
+        if (id > 0)
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        else
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Update an image", response = ResponseEntity.class)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity update(@RequestBody ImageView view) { // Image data and MIME type will not be changed
+        ResponseEntity<Long> responseEntity;
+        Long id = -1L;
+        try {
+            id = manager.update(view); //update the image, returns -1 if data is stale
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (javax.ws.rs.NotFoundException e) {  //catches the case of non-existent image
+            System.out.println("Error: requested user does not exist");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        } catch (DataIntegrityViolationException e) {   //catches the case where for example an id is null thus implying a insert
+            System.out.println("Error: can not determine if insert or update");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.BAD_REQUEST);
+        }
+        if (id == -1L) {    //catches the case if there was an attempt to update outdated information
+            System.out.println("Error: stale data detected");
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
+
+    @ExceptionHandler(MissingServletRequestPartException.class)
+    public ResponseEntity<Long> handleMissingParams(MissingServletRequestPartException ex) {
+        return new ResponseEntity<Long>(-1L, HttpStatus.BAD_REQUEST);
     }
 }

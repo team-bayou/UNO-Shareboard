@@ -25,6 +25,7 @@ public class AdvertisementConverter {
         view.setAdType(domain.getAdType());
         view.setPrice(domain.getPrice());
         view.setTradeItem(domain.getTradeItem());
+        view.setImageIDs(domain.getImageIDs());
 
         return view;
     }
@@ -41,6 +42,7 @@ public class AdvertisementConverter {
         domain.setAdType(view.getAdType());
         domain.setPrice(view.getPrice());
         domain.setTradeItem(view.getTradeItem());
+        domain.setImageIDs(view.getImageIDs());
 
         return domain;
     }
@@ -56,6 +58,7 @@ public class AdvertisementConverter {
         if(updatedAdState.getAdType() == null)  updatedAdState.setAdType(oldAdState.getAdType());
         if(updatedAdState.getPrice() == null)  updatedAdState.setPrice(oldAdState.getPrice());
         if(updatedAdState.getTradeItem() == null)  updatedAdState.setTradeItem(oldAdState.getTradeItem());
+        if(updatedAdState.getImageIDs() == null) updatedAdState.setImageIDs(oldAdState.getImageIDs());
 
         return updatedAdState;
     }
