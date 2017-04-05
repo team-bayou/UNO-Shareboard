@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "301376e8-c87f-537d-c428-2bdb9b5af21c",
+		"_postman_id": "ce52221e-6202-d0c0-3e02-1c6278ad804b",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -505,7 +505,8 @@
 									"key": "image_data",
 									"type": "file",
 									"enabled": true,
-									"src": "258859_183827928338341_7827720_o.jpg"
+									"src": "258859_183827928338341_7827720_o.jpg",
+									"value": ""
 								}
 							]
 						},
@@ -740,6 +741,35 @@
 					"response": []
 				},
 				{
+					"name": "Get Avg Reviewee Rating",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "authShareboard",
+								"password": "91b0cc59-c527-4c16-91f5-3ffc8228ffe4",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee_rating/34",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets the average rating of a given user with their id"
+					},
+					"response": []
+				},
+				{
 					"name": "Add Review",
 					"request": {
 						"url": "{{unoshareboard.api.host}}/service/v1/reviews/add",
@@ -954,7 +984,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets a list of all users"
 					},
 					"response": []
