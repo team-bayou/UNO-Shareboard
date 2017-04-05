@@ -12,8 +12,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -93,7 +95,12 @@ public class ImageController {
             return new ResponseEntity<Long>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
         Long id = manager.add(view);
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        ResponseEntity<Long> responseEntity;
+        if (id > 0)
+            responseEntity = new ResponseEntity<>(id, HttpStatus.OK);
+        else
+            responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
+        return responseEntity;
     }
 
     @ApiOperation(value = "Update an image", response = ResponseEntity.class)
@@ -116,5 +123,10 @@ public class ImageController {
             responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
         }
         return responseEntity;
+    }
+
+    @ExceptionHandler(MissingServletRequestPartException.class)
+    public ResponseEntity<Long> handleMissingParams(MissingServletRequestPartException ex) {
+        return new ResponseEntity<Long>(-1L, HttpStatus.BAD_REQUEST);
     }
 }
