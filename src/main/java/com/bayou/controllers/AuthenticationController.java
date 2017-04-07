@@ -71,14 +71,31 @@ public class AuthenticationController {
     @RequestMapping(value = "/forgotPass", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Integer> forgotPassword(@RequestBody VerifyUserView verifyUserView) {
         ResponseEntity responseEntity;
-        UserView userView;
 
         try {
-            userView = userManager.getByEmail(verifyUserView.getEmail());
-
             userManager.forgotPassword(verifyUserView);
+            responseEntity = new ResponseEntity(HttpStatus.OK);
         } catch (NotFoundException nfe) {
             responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
-        } catch
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Reset password", response = ResponseEntity.class)
+    @RequestMapping(value = "/resetPass", method = RequestMethod.POST)
+    public ResponseEntity<Integer> resetPassword(@RequestBody VerifyUserView verifyUserView) {
+        ResponseEntity responseEntity;
+
+        try {
+            userManager.resetPassword(verifyUserView);
+            responseEntity = new ResponseEntity(HttpStatus.OK);
+        } catch (NotFoundException nfe) {
+            responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+        } catch (VerificationException ve) {
+            responseEntity = new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        return responseEntity;
     }
 }

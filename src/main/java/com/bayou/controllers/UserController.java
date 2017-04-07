@@ -123,4 +123,20 @@ public class UserController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(value = "Is verification code not null?", response = ResponseEntity.class)
+    @RequestMapping(value = "/{email:.+}/codeCheck", method = RequestMethod.GET)
+    public ResponseEntity isVerificationCodeNotNull(@PathVariable("email") String email) {
+        ResponseEntity responseEntity;
+        UserView userView;
+
+        try {
+            userView = manager.getByEmail(email);
+            Integer verificationCode = userView.getVerificationCode();
+            responseEntity = new ResponseEntity(verificationCode != null ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+        } catch (NotFoundException nfe) {
+            responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        return responseEntity;
+    }
 }

@@ -3,6 +3,7 @@ package com.bayou.managers.impl;
 import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UserConverter;
 import com.bayou.domains.User;
+import com.bayou.engines.UserEngine;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UserResourceAccessor;
@@ -15,8 +16,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.NotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by joshuaeaton on 1/31/17.
@@ -31,6 +34,9 @@ public class UserManager implements IManager<UserView> {
 
     @Autowired
     private LoginConverter loginConverter;
+
+    @Autowired
+    private UserEngine userEngine;
 
     public LoginView login(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
         UserView returnedUser;
@@ -156,9 +162,28 @@ public class UserManager implements IManager<UserView> {
     public void forgotPassword(VerifyUserView verifyUserView) throws NotFoundException {
         UserView userView = getByEmail(verifyUserView.getEmail());
 
-
         Random randomGen = new Random();
         userView.setVerificationCode(Math.abs(randomGen.nextInt()));
+
+        try {   //try to send the verification code to the email of the user
+            userEngine.sendVerificationCode(userView.getVerificationCode().toString(), userView.getEmail());
+            update(userView);
+        } catch (IOException e) {   //catch a IO exception if an issue occured performing this operation
+            System.err.println("Email could not be sent due to:\n\t" + e.getMessage());
+        }
+
     }
 
+    public void resetPassword(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
+        UserView userView = getByEmail(verifyUserView.getEmail());;
+
+        if(verifyUserView != null && verifyUserView.getEnteredVerificationCode().equals(userView.getVerificationCode())) {
+            userView.setPasswordSalt(verifyUserView.getEnteredPasswordSalt());
+            userView.setPasswordHash(verifyUserView.getEnteredPasswordHash());
+            userView.setVerificationCode(null);
+            update(userView);
+        } else {
+            throw new VerificationException("Verification code does not match.");
+        }
+    }
 }
