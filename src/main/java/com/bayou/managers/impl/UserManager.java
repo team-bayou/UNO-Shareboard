@@ -153,4 +153,12 @@ public class UserManager implements IManager<UserView> {
         }
     }
 
+    public void forgotPassword(VerifyUserView verifyUserView) throws NotFoundException {
+        UserView userView = getByEmail(verifyUserView.getEmail());
+
+
+        Random randomGen = new Random();
+        userView.setVerificationCode(Math.abs(randomGen.nextInt()));
+    }
+
 }

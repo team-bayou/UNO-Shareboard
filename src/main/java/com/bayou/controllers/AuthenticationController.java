@@ -4,6 +4,7 @@ import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.LoginView;
+import com.bayou.views.UserView;
 import com.bayou.views.VerifyUserView;
 import io.swagger.annotations.ApiOperation;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.NotFoundException;
+import java.util.Random;
 
 /**
  * Created by Rachel on 2/21/2017.
@@ -63,5 +65,20 @@ public class AuthenticationController {
         }
 
         return responseEntity;
+    }
+
+    @ApiOperation(value = "Forgot password", response = ResponseEntity.class)
+    @RequestMapping(value = "/forgotPass", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
+    public ResponseEntity<Integer> forgotPassword(@RequestBody VerifyUserView verifyUserView) {
+        ResponseEntity responseEntity;
+        UserView userView;
+
+        try {
+            userView = userManager.getByEmail(verifyUserView.getEmail());
+
+            userManager.forgotPassword(verifyUserView);
+        } catch (NotFoundException nfe) {
+            responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+        } catch
     }
 }

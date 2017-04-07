@@ -6,6 +6,7 @@ package com.bayou.views;
 public class VerifyUserView extends UserView {
 
     private String enteredPasswordHash;
+    private String enteredPasswordSalt;
     private Integer enteredVerificationCode;
 
     public String getEnteredPasswordHash() {
@@ -22,6 +23,14 @@ public class VerifyUserView extends UserView {
 
     public void setEnteredVerificationCode(Integer enteredVerificationCode) {
         this.enteredVerificationCode = enteredVerificationCode;
+    }
+
+    public String getEnteredPasswordSalt() {
+        return enteredPasswordSalt;
+    }
+
+    public void setEnteredPasswordSalt(String enteredPasswordSalt) {
+        this.enteredPasswordSalt = enteredPasswordSalt;
     }
 
     public boolean login() {

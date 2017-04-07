@@ -49,6 +49,9 @@ public class User extends BaseEntity implements Persistable<Long> {
     @Column(name = "image_id", columnDefinition = "INTEGER")
     private Integer imageId;
 
+    @Column(name = "verification_code", columnDefinition = "INTEGER")
+    private Integer verificationCode;
+
     public String getAccountName() {
         return accountName;
     }
@@ -135,6 +138,14 @@ public class User extends BaseEntity implements Persistable<Long> {
 
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
+    }
+
+    public Integer getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(Integer verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     @Override
