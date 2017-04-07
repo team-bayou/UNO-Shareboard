@@ -96,6 +96,14 @@ public class AuthenticationControllerTests {
     @Test
     public void testVerify() {
         VerifyUserView view = Mocks.createVerifyUserView(unverifiedUserView);
+        UnverifiedUserView unvView;
+
+        ResponseEntity<UnverifiedUserView> getCodeEntity = rest.postForEntity(
+                Server.url() + "/unverifiedUser/email/" + view.getEmail(), headers,
+                UnverifiedUserView.class);
+        unvView = getCodeEntity.getBody();
+
+        view.setEnteredVerificationCode(unvView.getVerificationCode());
 
         // Verify user.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
