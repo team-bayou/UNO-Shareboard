@@ -103,6 +103,7 @@ public class AuthenticationControllerTests {
                 UnverifiedUserView.class);
         unvView = getCodeEntity.getBody();
 
+        view.setId(unvView.getId());
         view.setEnteredVerificationCode(unvView.getVerificationCode());
 
         // Verify user.
