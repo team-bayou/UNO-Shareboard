@@ -99,7 +99,7 @@ public class AuthenticationControllerTests {
         UnverifiedUserView unvView;
 
         ResponseEntity<UnverifiedUserView> getCodeEntity = rest.postForEntity(
-                Server.url() + "/unverifiedUser/email/" + view.getEmail() + "/", headers,
+                Server.url() + "/unverified_users/email/" + view.getEmail() + "/", headers,
                 UnverifiedUserView.class);
         unvView = getCodeEntity.getBody();
         assertEquals(HttpStatus.OK, getCodeEntity.getStatusCode());
