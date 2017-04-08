@@ -102,6 +102,8 @@ public class AuthenticationControllerTests {
                 Server.url() + "/unverifiedUser/email/" + view.getEmail() + "/", headers,
                 UnverifiedUserView.class);
         unvView = getCodeEntity.getBody();
+        assertEquals(HttpStatus.OK, getCodeEntity.getStatusCode());
+        assertTrue(getCodeEntity.getBody() != null);
 
         view.setId(unvView.getId());
         view.setEnteredVerificationCode(unvView.getVerificationCode());
