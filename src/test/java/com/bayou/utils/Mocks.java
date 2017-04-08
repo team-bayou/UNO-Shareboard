@@ -37,7 +37,7 @@ public class Mocks {
         view.setPasswordHash("jjjjjjj3                                                                                                                        ");
         view.setPasswordSalt("hhhhhhh3                                                        ");
         view.setEmail("jleaton" + rand.nextInt() + "@uno.edu");
-        view.setVerificationCode(46555038);
+        //view.setVerificationCode(46555038);
 
         return view;
     }

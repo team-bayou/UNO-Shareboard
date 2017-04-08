@@ -54,6 +54,7 @@ public class AuthenticationControllerTests {
                 Server.url() + UNVERIFIED_USER_URL + "/add",
                 new HttpEntity<>(unverifiedUserView, headers), Long.class);
         unverifiedUserView.setId(entity.getBody());
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
 
     @After
@@ -99,7 +100,7 @@ public class AuthenticationControllerTests {
         UnverifiedUserView unvView;
 
         ResponseEntity<UnverifiedUserView> getCodeEntity = rest.postForEntity(
-                Server.url() + UNVERIFIED_USER_URL + "/email/" + view.getEmail() + "/", headers,
+                Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId(), headers,
                 UnverifiedUserView.class);
         unvView = getCodeEntity.getBody();
         assertEquals(HttpStatus.OK, getCodeEntity.getStatusCode());
