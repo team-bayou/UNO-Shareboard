@@ -99,8 +99,8 @@ public class AuthenticationControllerTests {
         VerifyUserView view = Mocks.createVerifyUserView(unverifiedUserView);
         UnverifiedUserView unvView;
 
-        ResponseEntity<UnverifiedUserView> getCodeEntity = rest.postForEntity(
-                Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId(), headers,
+        ResponseEntity<UnverifiedUserView> getCodeEntity = rest.exchange(
+                Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId(), HttpMethod.GET, new HttpEntity<>(headers),
                 UnverifiedUserView.class);
         unvView = getCodeEntity.getBody();
         assertEquals(HttpStatus.OK, getCodeEntity.getStatusCode());
