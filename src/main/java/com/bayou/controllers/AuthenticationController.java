@@ -76,7 +76,7 @@ public class AuthenticationController {
             userManager.forgotPassword(verifyUserView);
             responseEntity = new ResponseEntity(HttpStatus.OK);
         } catch (NotFoundException nfe) {
-            responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+            responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
 
         return responseEntity;
@@ -91,7 +91,7 @@ public class AuthenticationController {
             userManager.resetPassword(verifyUserView);
             responseEntity = new ResponseEntity(HttpStatus.OK);
         } catch (NotFoundException nfe) {
-            responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+            responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (VerificationException ve) {
             responseEntity = new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }

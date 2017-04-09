@@ -134,7 +134,7 @@ public class UserController {
             Integer verificationCode = userView.getVerificationCode();
             responseEntity = new ResponseEntity(verificationCode != null ? HttpStatus.OK : HttpStatus.NO_CONTENT);
         } catch (NotFoundException nfe) {
-            responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+            responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
 
         return responseEntity;
