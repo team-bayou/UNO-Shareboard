@@ -130,7 +130,7 @@ public class AuthenticationControllerTests {
         assertEquals(HttpStatus.OK, resetRespEntity.getStatusCode());
 
         ResponseEntity<Integer> checkVerifNullEntity = rest.exchange(Server.url() + USER_URL +
-                "/" + email.getEmail() + "/codeCheck", HttpMethod.GET, new HttpEntity<>(headers),
+                "/" + userView.getEmail() + "/codeCheck", HttpMethod.GET, new HttpEntity<>(headers),
                 Integer.class);
         assertEquals(HttpStatus.OK, checkVerifNullEntity.getStatusCode());
 
