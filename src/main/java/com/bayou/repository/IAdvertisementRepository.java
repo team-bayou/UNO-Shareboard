@@ -25,17 +25,5 @@ public interface IAdvertisementRepository extends PagingAndSortingRepository<Adv
 
     Page<Advertisement> findByCategoryId(Long id, Pageable pageable);
 
-    Page<Advertisement> findByCategoryIdAndAdType(Long id, AdType adType, Pageable pageable);
-
-    Page<Advertisement> findByCategoryIds(List<Long> ids, Pageable pageable);
-
-    Page<Advertisement> findByCategoryIdsAndAdType(List<Long> ids, AdType adType, Pageable pageable);
-
-    Page<Advertisement> findByCategoryIdsAndTitle(List<Long> ids, String title, Pageable pageable);
-
-    Page<Advertisement> findByCategoryIdsAndAdTypeAndTitleContainingIgnoreCase(List<Long> ids, AdType adType, String title, Pageable pageable);
-
-    Page<Advertisement> findByCategoryIdsAndAdTypeAndDescriptionContainingIgnoreCase(List<Long> ids, AdType adType, String description, Pageable pageable);
-
     Integer countByOwner(Long id);
 }
