@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 /**
  * Created by rachelguillory on 2/16/2017.
  */
@@ -47,6 +49,8 @@ public class UnverifiedUserController {
     @ApiOperation(value = "Add an unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> add(@RequestBody UnverifiedUserView userView) {
+        Random randomGen = new Random();
+        userView.setVerificationCode(Math.abs(randomGen.nextInt()));
         Long id = manager.add(userView);
 
         ResponseEntity<Long> responseEntity;

@@ -8,6 +8,7 @@ import com.bayou.views.UserView;
 import com.bayou.views.VerifyUserView;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,7 @@ public class AuthenticationControllerTests {
                 Server.url() + UNVERIFIED_USER_URL + "/add",
                 new HttpEntity<>(unverifiedUserView, headers), Long.class);
         unverifiedUserView.setId(entity.getBody());
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
 
     @After
@@ -96,6 +98,18 @@ public class AuthenticationControllerTests {
     @Test
     public void testVerify() {
         VerifyUserView view = Mocks.createVerifyUserView(unverifiedUserView);
+        UnverifiedUserView unvView;
+
+        ResponseEntity<UnverifiedUserView> getCodeEntity = rest.exchange(
+                Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), UnverifiedUserView.class);
+
+        unvView = getCodeEntity.getBody();
+        assertEquals(HttpStatus.OK, getCodeEntity.getStatusCode());
+        assertTrue(getCodeEntity.getBody() != null);
+
+        view.setId(unvView.getId());
+        view.setEnteredVerificationCode(unvView.getVerificationCode());
 
         // Verify user.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -104,5 +118,49 @@ public class AuthenticationControllerTests {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    @Ignore
+    public void testResetAndForgotPassword() {
+        UserView resultView;
+        VerifyUserView email = new VerifyUserView();
+        email.setEmail(userView.getEmail());
+
+        ResponseEntity<Integer> resetRespEntity = rest.postForEntity(Server.url()
+            + RESOURCE_URL + "/forgotPass",  new HttpEntity<>(email, headers), Integer.class);
+        assertEquals(HttpStatus.OK, resetRespEntity.getStatusCode());
+
+        ResponseEntity<Integer> checkVerifNullEntity = rest.exchange(Server.url() + USER_URL +
+                "/" + userView.getEmail() + "/codeCheck", HttpMethod.GET, new HttpEntity<>(headers),
+                Integer.class);
+        assertEquals(HttpStatus.OK, checkVerifNullEntity.getStatusCode());
+
+        ResponseEntity<UserView> getUserEntity = rest.exchange(Server.url() + USER_URL +
+                "/email/" + email.getEmail(), HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
+        assertEquals(HttpStatus.OK, getUserEntity.getStatusCode());
+        resultView = getUserEntity.getBody();
+        assertTrue(resultView.getVerificationCode() != null);
+
+        email.setEnteredVerificationCode(resultView.getVerificationCode());
+        email.setEnteredPasswordHash("abc123");
+        email.setEnteredPasswordSalt("123abc");
+
+        ResponseEntity<Integer> resetPassEntity = rest.postForEntity(Server.url() + RESOURCE_URL +
+            "/resetPass", new HttpEntity<>(email, headers), Integer.class);
+        assertEquals(HttpStatus.OK, resetPassEntity.getStatusCode());
+
+        checkVerifNullEntity = rest.exchange(Server.url() + USER_URL +
+                "/" + email.getEmail() + "/codeCheck", HttpMethod.GET, new HttpEntity<>(headers),
+                Integer.class);
+        assertEquals(HttpStatus.NO_CONTENT, checkVerifNullEntity.getStatusCode());
+
+        getUserEntity = rest.exchange(Server.url() + USER_URL +
+                "/" + userView.getId(), HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
+        assertEquals(HttpStatus.OK, getUserEntity.getStatusCode());
+        resultView = getUserEntity.getBody();
+        assertTrue(resultView.getVerificationCode() == null);
+        assertEquals(email.getPasswordHash(), resultView.getPasswordHash());
+        assertEquals(email.getPasswordSalt(), resultView.getPasswordSalt());
     }
 }

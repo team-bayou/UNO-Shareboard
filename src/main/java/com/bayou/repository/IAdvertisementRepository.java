@@ -1,10 +1,13 @@
 package com.bayou.repository;
 
 import com.bayou.domains.Advertisement;
+import com.bayou.types.AdType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * File: IAdvertisementRepository

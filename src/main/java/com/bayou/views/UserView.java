@@ -17,6 +17,7 @@ public class UserView extends BaseEntityView {
     private String facebookId;
     private String twitterHandle;
     private Integer imageId;
+    private Integer verificationCode;
 
     public String getAccountName() {
         return accountName;
@@ -104,6 +105,14 @@ public class UserView extends BaseEntityView {
 
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
+    }
+
+    public Integer getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(Integer verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     @Override

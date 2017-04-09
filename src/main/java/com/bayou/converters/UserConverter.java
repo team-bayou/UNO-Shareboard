@@ -24,6 +24,7 @@ public class UserConverter {
         view.setFacebookId(domain.getFacebookId());
         view.setTwitterHandle(domain.getTwitterHandle());
         view.setImageId(domain.getImageId());
+        view.setVerificationCode(domain.getVerificationCode());
 
         return view;    //return the View version of the given domain Object
     }
@@ -42,6 +43,7 @@ public class UserConverter {
         domain.setFacebookId(view.getFacebookId());
         domain.setTwitterHandle(view.getTwitterHandle());
         domain.setImageId(view.getImageId());
+        domain.setVerificationCode(view.getVerificationCode());
 
         return domain;  //return the Domain version of the given view Object
     }
