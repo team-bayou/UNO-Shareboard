@@ -61,7 +61,7 @@ public class AuthenticationController {
         } catch (VerificationException e) {
             LoginView errorView = new LoginView();
             errorView.setErrorMessage(e.getMessage());
-            responseEntity = new ResponseEntity<>(errorView, HttpStatus.UNAUTHORIZED);
+            responseEntity = new ResponseEntity<>(errorView, HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;
@@ -93,7 +93,7 @@ public class AuthenticationController {
         } catch (NotFoundException nfe) {
             responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (VerificationException ve) {
-            responseEntity = new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            responseEntity = new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;
