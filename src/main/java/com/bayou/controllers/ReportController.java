@@ -1,5 +1,6 @@
 package com.bayou.controllers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.managers.impl.ReportManager;
 import com.bayou.views.ReportView;
 import io.swagger.annotations.ApiOperation;
@@ -27,13 +28,20 @@ public class ReportController {
     @RequestMapping(value = "/submit", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> submit(@RequestBody ReportView view) {
 
+        ResponseEntity responseEntity;
+
         try {
             manager.submitReportEmail(view);
-        } catch (IOException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        } catch (ValidationException ve) {
+            responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        catch (IOException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             e.printStackTrace();
         }
 
-        ResponseEntity responseEntity = new ResponseEntity<>(HttpStatus.OK);
+
 
         return responseEntity;
     }

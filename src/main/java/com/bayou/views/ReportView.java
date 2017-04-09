@@ -5,25 +5,24 @@ package com.bayou.views;
  */
 public class ReportView  {
 
+
+
     private String reportingUserEmail;
     private String reportingUserName;
     private String offendingUser;
     private String comments;
     private Long advertisementId;
 
-    public String getEmail() {
-        return reportingUserEmail;
-    }
 
-    public void setEmail(String email) {
-        this.reportingUserEmail = email;
-    }
+    public String getReportingUserEmail() { return reportingUserEmail; }
 
-    public String getReportingUser() {
+    public void setReportingUserEmail(String reportingUserEmail) { this.reportingUserEmail = reportingUserEmail; }
+
+    public String getReportingUserName() {
         return reportingUserName;
     }
 
-    public void setReportingUser(String reportingUser) {
+    public void setReportingUserName(String reportingUser) {
         this.reportingUserName = reportingUser;
     }
 

@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "7de6ec8b-e89b-d303-fd91-7b91bd329fd8",
+		"_postman_id": "c5a5c739-f308-ed30-a95d-7b72811cb763",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -686,6 +686,37 @@
 							"raw": "{\n  \"id\": 1,\n  \"description\": \"test3\",\n  \"imageMimeType\": \"image/gif\",\n  \"owner\": 1,\n  \"order\": 2\n}"
 						},
 						"description": "Update Image metadata.  MIME type and imageData field changes will be ignored."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API - Report",
+			"description": "Handles bug and ad reports",
+			"item": [
+				{
+					"name": "Submit Report",
+					"request": {
+						"url": "localhost:8090/service/v1/reports/submit",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"advertisementId\": \"1\",\n\t\"reportingUserEmail\" : \"jleaton@uno.edu\",\n\t\"offendingUser\": \"Bob\",\n\t\"comments\": \"This is a offense report\"\n}"
+						},
+						"description": "Submits a bug or ad report which will be emailed to the team email."
 					},
 					"response": []
 				}
