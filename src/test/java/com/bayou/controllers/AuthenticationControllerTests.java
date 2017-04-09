@@ -135,7 +135,7 @@ public class AuthenticationControllerTests {
         assertEquals(HttpStatus.OK, checkVerifNullEntity.getStatusCode());
 
         ResponseEntity<UserView> getUserEntity = rest.exchange(Server.url() + USER_URL +
-                "/" + userView.getId(), HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
+                "/email/" + email.getEmail(), HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
         assertEquals(HttpStatus.OK, getUserEntity.getStatusCode());
         resultView = getUserEntity.getBody();
         assertTrue(resultView.getVerificationCode() != null);
@@ -158,7 +158,7 @@ public class AuthenticationControllerTests {
         assertEquals(HttpStatus.OK, getUserEntity.getStatusCode());
         resultView = getUserEntity.getBody();
         assertTrue(resultView.getVerificationCode() == null);
-        assertEquals("abc123", resultView.getPasswordHash());
-        assertEquals("123abc", resultView.getPasswordSalt());
+        assertEquals(email.getPasswordHash(), resultView.getPasswordHash());
+        assertEquals(email.getPasswordSalt(), resultView.getPasswordSalt());
     }
 }
