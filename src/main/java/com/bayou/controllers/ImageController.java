@@ -60,7 +60,7 @@ public class ImageController {
     }
 
     @ApiOperation(value = "Get a image by id", response = ResponseEntity.class)
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public void getById(@PathVariable("id") Long id, HttpServletResponse response) throws NotFoundException {
         ImageView view;
         try {
@@ -69,10 +69,10 @@ public class ImageController {
             response.setContentType(MediaType.parseMediaType(view.getImageMimeType()).toString());
             IOUtils.copy(in, response.getOutputStream());
         } catch (NotFoundException e) {
-            response.setStatus(404); //HttpStatus.NOT_FOUND);
+            response.setStatus(204); //HttpStatus.NO_CONTENT);
             return;
         } catch (IOException ioe) {
-            response.setStatus(404);//HttpState.NOT_FOUND
+            response.setStatus(400);//HttpState.BAD_REQUEST
             return;
         }
     }
