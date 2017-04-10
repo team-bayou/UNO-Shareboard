@@ -124,6 +124,20 @@ public class AdvertisementController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Get a list of advertisements in the list of categories by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/categoryList/page/{page}/{ids}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getCategoryAdvertisements(@RequestParam("ids") Long[] ids,
+                                                                             @RequestParam("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByCategories(ids, page), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @ApiOperation(value = "Add an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Long> add(@RequestBody AdvertisementView view) {

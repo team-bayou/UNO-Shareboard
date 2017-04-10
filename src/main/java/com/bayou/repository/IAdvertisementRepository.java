@@ -25,5 +25,7 @@ public interface IAdvertisementRepository extends PagingAndSortingRepository<Adv
 
     Page<Advertisement> findByCategoryId(Long id, Pageable pageable);
 
+    Page<Advertisement> findByCategoryIdIn(Long[] ids, Pageable pageable);
+
     Integer countByOwner(Long id);
 }

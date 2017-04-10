@@ -114,6 +114,15 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAllByCategories(Long[] ids, Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByCategoryIn(ids, page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public Integer countByOwner(Long ownerID) {
         return advertisementRas.countByOwner(ownerID);
     }

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.bayou.Constants.MAX_RESULTS;
 
 /**
@@ -51,6 +53,10 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
 
     public Iterable<Advertisement> findByCategory(Long id, Integer page) {
         return repo.findByCategoryId(id, pageAndSortByIdDesc(page));
+    }
+
+    public Iterable<Advertisement> findByCategoryIn(Long[] ids, Integer page) {
+        return repo.findByCategoryIdIn(ids, pageAndSortByIdDesc(page));
     }
 
     public Integer countByOwner(Long id) {
