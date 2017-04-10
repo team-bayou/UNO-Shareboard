@@ -60,7 +60,7 @@ public class ImageController {
     }
 
     @ApiOperation(value = "Get a image by id", response = ResponseEntity.class)
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public void getById(@PathVariable("id") Long id, HttpServletResponse response) throws NotFoundException {
         ImageView view;
         try {
