@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "afbdfb83-06e5-b49f-0f86-70bfe90b056f",
+		"_postman_id": "105e8725-aa85-875d-8b2f-34d8149c1704",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -293,6 +293,31 @@
 							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
 						},
 						"description": "Count of User's Advertisments"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Advertisements",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/search?page=1&title=ad&description=ad&categoryId=1&adType=offer",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dGVzdDp0ZXN0",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"seek\"\n}"
+						},
+						"description": "Search advertisements, page is required.  Title, description, categoryId, and adType are optional.  Multiple categoryIds can be supplied.  Title/description are string matching, not necessarily full match, ignoring case."
 					},
 					"response": []
 				}
