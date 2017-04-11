@@ -14,10 +14,10 @@ public class ReportEngine {
     public void emailBugReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
-                new Email("shareboard_User_"+view.getReportingUserId()), //set who the email is from
+                new Email("shareboard_user"+"@shareboard.app"), //set who the email is from
                 "User Submitted Bug Report", //set the subject of the email
                 new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
-                new Content("text/plain", "Comments: " + view.getComments()) //set the content of the email
+                new Content("text/plain", "Reporting User ID: " + view.getReportingUserId()+ "\nComments: " + view.getComments()) //set the content of the email
         );
 
         send(mail);
@@ -26,10 +26,10 @@ public class ReportEngine {
     public void emailAdReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
-                new Email("shareboard_User_"+view.getReportingUserId()), //set who the email is from
+                new Email("shareboard_user"+"@shareboard.app"), //set who the email is from
                 "User Submitted Ad Report", //set the subject of the email
                 new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
-                new Content("text/plain", "Ad ID: "+view.getAdvertisementId()+
+                new Content("text/plain", "Reporting User ID: " + view.getReportingUserId()+"\nAd ID: "+view.getAdvertisementId()+
                         "\nReported User ID: "+ view.getOffendingUserId()+ "\nComments: " + view.getComments()//set the content of the email
                 ));
 
@@ -39,10 +39,10 @@ public class ReportEngine {
     public void emailUserReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
-                new Email("shareboard_User_"+view.getReportingUserId()), //set who the email is from
-                "User Submitted Ad Report", //set the subject of the email
+                new Email("shareboard_user"+view.getReportingUserId()+"@shareboard.app"), //set who the email is from
+                "User Submitted User Report", //set the subject of the email
                 new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
-                new Content("text/plain", "Reported User ID: "+ view.getOffendingUserId()+ "\nComments: " + view.getComments() ));
+                new Content("text/plain", "Reporting User ID: " + view.getReportingUserId()+"\nReported User ID: "+ view.getOffendingUserId()+ "\nComments: " + view.getComments() ));
 
         send(mail);
     }
