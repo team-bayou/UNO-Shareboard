@@ -39,7 +39,7 @@ public class ReportEngine {
     public void emailUserReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
-                new Email("shareboard_user"+view.getReportingUserId()+"@shareboard.app"), //set who the email is from
+                new Email("shareboard_user"+"@shareboard.app"), //set who the email is from
                 "User Submitted User Report", //set the subject of the email
                 new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
                 new Content("text/plain", "Reporting User ID: " + view.getReportingUserId()+"\nReported User ID: "+ view.getOffendingUserId()+ "\nComments: " + view.getComments() ));
