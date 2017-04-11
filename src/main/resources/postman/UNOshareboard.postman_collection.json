@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "105e8725-aa85-875d-8b2f-34d8149c1704",
+		"_postman_id": "7de6ec8b-e89b-d303-fd91-7b91bd329fd8",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -240,7 +240,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
+							"raw": ""
 						},
 						"description": "Adds an image to an advertisement, ad_id/image_id"
 					},
@@ -265,7 +265,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
+							"raw": ""
 						},
 						"description": "Removes an image from an advertisement, ad_id/image_id"
 					},
@@ -617,7 +617,7 @@
 				{
 					"name": "Get Image",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/images/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/images/get/1",
 						"method": "GET",
 						"header": [
 							{
