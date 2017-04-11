@@ -3,6 +3,7 @@ package com.bayou.ras.impl;
 import com.bayou.domains.Advertisement;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IAdvertisementRepository;
+import com.bayou.types.AdType;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -57,6 +58,47 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
 
     public Iterable<Advertisement> findByCategoryIn(Long[] ids, Integer page) {
         return repo.findByCategoryIdIn(ids, pageAndSortByIdDesc(page));
+    }
+
+    public Iterable<Advertisement> search(Long[] categoryIds, String title, String desc, AdType type, Integer page) {
+        if(categoryIds != null && categoryIds.length > 0) {
+            if (title == null && desc == null && type == null) {
+                return repo.findByCategoryIdIn(categoryIds, pageAndSortByIdDesc(page));
+            } else if (title != null && desc == null && type == null) {
+                return repo.findByCategoryIdInAndTitleContainingIgnoreCase(categoryIds, title, pageAndSortByIdDesc(page));
+            } else if (title != null && desc != null && type == null) {
+                return repo.findByCategoryIdInAndTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCase(categoryIds, title, desc, pageAndSortByIdDesc(page));
+            } else if (title != null && desc != null && type != null) {
+                return repo.findByCategoryIdInAndTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCaseAndAdType(categoryIds, title, desc, type, pageAndSortByIdDesc(page));
+            } else if (title == null && desc != null && type == null) {
+                return repo.findByCategoryIdInAndDescriptionContainingIgnoreCase(categoryIds, desc, pageAndSortByIdDesc(page));
+            } else if (title == null && desc != null && type != null) {
+                return repo.findByCategoryIdInAndDescriptionContainingIgnoreCaseAndAdType(categoryIds, desc, type, pageAndSortByIdDesc(page));
+            } else if (title != null && desc == null && type != null) {
+                return repo.findByCategoryIdInAndTitleContainingIgnoreCaseAndAdType(categoryIds, title, type, pageAndSortByIdDesc(page));
+            } else if (title == null && desc == null && type != null) {
+                return repo.findByCategoryIdInAndAdType(categoryIds, type, pageAndSortByIdDesc(page));
+            }
+        } else {
+            if (title == null && desc == null && type == null) {
+                return repo.findAll(pageAndSortByIdDesc(page));
+            } else if (title != null && desc == null && type == null) {
+                return repo.findByTitleContainingIgnoreCase(title, pageAndSortByIdDesc(page));
+            } else if (title != null && desc != null && type == null) {
+                return repo.findByTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCase(title, desc, pageAndSortByIdDesc(page));
+            } else if (title != null && desc != null && type != null) {
+                return repo.findByTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCaseAndAdType(title, desc, type, pageAndSortByIdDesc(page));
+            } else if (title == null && desc != null && type == null) {
+                return repo.findByDescriptionContainingIgnoreCase(desc, pageAndSortByIdDesc(page));
+            } else if (title == null && desc != null && type != null) {
+                return repo.findByDescriptionContainingIgnoreCaseAndAdType(desc, type, pageAndSortByIdDesc(page));
+            } else if (title != null && desc == null && type != null) {
+                return repo.findByTitleContainingIgnoreCaseAndAdType(title, type, pageAndSortByIdDesc(page));
+            } else if (title == null && desc == null && type != null) {
+                return repo.findByAdType(type, pageAndSortByIdDesc(page));
+            }
+        }
+        return null;
     }
 
     public Integer countByOwner(Long id) {
