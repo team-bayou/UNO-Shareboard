@@ -21,7 +21,7 @@ public class ReportEngine {
 
     private void constructMessageData(ReportView view) {
 
-        if(reportingUserName != null) {
+        if(view.getReportingUserName() != null) {
             reportingUserName = "Reporter Username: " + view.getReportingUserName();
         } else {
             reportingUserName = "";
