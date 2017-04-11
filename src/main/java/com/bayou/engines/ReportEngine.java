@@ -3,7 +3,6 @@ package com.bayou.engines;
 import com.bayou.views.ReportView;
 import com.sendgrid.*;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 
 /**
@@ -12,42 +11,13 @@ import java.io.IOException;
 @Component
 public class ReportEngine {
 
-
-    private String reportingUserEmail;
-    private String reportingUserName;
-    private String offendingUserId;
-    private String comments;
-    private Long advertisementId;
-
-    private void constructMessageData(ReportView view) {
-
-        if(view.getReportingUserName() != null) {
-            reportingUserName = "Reporter Username: " + view.getReportingUserName();
-        } else {
-            reportingUserName = "";
-        }
-        if(view.getAdvertisementId() != null) {
-            advertisementId = view.getAdvertisementId();
-        }
-        if(view.getOffendingUserId() != null) {
-            offendingUserId = "Reported User ID: " + view.getOffendingUserId();
-        }
-
-        /*Only two variables required when doing a bug report*/
-        reportingUserEmail = "Reporting User Email: " + view.getReportingUserEmail();
-        comments = "Comments: " + view.getComments();
-
-    }
-
     public void emailBugReport(ReportView view) throws IOException {
 
-        constructMessageData(view); //initializes the variables with data from the report
-
         Mail mail = new Mail(
-                new Email(view.getReportingUserEmail()), //set who the email is from
+                new Email("shareboard_User_"+view.getReportingUserId()), //set who the email is from
                 "User Submitted Bug Report", //set the subject of the email
                 new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
-                new Content("text/plain", reportingUserName +"\n"+ reportingUserEmail+"'s\n" +"\n"+ comments) //set the content of the email
+                new Content("text/plain", "Comments: " + view.getComments()) //set the content of the email
         );
 
         send(mail);
@@ -55,17 +25,24 @@ public class ReportEngine {
 
     public void emailAdReport(ReportView view) throws IOException {
 
-        constructMessageData(view); //initializes the variables with data from the report
-
         Mail mail = new Mail(
-                new Email(view.getReportingUserEmail()), //set who the email is from
+                new Email("shareboard_User_"+view.getReportingUserId()), //set who the email is from
                 "User Submitted Ad Report", //set the subject of the email
                 new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
-                new Content("text/plain",
-                        reportingUserName +"\n"+ reportingUserEmail+"'s" +"\n"+offendingUserId+"\n"+"Advertisement Id: "+
-                                advertisementId+"\n"+
-                                "\n" + comments) //set the content of the email
-        );
+                new Content("text/plain", "Ad ID: "+view.getAdvertisementId()+
+                        "\nReported User ID: "+ view.getOffendingUserId()+ "\nComments: " + view.getComments()//set the content of the email
+                ));
+
+        send(mail);
+    }
+
+    public void emailUserReport(ReportView view) throws IOException {
+
+        Mail mail = new Mail(
+                new Email("shareboard_User_"+view.getReportingUserId()), //set who the email is from
+                "User Submitted Ad Report", //set the subject of the email
+                new Email("unoshareboard.dev@gmail.com"), //set who the email is to be sent to
+                new Content("text/plain", "Reported User ID: "+ view.getOffendingUserId()+ "\nComments: " + view.getComments() ));
 
         send(mail);
     }

@@ -5,33 +5,27 @@ package com.bayou.views;
  */
 public class ReportView  {
 
-
-
-    private String reportingUserEmail;
-    private String reportingUserName;
-    private String offendingUser;
-    private String comments;
+    private Long reportingUserId;
+    private Long offendingUserId;
     private Long advertisementId;
+    private String comments;
 
+    public Long getReportingUserId() { return reportingUserId; }
 
-    public String getReportingUserEmail() { return reportingUserEmail; }
+    public void setReportingUserId(Long reportingUserId) { this.reportingUserId = reportingUserId; }
 
-    public void setReportingUserEmail(String reportingUserEmail) { this.reportingUserEmail = reportingUserEmail; }
-
-    public String getReportingUserName() {
-        return reportingUserName;
+    public Long getOffendingUserId() {
+        return offendingUserId;
     }
 
-    public void setReportingUserName(String reportingUser) {
-        this.reportingUserName = reportingUser;
+    public void setOffendingUserId(Long offendingUserId) { this.offendingUserId = offendingUserId;}
+
+    public Long getAdvertisementId() {
+        return advertisementId;
     }
 
-    public String getOffendingUser() {
-        return offendingUser;
-    }
-
-    public void setOffendingUser(String offendingUser) {
-        this.offendingUser = offendingUser;
+    public void setAdvertisementId(Long advertisementId) {
+        this.advertisementId = advertisementId;
     }
 
     public String getComments() {
@@ -40,14 +34,6 @@ public class ReportView  {
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
-
-    public Long getAdvertisementId() {
-        return advertisementId;
-    }
-
-    public void setAdvertisementId(Long advertisementId) {
-        this.advertisementId = advertisementId;
     }
 
 }

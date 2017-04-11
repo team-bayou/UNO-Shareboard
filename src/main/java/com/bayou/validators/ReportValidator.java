@@ -1,4 +1,4 @@
-package com.bayou.Validators;
+package com.bayou.validators;
 
 import com.bayou.views.ReportView;
 import org.springframework.stereotype.Component;
@@ -11,11 +11,10 @@ public class ReportValidator {
 
 
     public Boolean isValidBugReport(ReportView view) {
-
         if(view.getComments() == null) {
             return false;
         }
-        if(view.getReportingUserEmail() == null) {
+        if(view.getReportingUserId() == null) {
             return false;
         }
 
@@ -26,13 +25,27 @@ public class ReportValidator {
         if(view.getComments() == null) {
             return false;
         }
-        if(view.getReportingUserEmail() == null) {
+        if(view.getReportingUserId() == null) {
             return false;
         }
-        if(view.getOffendingUser() == null) {
+        if(view.getOffendingUserId() == null) {
             return false;
         }
         if(view.getAdvertisementId() == null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public Boolean isValidUserReport(ReportView view) {
+        if(view.getComments() == null) {
+            return false;
+        }
+        if(view.getReportingUserId() == null) {
+            return false;
+        }
+        if(view.getOffendingUserId() == null) {
             return false;
         }
 
