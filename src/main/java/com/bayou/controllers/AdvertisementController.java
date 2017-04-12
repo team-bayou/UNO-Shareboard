@@ -150,6 +150,9 @@ public class AdvertisementController {
                                                           @RequestParam(value = "adType", required = false) String type,
                                                           @RequestParam(value = "page") Integer page) {
         ResponseEntity<List<AdvertisementView>> responseEntity;
+        if(page == null) {
+            return new ResponseEntity<List<AdvertisementView>>(HttpStatus.BAD_REQUEST);
+        }
         try {
             AdType adType = type == null ? null : Enum.valueOf(AdType.class, type);
             List<AdvertisementView> adList = manager.search(categoryIds, title, desc, adType, page);
