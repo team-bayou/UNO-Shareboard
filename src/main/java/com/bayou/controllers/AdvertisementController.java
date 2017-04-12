@@ -1,9 +1,11 @@
 package com.bayou.controllers;
 
 import com.bayou.managers.impl.AdvertisementManager;
+import com.bayou.types.AdType;
 import com.bayou.views.AdvertisementView;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
+import org.apache.http.protocol.HTTP;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -119,6 +121,50 @@ public class AdvertisementController {
             responseEntity = new ResponseEntity<>(manager.getAllByCategory(id, page), HttpStatus.OK);
         } catch (NotFoundException e) {
             responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Get a list of advertisements in the list of categories by page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/categoryList/page/{ids}/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getCategoryAdvertisements(@PathVariable("id") Long[] ids,
+                                                                             @PathVariable("page") Integer page) throws NotFoundException {
+        System.out.println(ids.length);
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            //responseEntity = new ResponseEntity<List<AdvertisementView>>(HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(manager.getAllByCategories(ids, page), HttpStatus.OK);
+        } catch (Exception e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "Search for advertisements", response = ResponseEntity.class)
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> search(@RequestParam(value = "categoryId", required = false) Long[] categoryIds,
+                                                          @RequestParam(value = "title", required = false) String title,
+                                                          @RequestParam(value = "description", required = false) String desc,
+                                                          @RequestParam(value = "adType", required = false) String type,
+                                                          @RequestParam(value = "page") Integer page) {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        if(page == null) {
+            return new ResponseEntity<List<AdvertisementView>>(HttpStatus.BAD_REQUEST);
+        }
+        try {
+            AdType adType = type == null ? null : Enum.valueOf(AdType.class, type);
+            List<AdvertisementView> adList = manager.search(categoryIds, title, desc, adType, page);
+            HttpStatus status;
+            if(adList.size() == 0) {
+                status = HttpStatus.NO_CONTENT;
+            } else {
+                status = HttpStatus.OK;
+            }
+            responseEntity = new ResponseEntity<List<AdvertisementView>>(adList, status);
+        } catch (IllegalArgumentException iae) {
+            responseEntity = new ResponseEntity<List<AdvertisementView>>(HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;

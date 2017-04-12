@@ -8,6 +8,7 @@ import com.bayou.managers.IManager;
 import com.bayou.ras.impl.AdvertisementResourceAccessor;
 import com.bayou.ras.impl.CategoryResourceAccessor;
 import com.bayou.ras.impl.UserResourceAccessor;
+import com.bayou.types.AdType;
 import com.bayou.views.AdvertisementView;
 import com.bayou.views.CategoryView;
 import com.bayou.views.UserView;
@@ -114,6 +115,15 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAllByCategories(Long[] ids, Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByCategoryIn(ids, page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public Integer countByOwner(Long ownerID) {
         return advertisementRas.countByOwner(ownerID);
     }
@@ -169,6 +179,16 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         } catch (EmptyResultDataAccessException e) {
             System.err.println("The advertisement with ID:" + id + " does not exist in the database");
         }
+    }
+
+    public List<AdvertisementView> search(Long[] categoryIds, String title, String desc, AdType type, Integer page) {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.search(categoryIds, title, desc, type, page))
+            views.add(prepare(ad));
+
+        return views;
+
     }
 
     private AdvertisementView prepare(Advertisement ad) {
