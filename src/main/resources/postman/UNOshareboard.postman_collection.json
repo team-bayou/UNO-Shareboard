@@ -714,7 +714,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"advertisementId\": \"1\",\n\t\"reportingUserEmail\" : \"jleaton@uno.edu\",\n\t\"offendingUser\": \"Bob\",\n\t\"comments\": \"This is a offense report\"\n}"
+							"raw": "{\n\t\"reportingUserId\": \"1\",\n\t\"offendingUserId\": \"2\",\n\t\"advertisementId\": \"3\",\n\t\"comments\": \"This is a ad report\"\n}"
 						},
 						"description": "Submits a bug or ad report which will be emailed to the team email."
 					},
