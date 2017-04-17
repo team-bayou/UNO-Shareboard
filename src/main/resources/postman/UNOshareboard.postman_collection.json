@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "6e7225f9-efb1-7158-6a6c-0e85eb1dda26",
+		"_postman_id": "49c9b2f3-44f3-9a3f-0b8f-2ba65743990a",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -686,6 +686,23 @@
 							"raw": "{\n  \"id\": 1,\n  \"description\": \"test3\",\n  \"imageMimeType\": \"image/gif\",\n  \"owner\": 1,\n  \"order\": 2\n}"
 						},
 						"description": "Update Image metadata.  MIME type and imageData field changes will be ignored."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"url": "localhost:8090/service/v1/images/7/delete",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Deletes an image"
 					},
 					"response": []
 				}

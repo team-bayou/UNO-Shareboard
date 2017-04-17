@@ -125,6 +125,13 @@ public class ImageController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "Delete a image", response = ResponseEntity.class)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
+    public ResponseEntity delete(@PathVariable("id") Long id) {
+        manager.delete(id);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
     @ExceptionHandler(MissingServletRequestPartException.class)
     public ResponseEntity<Long> handleMissingParams(MissingServletRequestPartException ex) {
         return new ResponseEntity<Long>(-1L, HttpStatus.BAD_REQUEST);
