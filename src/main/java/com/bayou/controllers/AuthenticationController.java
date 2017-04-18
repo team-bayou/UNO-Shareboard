@@ -4,10 +4,8 @@ import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.LoginView;
-import com.bayou.views.UserView;
 import com.bayou.views.VerifyUserView;
 import io.swagger.annotations.ApiOperation;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.NotFoundException;
-import java.util.Random;
 
 /**
  * Created by Rachel on 2/21/2017.
- *
+ * <p>
  * Controller for logging in, and verifying users.
  */
 @RestController
@@ -69,7 +66,7 @@ public class AuthenticationController {
 
     @ApiOperation(value = "Forgot password", response = ResponseEntity.class)
     @RequestMapping(value = "/forgotPass", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<Integer> forgotPassword(@RequestBody VerifyUserView verifyUserView) {
+    public ResponseEntity forgotPassword(@RequestBody VerifyUserView verifyUserView) {
         ResponseEntity responseEntity;
 
         try {
@@ -84,7 +81,7 @@ public class AuthenticationController {
 
     @ApiOperation(value = "Reset password", response = ResponseEntity.class)
     @RequestMapping(value = "/resetPass", method = RequestMethod.POST)
-    public ResponseEntity<Integer> resetPassword(@RequestBody VerifyUserView verifyUserView) {
+    public ResponseEntity resetPassword(@RequestBody VerifyUserView verifyUserView) {
         ResponseEntity responseEntity;
 
         try {

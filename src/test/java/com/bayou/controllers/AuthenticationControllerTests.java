@@ -8,7 +8,6 @@ import com.bayou.views.UserView;
 import com.bayou.views.VerifyUserView;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,6 @@ public class AuthenticationControllerTests {
     private HttpHeaders headers = Server.createHeadersAuthJson();
 
     private UserView userView;
-    private UnverifiedUserView unverifiedUserView;
 
     @Before
     public void setup() {
@@ -48,30 +46,19 @@ public class AuthenticationControllerTests {
                 Server.url() + USER_URL + "/add",
                 new HttpEntity<>(userView, headers), Long.class);
         userView.setId(entity.getBody());
-
-        // Create unverified user view and add unverified user to db.
-        unverifiedUserView = Mocks.createUnverifiedUserView();
-        entity = rest.postForEntity(
-                Server.url() + UNVERIFIED_USER_URL + "/add",
-                new HttpEntity<>(unverifiedUserView, headers), Long.class);
-        unverifiedUserView.setId(entity.getBody());
-        assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
 
     @After
     public void cleanup() {
         // Delete test data.
-        rest.exchange(Server.url() + USER_URL + "/" + userView.getId() + "/delete",
-                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
-        rest.exchange(Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId() + "/delete",
+        rest.exchange(
+                Server.url() + USER_URL + "/" + userView.getId() + "/delete",
                 HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
     public void testLoginByAccountName() {
-        VerifyUserView view = new VerifyUserView();
-        view.setAccountName(userView.getAccountName());
-        view.setEnteredPasswordHash(userView.getPasswordHash());
+        VerifyUserView view = Mocks.createVerifyUserViewForLoginByAccountName(userView);
 
         // Login user by account name.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -84,7 +71,7 @@ public class AuthenticationControllerTests {
 
     @Test
     public void testLoginByEmail() {
-        VerifyUserView view = Mocks.createVerifyUserView(userView);
+        VerifyUserView view = Mocks.createVerifyUserViewForLoginByEmail(userView);
 
         // Login user by email.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -97,19 +84,20 @@ public class AuthenticationControllerTests {
 
     @Test
     public void testVerify() {
-        VerifyUserView view = Mocks.createVerifyUserView(unverifiedUserView);
-        UnverifiedUserView unvView;
+        // Create unverified user view and add unverified user to db.
+        UnverifiedUserView unverifiedUserView = Mocks.createUnverifiedUserView();
+        ResponseEntity<Long> entity = rest.postForEntity(
+                Server.url() + UNVERIFIED_USER_URL + "/add",
+                new HttpEntity<>(unverifiedUserView, headers), Long.class);
+        unverifiedUserView.setId(entity.getBody());
 
-        ResponseEntity<UnverifiedUserView> getCodeEntity = rest.exchange(
+        // We need to fetch the unverified user from the db because some attributes (e.g. verification code) which are
+        // required for the verify user are missing in the current unverified user object.
+        ResponseEntity<UnverifiedUserView> unverifiedUserEntity = rest.exchange(
                 Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId(),
                 HttpMethod.GET, new HttpEntity<>(headers), UnverifiedUserView.class);
 
-        unvView = getCodeEntity.getBody();
-        assertEquals(HttpStatus.OK, getCodeEntity.getStatusCode());
-        assertTrue(getCodeEntity.getBody() != null);
-
-        view.setId(unvView.getId());
-        view.setEnteredVerificationCode(unvView.getVerificationCode());
+        VerifyUserView view = Mocks.createVerifyUserViewForVerification(unverifiedUserEntity.getBody());
 
         // Verify user.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -118,49 +106,50 @@ public class AuthenticationControllerTests {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
+
+        // Delete test data.
+        rest.exchange(
+                Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId() + "/delete",
+                HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
 
     @Test
-    @Ignore
-    public void testResetAndForgotPassword() {
-        UserView resultView;
-        VerifyUserView email = new VerifyUserView();
-        email.setEmail(userView.getEmail());
+    public void testForgotPassword() {
+        VerifyUserView view = Mocks.createVerifyUserViewForForgotPassword(userView);
 
-        ResponseEntity<Integer> resetRespEntity = rest.postForEntity(Server.url()
-            + RESOURCE_URL + "/forgotPass",  new HttpEntity<>(email, headers), Integer.class);
-        assertEquals(HttpStatus.OK, resetRespEntity.getStatusCode());
+        // Forget user's password and send verification code to user's email.
+        ResponseEntity responseEntity = rest.postForEntity(
+                Server.url() + RESOURCE_URL + "/forgotPass",
+                new HttpEntity<>(view, headers), Object.class);
 
-        ResponseEntity<Integer> checkVerifNullEntity = rest.exchange(Server.url() + USER_URL +
-                "/" + userView.getEmail() + "/codeCheck", HttpMethod.GET, new HttpEntity<>(headers),
-                Integer.class);
-        assertEquals(HttpStatus.OK, checkVerifNullEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }
 
-        ResponseEntity<UserView> getUserEntity = rest.exchange(Server.url() + USER_URL +
-                "/email/" + email.getEmail(), HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
-        assertEquals(HttpStatus.OK, getUserEntity.getStatusCode());
-        resultView = getUserEntity.getBody();
-        assertTrue(resultView.getVerificationCode() != null);
+    @Test
+    public void testResetPassword() {
+        VerifyUserView view = Mocks.createVerifyUserViewForForgotPassword(userView);
 
-        email.setEnteredVerificationCode(resultView.getVerificationCode());
-        email.setEnteredPasswordHash("abc123");
-        email.setEnteredPasswordSalt("123abc");
+        // Hit 'Forgot password' endpoint first. Otherwise, the verification code of the user is not be set.
+        ResponseEntity responseEntity = rest.postForEntity(
+                Server.url() + RESOURCE_URL + "/forgotPass",
+                new HttpEntity<>(view, headers), Object.class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        ResponseEntity<Integer> resetPassEntity = rest.postForEntity(Server.url() + RESOURCE_URL +
-            "/resetPass", new HttpEntity<>(email, headers), Integer.class);
-        assertEquals(HttpStatus.OK, resetPassEntity.getStatusCode());
+        // Get user by id.
+        // We need to fetch the user from the db because some attributes (e.g. verification code) which are
+        // required for the verify user are missing in the current user object.
+        ResponseEntity<UserView> responseUserEntity = rest.exchange(
+                Server.url() + USER_URL + "/" + userView.getId(),
+                HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
 
-        checkVerifNullEntity = rest.exchange(Server.url() + USER_URL +
-                "/" + email.getEmail() + "/codeCheck", HttpMethod.GET, new HttpEntity<>(headers),
-                Integer.class);
-        assertEquals(HttpStatus.NO_CONTENT, checkVerifNullEntity.getStatusCode());
+        view = Mocks.createVerifyUserViewForResetPassword(responseUserEntity.getBody());
 
-        getUserEntity = rest.exchange(Server.url() + USER_URL +
-                "/" + userView.getId(), HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
-        assertEquals(HttpStatus.OK, getUserEntity.getStatusCode());
-        resultView = getUserEntity.getBody();
-        assertTrue(resultView.getVerificationCode() == null);
-        assertEquals(email.getPasswordHash(), resultView.getPasswordHash());
-        assertEquals(email.getPasswordSalt(), resultView.getPasswordSalt());
+        // Reset user's password and verification code.
+        responseEntity = rest.postForEntity(
+                Server.url() + RESOURCE_URL + "/resetPass",
+                new HttpEntity<>(view, headers),
+                Object.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 }

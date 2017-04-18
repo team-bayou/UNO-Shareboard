@@ -37,12 +37,19 @@ public class Mocks {
         view.setPasswordHash("jjjjjjj3                                                                                                                        ");
         view.setPasswordSalt("hhhhhhh3                                                        ");
         view.setEmail("jleaton" + rand.nextInt() + "@uno.edu");
-        //view.setVerificationCode(46555038);
 
         return view;
     }
 
-    public static VerifyUserView createVerifyUserView(UserView userView) {
+    public static VerifyUserView createVerifyUserViewForLoginByAccountName(UserView userView) {
+        VerifyUserView view = new VerifyUserView();
+        view.setAccountName(userView.getAccountName());
+        view.setEnteredPasswordHash(userView.getPasswordHash());
+
+        return view;
+    }
+
+    public static VerifyUserView createVerifyUserViewForLoginByEmail(UserView userView) {
         VerifyUserView view = new VerifyUserView();
         view.setEmail(userView.getEmail());
         view.setEnteredPasswordHash(userView.getPasswordHash());
@@ -50,13 +57,32 @@ public class Mocks {
         return view;
     }
 
-    public static VerifyUserView createVerifyUserView(UnverifiedUserView unverifiedUserView) {
+    public static VerifyUserView createVerifyUserViewForVerification(UnverifiedUserView unverifiedUserView) {
         VerifyUserView view = new VerifyUserView();
         view.setAccountName("jleaton" + rand.nextInt());
         view.setEmail(unverifiedUserView.getEmail());
         view.setUserType(UserType.standard);
         view.setEnteredPasswordHash(unverifiedUserView.getPasswordHash());
         view.setEnteredVerificationCode(unverifiedUserView.getVerificationCode());
+
+        return view;
+    }
+
+    public static VerifyUserView createVerifyUserViewForForgotPassword(UserView userView) {
+        VerifyUserView view = new VerifyUserView();
+        view.setEmail(userView.getEmail());
+        view.setEnteredPasswordHash(userView.getPasswordHash());
+        view.setEnteredVerificationCode(userView.getVerificationCode());
+
+        return view;
+    }
+
+    public static VerifyUserView createVerifyUserViewForResetPassword(UserView userView) {
+        VerifyUserView view = new VerifyUserView();
+        view.setEmail(userView.getEmail());
+        view.setPasswordHash("kkkkkkk4                                                                                                                        ");
+        view.setPasswordSalt("ggggggg4                                                        ");
+        view.setEnteredVerificationCode(userView.getVerificationCode());
 
         return view;
     }
