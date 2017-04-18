@@ -1,6 +1,8 @@
 package com.bayou.converters;
 
 import com.bayou.domains.UnverifiedUser;
+import com.bayou.utils.DomainMocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.views.UnverifiedUserView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by rachelguillory on 2/18/17.
@@ -18,43 +19,31 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class UnverifiedUserConverterTests {
     @Autowired
-    UnverifiedUserConverter userConverter;
+    UnverifiedUserConverter converter;
 
     @Test
-    public void testConvertUnverifiedUserToViewSuccess() {
-        UnverifiedUser user = getMockUser();
+    public void testConvertToView() {
+        UnverifiedUser domain = DomainMocks.createUnverifiedUser();
 
-        UnverifiedUserView convertedView = userConverter.convertToView(user);
+        UnverifiedUserView view = converter.convertToView(domain);
 
-        assertThat(convertedView.getEmail(), is("jleaton3@uno.edu"));  //assert that the username is jleaton
+        assertEquals(domain.getId(), view.getId());
+        assertEquals(domain.getEmail(), view.getEmail());
+        assertEquals(domain.getPasswordHash(), view.getPasswordHash());
+        assertEquals(domain.getPasswordSalt(), view.getPasswordSalt());
+        assertEquals(domain.getVerificationCode(), view.getVerificationCode());
     }
 
     @Test
-    public void testConvertUnverifiedUserViewToDomainSuccess() {
-        UnverifiedUserView userView = getMockUserView();
+    public void testConvertToDomain() {
+        UnverifiedUserView view = ViewMocks.createUnverifiedUser();
 
-        UnverifiedUser convertedUser = userConverter.convertToDomain(userView);
+        UnverifiedUser domain = converter.convertToDomain(view);
 
-        assertThat(convertedUser.getEmail(), is("jleaton3@uno.edu"));  //assert that the username is jleaton
-    }
-
-    private UnverifiedUserView getMockUserView() {
-        UnverifiedUserView userView = new UnverifiedUserView();
-        userView.setPasswordHash("jjjjjjj3");
-        userView.setPasswordSalt("hhhhhhh3");
-        userView.setEmail("jleaton3@uno.edu");
-        userView.setVerificationCode(46555038);
-
-        return userView;
-    }
-
-    private UnverifiedUser getMockUser() {
-        UnverifiedUser user = new UnverifiedUser();
-        user.setPasswordHash("jjjjjjj3");
-        user.setPasswordSalt("hhhhhhh3");
-        user.setEmail("jleaton3@uno.edu");
-        user.setVerificationCode(46555038);
-
-        return user;
+        assertEquals(view.getId(), domain.getId());
+        assertEquals(view.getEmail(), domain.getEmail());
+        assertEquals(view.getPasswordHash(), domain.getPasswordHash());
+        assertEquals(view.getPasswordSalt(), domain.getPasswordSalt());
+        assertEquals(view.getVerificationCode(), domain.getVerificationCode());
     }
 }
