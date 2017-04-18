@@ -1,7 +1,7 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
 import com.bayou.utils.Server;
+import com.bayou.utils.ViewMocks;
 import com.bayou.views.AdvertisementView;
 import com.bayou.views.CategoryView;
 import com.bayou.views.UserView;
@@ -45,19 +45,19 @@ public class AdvertisementControllerTests {
     @Before
     public void setup() {
         // Create user view and add user to db.
-        userView = Mocks.createUserView();
+        userView = ViewMocks.createUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + USERS_URL + "/add", new HttpEntity<>(userView, headers), Long.class);
         userView.setId(entity.getBody());
 
         // Create category view and add category to db.
-        categoryView = Mocks.createCategoryView();
+        categoryView = ViewMocks.createCategory();
         entity = rest.postForEntity(
                 Server.url() + CATEGORIES_URL + "/add", new HttpEntity<>(categoryView, headers), Long.class);
         categoryView.setId(entity.getBody());
 
         // Create advertisement view and add advertisement to db.
-        advertisementView = Mocks.createAdvertisementView();
+        advertisementView = ViewMocks.createAdvertisement();
         advertisementView.setOwnerId(userView.getId());
         advertisementView.setCategoryId(categoryView.getId());
         entity = rest.postForEntity(
@@ -89,7 +89,7 @@ public class AdvertisementControllerTests {
 
     @Test
     public void testGetAdvertisementsByPage() {
-        // Get list of advertisements.
+        // Get list of advertisements by page number.
         ResponseEntity<List> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
@@ -156,7 +156,7 @@ public class AdvertisementControllerTests {
     @Test
     public void testAddAdvertisement() {
         // Create advertisement view and add advertisement to db.
-        AdvertisementView advertisementView = Mocks.createAdvertisementView();
+        AdvertisementView advertisementView = ViewMocks.createAdvertisement();
         advertisementView.setOwnerId(userView.getId());
         advertisementView.setCategoryId(categoryView.getId());
 
@@ -182,13 +182,13 @@ public class AdvertisementControllerTests {
                 HttpMethod.PUT, new HttpEntity<>(advertisementView, headers), Long.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(responseEntity.getBody(), advertisementView.getId());
+        assertEquals(advertisementView.getId(), responseEntity.getBody());
     }
 
     @Test
     public void testDeleteAdvertisement() {
         // Create advertisement view and add advertisement to db.
-        AdvertisementView advertisementView = Mocks.createAdvertisementView();
+        AdvertisementView advertisementView = ViewMocks.createAdvertisement();
         advertisementView.setOwnerId(userView.getId());
         advertisementView.setCategoryId(categoryView.getId());
 

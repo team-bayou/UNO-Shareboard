@@ -1,6 +1,6 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
 import com.bayou.views.ReviewView;
 import com.bayou.views.UserView;
@@ -45,21 +45,21 @@ public class ReviewControllerTests {
     @Before
     public void setup() {
         // Create user view and add user to db.
-        reviewerView = Mocks.createUserView();
+        reviewerView = ViewMocks.createUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + USERS_URL + "/add",
                 new HttpEntity<>(reviewerView, headers), Long.class);
         reviewerView.setId(entity.getBody());
 
         // Create user view and add user to db.
-        revieweeView = Mocks.createUserView();
+        revieweeView = ViewMocks.createUser();
         entity = rest.postForEntity(
                 Server.url() + USERS_URL + "/add",
                 new HttpEntity<>(revieweeView, headers), Long.class);
         revieweeView.setId(entity.getBody());
 
         // Create review view and add review to db.
-        reviewView = Mocks.createReviewView();
+        reviewView = ViewMocks.createReview();
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
         entity = rest.postForEntity(
@@ -114,7 +114,7 @@ public class ReviewControllerTests {
 
     @Test
     public void testGetReviewsByReviewerByPage() {
-        // Get list of reviewer's reviews by page.
+        // Get list of reviewer's reviews by page number.
         ResponseEntity<List> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + REVIEWER_URL + "/" + reviewerView.getId() + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
@@ -136,7 +136,7 @@ public class ReviewControllerTests {
 
     @Test
     public void testGetReviewsByRevieweeByPage() {
-        // Get list of reviewee's reviews by page.
+        // Get list of reviewee's reviews by page number.
         ResponseEntity<List> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + REVIEWEE_URL + "/" + revieweeView.getId() + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
@@ -148,7 +148,7 @@ public class ReviewControllerTests {
     @Test
     public void testAddReview() {
         // Create review view and add review to db.
-        ReviewView reviewView = Mocks.createReviewView();
+        ReviewView reviewView = ViewMocks.createReview();
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
 
@@ -167,7 +167,7 @@ public class ReviewControllerTests {
 
     @Test
     public void testUpdateReview() {
-        // Update some information of user and save it to db.
+        // Update some information of review and save it to db.
         reviewView.setComments(reviewView.getComments() + " updated");
         ResponseEntity<Long> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/update",
@@ -180,7 +180,7 @@ public class ReviewControllerTests {
     @Test
     public void testDeleteReview() {
         // Create review view and add review to db.
-        ReviewView reviewView = Mocks.createReviewView();
+        ReviewView reviewView = ViewMocks.createReview();
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
 

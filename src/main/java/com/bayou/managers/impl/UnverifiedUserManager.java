@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by rachelguillory on 2/16/2017.
@@ -50,7 +51,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
         LoginView userView;
         if (passwordSuccess && verifySuccess) {
             Long id = userManager.add(verifyUserView);
-            userView = loginConverter.convertToLoginView(userManager.get(id));
+            userView = loginConverter.convertToView(userManager.get(id));
             delete(unverifiedUser.getId());
         } else {
             String message;
@@ -101,6 +102,9 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
     @Override
     public Long add(UnverifiedUserView userView) {
+        Random randomGen = new Random();
+        userView.setVerificationCode(Math.abs(randomGen.nextInt()));
+
         Long id = -1L;
         try {
             id = unverifiedUserRas.add(unverifiedUserConverter.convertToDomain(userView));  //add the unverified user to the database

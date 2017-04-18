@@ -9,12 +9,12 @@ import com.bayou.ras.impl.ReviewResourceAccessor;
 import com.bayou.ras.impl.UserResourceAccessor;
 import com.bayou.views.ReviewView;
 import com.bayou.views.UserView;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 

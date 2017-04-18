@@ -1,6 +1,6 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
 import com.bayou.views.UnverifiedUserView;
 import org.junit.After;
@@ -36,7 +36,7 @@ public class UnverifiedUserControllerTests {
     @Before
     public void setup() {
         // Create unverified user view and add unverified user to db.
-        view = Mocks.createUnverifiedUserView();
+        view = ViewMocks.createUnverifiedUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
@@ -74,7 +74,7 @@ public class UnverifiedUserControllerTests {
     @Test
     public void testAddUnverifiedUser() {
         // Create unverified user view and add unverified user to db.
-        UnverifiedUserView view = Mocks.createUnverifiedUserView();
+        UnverifiedUserView view = ViewMocks.createUnverifiedUser();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(responseEntity.getBody());
@@ -90,7 +90,7 @@ public class UnverifiedUserControllerTests {
     @Test
     public void testDeleteUnverifiedUser() {
         // Create unverified user view and add user to db.
-        UnverifiedUserView view = Mocks.createUnverifiedUserView();
+        UnverifiedUserView view = ViewMocks.createUnverifiedUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());

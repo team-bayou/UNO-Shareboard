@@ -12,12 +12,12 @@ import com.bayou.types.AdType;
 import com.bayou.views.AdvertisementView;
 import com.bayou.views.CategoryView;
 import com.bayou.views.UserView;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 

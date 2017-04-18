@@ -1,71 +1,142 @@
 package com.bayou.managers;
 
-import com.bayou.MainConfig;
 import com.bayou.managers.impl.UserManager;
-import com.bayou.views.LoginView;
+import com.bayou.utils.ViewMocks;
 import com.bayou.views.UserView;
-import javassist.NotFoundException;
-import org.junit.Ignore;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.net.URISyntaxException;
+import javax.ws.rs.NotFoundException;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
- * Created by joshuaeaton on 2/1/17.
+ * File: UserManagerTests
+ * Package: com.bayou.managers
+ * Author: Stefan Haselwanter
+ * Created on: 4/17/17
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class UserManagerTests {
-    @InjectMocks
-    private UserManager userManager;
-    @InjectMocks
-    private MainConfig mainConfig;
+    @Autowired
+    private UserManager manager;
 
-    @Ignore
+    private UserView view;
+
+    @Before
+    public void setup() {
+        // Create user view and add user to db.
+        view = ViewMocks.createUser();
+        Long id = manager.add(view);
+        view.setId(id);
+    }
+
+    @After
+    public void cleanup() {
+        // Delete test data.
+        manager.delete(view.getId());
+    }
+
     @Test
-    public void testAddUser() throws URISyntaxException {
-        // mainConfig.dataSource();
-        // UserView returnedView = userManager.add(createMockUser());
-        // assertThat(returnedView.getAccountName(), is("jleaton3"));
+    public void testGetUsers() {
+        List<UserView> views = null;
+
+        // Get list of users.
+        try {
+            views = manager.getAll();
+        } catch (NotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+        assertTrue(views != null && views.size() > 0);
     }
 
-    @Ignore
     @Test
-    public void testLogin() throws NotFoundException, URISyntaxException {
+    public void testGetUserById() {
+        UserView view = null;
 
-        //LoginView returnedLoginView = userManager.login(createMockLoginView());
-        //assertThat(returnedLoginView.getAccountName(), is("jleaton"));
-        //assertThat(returnedLoginView.getEmail(), is("jleaton@uno.edu"));
-        //assertThat(returnedLoginView.getPasswordHash(), is("passwordHash"));
-        //assertThat(returnedLoginView.getPasswordSalt(), is("passwordSalt"));
+        // Get user by id.
+        try {
+            view = manager.get(this.view.getId());
+        } catch (NotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+        assertTrue(view != null);
     }
 
-    private static UserView createMockUser() {
-        UserView userView = new UserView();
-        userView.setAccountName("jleaton3");
-        userView.setPasswordSalt("hhhhhhh3");
-        userView.setFirstName("Joshua3");
-        userView.setLastName("Eaton3");
-        userView.setEmail("jleaton@uno.edu3");
-        userView.setPhoneNumber("5046555038");
-        userView.setFacebookId("Josh Eaton");
-        userView.setTwitterHandle("");
+    @Test
+    public void testGetUserByAccountName() {
+        UserView view = null;
 
-        return userView;
+        // Get user by account name.
+        try {
+            view = manager.getByAccountName(this.view.getAccountName());
+        } catch (NotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+        assertTrue(view != null);
     }
 
-    private static LoginView createMockLoginView() {
+    @Test
+    public void testGetUserByEmail() {
+        UserView view = null;
 
-        LoginView loginView = new LoginView();
-        loginView.setAccountName("jleaton");
-        loginView.setEmail("jleaton@uno.edu");
-        loginView.setPasswordSalt("passwordSalt");
-        loginView.setErrorMessage("both");
+        // Get user by email.
+        try {
+            view = manager.getByEmail(this.view.getEmail());
+        } catch (NotFoundException e) {
+            System.err.println(e.getMessage());
+        }
 
-        return loginView;
+        assertTrue(view != null);
+    }
+
+    @Test
+    public void testAddUser() {
+        // Create user view and add user to db.
+        UserView view = ViewMocks.createUser();
+        Long id = manager.add(view);
+        view.setId(id);
+
+        assertTrue(id != null && id > 0);
+
+        // Delete test data.
+        manager.delete(view.getId());
+    }
+
+    @Test
+    public void testUpdateUser() {
+        // Update some information of user and save it to db.
+        view.setFirstName(view.getFirstName() + " updated");
+        Long id = manager.update(view);
+
+        assertEquals(view.getId(), id);
+    }
+
+    @Test
+    public void testDeleteUser() {
+        // Create user view and add user to db.
+        UserView view = ViewMocks.createUser();
+        Long id = manager.add(view);
+        view.setId(id);
+
+        // Delete user by id.
+        manager.delete(view.getId());
+
+        try {
+            manager.get(view.getId());
+            fail();
+        } catch (NotFoundException e) {
+            // Test passed.
+        }
     }
 }

@@ -5,12 +5,12 @@ import com.bayou.domains.Category;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.CategoryResourceAccessor;
 import com.bayou.views.CategoryView;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -44,6 +44,7 @@ public class VerifyUserView extends UserView {
     public String toString() {
         return "VerifyUserView{" +
                 "enteredPasswordHash='" + enteredPasswordHash + '\'' +
+                ", enteredPasswordSalt='" + enteredPasswordSalt + '\'' +
                 ", enteredVerificationCode=" + enteredVerificationCode +
                 "} " + super.toString();
     }
