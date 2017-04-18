@@ -69,4 +69,15 @@ public class DomainMocks {
 
         return view;
     }
+
+    public static Image createImage() {
+        Image view = new Image();
+        view.setImageMimeType("jpeg");
+        view.setDescription("Some text describing the image");
+        view.setImageData(new byte[]{1, 2, 3, 4, 5});
+        view.setOwner(1L);
+        view.setOrder(1);
+
+        return view;
+    }
 }

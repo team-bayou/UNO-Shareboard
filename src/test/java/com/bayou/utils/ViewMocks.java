@@ -115,4 +115,15 @@ public class ViewMocks {
 
         return view;
     }
+
+    public static ImageView createImage() {
+        ImageView view = new ImageView();
+        view.setImageMimeType("jpeg");
+        view.setDescription("Some text describing the image");
+        view.setImageData(new byte[]{1, 2, 3, 4, 5});
+        view.setOwner(1L);
+        view.setOrder(1);
+
+        return view;
+    }
 }
