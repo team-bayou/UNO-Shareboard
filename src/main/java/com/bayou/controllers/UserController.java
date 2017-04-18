@@ -1,8 +1,11 @@
 package com.bayou.controllers;
 
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.UserView;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -18,12 +21,15 @@ import java.util.List;
 @RestController
 @RequestMapping("service/v1/users")
 public class UserController {
+
     @Autowired
     private UserManager manager;
 
+    @Loggable
     @ApiOperation(value = "Get a list of all Users in the system", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<UserView>> getAll() throws NotFoundException {
+
         ResponseEntity<List<UserView>> responseEntity;
         try {
             responseEntity = new ResponseEntity<>(manager.getAll(), HttpStatus.OK);
