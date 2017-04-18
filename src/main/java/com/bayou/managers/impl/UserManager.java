@@ -175,7 +175,7 @@ public class UserManager implements IManager<UserView> {
     }
 
     public void resetPassword(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
-        UserView userView = getByEmail(verifyUserView.getEmail());;
+        UserView userView = getByEmail(verifyUserView.getEmail());
 
         if(verifyUserView != null && verifyUserView.getEnteredVerificationCode().equals(userView.getVerificationCode())) {
             userView.setPasswordSalt(verifyUserView.getEnteredPasswordSalt());

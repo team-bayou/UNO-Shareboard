@@ -143,12 +143,12 @@ public class AuthenticationControllerTests {
                 HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
 
         view = ViewMocks.createVerifyUserForResetPassword(responseUserEntity.getBody());
+        System.err.println(view);
 
         // Reset user's password and verification code.
         responseEntity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/resetPass",
-                new HttpEntity<>(view, headers),
-                Object.class);
+                new HttpEntity<>(view, headers), Object.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }

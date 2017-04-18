@@ -80,8 +80,8 @@ public class ViewMocks {
     public static VerifyUserView createVerifyUserForResetPassword(UserView userView) {
         VerifyUserView view = new VerifyUserView();
         view.setEmail(userView.getEmail());
-        view.setPasswordHash("kkkkkkk4                                                                                                                        ");
-        view.setPasswordSalt("ggggggg4                                                        ");
+        view.setEnteredPasswordHash("kkkkkkk4                                                                                                                        ");
+        view.setEnteredPasswordSalt("ggggggg4                                                        ");
         view.setEnteredVerificationCode(userView.getVerificationCode());
 
         return view;
