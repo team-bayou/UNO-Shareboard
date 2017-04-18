@@ -3,13 +3,13 @@ package com.bayou.controllers;
 import com.bayou.managers.impl.ReviewManager;
 import com.bayou.views.ReviewView;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -116,7 +116,7 @@ public class ReviewController {
         try {
             int avgRating = manager.getUserAverageRating(id);
 
-            if(avgRating != 0) {
+            if (avgRating != 0) {
                 responseEntity = new ResponseEntity<>(avgRating, HttpStatus.OK);
             } else {
                 responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);

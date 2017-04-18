@@ -114,7 +114,7 @@ public class ReviewControllerTests {
 
     @Test
     public void testGetReviewsByReviewerByPage() {
-        // Get list of reviewer's reviews by page.
+        // Get list of reviewer's reviews by page number.
         ResponseEntity<List> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + REVIEWER_URL + "/" + reviewerView.getId() + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
@@ -136,7 +136,7 @@ public class ReviewControllerTests {
 
     @Test
     public void testGetReviewsByRevieweeByPage() {
-        // Get list of reviewee's reviews by page.
+        // Get list of reviewee's reviews by page number.
         ResponseEntity<List> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + REVIEWEE_URL + "/" + revieweeView.getId() + PAGE_URL,
                 HttpMethod.GET, new HttpEntity<>(headers), List.class);
@@ -167,7 +167,7 @@ public class ReviewControllerTests {
 
     @Test
     public void testUpdateReview() {
-        // Update some information of user and save it to db.
+        // Update some information of review and save it to db.
         reviewView.setComments(reviewView.getComments() + " updated");
         ResponseEntity<Long> responseEntity = rest.exchange(
                 Server.url() + RESOURCE_URL + "/update",

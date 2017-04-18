@@ -24,12 +24,13 @@ import static org.junit.Assert.*;
  * File: AdvertisementManagerTests
  * Package: com.bayou.managers
  * Author: Stefan Haselwanter
- * Created on: 2/21/17
+ * Created on: 4/17/17
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class AdvertisementManagerTests {
     private static final int PAGE_NUMBER = 1;
+
     @Autowired
     private UserManager userManager;
     @Autowired
@@ -64,9 +65,9 @@ public class AdvertisementManagerTests {
     @After
     public void cleanup() {
         // Delete test data.
+        advertisementManager.delete(advertisementView.getId());
         userManager.delete(userView.getId());
         categoryManager.delete(categoryView.getId());
-        advertisementManager.delete(advertisementView.getId());
     }
 
     @Test
@@ -170,16 +171,16 @@ public class AdvertisementManagerTests {
     @Test
     public void testAddAdvertisement() {
         // Create advertisement view and add advertisement to db.
-        AdvertisementView view = ViewMocks.createAdvertisement();
-        view.setOwnerId(userView.getId());
-        view.setCategoryId(categoryView.getId());
-        Long id = advertisementManager.add(view);
-        view.setId(id);
+        AdvertisementView advertisementView = ViewMocks.createAdvertisement();
+        advertisementView.setOwnerId(userView.getId());
+        advertisementView.setCategoryId(categoryView.getId());
+        Long id = advertisementManager.add(advertisementView);
+        advertisementView.setId(id);
 
         assertTrue(id != null && id > 0);
 
         // Delete test data.
-        advertisementManager.delete(view.getId());
+        advertisementManager.delete(advertisementView.getId());
     }
 
     @Test
@@ -194,19 +195,19 @@ public class AdvertisementManagerTests {
     @Test
     public void testDeleteAdvertisement() {
         // Create advertisement view and add advertisement to db.
-        AdvertisementView view = ViewMocks.createAdvertisement();
-        view.setOwnerId(userView.getId());
-        view.setCategoryId(categoryView.getId());
-        Long id = advertisementManager.add(view);
-        view.setId(id);
+        AdvertisementView advertisementView = ViewMocks.createAdvertisement();
+        advertisementView.setOwnerId(userView.getId());
+        advertisementView.setCategoryId(categoryView.getId());
+        Long id = advertisementManager.add(advertisementView);
+        advertisementView.setId(id);
 
         assertTrue(id != null && id > 0);
 
         // Delete advertisement by id.
-        advertisementManager.delete(view.getId());
+        advertisementManager.delete(advertisementView.getId());
 
         try {
-            advertisementManager.get(view.getId());
+            advertisementManager.get(advertisementView.getId());
             fail();
         } catch (NotFoundException e) {
             // Test passed.

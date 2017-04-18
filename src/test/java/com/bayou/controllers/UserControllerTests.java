@@ -1,7 +1,7 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
+import com.bayou.utils.ViewMocks;
 import com.bayou.views.UserView;
 import org.junit.After;
 import org.junit.Before;
@@ -120,7 +120,7 @@ public class UserControllerTests {
                 HttpMethod.PUT, new HttpEntity<>(view, headers), Long.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(responseEntity.getBody(), view.getId());
+        assertEquals(view.getId(), responseEntity.getBody());
     }
 
     @Test
