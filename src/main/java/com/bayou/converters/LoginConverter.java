@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("LoginConverter")
 public class LoginConverter {
-    public LoginView convertToLoginView(UserView user) {
+    public LoginView convertToView(UserView user) {
         LoginView loginView = new LoginView();
         loginView.setId(user.getId());
         loginView.setEmail(user.getEmail());

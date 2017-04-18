@@ -50,7 +50,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
         LoginView userView;
         if (passwordSuccess && verifySuccess) {
             Long id = userManager.add(verifyUserView);
-            userView = loginConverter.convertToLoginView(userManager.get(id));
+            userView = loginConverter.convertToView(userManager.get(id));
             delete(unverifiedUser.getId());
         } else {
             String message;

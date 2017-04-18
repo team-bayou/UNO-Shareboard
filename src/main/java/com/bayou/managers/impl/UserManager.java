@@ -56,7 +56,7 @@ public class UserManager implements IManager<UserView> {
         }
 
         if (verifyUserView.login()) {
-            return loginConverter.convertToLoginView(returnedUser);
+            return loginConverter.convertToView(returnedUser);
         } else {
             throw new VerificationException("password");
         }

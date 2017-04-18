@@ -31,6 +31,7 @@ public class UserConverterTests {
         UserView view = converter.convertToView(domain);
 
         assertEquals(domain.getId(), view.getId());
+        assertEquals(domain.getAccountName(), view.getAccountName());
         assertEquals(domain.getEmail(), view.getEmail());
         assertEquals(domain.getPasswordHash(), view.getPasswordHash());
         assertEquals(domain.getPasswordSalt(), view.getPasswordSalt());
@@ -51,6 +52,7 @@ public class UserConverterTests {
         User domain = converter.convertToDomain(view);
 
         assertEquals(view.getId(), domain.getId());
+        assertEquals(view.getAccountName(), domain.getAccountName());
         assertEquals(view.getEmail(), domain.getEmail());
         assertEquals(view.getPasswordHash(), domain.getPasswordHash());
         assertEquals(view.getPasswordSalt(), domain.getPasswordSalt());
