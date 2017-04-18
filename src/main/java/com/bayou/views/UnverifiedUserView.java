@@ -64,4 +64,14 @@ public class UnverifiedUserView extends BaseEntityView {
         result = 31 * result + (verificationCode != null ? verificationCode.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UnverifiedUserView{" +
+                "passwordHash='" + passwordHash + '\'' +
+                ", passwordSalt='" + passwordSalt + '\'' +
+                ", email='" + email + '\'' +
+                ", verificationCode=" + verificationCode +
+                "} " + super.toString();
+    }
 }
