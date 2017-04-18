@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "49c9b2f3-44f3-9a3f-0b8f-2ba65743990a",
+		"_postman_id": "90867890-56eb-9cd0-a8a5-26b05d5b5bd3",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -371,7 +371,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"accountName\" : \"jleaton\",\n\t\"userType\" : \"standard\",\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\" : \"hjjjjjj3                                                                                                                        \",\n\t\"enteredVerificationCode\" : 12345678\n}"
+							"raw": "{\n\t\"enteredVerificationCode\" : 12345678,\n\t\"email\": \"jleaton2@uno.edu\"\n}"
 						},
 						"description": "Verify an unverified user"
 					},
@@ -701,7 +701,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Deletes an image"
 					},
 					"response": []

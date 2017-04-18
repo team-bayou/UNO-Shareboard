@@ -45,21 +45,16 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
 
         verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());
         verifyUserView.setPasswordSalt(unverifiedUser.getPasswordSalt());
-        boolean passwordSuccess = verifyUserView.login();
         boolean verifySuccess = verifyUserView.getEnteredVerificationCode().equals(unverifiedUser.getVerificationCode());
 
         LoginView userView;
-        if (passwordSuccess && verifySuccess) {
+        if (verifySuccess) {
             Long id = userManager.add(verifyUserView);
             userView = loginConverter.convertToView(userManager.get(id));
             delete(unverifiedUser.getId());
         } else {
-            String message;
-            if (!passwordSuccess && !verifySuccess) {
-                message = "both";
-            } else if (!passwordSuccess) {
-                message = "password";
-            } else {
+            String message = "";
+            if (!verifySuccess) {
                 message = "verify";
             }
             throw new VerificationException(message);
