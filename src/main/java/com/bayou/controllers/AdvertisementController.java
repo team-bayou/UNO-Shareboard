@@ -4,15 +4,13 @@ import com.bayou.managers.impl.AdvertisementManager;
 import com.bayou.types.AdType;
 import com.bayou.views.AdvertisementView;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
-import org.apache.http.protocol.HTTP;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -150,14 +148,14 @@ public class AdvertisementController {
                                                           @RequestParam(value = "adType", required = false) String type,
                                                           @RequestParam(value = "page") Integer page) {
         ResponseEntity<List<AdvertisementView>> responseEntity;
-        if(page == null) {
+        if (page == null) {
             return new ResponseEntity<List<AdvertisementView>>(HttpStatus.BAD_REQUEST);
         }
         try {
             AdType adType = type == null ? null : Enum.valueOf(AdType.class, type);
             List<AdvertisementView> adList = manager.search(categoryIds, title, desc, adType, page);
             HttpStatus status;
-            if(adList.size() == 0) {
+            if (adList.size() == 0) {
                 status = HttpStatus.NO_CONTENT;
             } else {
                 status = HttpStatus.OK;
@@ -189,7 +187,7 @@ public class AdvertisementController {
     public ResponseEntity<Integer> addImage(@PathVariable("adID") Long adID, @PathVariable("imageID") Long imageID) {
         try {
             manager.addImage(adID, imageID);
-        } catch(NotFoundException nfe) {
+        } catch (NotFoundException nfe) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -200,7 +198,7 @@ public class AdvertisementController {
     public ResponseEntity<Integer> removeImage(@PathVariable("adID") Long adID, @PathVariable("imageID") Long imageID) {
         try {
             manager.removeImage(adID, imageID);
-        } catch(NotFoundException nfe) {
+        } catch (NotFoundException nfe) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.OK);
