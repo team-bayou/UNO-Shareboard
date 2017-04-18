@@ -1,9 +1,9 @@
 package com.bayou.converters;
 
-import com.bayou.domains.Image;
+import com.bayou.domains.Category;
 import com.bayou.utils.DomainMocks;
 import com.bayou.utils.ViewMocks;
-import com.bayou.views.ImageView;
+import com.bayou.views.CategoryView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,40 +13,40 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 
 /**
- * File: ImageConverterTests
+ * File: CategoryConverterTests
  * Package: com.bayou.converters
  * Author: Stefan Haselwanter
  * Created on: 4/17/17
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class ImageConverterTests {
+public class CategoryConverterTests {
     @Autowired
-    ImageConverter converter;
+    CategoryConverter converter;
 
     @Test
     public void testConvertToView() {
-        Image domain = DomainMocks.createImage();
+        Category domain = DomainMocks.createCategory();
 
-        ImageView view = converter.convertToView(domain);
+        CategoryView view = converter.convertToView(domain);
 
         assertEquals(domain.getId(), view.getId());
+        assertEquals(domain.getTitle(), view.getTitle());
+        assertEquals(domain.getColor(), view.getColor());
         assertEquals(domain.getDescription(), view.getDescription());
-        assertEquals(domain.getImageData(), view.getImageData());
-        assertEquals(domain.getOrder(), view.getOrder());
-        assertEquals(domain.getOwner(), view.getOwner());
+        assertEquals(domain.getParentCategoryId(), view.getParentCategoryId());
     }
 
     @Test
     public void testConvertToDomain() {
-        ImageView domain = ViewMocks.createImage();
+        CategoryView view = ViewMocks.createCategory();
 
-        Image view = converter.convertToDomain(domain);
+        Category domain = converter.convertToDomain(view);
 
         assertEquals(view.getId(), domain.getId());
+        assertEquals(view.getTitle(), domain.getTitle());
+        assertEquals(view.getColor(), domain.getColor());
         assertEquals(view.getDescription(), domain.getDescription());
-        assertEquals(view.getImageData(), domain.getImageData());
-        assertEquals(view.getOrder(), domain.getOrder());
-        assertEquals(view.getOwner(), domain.getOwner());
+        assertEquals(view.getParentCategoryId(), domain.getParentCategoryId());
     }
 }
