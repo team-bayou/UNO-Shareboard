@@ -8,15 +8,15 @@ import java.util.Calendar;
 import java.util.Random;
 
 /**
- * File: Mocks
+ * File: ViewMocks
  * Package: com.bayou.utils
  * Author: Stefan Haselwanter
  * Created on: 2/20/17
  */
-public class Mocks {
+public class ViewMocks {
     private static Random rand = new Random();
 
-    public static UserView createUserView() {
+    public static UserView createUser() {
         UserView view = new UserView();
         view.setAccountName("jleaton" + rand.nextInt());
         view.setPasswordHash("jjjjjjj3                                                                                                                        ");
@@ -32,7 +32,7 @@ public class Mocks {
         return view;
     }
 
-    public static UnverifiedUserView createUnverifiedUserView() {
+    public static UnverifiedUserView createUnverifiedUser() {
         UnverifiedUserView view = new UnverifiedUserView();
         view.setPasswordHash("jjjjjjj3                                                                                                                        ");
         view.setPasswordSalt("hhhhhhh3                                                        ");
@@ -41,7 +41,7 @@ public class Mocks {
         return view;
     }
 
-    public static VerifyUserView createVerifyUserViewForLoginByAccountName(UserView userView) {
+    public static VerifyUserView createVerifyUserForLoginByAccountName(UserView userView) {
         VerifyUserView view = new VerifyUserView();
         view.setAccountName(userView.getAccountName());
         view.setEnteredPasswordHash(userView.getPasswordHash());
@@ -49,7 +49,7 @@ public class Mocks {
         return view;
     }
 
-    public static VerifyUserView createVerifyUserViewForLoginByEmail(UserView userView) {
+    public static VerifyUserView createVerifyUserForLoginByEmail(UserView userView) {
         VerifyUserView view = new VerifyUserView();
         view.setEmail(userView.getEmail());
         view.setEnteredPasswordHash(userView.getPasswordHash());
@@ -57,7 +57,7 @@ public class Mocks {
         return view;
     }
 
-    public static VerifyUserView createVerifyUserViewForVerification(UnverifiedUserView unverifiedUserView) {
+    public static VerifyUserView createVerifyUserForVerification(UnverifiedUserView unverifiedUserView) {
         VerifyUserView view = new VerifyUserView();
         view.setAccountName("jleaton" + rand.nextInt());
         view.setEmail(unverifiedUserView.getEmail());
@@ -68,7 +68,7 @@ public class Mocks {
         return view;
     }
 
-    public static VerifyUserView createVerifyUserViewForForgotPassword(UserView userView) {
+    public static VerifyUserView createVerifyUserForForgotPassword(UserView userView) {
         VerifyUserView view = new VerifyUserView();
         view.setEmail(userView.getEmail());
         view.setEnteredPasswordHash(userView.getPasswordHash());
@@ -77,7 +77,7 @@ public class Mocks {
         return view;
     }
 
-    public static VerifyUserView createVerifyUserViewForResetPassword(UserView userView) {
+    public static VerifyUserView createVerifyUserForResetPassword(UserView userView) {
         VerifyUserView view = new VerifyUserView();
         view.setEmail(userView.getEmail());
         view.setPasswordHash("kkkkkkk4                                                                                                                        ");
@@ -87,7 +87,7 @@ public class Mocks {
         return view;
     }
 
-    public static CategoryView createCategoryView() {
+    public static CategoryView createCategory() {
         CategoryView view = new CategoryView();
         view.setTitle("Books");
         view.setColor("#123456");
@@ -96,7 +96,7 @@ public class Mocks {
         return view;
     }
 
-    public static AdvertisementView createAdvertisementView() {
+    public static AdvertisementView createAdvertisement() {
         AdvertisementView view = new AdvertisementView();
         view.setTitle("Literature for UNO");
         view.setDescription("Class notes for math");
@@ -108,7 +108,7 @@ public class Mocks {
         return view;
     }
 
-    public static ReviewView createReviewView() {
+    public static ReviewView createReview() {
         ReviewView view = new ReviewView();
         view.setRating(3);
         view.setComments("Some text with comments which describes some quality aspects about the reviewee");

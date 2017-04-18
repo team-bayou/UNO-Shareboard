@@ -1,6 +1,6 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
 import com.bayou.views.ReviewView;
 import com.bayou.views.UserView;
@@ -45,21 +45,21 @@ public class ReviewControllerTests {
     @Before
     public void setup() {
         // Create user view and add user to db.
-        reviewerView = Mocks.createUserView();
+        reviewerView = ViewMocks.createUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + USERS_URL + "/add",
                 new HttpEntity<>(reviewerView, headers), Long.class);
         reviewerView.setId(entity.getBody());
 
         // Create user view and add user to db.
-        revieweeView = Mocks.createUserView();
+        revieweeView = ViewMocks.createUser();
         entity = rest.postForEntity(
                 Server.url() + USERS_URL + "/add",
                 new HttpEntity<>(revieweeView, headers), Long.class);
         revieweeView.setId(entity.getBody());
 
         // Create review view and add review to db.
-        reviewView = Mocks.createReviewView();
+        reviewView = ViewMocks.createReview();
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
         entity = rest.postForEntity(
@@ -148,7 +148,7 @@ public class ReviewControllerTests {
     @Test
     public void testAddReview() {
         // Create review view and add review to db.
-        ReviewView reviewView = Mocks.createReviewView();
+        ReviewView reviewView = ViewMocks.createReview();
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
 
@@ -180,7 +180,7 @@ public class ReviewControllerTests {
     @Test
     public void testDeleteReview() {
         // Create review view and add review to db.
-        ReviewView reviewView = Mocks.createReviewView();
+        ReviewView reviewView = ViewMocks.createReview();
         reviewView.setReviewerId(reviewerView.getId());
         reviewView.setRevieweeId(revieweeView.getId());
 

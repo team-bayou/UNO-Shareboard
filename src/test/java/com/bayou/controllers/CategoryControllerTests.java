@@ -1,6 +1,6 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
 import com.bayou.views.CategoryView;
 import org.junit.After;
@@ -39,7 +39,7 @@ public class CategoryControllerTests {
     @Before
     public void setup() {
         // Create category view and add category to db.
-        view = Mocks.createCategoryView();
+        view = ViewMocks.createCategory();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add",
                 new HttpEntity<>(view, headers), Long.class);
@@ -78,7 +78,7 @@ public class CategoryControllerTests {
     @Test
     public void testAddCategory() {
         // Create category view and add category to db.
-        CategoryView view = Mocks.createCategoryView();
+        CategoryView view = ViewMocks.createCategory();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add",
                 new HttpEntity<>(view, headers), Long.class);
@@ -106,7 +106,7 @@ public class CategoryControllerTests {
     @Test
     public void testDeleteCategory() {
         // Create category view and add category to db.
-        CategoryView view = Mocks.createCategoryView();
+        CategoryView view = ViewMocks.createCategory();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add",
                 new HttpEntity<>(view, headers), Long.class);

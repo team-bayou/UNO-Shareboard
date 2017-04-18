@@ -1,6 +1,6 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
 import com.bayou.views.UserView;
 import org.junit.After;
@@ -37,7 +37,7 @@ public class UserControllerTests {
     @Before
     public void setup() {
         // Create user view and add user to db.
-        view = Mocks.createUserView();
+        view = ViewMocks.createUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(entity.getBody());
@@ -97,7 +97,7 @@ public class UserControllerTests {
     @Test
     public void testAddUser() {
         // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+        UserView view = ViewMocks.createUser();
         ResponseEntity<Long> responseEntity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add", new HttpEntity<>(view, headers), Long.class);
         view.setId(responseEntity.getBody());
@@ -125,7 +125,7 @@ public class UserControllerTests {
     @Test
     public void testDeleteUser() {
         // Create user view and add user to db.
-        UserView view = Mocks.createUserView();
+        UserView view = ViewMocks.createUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + RESOURCE_URL + "/add",
                 new HttpEntity<>(view, headers), Long.class);

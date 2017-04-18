@@ -1,6 +1,6 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.Mocks;
+import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
 import com.bayou.views.LoginView;
 import com.bayou.views.UnverifiedUserView;
@@ -41,7 +41,7 @@ public class AuthenticationControllerTests {
     @Before
     public void setup() {
         // Create user view and add user to db.
-        userView = Mocks.createUserView();
+        userView = ViewMocks.createUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + USER_URL + "/add",
                 new HttpEntity<>(userView, headers), Long.class);
@@ -58,7 +58,7 @@ public class AuthenticationControllerTests {
 
     @Test
     public void testLoginByAccountName() {
-        VerifyUserView view = Mocks.createVerifyUserViewForLoginByAccountName(userView);
+        VerifyUserView view = ViewMocks.createVerifyUserForLoginByAccountName(userView);
 
         // Login user by account name.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -71,7 +71,7 @@ public class AuthenticationControllerTests {
 
     @Test
     public void testLoginByEmail() {
-        VerifyUserView view = Mocks.createVerifyUserViewForLoginByEmail(userView);
+        VerifyUserView view = ViewMocks.createVerifyUserForLoginByEmail(userView);
 
         // Login user by email.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -85,7 +85,7 @@ public class AuthenticationControllerTests {
     @Test
     public void testVerify() {
         // Create unverified user view and add unverified user to db.
-        UnverifiedUserView unverifiedUserView = Mocks.createUnverifiedUserView();
+        UnverifiedUserView unverifiedUserView = ViewMocks.createUnverifiedUser();
         ResponseEntity<Long> entity = rest.postForEntity(
                 Server.url() + UNVERIFIED_USER_URL + "/add",
                 new HttpEntity<>(unverifiedUserView, headers), Long.class);
@@ -97,7 +97,7 @@ public class AuthenticationControllerTests {
                 Server.url() + UNVERIFIED_USER_URL + "/" + unverifiedUserView.getId(),
                 HttpMethod.GET, new HttpEntity<>(headers), UnverifiedUserView.class);
 
-        VerifyUserView view = Mocks.createVerifyUserViewForVerification(unverifiedUserEntity.getBody());
+        VerifyUserView view = ViewMocks.createVerifyUserForVerification(unverifiedUserEntity.getBody());
 
         // Verify user.
         ResponseEntity<LoginView> responseEntity = rest.postForEntity(
@@ -115,7 +115,7 @@ public class AuthenticationControllerTests {
 
     @Test
     public void testForgotPassword() {
-        VerifyUserView view = Mocks.createVerifyUserViewForForgotPassword(userView);
+        VerifyUserView view = ViewMocks.createVerifyUserForForgotPassword(userView);
 
         // Forget user's password and send verification code to user's email.
         ResponseEntity responseEntity = rest.postForEntity(
@@ -127,7 +127,7 @@ public class AuthenticationControllerTests {
 
     @Test
     public void testResetPassword() {
-        VerifyUserView view = Mocks.createVerifyUserViewForForgotPassword(userView);
+        VerifyUserView view = ViewMocks.createVerifyUserForForgotPassword(userView);
 
         // Hit 'Forgot password' endpoint first. Otherwise, the verification code of the user is not be set.
         ResponseEntity responseEntity = rest.postForEntity(
@@ -142,7 +142,7 @@ public class AuthenticationControllerTests {
                 Server.url() + USER_URL + "/" + userView.getId(),
                 HttpMethod.GET, new HttpEntity<>(headers), UserView.class);
 
-        view = Mocks.createVerifyUserViewForResetPassword(responseUserEntity.getBody());
+        view = ViewMocks.createVerifyUserForResetPassword(responseUserEntity.getBody());
 
         // Reset user's password and verification code.
         responseEntity = rest.postForEntity(
