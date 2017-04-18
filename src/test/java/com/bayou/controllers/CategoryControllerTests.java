@@ -1,7 +1,7 @@
 package com.bayou.controllers;
 
-import com.bayou.utils.ViewMocks;
 import com.bayou.utils.Server;
+import com.bayou.utils.ViewMocks;
 import com.bayou.views.CategoryView;
 import org.junit.After;
 import org.junit.Before;
@@ -87,6 +87,7 @@ public class CategoryControllerTests {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody() != null);
 
+        // Delete test data.
         rest.exchange(Server.url() + RESOURCE_URL + "/" + view.getId() + "/delete",
                 HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
     }
@@ -100,7 +101,7 @@ public class CategoryControllerTests {
                 HttpMethod.PUT, new HttpEntity<>(view, headers), Long.class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(responseEntity.getBody(), view.getId());
+        assertEquals(view.getId(), responseEntity.getBody());
     }
 
     @Test

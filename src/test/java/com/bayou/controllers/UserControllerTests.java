@@ -32,6 +32,7 @@ public class UserControllerTests {
     @Autowired
     private TestRestTemplate rest;
     private HttpHeaders headers = Server.createHeadersAuthJson();
+
     private UserView view;
 
     @Before

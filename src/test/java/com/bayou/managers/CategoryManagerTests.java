@@ -1,8 +1,8 @@
 package com.bayou.managers;
 
-import com.bayou.managers.impl.UserManager;
+import com.bayou.managers.impl.CategoryManager;
 import com.bayou.utils.ViewMocks;
-import com.bayou.views.UserView;
+import com.bayou.views.CategoryView;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,28 +12,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.ws.rs.NotFoundException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 /**
- * File: UserManagerTests
+ * File: CategoryManagerTests
  * Package: com.bayou.managers
  * Author: Stefan Haselwanter
  * Created on: 4/17/17
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class UserManagerTests {
+public class CategoryManagerTests {
     @Autowired
-    private UserManager manager;
+    private CategoryManager manager;
 
-    private UserView view;
+    private CategoryView view;
 
     @Before
     public void setup() {
-        // Create user view and add user to db.
-        view = ViewMocks.createUser();
+        // Create category view and add category to db.
+        view = ViewMocks.createCategory();
         Long id = manager.add(view);
         view.setId(id);
     }
@@ -45,10 +46,10 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testGetUsers() {
-        List<UserView> views = null;
+    public void testGetCategories() {
+        List<CategoryView> views = null;
 
-        // Get list of users.
+        // Get list of categories.
         try {
             views = manager.getAll();
         } catch (NotFoundException e) {
@@ -59,10 +60,10 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testGetUserById() {
-        UserView view = null;
+    public void testGetCategoryById() {
+        CategoryView view = null;
 
-        // Get user by id.
+        // Get category by id.
         try {
             view = manager.get(this.view.getId());
         } catch (NotFoundException e) {
@@ -73,37 +74,9 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testGetUserByAccountName() {
-        UserView view = null;
-
-        // Get user by account name.
-        try {
-            view = manager.getByAccountName(this.view.getAccountName());
-        } catch (NotFoundException e) {
-            System.err.println(e.getMessage());
-        }
-
-        assertTrue(view != null);
-    }
-
-    @Test
-    public void testGetUserByEmail() {
-        UserView view = null;
-
-        // Get user by email.
-        try {
-            view = manager.getByEmail(this.view.getEmail());
-        } catch (NotFoundException e) {
-            System.err.println(e.getMessage());
-        }
-
-        assertTrue(view != null);
-    }
-
-    @Test
-    public void testAddUser() {
-        // Create user view and add user to db.
-        UserView view = ViewMocks.createUser();
+    public void testAddCategory() {
+        // Create category view and add category to db.
+        CategoryView view = ViewMocks.createCategory();
         Long id = manager.add(view);
         view.setId(id);
 
@@ -114,22 +87,22 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testUpdateUser() {
-        // Update some information of user and save it to db.
-        view.setFirstName(view.getFirstName() + " updated");
+    public void testUpdateCategory() throws URISyntaxException {
+        // Update some information of category and save it to db.
+        view.setTitle(view.getTitle() + " updated");
         Long id = manager.update(view);
 
         assertEquals(view.getId(), id);
     }
 
     @Test
-    public void testDeleteUser() {
-        // Create user view and add user to db.
-        UserView view = ViewMocks.createUser();
+    public void testDeleteCategory() {
+        // Create category view and add category to db.
+        CategoryView view = ViewMocks.createCategory();
         Long id = manager.add(view);
         view.setId(id);
 
-        // Delete user by id.
+        // Delete category by id.
         manager.delete(view.getId());
 
         try {
