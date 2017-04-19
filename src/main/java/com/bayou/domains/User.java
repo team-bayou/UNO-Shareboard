@@ -52,6 +52,9 @@ public class User extends BaseEntity implements Persistable<Long> {
     @Column(name = "verification_code", columnDefinition = "INTEGER")
     private Integer verificationCode;
 
+    @Column(name = "view_flag", columnDefinition = "INTEGER")
+    private Integer view_flag;
+
     public String getAccountName() {
         return accountName;
     }
@@ -147,6 +150,10 @@ public class User extends BaseEntity implements Persistable<Long> {
     public void setVerificationCode(Integer verificationCode) {
         this.verificationCode = verificationCode;
     }
+
+    public Integer getView_flag() { return view_flag; }
+
+    public void setView_flag(Integer view_flag) { this.view_flag = view_flag; }
 
     @Override
     public boolean equals(Object o) {
