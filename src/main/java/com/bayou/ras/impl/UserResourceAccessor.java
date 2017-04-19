@@ -1,6 +1,7 @@
 package com.bayou.ras.impl;
 
 import com.bayou.domains.User;
+import com.bayou.loggers.Loggable;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IUserRepository;
 import org.hibernate.StaleObjectStateException;
@@ -34,12 +35,12 @@ public class UserResourceAccessor implements IResourceAccessor<User> {
     public User findByAccountName(String accountName) {
         return repo.findByAccountNameIgnoreCase(accountName);
     }
-
+    @Loggable
     @Override
     public Long add(User entity) {
         return repo.save(entity).getId();
     }
-
+    @Loggable
     @Override
     public Long update(User entity) {
 

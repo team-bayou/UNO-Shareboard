@@ -1,5 +1,6 @@
 package com.bayou.controllers;
 
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.views.UnverifiedUserView;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,7 @@ public class UnverifiedUserController {
     @Autowired
     private UnverifiedUserManager manager;
 
+    @Loggable
     @ApiOperation(value = "Get an unverified user by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UnverifiedUserView> getById(@PathVariable("id") Long id) throws NotFoundException {
@@ -31,7 +33,7 @@ public class UnverifiedUserController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Get an unverified user by email", response = ResponseEntity.class)
     @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET)
     public ResponseEntity<UnverifiedUserView> getByEmail(@PathVariable("email") String email) throws NotFoundException {
@@ -44,7 +46,7 @@ public class UnverifiedUserController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Add an unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> add(@RequestBody UnverifiedUserView userView) {
@@ -58,7 +60,7 @@ public class UnverifiedUserController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Delete an unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
     public ResponseEntity delete(@PathVariable("id") Long id) {

@@ -1,6 +1,7 @@
 package com.bayou.ras.impl;
 
 import com.bayou.domains.Review;
+import com.bayou.loggers.Loggable;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IReviewRepository;
 import org.hibernate.StaleObjectStateException;
@@ -57,7 +58,7 @@ public class ReviewResourceAccessor implements IResourceAccessor<Review> {
     public Long add(Review entity) {
         return repo.save(entity).getId();
     }
-
+    @Loggable
     @Override
     public Long update(Review entity) {
 
@@ -81,7 +82,7 @@ public class ReviewResourceAccessor implements IResourceAccessor<Review> {
     public void delete(Long id) {
         repo.delete(id);
     }
-
+    @Loggable
     private PageRequest pageAndSortByIdDesc(Integer page) {
         return new PageRequest(page - 1, MAX_RESULTS,
                 new Sort(Sort.Direction.DESC, "id"));

@@ -1,5 +1,6 @@
 package com.bayou.engines;
 
+import com.bayou.loggers.Loggable;
 import com.sendgrid.*;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import java.io.IOException;
  */
 @Component
 public class UserEngine {
+    @Loggable
     public void sendVerificationCode(String verCode, String recipient) throws IOException {
         Mail mail = new Mail(
                 new Email("unoshareboard@uno.edu"), //set who the email is from

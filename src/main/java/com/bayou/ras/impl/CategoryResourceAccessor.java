@@ -1,6 +1,7 @@
 package com.bayou.ras.impl;
 
 import com.bayou.domains.Category;
+import com.bayou.loggers.Loggable;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.ICategoryRepository;
 import org.hibernate.StaleObjectStateException;
@@ -28,12 +29,12 @@ public class CategoryResourceAccessor implements IResourceAccessor<Category> {
     public Iterable<Category> findAll() {
         return repo.findAll();
     }
-
+    @Loggable
     @Override
     public Long add(Category entity) {
         return repo.save(entity).getId();
     }
-
+    @Loggable
     @Override
     public Long update(Category entity) {
 

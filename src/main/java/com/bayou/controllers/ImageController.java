@@ -1,6 +1,7 @@
 package com.bayou.controllers;
 
 import com.bayou.domains.Image;
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.ImageManager;
 import com.bayou.views.ImageInfoView;
 import com.bayou.views.ImageView;
@@ -32,6 +33,7 @@ public class ImageController {
     @Autowired
     private ImageManager manager;
 
+    @Loggable
     @ApiOperation(value = "Get a image info by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/info", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public ResponseEntity<ImageInfoView> getInfoById(@PathVariable("id") Long id) throws NotFoundException {
@@ -45,7 +47,7 @@ public class ImageController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Get image info by owner", response = ResponseEntity.class)
     @RequestMapping(value = "/owner/{id}/info", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public ResponseEntity<List<ImageInfoView>> getInfoByOwner(@PathVariable("id") Long id) throws NotFoundException {
@@ -58,7 +60,7 @@ public class ImageController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Get a image by id", response = ResponseEntity.class)
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public void getById(@PathVariable("id") Long id, HttpServletResponse response) throws NotFoundException {
@@ -76,7 +78,7 @@ public class ImageController {
             return;
         }
     }
-
+    @Loggable
     @ApiOperation(value = "Add an image", response = ResponseEntity.class)
     @RequestMapping(value = "/upload", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> uploadImage(@RequestParam("description") String desc, @RequestParam("owner") Long owner_id, @RequestParam("image_data") MultipartFile file) {
@@ -102,7 +104,7 @@ public class ImageController {
             responseEntity = new ResponseEntity<>(id, HttpStatus.CONFLICT);
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Update an image", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody ImageView view) { // Image data and MIME type will not be changed
@@ -124,7 +126,7 @@ public class ImageController {
         }
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Delete a image", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
     public ResponseEntity delete(@PathVariable("id") Long id) {

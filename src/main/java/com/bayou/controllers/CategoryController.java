@@ -1,5 +1,6 @@
 package com.bayou.controllers;
 
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.CategoryManager;
 import com.bayou.views.CategoryView;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,7 @@ public class CategoryController {
     @Autowired
     private CategoryManager manager;
 
+    @Loggable
     @ApiOperation(value = "Get a list of categories", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<CategoryView>> getAll() throws NotFoundException {
@@ -36,7 +38,7 @@ public class CategoryController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Get a category by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CategoryView> get(@PathVariable("id") Long id) throws NotFoundException {
@@ -49,7 +51,7 @@ public class CategoryController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Add a category", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Long> add(@RequestBody CategoryView view) {
@@ -63,7 +65,7 @@ public class CategoryController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Update a category", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> update(@RequestBody CategoryView view) {
@@ -87,7 +89,7 @@ public class CategoryController {
         }
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Delete a category", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable("id") Long id) {
