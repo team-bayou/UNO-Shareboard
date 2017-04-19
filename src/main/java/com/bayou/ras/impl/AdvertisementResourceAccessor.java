@@ -1,6 +1,7 @@
 package com.bayou.ras.impl;
 
 import com.bayou.domains.Advertisement;
+import com.bayou.loggers.Loggable;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IAdvertisementRepository;
 import com.bayou.types.AdType;
@@ -26,40 +27,43 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     @Autowired
     IAdvertisementRepository repo;
 
+    @Loggable
     @Override
     public Advertisement find(Long id) {
         return repo.findOne(id);
     }
 
+    @Loggable
     @Override
     public Iterable<Advertisement> findAll() {
         return repo.findAll();
     }
-
+    @Loggable
     public Iterable<Advertisement> findAll(Integer page) {
         return repo.findAll(pageAndSortByIdDesc(page));
     }
-
+    @Loggable
     public Iterable<Advertisement> findByOwner(Long id) {
         return repo.findByOwner(id);
     }
-
+    @Loggable
     public Iterable<Advertisement> findByOwner(Long id, Integer page) {
         return repo.findByOwner(id, pageAndSortByIdDesc(page));
     }
-
+    @Loggable
     public Iterable<Advertisement> findByCategory(Long id) {
         return repo.findByCategoryId(id);
     }
 
+    @Loggable
     public Iterable<Advertisement> findByCategory(Long id, Integer page) {
         return repo.findByCategoryId(id, pageAndSortByIdDesc(page));
     }
-
+    @Loggable
     public Iterable<Advertisement> findByCategoryIn(Long[] ids, Integer page) {
         return repo.findByCategoryIdIn(ids, pageAndSortByIdDesc(page));
     }
-
+    @Loggable
     public Iterable<Advertisement> search(Long[] categoryIds, String title, String desc, AdType type, Integer page) {
         if(categoryIds != null && categoryIds.length > 0) {
             if (title == null && desc == null && type == null) {
@@ -105,12 +109,13 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
         return repo.countByOwner(id);
     }
 
+    @Loggable
     @Override
     public Long add(Advertisement entity) {
         return repo.save(entity).getId();
     }
 
-    //TODO:implement
+    @Loggable
     @Override
     public Long update(Advertisement entity) {
 
@@ -128,12 +133,12 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
 
         return returnedID;
     }
-
+    @Loggable
     @Override
     public void delete(Long id) {
         repo.delete(id);
     }
-
+    @Loggable
     private PageRequest pageAndSortByIdDesc(Integer page) {
         return new PageRequest(page - 1, MAX_RESULTS,
                 new Sort(Sort.Direction.DESC, "id"));

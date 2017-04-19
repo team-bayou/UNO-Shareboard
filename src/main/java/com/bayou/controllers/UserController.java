@@ -4,8 +4,6 @@ import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.UserView;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -40,6 +38,7 @@ public class UserController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get a user by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)   //sets the mapping url and the HTTP method
     public ResponseEntity<UserView> getById(@PathVariable("id") Long id) throws NotFoundException {
@@ -54,6 +53,7 @@ public class UserController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get a user by account name", response = ResponseEntity.class)
     @RequestMapping(value = "/accountName/{accountName}", method = RequestMethod.GET)
     //sets the mapping url and the HTTP method
@@ -69,6 +69,7 @@ public class UserController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get a user by email", response = ResponseEntity.class)
     @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET)
     //sets the mapping url and the HTTP method
@@ -84,6 +85,7 @@ public class UserController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> add(@RequestBody UserView view) {
@@ -98,6 +100,7 @@ public class UserController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Update a user", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> update(@RequestBody UserView view) {
@@ -121,6 +124,7 @@ public class UserController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Delete a user", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)   //sets the mapping url and the HTTP method
     public ResponseEntity delete(@PathVariable("id") Long id) {
@@ -129,6 +133,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @Loggable
     @ApiOperation(value = "Is verification code not null?", response = ResponseEntity.class)
     @RequestMapping(value = "/{email:.+}/codeCheck", method = RequestMethod.GET)
     public ResponseEntity isVerificationCodeNotNull(@PathVariable("email") String email) {

@@ -1,6 +1,7 @@
 package com.bayou.ras.impl;
 
 import com.bayou.domains.Image;
+import com.bayou.loggers.Loggable;
 import com.bayou.ras.IResourceAccessor;
 import com.bayou.repository.IImageRepository;
 import org.hibernate.StaleObjectStateException;
@@ -16,29 +17,29 @@ public class ImageResourceAccessor implements IResourceAccessor<Image> {
 
     @Autowired
     IImageRepository repo;
-
+    @Loggable
     @Override
     public Long add(Image entity) {
         return repo.save(entity).getId();
     }
-
+    @Loggable
     @Override
     public void delete(Long id) {
         repo.delete(id);
     }
-
+    @Loggable
     @Override
     public Iterable<Image> findAll() {
         return repo.findAll();
     }
-
+    @Loggable
     @Override
     public Image find(Long id) {
         return repo.findOne(id);
     }
-
+    @Loggable
     public Iterable<Image> findByOwner(Long id) { return repo.findByOwner(id); }
-
+    @Loggable
     @Override
     public Long update(Image entity) {
 

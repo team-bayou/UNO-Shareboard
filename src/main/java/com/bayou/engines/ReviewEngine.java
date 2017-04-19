@@ -1,5 +1,6 @@
 package com.bayou.engines;
 
+import com.bayou.loggers.Loggable;
 import com.bayou.views.ReviewView;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class ReviewEngine {
 
     /*Provided a list of reviews for a user, averages them for the average user star rating*/
+    @Loggable
     public int avgUserRating(List<ReviewView> reviewsList) {
 
         int fiveStarCount = 0;

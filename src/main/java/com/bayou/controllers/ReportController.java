@@ -1,6 +1,7 @@
 package com.bayou.controllers;
 
 import com.bayou.exceptions.ValidationException;
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.ReportManager;
 import com.bayou.views.ReportView;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,7 @@ public class ReportController {
     @Autowired
     ReportManager manager;
 
+    @Loggable
     @ApiOperation(value = "Submit a issue report", response = ResponseEntity.class)
     @RequestMapping(value = "/submit", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> submit(@RequestBody ReportView view) {

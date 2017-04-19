@@ -1,6 +1,7 @@
 package com.bayou.controllers;
 
 import com.bayou.exceptions.VerificationException;
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UnverifiedUserManager;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.LoginView;
@@ -30,6 +31,7 @@ public class AuthenticationController {
     @Autowired
     private UnverifiedUserManager unverifiedUserManager;
 
+    @Loggable
     @ApiOperation(value = "Login as user by email or account name", response = ResponseEntity.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<LoginView> login(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
@@ -45,7 +47,7 @@ public class AuthenticationController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Verify unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/verify", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<LoginView> verify(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
@@ -63,7 +65,7 @@ public class AuthenticationController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Forgot password", response = ResponseEntity.class)
     @RequestMapping(value = "/forgotPass", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity forgotPassword(@RequestBody VerifyUserView verifyUserView) {
@@ -78,7 +80,7 @@ public class AuthenticationController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Reset password", response = ResponseEntity.class)
     @RequestMapping(value = "/resetPass", method = RequestMethod.POST)
     public ResponseEntity resetPassword(@RequestBody VerifyUserView verifyUserView) {

@@ -1,5 +1,6 @@
 package com.bayou.engines;
 
+import com.bayou.loggers.Loggable;
 import com.bayou.views.ReportView;
 import com.sendgrid.*;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import java.io.IOException;
  */
 @Component
 public class ReportEngine {
-
+    @Loggable
     public void emailBugReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
@@ -22,7 +23,7 @@ public class ReportEngine {
 
         send(mail);
     }
-
+    @Loggable
     public void emailAdReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
@@ -35,7 +36,7 @@ public class ReportEngine {
 
         send(mail);
     }
-
+    @Loggable
     public void emailUserReport(ReportView view) throws IOException {
 
         Mail mail = new Mail(
@@ -47,6 +48,7 @@ public class ReportEngine {
         send(mail);
     }
     /*Handles the prep and sending of mail via Sendgrid API*/
+    @Loggable
     private void send(Mail mail) throws IOException {
         Request request = new Request();
         request.method = Method.POST;

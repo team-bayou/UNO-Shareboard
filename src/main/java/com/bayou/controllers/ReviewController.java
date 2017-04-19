@@ -1,5 +1,6 @@
 package com.bayou.controllers;
 
+import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.ReviewManager;
 import com.bayou.views.ReviewView;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,7 @@ public class ReviewController {
     @Autowired
     private ReviewManager manager;
 
+    @Loggable
     @ApiOperation(value = "Get a list of reviews", response = ResponseEntity.class)
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<ReviewView>> getAll() throws NotFoundException {
@@ -39,6 +41,7 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get an review by id", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ReviewView> get(@PathVariable("id") Long id) throws NotFoundException {
@@ -52,6 +55,7 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get a list of user's given reviews", response = ResponseEntity.class)
     @RequestMapping(value = "/reviewer/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<ReviewView>> getReviewerReviews(@PathVariable("id") Long id) throws NotFoundException {
@@ -66,6 +70,7 @@ public class ReviewController {
 
     }
 
+    @Loggable
     @ApiOperation(value = "Get a list of user's given reviews by page number", response = ResponseEntity.class)
     @RequestMapping(value = "/reviewer/{id}/page/{page}", method = RequestMethod.GET)
     public ResponseEntity<List<ReviewView>> getReviewerReviews(@PathVariable("id") Long id,
@@ -81,6 +86,7 @@ public class ReviewController {
 
     }
 
+    @Loggable
     @ApiOperation(value = "Get a list of user's received reviews", response = ResponseEntity.class)
     @RequestMapping(value = "/reviewee/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<ReviewView>> getRevieweeReviews(@PathVariable("id") Long id) throws NotFoundException {
@@ -94,6 +100,7 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get a list of user's received reviews by page number", response = ResponseEntity.class)
     @RequestMapping(value = "/reviewee/{id}/page/{page}", method = RequestMethod.GET)
     public ResponseEntity<List<ReviewView>> getRevieweeReviews(@PathVariable("id") Long id,
@@ -108,6 +115,7 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Get average star rating for a given user id", response = ResponseEntity.class)
     @RequestMapping(value = "/reviewee/{id}/rating", method = RequestMethod.GET)
     public ResponseEntity getUserAverageRating(@PathVariable("id") Long id) {
@@ -132,6 +140,7 @@ public class ReviewController {
         return responseEntity;
     }
 
+    @Loggable
     @ApiOperation(value = "Add a review", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Long> add(@RequestBody ReviewView view) {
@@ -145,7 +154,7 @@ public class ReviewController {
 
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Update a review", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody ReviewView view) {
@@ -169,7 +178,7 @@ public class ReviewController {
         }
         return responseEntity;
     }
-
+    @Loggable
     @ApiOperation(value = "Delete a review", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable("id") Long id) {
