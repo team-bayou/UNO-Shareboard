@@ -12,8 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 import static com.bayou.Constants.MAX_RESULTS;
 
 /**
@@ -38,18 +36,22 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     public Iterable<Advertisement> findAll() {
         return repo.findAll();
     }
+
     @Loggable
     public Iterable<Advertisement> findAll(Integer page) {
         return repo.findAll(pageAndSortByIdDesc(page));
     }
+
     @Loggable
     public Iterable<Advertisement> findByOwner(Long id) {
         return repo.findByOwner(id);
     }
+
     @Loggable
     public Iterable<Advertisement> findByOwner(Long id, Integer page) {
         return repo.findByOwner(id, pageAndSortByIdDesc(page));
     }
+
     @Loggable
     public Iterable<Advertisement> findByCategory(Long id) {
         return repo.findByCategoryId(id);
@@ -59,13 +61,25 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
     public Iterable<Advertisement> findByCategory(Long id, Integer page) {
         return repo.findByCategoryId(id, pageAndSortByIdDesc(page));
     }
+
     @Loggable
     public Iterable<Advertisement> findByCategoryIn(Long[] ids, Integer page) {
         return repo.findByCategoryIdIn(ids, pageAndSortByIdDesc(page));
     }
+
+    @Loggable
+    public Iterable<Advertisement> findByAdType(AdType adType) {
+        return repo.findByAdType(adType);
+    }
+
+    @Loggable
+    public Iterable<Advertisement> findByAdType(AdType adType, Integer page) {
+        return repo.findByAdType(adType, pageAndSortByIdDesc(page));
+    }
+
     @Loggable
     public Iterable<Advertisement> search(Long[] categoryIds, String title, String desc, AdType type, Integer page) {
-        if(categoryIds != null && categoryIds.length > 0) {
+        if (categoryIds != null && categoryIds.length > 0) {
             if (title == null && desc == null && type == null) {
                 return repo.findByCategoryIdIn(categoryIds, pageAndSortByIdDesc(page));
             } else if (title != null && desc == null && type == null) {
@@ -133,11 +147,13 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
 
         return returnedID;
     }
+
     @Loggable
     @Override
     public void delete(Long id) {
         repo.delete(id);
     }
+
     @Loggable
     private PageRequest pageAndSortByIdDesc(Integer page) {
         return new PageRequest(page - 1, MAX_RESULTS,

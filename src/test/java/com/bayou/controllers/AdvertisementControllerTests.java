@@ -154,6 +154,28 @@ public class AdvertisementControllerTests {
     }
 
     @Test
+    public void testGetAdTypeAdvertisements() {
+        // Get list of advertisements by ad type.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/adType/offer",
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
+    public void testGetAdTypeAdvertisementsByPage() {
+        // Get list of advertisements by ad type and page number.
+        ResponseEntity<List> responseEntity = rest.exchange(
+                Server.url() + RESOURCE_URL + "/adType/offer" + PAGE_URL,
+                HttpMethod.GET, new HttpEntity<>(headers), List.class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertTrue(responseEntity.getBody() != null);
+    }
+
+    @Test
     public void testAddAdvertisement() {
         // Create advertisement view and add advertisement to db.
         AdvertisementView advertisementView = ViewMocks.createAdvertisement();

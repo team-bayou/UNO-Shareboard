@@ -124,6 +124,24 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
         return views;
     }
 
+    public List<AdvertisementView> getAllByAdType(String adType) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByAdType(AdType.valueOf(adType)))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
+    public List<AdvertisementView> getAllByAdType(String adType, Integer page) throws NotFoundException {
+        List<AdvertisementView> views = new ArrayList<>();
+
+        for (Advertisement ad : advertisementRas.findByAdType(AdType.valueOf(adType), page))
+            views.add(prepare(ad));
+
+        return views;
+    }
+
     public Integer countByOwner(Long ownerID) {
         return advertisementRas.countByOwner(ownerID);
     }

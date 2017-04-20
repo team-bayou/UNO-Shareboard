@@ -7,8 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * File: IAdvertisementRepository
  * Package: com.bayou.repository
@@ -26,6 +24,8 @@ public interface IAdvertisementRepository extends PagingAndSortingRepository<Adv
     Page<Advertisement> findByCategoryId(Long id, Pageable pageable);
 
     Page<Advertisement> findByCategoryIdIn(Long[] ids, Pageable pageable);
+
+    Iterable<Advertisement> findByAdType(AdType adType);
 
     Page<Advertisement> findByAdType(AdType adType, Pageable pageable);
 

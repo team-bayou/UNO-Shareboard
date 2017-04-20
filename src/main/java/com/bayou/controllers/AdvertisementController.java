@@ -67,6 +67,7 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Get a list of user's advertisements", response = ResponseEntity.class)
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
@@ -80,6 +81,7 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Get a list of user's advertisements by page number", response = ResponseEntity.class)
     @RequestMapping(value = "/users/{id}/page/{page}", method = RequestMethod.GET)
@@ -94,12 +96,14 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Get a count of user's advertisements", response = ResponseEntity.class)
-    @RequestMapping(value = "/users/count/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{id}/count", method = RequestMethod.GET)
     public ResponseEntity<Integer> getUserAdvertisementCount(@PathVariable("id") Long id) throws NotFoundException {
-        return new ResponseEntity<Integer>(manager.countByOwner(id), HttpStatus.OK);
+        return new ResponseEntity<>(manager.countByOwner(id), HttpStatus.OK);
     }
+
     @Loggable
     @ApiOperation(value = "Get a list of category's advertisements", response = ResponseEntity.class)
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
@@ -113,6 +117,7 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Get a list of category's advertisements by page number", response = ResponseEntity.class)
     @RequestMapping(value = "/categories/{id}/page/{page}", method = RequestMethod.GET)
@@ -127,6 +132,36 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
+    @Loggable
+    @ApiOperation(value = "Get a list of advertisements by ad type", response = ResponseEntity.class)
+    @RequestMapping(value = "/adType/{adType}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getAdTypeAdvertisements(@PathVariable("adType") String adType) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByAdType(adType), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @Loggable
+    @ApiOperation(value = "Get a list of advertisements by ad type and page number", response = ResponseEntity.class)
+    @RequestMapping(value = "/adType/{adType}/page/{page}", method = RequestMethod.GET)
+    public ResponseEntity<List<AdvertisementView>> getAdTypeAdvertisements(@PathVariable("adType") String adType,
+                                                                           @PathVariable("page") Integer page) throws NotFoundException {
+        ResponseEntity<List<AdvertisementView>> responseEntity;
+        try {
+            responseEntity = new ResponseEntity<>(manager.getAllByAdType(adType, page), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
     @Loggable
     @ApiOperation(value = "Get a list of advertisements in the list of categories by page number", response = ResponseEntity.class)
     @RequestMapping(value = "/categoryList/page/{ids}/{page}", method = RequestMethod.GET)
@@ -143,6 +178,7 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Search for advertisements", response = ResponseEntity.class)
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -153,7 +189,7 @@ public class AdvertisementController {
                                                           @RequestParam(value = "page") Integer page) {
         ResponseEntity<List<AdvertisementView>> responseEntity;
         if (page == null) {
-            return new ResponseEntity<List<AdvertisementView>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
             AdType adType = type == null ? null : Enum.valueOf(AdType.class, type);
@@ -164,13 +200,14 @@ public class AdvertisementController {
             } else {
                 status = HttpStatus.OK;
             }
-            responseEntity = new ResponseEntity<List<AdvertisementView>>(adList, status);
+            responseEntity = new ResponseEntity<>(adList, status);
         } catch (IllegalArgumentException iae) {
-            responseEntity = new ResponseEntity<List<AdvertisementView>>(HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Add an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -185,6 +222,7 @@ public class AdvertisementController {
 
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Add Image to an Advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/addImage/{adID}/{imageID}", method = RequestMethod.PUT)
@@ -196,6 +234,7 @@ public class AdvertisementController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @Loggable
     @ApiOperation(value = "Remove Image from an Advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/removeImage/{adID}/{imageID}", method = RequestMethod.PUT)
@@ -207,6 +246,7 @@ public class AdvertisementController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @Loggable
     @ApiOperation(value = "Update an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
@@ -230,6 +270,7 @@ public class AdvertisementController {
         }
         return responseEntity;
     }
+
     @Loggable
     @ApiOperation(value = "Delete an advertisement", response = ResponseEntity.class)
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
