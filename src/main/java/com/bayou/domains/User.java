@@ -151,9 +151,9 @@ public class User extends BaseEntity implements Persistable<Long> {
         this.verificationCode = verificationCode;
     }
 
-    public Integer getView_flag() { return view_flag; }
+    public Integer getViewFlag() { return view_flag; }
 
-    public void setView_flag(Integer view_flag) { this.view_flag = view_flag; }
+    public void setViewFlag(Integer view_flag) { this.view_flag = view_flag; }
 
     @Override
     public boolean equals(Object o) {
