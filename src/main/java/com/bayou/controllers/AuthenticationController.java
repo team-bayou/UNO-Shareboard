@@ -62,6 +62,10 @@ public class AuthenticationController {
             LoginView errorView = new LoginView();
             errorView.setErrorMessage(e.getMessage());
             responseEntity = new ResponseEntity<>(errorView, HttpStatus.BAD_REQUEST);
+        } catch(ValidationException ve) {
+            LoginView errorView = new LoginView();
+            errorView.setErrorMessage(ve.getMessage());
+            responseEntity = new ResponseEntity<>(errorView, HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;

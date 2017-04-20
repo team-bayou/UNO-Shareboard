@@ -57,7 +57,7 @@ public class UserConverter {
         if(validator.isValidFlag(domain.getViewFlag())) {
             return domain;  //return the Domain version of the given view Object
         } else {
-            throw new ValidationException("Invalid user data format");
+            throw new ValidationException("Invalid data");
         }
     }
 
@@ -104,14 +104,20 @@ public class UserConverter {
 
         int flag = 000;
 
-        if(view.isShowFullName()) {
-            flag += 001;
-        }
-        if(view.isShowEmail()) {
-            flag += 010;
-        }
-        if(view.isShowPhoneNumber()) {
-            flag += 100;
+        if(view.isShowFullName() && view.isShowEmail() && view.isShowPhoneNumber()){
+            flag = 111;
+        } else if (view.isShowFullName() && view.isShowEmail()) {
+            flag = 011;
+        } else if (view.isShowFullName() && view.isShowPhoneNumber() ) {
+            flag = 101;
+        } else if (view.isShowEmail() & view.isShowPhoneNumber() ) {
+            flag = 110;
+        } else if(view.isShowFullName()) {
+            flag = 001;
+        } else if(view.isShowEmail()) {
+            flag = 010;
+        } else if(view.isShowPhoneNumber()) {
+            flag = 100;
         }
 
         return flag;

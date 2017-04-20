@@ -14,6 +14,8 @@ public class UserValidator {
         boolean validFlag = false;
         if(String.valueOf(flag).length() == 3) {
             validFlag = true;
+        } else if(flag == 0) {
+            validFlag = true;
         }
 
         return validFlag;
