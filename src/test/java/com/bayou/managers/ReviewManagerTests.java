@@ -1,5 +1,6 @@
 package com.bayou.managers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.managers.impl.ReviewManager;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.utils.ViewMocks;
@@ -39,7 +40,7 @@ public class ReviewManagerTests {
     private ReviewView reviewView;
 
     @Before
-    public void setup() {
+    public void setup() throws ValidationException {
         // Create user view and add user to db.
         reviewerView = ViewMocks.createUser();
         Long id = userManager.add(reviewerView);

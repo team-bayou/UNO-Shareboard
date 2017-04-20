@@ -1,5 +1,6 @@
 package com.bayou.controllers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.views.UserView;
@@ -89,7 +90,12 @@ public class UserController {
     @ApiOperation(value = "Add a user", response = ResponseEntity.class)
     @RequestMapping(value = "/add", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
     public ResponseEntity<Long> add(@RequestBody UserView view) {
-        Long id = manager.add(view);
+        Long id = null;
+        try {
+            id = manager.add(view);
+        } catch (ValidationException e) {
+            e.printStackTrace();
+        }
 
         ResponseEntity<Long> responseEntity;
         if (id > 0) {
@@ -103,7 +109,7 @@ public class UserController {
     @Loggable
     @ApiOperation(value = "Update a user", response = ResponseEntity.class)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)   //sets the mapping url and the HTTP method
-    public ResponseEntity<Long> update(@RequestBody UserView view) {
+    public ResponseEntity<Long> update(@RequestBody UserView view) throws ValidationException {
         ResponseEntity<Long> responseEntity;
         Long id = -1L;
 
