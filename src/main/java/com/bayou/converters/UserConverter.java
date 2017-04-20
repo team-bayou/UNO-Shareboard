@@ -64,7 +64,11 @@ public class UserConverter {
         if(updatedUserState.getPhoneNumber() == null) { updatedUserState.setPhoneNumber(oldUserState.getPhoneNumber()); }
         if(updatedUserState.getFacebookId() == null) { updatedUserState.setFacebookId(oldUserState.getFacebookId()); }
         if(updatedUserState.getTwitterHandle() == null) { updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle()); }
-        if(updatedUserState.getImageId() == null) { updatedUserState.setImageId(oldUserState.getImageId()); }
+         //if(updatedUserState.getImageId() == null) { updatedUserState.setImageId(oldUserState.getImageId());}
+
+
+         if(updatedUserState.getImageId() == -1) { updatedUserState.setImageId(-1);}
+        else if(updatedUserState.getImageId() == null ) { updatedUserState.setImageId(oldUserState.getImageId()); }
 
         return updatedUserState;
     }
