@@ -8,14 +8,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserValidator {
 
+
+    int[] flagArray = {000, 001, 010, 100, 110, 111};
+
     /*Valid flag if 3 digits*/
     public boolean isValidFlag(int flag) {
 
         boolean validFlag = false;
-        if(String.valueOf(flag).length() == 3) {
-            validFlag = true;
-        } else if(flag == 0) {
-            validFlag = true;
+
+        for (int val: flagArray) {
+            if(flag == val) {
+                validFlag = true;
+            }
         }
 
         return validFlag;
