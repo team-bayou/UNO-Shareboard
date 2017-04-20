@@ -1,1298 +1,935 @@
 {
-	"variables": [],
-	"info": {
-		"name": "UNOshareboard",
-		"_postman_id": "90867890-56eb-9cd0-a8a5-26b05d5b5bd3",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "2f9a742a-8721-1d94-be69-676c5926c78c",
+	"name": "UNOshareboard",
+	"description": "",
+	"order": [],
+	"folders": [
 		{
+			"id": "859f805e-2151-f910-99ad-bd3e34c7ca15",
 			"name": "API - Advertisements",
 			"description": "",
-			"item": [
-				{
-					"name": "Get Advertisements",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all advertisements"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Advertisements by Page",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/page/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all advertisements by page number"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By ID",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/2",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets an advertisement by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Advertisements by Owner",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all advertisements by an owner"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Advertisements by Owner and Page",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1/page/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all advertisements by an owner and page number"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Advertisements by Category",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all advertisements by a category"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Advertisements by Category and Page",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1/page/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all advertisements by a category and page number"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
-						},
-						"description": "Adds an advertisement"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/update",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"id\":\"164\",\n\t\"title\": \"Test Add Update\",\n\t\"description\":\"This is a test add update\",\n\t\"categoryId\" : \"2\",\n\t\"ownerId\": \"34\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
-						},
-						"description": "Updates an advertisement"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes an advertisement"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Image to Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/addImage/1/1",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Adds an image to an advertisement, ad_id/image_id"
-					},
-					"response": []
-				},
-				{
-					"name": "Remove Image from Advertisement",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/removeImage/1/1",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Removes an image from an advertisement, ad_id/image_id"
-					},
-					"response": []
-				},
-				{
-					"name": "Count of User's Advertisements",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/count/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}"
-						},
-						"description": "Count of User's Advertisments"
-					},
-					"response": []
-				},
-				{
-					"name": "Search Advertisements",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/search?page=1&title=ad&description=ad&categoryId=1&adType=offer",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"seek\"\n}"
-						},
-						"description": "Search advertisements, page is required.  Title, description, categoryId, and adType are optional.  Multiple categoryIds can be supplied.  Title/description are string matching, not necessarily full match, ignoring case."
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"06393066-5c0a-0358-bb55-c8cd4f488b7f",
+				"4d3fae73-edb3-8629-bef8-4918af87149e",
+				"cc8c2ef5-feab-b4a0-3c8c-18af76bd4cc7",
+				"296ad22d-9e89-7426-1480-0f489246f0a7",
+				"b53c4760-2ad9-83f5-6db6-fa1e5738b0b3",
+				"4ee6ce93-4df7-bf96-7077-a6ba96267035",
+				"6291ab4a-f091-780d-58b1-3a81d4840df9",
+				"046b2f02-5a9d-c49b-e6b1-6d170cc1f042",
+				"6edac873-94f0-66c8-a605-05d08508e3f1",
+				"62aa1e67-aeb2-a2b9-896c-4579fc366d88",
+				"3c93fe86-0c7a-8cec-e88c-0e709a05c955",
+				"2da3aadc-9203-2e44-50c5-8ba7343c0ffd",
+				"01ec4961-678b-b5db-8357-d3213b5b3a94",
+				"369ff312-e091-b084-c298-cf0d16039a57",
+				"376dcc03-9bd9-a150-2017-90ba4f1e25f7",
+				"105fde7c-808f-d2ec-ba4b-4804f1a749da"
+			],
+			"owner": 0,
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c"
 		},
 		{
+			"id": "a4d04acc-8d73-a023-d966-0d2a694a43b4",
 			"name": "API - Auth",
 			"description": "",
-			"item": [
-				{
-					"name": "Login",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/auth/login",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\": \"hjjjjjj3                                                                                                                        \"\n}\n"
-						},
-						"description": "Login as an user by email or account name"
-					},
-					"response": []
-				},
-				{
-					"name": "Verify",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/auth/verify",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"enteredVerificationCode\" : 12345678,\n\t\"email\": \"jleaton2@uno.edu\"\n}"
-						},
-						"description": "Verify an unverified user"
-					},
-					"response": []
-				},
-				{
-					"name": "Forgot Password",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/auth/forgotPass",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu\"\n}"
-						},
-						"description": "Set a verification code that allows the user to reset their password."
-					},
-					"response": []
-				},
-				{
-					"name": "Reset Password",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/auth/resetPass",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu\",\n\t\"enteredVerificationCode\": \"12345\",\n\t\"enteredPasswordHash\": \"abbb\",\n\t\"enteredPasswordSalt\": \"abc\"\n}"
-						},
-						"description": "Reset password given the sent verification code to the user."
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"6756ce34-a25d-5d53-35d8-3179493f3b1c",
+				"7b7c85dd-1a0c-37b5-fdd1-d27f98d3a3ba",
+				"2848f458-25ea-1ee5-e0d3-14e56240c233",
+				"29fcbd81-301b-d23a-202d-df47a1f099c2"
+			],
+			"owner": 0
 		},
 		{
+			"id": "b380de8e-5e6b-4056-bd38-63a9c3377e05",
 			"name": "API - Categories",
 			"description": "",
-			"item": [
-				{
-					"name": "Get Categories",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/categories",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all categories"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By ID",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/categories/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a category by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Category",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/categories/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Category\",\n\t\"color\": \"#123456\",\n\t\"description\":\"This is a test category\"\n}"
-						},
-						"description": "Adds a category"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Category",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/categories/update",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"id\" : \"59\",\n\t\"description\":\"This is a test category update\"\n}"
-						},
-						"description": "Updates a category"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Category",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/categories/4/delete",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes a category"
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"58ebc9ab-72ae-4913-2b4e-9f6aaeff05a0",
+				"4b94132f-0971-a320-40d8-df599551820a",
+				"3afe8132-bbbc-ed5a-83a2-22e0a947ccfb",
+				"c4dd3d0e-19f3-172a-b265-fe96e5deb94b",
+				"a4858950-4c69-032e-7224-08aed4c7d7cb"
+			],
+			"owner": 0
 		},
 		{
+			"id": "813679dc-64f0-b20a-a3f7-b351a6ece245",
 			"name": "API - Images",
 			"description": "",
-			"item": [
-				{
-					"name": "Upload Image",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/images/upload",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "description",
-									"value": "test",
-									"type": "text",
-									"enabled": true
-								},
-								{
-									"key": "owner",
-									"value": "1",
-									"type": "text",
-									"enabled": true
-								},
-								{
-									"key": "image_data",
-									"type": "file",
-									"enabled": true,
-									"src": "258859_183827928338341_7827720_o.jpg",
-									"value": ""
-								}
-							]
-						},
-						"description": "Select a file under the body tab before sending to upload a file."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Image Info",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/images/1/info",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "text/html",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Image metadata."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Image",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/images/get/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "text/html",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Download image."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Image Info by Owner",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/images/owner/1/info",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "text/html",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Image metadata for all images uploaded by the specified owner."
-					},
-					"response": []
-				},
-				{
-					"name": "Update Image Info",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/images/update",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"id\": 1,\n  \"description\": \"test3\",\n  \"imageMimeType\": \"image/gif\",\n  \"owner\": 1,\n  \"order\": 2\n}"
-						},
-						"description": "Update Image metadata.  MIME type and imageData field changes will be ignored."
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Image",
-					"request": {
-						"url": "localhost:8090/service/v1/images/7/delete",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes an image"
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"79438239-8d2f-820b-df61-28abeb71eb30",
+				"d6eb7292-6979-48ca-0728-b942b8b1fa65",
+				"e659ac70-948c-431f-8243-f2f7699594b5",
+				"bf749539-3c41-a3db-9949-6a1641820f1c",
+				"1a019033-87de-85b7-be12-a09371bf611c",
+				"451e4b77-2e54-c0e1-2338-1419d1ede543"
+			],
+			"owner": 0
 		},
 		{
+			"id": "e3db8dd3-e2bd-55ea-3968-2f5c6c47d8f7",
 			"name": "API - Report",
 			"description": "Handles bug and ad reports",
-			"item": [
-				{
-					"name": "Submit Report",
-					"request": {
-						"url": "localhost:8090/service/v1/reports/submit",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"reportingUserId\": \"1\",\n\t\"offendingUserId\": \"2\",\n\t\"advertisementId\": \"3\",\n\t\"comments\": \"This is a ad report\"\n}"
-						},
-						"description": "Submits a bug or ad report which will be emailed to the team email."
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"40b43eec-a059-25db-bb2f-90d82867fb19"
+			],
+			"owner": 0
 		},
 		{
+			"id": "612973e4-b9b8-09e3-d66d-6324070e2f35",
 			"name": "API - Reviews",
 			"description": "",
-			"item": [
-				{
-					"name": "Get Reviews",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all reviews"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By ID",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/2",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a review by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Review by Reviewer",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewer/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all reviews by a reviewer"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Review by Reviewer and Page",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewer/1/page/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all reviews by a reviewer and page number"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Reviews by Reviewee",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all reviews by a reviewee"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Reviews by Reviewee and Page",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1/page/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all reviews by a reviewee and page number"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Avg Reviewee Rating",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "authShareboard",
-								"password": "91b0cc59-c527-4c16-91f5-3ffc8228ffe4",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1/rating",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets the average rating of a given user with their id"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Review",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewerId\": \"34\",\n\t\"revieweeId\": \"197\"\n}"
-						},
-						"description": "Adds a review"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Review",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/update",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"id\":\"184\",\n\t\"rating\": \"4\",\n\t\"comments\":\"Some text with comments update\",\n\t\"reviewerId\": \"34\",\n\t\"revieweeId\": \"197\"\n}"
-						},
-						"description": "Updates a review"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Review",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/reviews/5/delete",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes a review"
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"1007987f-69a3-b924-6ae2-59e3e168e63d",
+				"3c01b76c-963e-d2d5-b64c-829fc2d74932",
+				"909fc713-024c-5ad3-8e57-cca3b39b4382",
+				"9a1c9f36-5895-2c2e-ac2d-48d14e01e19a",
+				"44bc7edc-8f4b-82c9-267a-bb75d25e30ef",
+				"831670e3-eb53-6c8a-e1fd-83c318e54844",
+				"feccfdc0-ea53-4716-6135-c48a7c566082",
+				"436379d8-8c8c-ac6c-8a1b-f166e4169ea7",
+				"b506d462-c61a-f362-45fc-3a367e7b2e30",
+				"1c0d423b-4967-3ebe-09bc-7953cf42f21a"
+			],
+			"owner": 0
 		},
 		{
+			"id": "deaef661-d3cf-613a-3ac4-a772f40f1ce9",
 			"name": "API - Unverified Users",
 			"description": "These endpoints handle database interactions in regards to unverified user operations.",
-			"item": [
-				{
-					"name": "Get By ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/1",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets an unverified user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Email",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/email/jleaton3@uno.edu",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets an unverified user by email"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Unverified User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"passwordHash\": \"hjjjjjj3                                                                                                                        \",\n  \"passwordSalt\": \"hhhhhhh3                                                        \",\n  \"email\": \"jleaton@uno.edu\"\n}"
-						},
-						"description": "Adds an unverified user"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Unverified User",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/7/delete",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes an unverified user"
-					},
-					"response": []
-				}
-			]
+			"order": [
+				"c6a33bfd-88fd-551b-4de3-1d4d90306c47",
+				"1f4781db-6a3e-9644-2d73-845ccc006349",
+				"20cb053e-dbbd-503a-20bb-6fb35cad5064",
+				"2b738583-1c2c-2765-dc8e-6fc36915dfd3"
+			],
+			"owner": 0
 		},
 		{
+			"id": "d492fdd8-131b-ca5f-8938-13172758be3b",
 			"name": "API - Users",
 			"description": "",
-			"item": [
+			"order": [
+				"149494ff-8bff-14de-4f28-fc6448d1dda0",
+				"873d6342-3eab-5ac8-4cab-cbe1339229f0",
+				"0392be1f-c46c-7a62-e781-2822caafcc3c",
+				"59110a41-efc4-0ff6-ff8d-d7fac4e04727",
+				"f41280b9-a3c6-2bf7-23f6-c030df17f000",
+				"50b872f9-7b7b-348f-cac5-357cd1a1a3b8",
+				"672cf80b-d733-7181-be71-132d1b63b28b",
+				"2f868351-707c-a3ff-b8c8-382f3612c3ce"
+			],
+			"owner": 0
+		}
+	],
+	"timestamp": 0,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "01ec4961-678b-b5db-8357-d3213b5b3a94",
+			"name": "Add Image to Advertisement",
+			"description": "Adds an image to an advertisement, ad_id/image_id",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/addImage/1/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "0392be1f-c46c-7a62-e781-2822caafcc3c",
+			"name": "Get By Acount Name",
+			"description": "Gets an user by account name",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "046b2f02-5a9d-c49b-e6b1-6d170cc1f042",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0\n",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/adType/offer",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1492715180649,
+			"name": "Get Advertisements by Ad Type",
+			"description": "Gets a list of all advertisements by ad type",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "06393066-5c0a-0358-bb55-c8cd4f488b7f",
+			"name": "Get Advertisements",
+			"description": "Gets a list of all advertisements",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "1007987f-69a3-b924-6ae2-59e3e168e63d",
+			"name": "Get Reviews",
+			"description": "Gets a list of all reviews",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "105fde7c-808f-d2ec-ba4b-4804f1a749da",
+			"name": "Search Advertisements",
+			"description": "Search advertisements, page is required.  Title, description, categoryId, and adType are optional.  Multiple categoryIds can be supplied.  Title/description are string matching, not necessarily full match, ignoring case.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"seek\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/search?page=1&title=ad&description=ad&categoryId=1&adType=offer",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "149494ff-8bff-14de-4f28-fc6448d1dda0",
+			"name": "Get Users",
+			"description": "Gets a list of all users",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/users",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "1a019033-87de-85b7-be12-a09371bf611c",
+			"name": "Update Image Info",
+			"description": "Update Image metadata.  MIME type and imageData field changes will be ignored.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n  \"id\": 1,\n  \"description\": \"test3\",\n  \"imageMimeType\": \"image/gif\",\n  \"owner\": 1,\n  \"order\": 2\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/images/update",
+			"responses": [],
+			"folder": "813679dc-64f0-b20a-a3f7-b351a6ece245"
+		},
+		{
+			"id": "1c0d423b-4967-3ebe-09bc-7953cf42f21a",
+			"name": "Delete Review",
+			"description": "Deletes a review",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "DELETE",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/5/delete",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "1f4781db-6a3e-9644-2d73-845ccc006349",
+			"name": "Get By Email",
+			"description": "Gets an unverified user by email",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";",
+			"preRequestScript": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/email/jleaton3@uno.edu",
+			"responses": [],
+			"folder": "deaef661-d3cf-613a-3ac4-a772f40f1ce9"
+		},
+		{
+			"id": "20cb053e-dbbd-503a-20bb-6fb35cad5064",
+			"name": "Add Unverified User",
+			"description": "Adds an unverified user",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n  \"passwordHash\": \"hjjjjjj3                                                                                                                        \",\n  \"passwordSalt\": \"hhhhhhh3                                                        \",\n  \"email\": \"jleaton@uno.edu\"\n}",
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"email\"] = jsonData.email === \"jleaton3@uno.edu\";",
+			"preRequestScript": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/add",
+			"responses": [],
+			"folder": "deaef661-d3cf-613a-3ac4-a772f40f1ce9"
+		},
+		{
+			"id": "2848f458-25ea-1ee5-e0d3-14e56240c233",
+			"name": "Forgot Password",
+			"description": "Set a verification code that allows the user to reset their password.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/auth/forgotPass",
+			"responses": [],
+			"folder": "a4d04acc-8d73-a023-d966-0d2a694a43b4"
+		},
+		{
+			"id": "296ad22d-9e89-7426-1480-0f489246f0a7",
+			"name": "Get Advertisements by Owner",
+			"description": "Gets a list of all advertisements by an owner",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "29fcbd81-301b-d23a-202d-df47a1f099c2",
+			"name": "Reset Password",
+			"description": "Reset password given the sent verification code to the user.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu\",\n\t\"enteredVerificationCode\": \"12345\",\n\t\"enteredPasswordHash\": \"abbb\",\n\t\"enteredPasswordSalt\": \"abc\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/auth/resetPass",
+			"responses": [],
+			"folder": "a4d04acc-8d73-a023-d966-0d2a694a43b4"
+		},
+		{
+			"id": "2b738583-1c2c-2765-dc8e-6fc36915dfd3",
+			"name": "Delete Unverified User",
+			"description": "Deletes an unverified user",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "DELETE",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/7/delete",
+			"responses": [],
+			"folder": "deaef661-d3cf-613a-3ac4-a772f40f1ce9"
+		},
+		{
+			"id": "2da3aadc-9203-2e44-50c5-8ba7343c0ffd",
+			"name": "Delete Advertisement",
+			"description": "Deletes an advertisement",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "DELETE",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "2f868351-707c-a3ff-b8c8-382f3612c3ce",
+			"name": "Verification code is not null?",
+			"description": "Check if the user's verification code is not null.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/jleaton@uno.edu/codeCheck",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "369ff312-e091-b084-c298-cf0d16039a57",
+			"name": "Remove Image from Advertisement",
+			"description": "Removes an image from an advertisement, ad_id/image_id",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/removeImage/1/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "376dcc03-9bd9-a150-2017-90ba4f1e25f7",
+			"name": "Count of User's Advertisements",
+			"description": "Count of User's Advertisments",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/count/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "3afe8132-bbbc-ed5a-83a2-22e0a947ccfb",
+			"name": "Add Category",
+			"description": "Adds a category",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"title\": \"Test Category\",\n\t\"color\": \"#123456\",\n\t\"description\":\"This is a test category\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/categories/add",
+			"responses": [],
+			"folder": "b380de8e-5e6b-4056-bd38-63a9c3377e05"
+		},
+		{
+			"id": "3c01b76c-963e-d2d5-b64c-829fc2d74932",
+			"name": "Get By ID",
+			"description": "Gets a review by ID",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/2",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "3c93fe86-0c7a-8cec-e88c-0e709a05c955",
+			"name": "Update Advertisement",
+			"description": "Updates an advertisement",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"id\":\"164\",\n\t\"title\": \"Test Add Update\",\n\t\"description\":\"This is a test add update\",\n\t\"categoryId\" : \"2\",\n\t\"ownerId\": \"34\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/update",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "40b43eec-a059-25db-bb2f-90d82867fb19",
+			"name": "Submit Report",
+			"description": "Submits a bug or ad report which will be emailed to the team email.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"reportingUserId\": \"1\",\n\t\"offendingUserId\": \"2\",\n\t\"advertisementId\": \"3\",\n\t\"comments\": \"This is a ad report\"\n}",
+			"url": "localhost:8090/service/v1/reports/submit",
+			"responses": [],
+			"folder": "e3db8dd3-e2bd-55ea-3968-2f5c6c47d8f7"
+		},
+		{
+			"id": "436379d8-8c8c-ac6c-8a1b-f166e4169ea7",
+			"name": "Add Review",
+			"description": "Adds a review",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"rating\": \"3\",\n\t\"comments\":\"Some text with comments\",\n\t\"reviewerId\": \"34\",\n\t\"revieweeId\": \"197\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/add",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "44bc7edc-8f4b-82c9-267a-bb75d25e30ef",
+			"name": "Get Reviews by Reviewee",
+			"description": "Gets a list of all reviews by a reviewee",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "451e4b77-2e54-c0e1-2338-1419d1ede543",
+			"name": "Delete Image",
+			"description": "Deletes an image",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "DELETE",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "localhost:8090/service/v1/images/7/delete",
+			"responses": [],
+			"folder": "813679dc-64f0-b20a-a3f7-b351a6ece245"
+		},
+		{
+			"id": "4b94132f-0971-a320-40d8-df599551820a",
+			"name": "Get By ID",
+			"description": "Gets a category by ID",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/categories/1",
+			"responses": [],
+			"folder": "b380de8e-5e6b-4056-bd38-63a9c3377e05"
+		},
+		{
+			"id": "4d3fae73-edb3-8629-bef8-4918af87149e",
+			"name": "Get Advertisements by Page",
+			"description": "Gets a list of all advertisements by page number",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/page/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "4ee6ce93-4df7-bf96-7077-a6ba96267035",
+			"name": "Get Advertisements by Category",
+			"description": "Gets a list of all advertisements by a category",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "50b872f9-7b7b-348f-cac5-357cd1a1a3b8",
+			"name": "Update User",
+			"description": "Updates an user",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/update",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "58ebc9ab-72ae-4913-2b4e-9f6aaeff05a0",
+			"name": "Get Categories",
+			"description": "Gets a list of all categories",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/categories",
+			"responses": [],
+			"folder": "b380de8e-5e6b-4056-bd38-63a9c3377e05"
+		},
+		{
+			"id": "59110a41-efc4-0ff6-ff8d-d7fac4e04727",
+			"name": "Get By Email",
+			"description": "Gets an user by email",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "6291ab4a-f091-780d-58b1-3a81d4840df9",
+			"name": "Get Advertisements by Category and Page",
+			"description": "Gets a list of all advertisements by a category and page number",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1/page/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "62aa1e67-aeb2-a2b9-896c-4579fc366d88",
+			"name": "Add Advertisement",
+			"description": "Adds an advertisement",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"title\": \"Test Add\",\n\t\"description\":\"This is a test add\",\n\t\"categoryId\" : \"1\",\n\t\"ownerId\": \"1\",\n\t\"timePublished\" : \"2017-09-10\",\n\t\"expirationDate\" : \"2017-09-15\",\n\t\"adType\" : \"offer\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "672cf80b-d733-7181-be71-132d1b63b28b",
+			"name": "Delete User",
+			"description": "Deletes an user",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "DELETE",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/7/delete",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "6756ce34-a25d-5d53-35d8-3179493f3b1c",
+			"name": "Login",
+			"description": "Login as an user by email or account name",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"email\" : \"jleaton@uno.edu\",\n\t\"enteredPasswordHash\": \"hjjjjjj3                                                                                                                        \"\n}\n",
+			"url": "{{unoshareboard.api.host}}/service/v1/auth/login",
+			"responses": [],
+			"folder": "a4d04acc-8d73-a023-d966-0d2a694a43b4"
+		},
+		{
+			"id": "6edac873-94f0-66c8-a605-05d08508e3f1",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0\n",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/adType/offer/page/1",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1492715237691,
+			"name": "Get Advertisements by Ad Type and Page",
+			"description": "Gets a list of all advertisements by ad type and page number",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "79438239-8d2f-820b-df61-28abeb71eb30",
+			"name": "Upload Image",
+			"description": "Select a file under the body tab before sending to upload a file.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Authorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "params",
+			"data": [
 				{
-					"name": "Get Users",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets a list of all users"
-					},
-					"response": []
+					"key": "description",
+					"value": "test",
+					"type": "text",
+					"enabled": true
 				},
 				{
-					"name": "Get By ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/5",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Gets an user by ID"
-					},
-					"response": []
+					"key": "owner",
+					"value": "1",
+					"type": "text",
+					"enabled": true
 				},
 				{
-					"name": "Get By Acount Name",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/accountName/jleaton3",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Gets an user by account name"
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Email",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/email/jleaton@uno.edu",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Gets an user by email"
-					},
-					"response": []
-				},
-				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"tests[\"accountName\"] = jsonData.accountName === \"jleaton3\";"
-								]
-							}
-						}
-					],
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/add",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Adds an user"
-					},
-					"response": []
-				},
-				{
-					"name": "Update User",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/update",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
-						},
-						"description": "Updates an user"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/7/delete",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": "Deletes an user"
-					},
-					"response": []
-				},
-				{
-					"name": "Verification code is not null?",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/jleaton@uno.edu/codeCheck",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Check if the user's verification code is not null."
-					},
-					"response": []
+					"key": "image_data",
+					"type": "file",
+					"enabled": true,
+					"src": "258859_183827928338341_7827720_o.jpg",
+					"value": ""
 				}
-			]
+			],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/images/upload",
+			"responses": [],
+			"folder": "813679dc-64f0-b20a-a3f7-b351a6ece245"
+		},
+		{
+			"id": "7b7c85dd-1a0c-37b5-fdd1-d27f98d3a3ba",
+			"name": "Verify",
+			"description": "Verify an unverified user",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"enteredVerificationCode\" : 12345678,\n\t\"email\": \"jleaton2@uno.edu\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/auth/verify",
+			"responses": [],
+			"folder": "a4d04acc-8d73-a023-d966-0d2a694a43b4"
+		},
+		{
+			"id": "831670e3-eb53-6c8a-e1fd-83c318e54844",
+			"name": "Get Reviews by Reviewee and Page",
+			"description": "Gets a list of all reviews by a reviewee and page number",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1/page/1",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "873d6342-3eab-5ac8-4cab-cbe1339229f0",
+			"name": "Get By ID",
+			"description": "Gets an user by ID",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";",
+			"preRequestScript": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/5",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "909fc713-024c-5ad3-8e57-cca3b39b4382",
+			"name": "Get Review by Reviewer",
+			"description": "Gets a list of all reviews by a reviewer",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewer/1",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "9a1c9f36-5895-2c2e-ac2d-48d14e01e19a",
+			"name": "Get Review by Reviewer and Page",
+			"description": "Gets a list of all reviews by a reviewer and page number",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewer/1/page/1",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "a4858950-4c69-032e-7224-08aed4c7d7cb",
+			"name": "Delete Category",
+			"description": "Deletes a category",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "DELETE",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/categories/4/delete",
+			"responses": [],
+			"folder": "b380de8e-5e6b-4056-bd38-63a9c3377e05"
+		},
+		{
+			"id": "b506d462-c61a-f362-45fc-3a367e7b2e30",
+			"name": "Update Review",
+			"description": "Updates a review",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"id\":\"184\",\n\t\"rating\": \"4\",\n\t\"comments\":\"Some text with comments update\",\n\t\"reviewerId\": \"34\",\n\t\"revieweeId\": \"197\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/update",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
+		},
+		{
+			"id": "b53c4760-2ad9-83f5-6db6-fa1e5738b0b3",
+			"name": "Get Advertisements by Owner and Page",
+			"description": "Gets a list of all advertisements by an owner and page number",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1/page/1",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "bf749539-3c41-a3db-9949-6a1641820f1c",
+			"name": "Get Image Info by Owner",
+			"description": "Image metadata for all images uploaded by the specified owner.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Content-Type: text/html\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/images/owner/1/info",
+			"responses": [],
+			"folder": "813679dc-64f0-b20a-a3f7-b351a6ece245"
+		},
+		{
+			"id": "c4dd3d0e-19f3-172a-b265-fe96e5deb94b",
+			"name": "Update Category",
+			"description": "Updates a category",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "PUT",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n\t\"id\" : \"59\",\n\t\"description\":\"This is a test category update\"\n}",
+			"url": "{{unoshareboard.api.host}}/service/v1/categories/update",
+			"responses": [],
+			"folder": "b380de8e-5e6b-4056-bd38-63a9c3377e05"
+		},
+		{
+			"id": "c6a33bfd-88fd-551b-4de3-1d4d90306c47",
+			"name": "Get By ID",
+			"description": "Gets an unverified user by ID",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"email\"] = jsonData.accountName === \"jleaton3@uno.edu\";",
+			"preRequestScript": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/unverified_users/1",
+			"responses": [],
+			"folder": "deaef661-d3cf-613a-3ac4-a772f40f1ce9"
+		},
+		{
+			"id": "cc8c2ef5-feab-b4a0-3c8c-18af76bd4cc7",
+			"name": "Get By ID",
+			"description": "Gets an advertisement by ID",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/advertisements/2",
+			"responses": [],
+			"folder": "859f805e-2151-f910-99ad-bd3e34c7ca15"
+		},
+		{
+			"id": "d6eb7292-6979-48ca-0728-b942b8b1fa65",
+			"name": "Get Image Info",
+			"description": "Image metadata.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Content-Type: text/html\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/images/1/info",
+			"responses": [],
+			"folder": "813679dc-64f0-b20a-a3f7-b351a6ece245"
+		},
+		{
+			"id": "e659ac70-948c-431f-8243-f2f7699594b5",
+			"name": "Get Image",
+			"description": "Download image.",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"headers": "Content-Type: text/html\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/images/get/1",
+			"responses": [],
+			"folder": "813679dc-64f0-b20a-a3f7-b351a6ece245"
+		},
+		{
+			"id": "f41280b9-a3c6-2bf7-23f6-c030df17f000",
+			"name": "Add User",
+			"description": "Adds an user",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "POST",
+			"headers": "Content-Type: application/json\nAuthorization: Basic dGVzdDp0ZXN0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}",
+			"tests": "var jsonData = JSON.parse(responseBody);\ntests[\"accountName\"] = jsonData.accountName === \"jleaton3\";",
+			"preRequestScript": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/users/add",
+			"responses": [],
+			"folder": "d492fdd8-131b-ca5f-8938-13172758be3b"
+		},
+		{
+			"id": "feccfdc0-ea53-4716-6135-c48a7c566082",
+			"name": "Get Avg Reviewee Rating",
+			"description": "Gets the average rating of a given user with their id",
+			"collectionId": "2f9a742a-8721-1d94-be69-676c5926c78c",
+			"method": "GET",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "authShareboard",
+				"password": "91b0cc59-c527-4c16-91f5-3ffc8228ffe4",
+				"saveToRequest": true
+			},
+			"headers": "Authorization: Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"url": "{{unoshareboard.api.host}}/service/v1/reviews/reviewee/1/rating",
+			"responses": [],
+			"folder": "612973e4-b9b8-09e3-d66d-6324070e2f35"
 		}
 	]
 }
