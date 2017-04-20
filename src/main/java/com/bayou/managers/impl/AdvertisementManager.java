@@ -131,6 +131,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
     @Override
     public Long add(AdvertisementView view) {
         Long id = -1L;
+        view.convertStrIDsToLong();
         try {
             id = advertisementRas.add(advertisementConverter.convertToDomain(view));
         } catch (DataIntegrityViolationException e) {
@@ -154,6 +155,7 @@ public class AdvertisementManager implements IManager<AdvertisementView> {
 
     @Override
     public Long update(AdvertisementView view) {
+        view.convertStrIDsToLong();
         Advertisement ad = advertisementConverter.convertToDomain(view);    //converts the ad view to the user domain Object
         if (view.getId() == null) {   //triggers a no content if the id is null
             return -1L;

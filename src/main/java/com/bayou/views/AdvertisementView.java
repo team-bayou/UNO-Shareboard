@@ -3,6 +3,8 @@ package com.bayou.views;
 import com.bayou.types.AdType;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -22,7 +24,7 @@ public class AdvertisementView extends BaseEntityView {
     private Double price;
     private String tradeItem;
     private Set<Long> imageIDs;
-
+    private Set<String> imageIDsStr;
     private CategoryView category;
     private UserView owner;
 
@@ -128,6 +130,28 @@ public class AdvertisementView extends BaseEntityView {
 
     public void removeImage(Long imageID) {
         imageIDs.remove(imageID);
+    }
+
+    public Set<String> getImageIDsStr() {
+        return imageIDsStr;
+    }
+
+    public void setImageIDsStr(Set<String> imageIDsStr) {
+        this.imageIDsStr = imageIDsStr;
+    }
+
+    public void convertStrIDsToLong() {
+        if(imageIDs == null) {
+            imageIDs = new HashSet();
+        } else {
+            return;
+        }
+        if(imageIDsStr != null) {
+            Iterator<String> iter = imageIDsStr.iterator();
+            while(iter.hasNext()) {
+                imageIDs.add(Long.parseLong(iter.next()));
+            }
+        }
     }
 
     @Override
