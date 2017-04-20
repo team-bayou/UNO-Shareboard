@@ -169,6 +169,34 @@ public class AdvertisementManagerTests {
     }
 
     @Test
+    public void testGetAdTypeAdvertisements() {
+        List<AdvertisementView> views = null;
+
+        // Get list of advertisements by ad type.
+        try {
+            views = advertisementManager.getAllByAdType("offer");
+        } catch (NotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+        assertTrue(views != null && views.size() > 0);
+    }
+
+    @Test
+    public void testGetAdTypeAdvertisementsByPage() {
+        List<AdvertisementView> views = null;
+
+        // Get list of advertisements by ad type and page number.
+        try {
+            views = advertisementManager.getAllByAdType("offer", PAGE_NUMBER);
+        } catch (NotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+        assertTrue(views != null && views.size() > 0);
+    }
+
+    @Test
     public void testAddAdvertisement() {
         // Create advertisement view and add advertisement to db.
         AdvertisementView advertisementView = ViewMocks.createAdvertisement();
