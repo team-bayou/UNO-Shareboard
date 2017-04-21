@@ -199,6 +199,10 @@ public class UserView extends BaseEntityView {
                 ", facebookId='" + facebookId + '\'' +
                 ", twitterHandle='" + twitterHandle + '\'' +
                 ", imageId=" + imageId +
+                ", verificationCode=" + verificationCode +
+                ", showFullName=" + showFullName +
+                ", showEmail=" + showEmail +
+                ", showPhoneNumber=" + showPhoneNumber +
                 "} " + super.toString();
     }
 }

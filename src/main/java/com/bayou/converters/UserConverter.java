@@ -1,5 +1,6 @@
 package com.bayou.converters;
 
+import com.bayou.Constants;
 import com.bayou.domains.User;
 import com.bayou.exceptions.ValidationException;
 import com.bayou.validators.UserValidator;
@@ -32,14 +33,16 @@ public class UserConverter {
         view.setTwitterHandle(domain.getTwitterHandle());
         view.setImageId(domain.getImageId());
         view.setVerificationCode(domain.getVerificationCode());
-        view = setBooleanFlags(domain, view);   //sets what values are to be displayed. eg. email, phone number, full name
+        view = setBooleanFlags(view, domain.getViewFlag());   //sets what values are to be displayed. eg. email, phone number, full name
 
         return view;    //return the View version of the given domain Object
     }
 
     public User convertToDomain(UserView view) throws ValidationException {
         User domain = new User();   //this will be the newly created Domain version of the view Object
-        if(view.getId() != null) { domain.setId(view.getId()); }
+        if (view.getId() != null) {
+            domain.setId(view.getId());
+        }
         domain.setAccountName(view.getAccountName());
         domain.setFirstName(view.getFirstName());
         domain.setLastName(view.getLastName());
@@ -52,9 +55,11 @@ public class UserConverter {
         domain.setTwitterHandle(view.getTwitterHandle());
         domain.setImageId(view.getImageId());
         domain.setVerificationCode(view.getVerificationCode());
-        domain.setViewFlag(setBinaryFlag(domain, view));    //sets the binary flag for the domain object
+        domain.setViewFlag(getBinaryFlag(view));    //sets the binary flag for the domain object
 
-        if(validator.isValidFlag(domain.getViewFlag())) {
+        System.err.println(view);
+        System.err.println(domain);
+        if (validator.isValidFlag(domain.getViewFlag())) {
             return domain;  //return the Domain version of the given view Object
         } else {
             throw new ValidationException("Invalid data");
@@ -67,61 +72,74 @@ public class UserConverter {
     //set the new domain objects value to the one that was retrieved from datasource
     public User updateConversion(User updatedUserState, User oldUserState) {
 
-        if(updatedUserState.getAccountName() == null) { updatedUserState.setAccountName(oldUserState.getAccountName());}
-        if(updatedUserState.getFirstName() == null) { updatedUserState.setFirstName(oldUserState.getFirstName()); }
-        if(updatedUserState.getLastName() == null ) { updatedUserState.setLastName(oldUserState.getLastName()); }
-        if(updatedUserState.getPasswordHash() == null) { updatedUserState.setPasswordHash(oldUserState.getPasswordHash()); }
-        if(updatedUserState.getPasswordSalt() == null) { updatedUserState.setPasswordSalt(oldUserState.getPasswordSalt()); }
-        if(updatedUserState.getUserType() == null) { updatedUserState.setUserType(oldUserState.getUserType());}
-        if(updatedUserState.getEmail() == null) { updatedUserState.setEmail(oldUserState.getEmail()); }
-        if(updatedUserState.getPhoneNumber() == null) { updatedUserState.setPhoneNumber(oldUserState.getPhoneNumber()); }
-        if(updatedUserState.getFacebookId() == null) { updatedUserState.setFacebookId(oldUserState.getFacebookId()); }
-        if(updatedUserState.getTwitterHandle() == null) { updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle()); }
+        if (updatedUserState.getAccountName() == null) {
+            updatedUserState.setAccountName(oldUserState.getAccountName());
+        }
+        if (updatedUserState.getFirstName() == null) {
+            updatedUserState.setFirstName(oldUserState.getFirstName());
+        }
+        if (updatedUserState.getLastName() == null) {
+            updatedUserState.setLastName(oldUserState.getLastName());
+        }
+        if (updatedUserState.getPasswordHash() == null) {
+            updatedUserState.setPasswordHash(oldUserState.getPasswordHash());
+        }
+        if (updatedUserState.getPasswordSalt() == null) {
+            updatedUserState.setPasswordSalt(oldUserState.getPasswordSalt());
+        }
+        if (updatedUserState.getUserType() == null) {
+            updatedUserState.setUserType(oldUserState.getUserType());
+        }
+        if (updatedUserState.getEmail() == null) {
+            updatedUserState.setEmail(oldUserState.getEmail());
+        }
+        if (updatedUserState.getPhoneNumber() == null) {
+            updatedUserState.setPhoneNumber(oldUserState.getPhoneNumber());
+        }
+        if (updatedUserState.getFacebookId() == null) {
+            updatedUserState.setFacebookId(oldUserState.getFacebookId());
+        }
+        if (updatedUserState.getTwitterHandle() == null) {
+            updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle());
+        }
+        if (updatedUserState.getViewFlag() == null) {
+            updatedUserState.setViewFlag(oldUserState.getViewFlag());
+        }
 
-        if(oldUserState.getImageId() != null && updatedUserState.getImageId() == -1) { //handles case of update to delete an image
+        if (oldUserState.getImageId() != null && updatedUserState.getImageId() == -1) { //handles case of update to delete an image
             updatedUserState.setImageId(null);
-        } else if(updatedUserState.getImageId() == null) {    //handles case if update that doesnt change existing image
-                  updatedUserState.setImageId(oldUserState.getImageId()); }
+        } else if (updatedUserState.getImageId() == null) {    //handles case if update that doesnt change existing image
+            updatedUserState.setImageId(oldUserState.getImageId());
+        }
 
         return updatedUserState;
     }
 
-    public UserView setBooleanFlags(User domain , UserView view) {
-        int fullNameMask = 001;
-        int emailMask = 010;
-        int phoneNumberMask = 100;
-
-        if((domain.getViewFlag() & fullNameMask) != 0) {  //show full name
+    public UserView setBooleanFlags(UserView view, int flag) {
+        if ((flag & Constants.CODE_SHOW_FULL_NAME) != 0) {  //show full name
             view.setShowFullName(true);
         }
-        if((domain.getViewFlag() & emailMask) != 0) {  //show email
+        if ((flag & Constants.CODE_SHOW_EMAIL) != 0) {  //show email
             view.setShowEmail(true);
         }
-        if((domain.getViewFlag() & phoneNumberMask) != 0) { //show phone number
+        if ((flag & Constants.CODE_SHOW_PHONE_NUMBER) != 0) { //show phone number
             view.setShowPhoneNumber(true);
         }
 
         return view;
     }
 
-    public int setBinaryFlag(User domain, UserView view) {
+    private int getBinaryFlag(UserView view) {
+        int flag = 0;
 
-        int flag = 000;
-
-        if(view.isShowFullName() && view.isShowEmail() && view.isShowPhoneNumber()){
-            flag = 111;
-        } else if (view.isShowFullName() && view.isShowEmail()) {
-            flag = 011;
-        } else if (view.isShowFullName() && view.isShowPhoneNumber() ) {
-            flag = 101;
-        } else if (view.isShowEmail() & view.isShowPhoneNumber() ) {
-            flag = 110;
-        } else if(view.isShowFullName()) {
-            flag = 001;
-        } else if(view.isShowEmail()) {
-            flag = 010;
-        } else if(view.isShowPhoneNumber()) {
-            flag = 100;
+        if (view.isShowFullName()) {
+            flag |= Constants.CODE_SHOW_FULL_NAME;
+        }
+        if (view.isShowEmail()) {
+            flag |= Constants.CODE_SHOW_EMAIL;
+        }
+        if (view.isShowPhoneNumber()) {
+            flag |= Constants.CODE_SHOW_PHONE_NUMBER;
         }
 
         return flag;
