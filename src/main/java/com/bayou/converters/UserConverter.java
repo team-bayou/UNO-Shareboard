@@ -79,7 +79,7 @@ public class UserConverter {
         if(updatedUserState.getTwitterHandle() == null) { updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle()); }
 
         if(oldUserState.getImageId() != null && updatedUserState.getImageId() == -1) { //handles case of update to delete an image
-            updatedUserState.setImageId(-1);
+            updatedUserState.setImageId(null);
         } else if(updatedUserState.getImageId() == null) {    //handles case if update that doesnt change existing image
                   updatedUserState.setImageId(oldUserState.getImageId()); }
 
