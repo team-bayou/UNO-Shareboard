@@ -77,7 +77,11 @@ public class UserConverter {
         if(updatedUserState.getPhoneNumber() == null) { updatedUserState.setPhoneNumber(oldUserState.getPhoneNumber()); }
         if(updatedUserState.getFacebookId() == null) { updatedUserState.setFacebookId(oldUserState.getFacebookId()); }
         if(updatedUserState.getTwitterHandle() == null) { updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle()); }
-        if(updatedUserState.getImageId() == null) { updatedUserState.setImageId(oldUserState.getImageId()); }
+
+        if(oldUserState.getImageId() != null && updatedUserState.getImageId() == -1) { //handles case of update to delete an image
+            updatedUserState.setImageId(null);
+        } else if(updatedUserState.getImageId() == null) {    //handles case if update that doesnt change existing image
+                  updatedUserState.setImageId(oldUserState.getImageId()); }
 
         return updatedUserState;
     }
