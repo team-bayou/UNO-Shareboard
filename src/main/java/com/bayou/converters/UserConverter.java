@@ -56,9 +56,7 @@ public class UserConverter {
         domain.setImageId(view.getImageId());
         domain.setVerificationCode(view.getVerificationCode());
         domain.setViewFlag(getBinaryFlag(view));    //sets the binary flag for the domain object
-
-        System.err.println(view);
-        System.err.println(domain);
+        
         if (validator.isValidFlag(domain.getViewFlag())) {
             return domain;  //return the Domain version of the given view Object
         } else {
