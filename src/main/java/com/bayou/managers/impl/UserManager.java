@@ -4,6 +4,7 @@ import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UserConverter;
 import com.bayou.domains.User;
 import com.bayou.engines.UserEngine;
+import com.bayou.exceptions.ValidationException;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UserResourceAccessor;
@@ -117,7 +118,7 @@ public class UserManager implements IManager<UserView> {
     }
 
     @Override
-    public Long add(UserView userView) {
+    public Long add(UserView userView) throws ValidationException {
         Long id = -1L;
         try {
             id = userRas.add(userConverter.convertToDomain(userView));
@@ -130,7 +131,7 @@ public class UserManager implements IManager<UserView> {
 
 
     @Override
-    public Long update(UserView userView) {
+    public Long update(UserView userView) throws ValidationException {
         User user = userConverter.convertToDomain(userView);    //converts the user view to the user domain Object
         if (userView.getId() == null)    //triggers a no content if the id is null
         {
@@ -159,7 +160,7 @@ public class UserManager implements IManager<UserView> {
         }
     }
 
-    public void forgotPassword(VerifyUserView verifyUserView) throws NotFoundException {
+    public void forgotPassword(VerifyUserView verifyUserView) throws NotFoundException, ValidationException {
         UserView userView = getByEmail(verifyUserView.getEmail());
 
         Random randomGen = new Random();
@@ -174,7 +175,7 @@ public class UserManager implements IManager<UserView> {
 
     }
 
-    public void resetPassword(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
+    public void resetPassword(VerifyUserView verifyUserView) throws NotFoundException, VerificationException, ValidationException {
         UserView userView = getByEmail(verifyUserView.getEmail());
 
         if(verifyUserView != null && verifyUserView.getEnteredVerificationCode().equals(userView.getVerificationCode())) {

@@ -1,6 +1,7 @@
 package com.bayou.converters;
 
 import com.bayou.domains.User;
+import com.bayou.exceptions.ValidationException;
 import com.bayou.utils.DomainMocks;
 import com.bayou.utils.ViewMocks;
 import com.bayou.views.UserView;
@@ -46,7 +47,7 @@ public class UserConverterTests {
     }
 
     @Test
-    public void testConvertToDomain() {
+    public void testConvertToDomain() throws ValidationException {
         UserView view = ViewMocks.createUser();
 
         User domain = converter.convertToDomain(view);

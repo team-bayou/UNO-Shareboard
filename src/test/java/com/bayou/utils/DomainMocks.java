@@ -28,6 +28,7 @@ public class DomainMocks {
         view.setPhoneNumber("5046555038");
         view.setFacebookId("Josh Eaton");
         view.setTwitterHandle("");
+        view.setViewFlag(001);
 
         return view;
     }

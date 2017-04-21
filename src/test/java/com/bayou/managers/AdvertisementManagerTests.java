@@ -1,5 +1,6 @@
 package com.bayou.managers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.managers.impl.AdvertisementManager;
 import com.bayou.managers.impl.CategoryManager;
 import com.bayou.managers.impl.UserManager;
@@ -43,7 +44,7 @@ public class AdvertisementManagerTests {
     private AdvertisementView advertisementView;
 
     @Before
-    public void setup() {
+    public void setup() throws ValidationException {
         // Create user view and add user to db.
         userView = ViewMocks.createUser();
         Long id = userManager.add(userView);
