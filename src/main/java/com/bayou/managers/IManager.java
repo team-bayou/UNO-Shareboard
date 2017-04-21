@@ -1,5 +1,6 @@
 package com.bayou.managers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.views.BaseEntityView;
 import javassist.NotFoundException;
 
@@ -16,9 +17,9 @@ public interface IManager<T extends BaseEntityView> {
 
     List<T> getAll() throws NotFoundException;
 
-    Long add(T view);
+    Long add(T view) throws ValidationException;
 
-    Long update(T view);
+    Long update(T view) throws ValidationException;
 
     void delete(Long id);
 }

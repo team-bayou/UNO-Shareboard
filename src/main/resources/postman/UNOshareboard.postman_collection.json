@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "04574d3b-1d6f-2512-68be-76bc779550a0",
+		"_postman_id": "f6f685d9-bdd8-8726-eeef-e402ccc40c5a",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -1231,6 +1231,26 @@
 					"response": []
 				},
 				{
+					"name": "Verification code is not null?",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/jleaton@uno.edu/codeCheck",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic dGVzdDp0ZXN0",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
+						},
+						"description": "Check if the user's verification code is not null."
+					},
+					"response": []
+				},
+				{
 					"name": "Add User",
 					"event": [
 						{
@@ -1261,7 +1281,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\",\n  \"showFullName\" : \"true\",\n  \"showEmail\" : \"true\",\n  \"showPhoneNumber\" : \"true\"\n}"
 						},
 						"description": "Adds an user"
 					},
@@ -1286,7 +1306,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\t\"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\"\n}"
+							"raw": "{\n  \"id\": 5,\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\",\n  \"showFullName\" : \"true\",\n  \"showEmail\" : \"true\",\n  \"showPhoneNumber\" : \"true\"\n}"
 						},
 						"description": "Updates an user"
 					},
@@ -1309,26 +1329,6 @@
 							"raw": ""
 						},
 						"description": "Deletes an user"
-					},
-					"response": []
-				},
-				{
-					"name": "Verification code is not null?",
-					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/users/jleaton@uno.edu/codeCheck",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic dGVzdDp0ZXN0",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jleaton@uno.edu3\"\n}"
-						},
-						"description": "Check if the user's verification code is not null."
 					},
 					"response": []
 				}

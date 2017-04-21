@@ -1,5 +1,6 @@
 package com.bayou.managers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.managers.impl.UserManager;
 import com.bayou.utils.ViewMocks;
 import com.bayou.views.UserView;
@@ -31,7 +32,7 @@ public class UserManagerTests {
     private UserView view;
 
     @Before
-    public void setup() {
+    public void setup() throws ValidationException {
         // Create user view and add user to db.
         view = ViewMocks.createUser();
         Long id = manager.add(view);
@@ -101,7 +102,7 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testAddUser() {
+    public void testAddUser() throws ValidationException {
         // Create user view and add user to db.
         UserView view = ViewMocks.createUser();
         Long id = manager.add(view);
@@ -114,7 +115,7 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testUpdateUser() {
+    public void testUpdateUser() throws ValidationException {
         // Update some information of user and save it to db.
         view.setFirstName(view.getFirstName() + " updated");
         Long id = manager.update(view);
@@ -123,7 +124,7 @@ public class UserManagerTests {
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteUser() throws ValidationException {
         // Create user view and add user to db.
         UserView view = ViewMocks.createUser();
         Long id = manager.add(view);

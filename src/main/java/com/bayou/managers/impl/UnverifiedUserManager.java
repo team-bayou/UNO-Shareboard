@@ -4,6 +4,7 @@ import com.bayou.converters.LoginConverter;
 import com.bayou.converters.UnverifiedUserConverter;
 import com.bayou.domains.UnverifiedUser;
 import com.bayou.engines.UnverifiedUserEngine;
+import com.bayou.exceptions.ValidationException;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UnverifiedUserResourceAccessor;
@@ -40,7 +41,7 @@ public class UnverifiedUserManager implements IManager<UnverifiedUserView> {
     @Autowired
     private UnverifiedUserEngine unvEngine;
 
-    public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException {
+    public LoginView verify(VerifyUserView verifyUserView) throws NotFoundException, VerificationException, ValidationException {
         UnverifiedUserView unverifiedUser = getByEmail(verifyUserView.getEmail());
 
         verifyUserView.setPasswordHash(unverifiedUser.getPasswordHash());

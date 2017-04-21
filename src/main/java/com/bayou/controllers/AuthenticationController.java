@@ -1,5 +1,6 @@
 package com.bayou.controllers;
 
+import com.bayou.exceptions.ValidationException;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UnverifiedUserManager;
@@ -50,7 +51,7 @@ public class AuthenticationController {
     @Loggable
     @ApiOperation(value = "Verify unverified user", response = ResponseEntity.class)
     @RequestMapping(value = "/verify", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity<LoginView> verify(@RequestBody VerifyUserView verifyUserView) throws NotFoundException {
+    public ResponseEntity<LoginView> verify(@RequestBody VerifyUserView verifyUserView) throws NotFoundException, ValidationException {
         ResponseEntity<LoginView> responseEntity;
 
         try {
@@ -61,6 +62,10 @@ public class AuthenticationController {
             LoginView errorView = new LoginView();
             errorView.setErrorMessage(e.getMessage());
             responseEntity = new ResponseEntity<>(errorView, HttpStatus.BAD_REQUEST);
+        } catch(ValidationException ve) {
+            LoginView errorView = new LoginView();
+            errorView.setErrorMessage(ve.getMessage());
+            responseEntity = new ResponseEntity<>(errorView, HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;
@@ -68,7 +73,7 @@ public class AuthenticationController {
     @Loggable
     @ApiOperation(value = "Forgot password", response = ResponseEntity.class)
     @RequestMapping(value = "/forgotPass", method = RequestMethod.POST)   //sets the mapping url and the HTTP method
-    public ResponseEntity forgotPassword(@RequestBody VerifyUserView verifyUserView) {
+    public ResponseEntity forgotPassword(@RequestBody VerifyUserView verifyUserView) throws ValidationException {
         ResponseEntity responseEntity;
 
         try {
@@ -83,7 +88,7 @@ public class AuthenticationController {
     @Loggable
     @ApiOperation(value = "Reset password", response = ResponseEntity.class)
     @RequestMapping(value = "/resetPass", method = RequestMethod.POST)
-    public ResponseEntity resetPassword(@RequestBody VerifyUserView verifyUserView) {
+    public ResponseEntity resetPassword(@RequestBody VerifyUserView verifyUserView) throws ValidationException {
         ResponseEntity responseEntity;
 
         try {

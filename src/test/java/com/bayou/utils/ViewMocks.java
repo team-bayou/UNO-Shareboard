@@ -28,6 +28,9 @@ public class ViewMocks {
         view.setPhoneNumber("5046555038");
         view.setFacebookId("Josh Eaton");
         view.setTwitterHandle("");
+        view.setShowPhoneNumber(true);
+        view.setShowEmail(true);
+        view.setShowFullName(true);
 
         return view;
     }

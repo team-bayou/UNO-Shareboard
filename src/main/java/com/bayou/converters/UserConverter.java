@@ -1,7 +1,10 @@
 package com.bayou.converters;
 
 import com.bayou.domains.User;
+import com.bayou.exceptions.ValidationException;
+import com.bayou.validators.UserValidator;
 import com.bayou.views.UserView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +13,10 @@ import org.springframework.stereotype.Component;
 @Component("UserConverter")
 //registers this class as a component bean so that it can be pulled into the application context
 public class UserConverter {
+
+    @Autowired
+    UserValidator validator;
+
     public UserView convertToView(User domain) {
         UserView view = new UserView(); //this will be the newly created View version of the domain Object
         view.setId(domain.getId());
@@ -25,11 +32,12 @@ public class UserConverter {
         view.setTwitterHandle(domain.getTwitterHandle());
         view.setImageId(domain.getImageId());
         view.setVerificationCode(domain.getVerificationCode());
+        view = setBooleanFlags(domain, view);   //sets what values are to be displayed. eg. email, phone number, full name
 
         return view;    //return the View version of the given domain Object
     }
 
-    public User convertToDomain(UserView view) {
+    public User convertToDomain(UserView view) throws ValidationException {
         User domain = new User();   //this will be the newly created Domain version of the view Object
         if(view.getId() != null) { domain.setId(view.getId()); }
         domain.setAccountName(view.getAccountName());
@@ -44,8 +52,13 @@ public class UserConverter {
         domain.setTwitterHandle(view.getTwitterHandle());
         domain.setImageId(view.getImageId());
         domain.setVerificationCode(view.getVerificationCode());
+        domain.setViewFlag(setBinaryFlag(domain, view));    //sets the binary flag for the domain object
 
-        return domain;  //return the Domain version of the given view Object
+        if(validator.isValidFlag(domain.getViewFlag())) {
+            return domain;  //return the Domain version of the given view Object
+        } else {
+            throw new ValidationException("Invalid data");
+        }
     }
 
     //if user is given partial data on update
@@ -71,6 +84,47 @@ public class UserConverter {
                   updatedUserState.setImageId(oldUserState.getImageId()); }
 
         return updatedUserState;
+    }
+
+    public UserView setBooleanFlags(User domain , UserView view) {
+        int fullNameMask = 001;
+        int emailMask = 010;
+        int phoneNumberMask = 100;
+
+        if((domain.getViewFlag() & fullNameMask) != 0) {  //show full name
+            view.setShowFullName(true);
+        }
+        if((domain.getViewFlag() & emailMask) != 0) {  //show email
+            view.setShowEmail(true);
+        }
+        if((domain.getViewFlag() & phoneNumberMask) != 0) { //show phone number
+            view.setShowPhoneNumber(true);
+        }
+
+        return view;
+    }
+
+    public int setBinaryFlag(User domain, UserView view) {
+
+        int flag = 000;
+
+        if(view.isShowFullName() && view.isShowEmail() && view.isShowPhoneNumber()){
+            flag = 111;
+        } else if (view.isShowFullName() && view.isShowEmail()) {
+            flag = 011;
+        } else if (view.isShowFullName() && view.isShowPhoneNumber() ) {
+            flag = 101;
+        } else if (view.isShowEmail() & view.isShowPhoneNumber() ) {
+            flag = 110;
+        } else if(view.isShowFullName()) {
+            flag = 001;
+        } else if(view.isShowEmail()) {
+            flag = 010;
+        } else if(view.isShowPhoneNumber()) {
+            flag = 100;
+        }
+
+        return flag;
     }
 }
 
