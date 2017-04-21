@@ -2,7 +2,6 @@ package com.bayou.domains;
 
 
 import com.bayou.types.UserType;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.springframework.data.domain.Persistable;
 
@@ -206,6 +205,8 @@ public class User extends BaseEntity implements Persistable<Long> {
                 ", facebookId='" + facebookId + '\'' +
                 ", twitterHandle='" + twitterHandle + '\'' +
                 ", imageId=" + imageId +
+                ", verificationCode=" + verificationCode +
+                ", view_flag=" + view_flag +
                 "} " + super.toString();
     }
 
