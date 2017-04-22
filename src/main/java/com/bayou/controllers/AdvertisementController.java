@@ -21,7 +21,7 @@ import java.util.List;
  * Created on: 2/20/17
  */
 @RestController
-@RequestMapping("service/v1/advertisements")
+@RequestMapping("service/v1/listings")
 public class AdvertisementController {
     @Autowired
     private AdvertisementManager manager;
