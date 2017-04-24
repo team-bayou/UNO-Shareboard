@@ -85,13 +85,9 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
             } else if (title != null && desc == null && type == null) {
                 return repo.findByCategoryIdInAndTitleContainingIgnoreCase(categoryIds, title, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type == null) {
-                title = "%" + title + "%"; // workaround for for ignore case on custom queries, but I think the system is escaping the '%', so it is not working
-                desc = "%" + desc + "%";
-                return repo.findByCategoryIdInAndTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(categoryIds, title, desc, pageAndSortByIdDesc(page));
+                return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdIn(title, desc, categoryIds, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type != null) {
-                title = "%" + title + "%";
-                desc = "%" + desc + "%";
-                return repo.findByCategoryIdInAndAdTypeAndTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(categoryIds, type, title, desc,  pageAndSortByIdDesc(page));
+                return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdInAndAdType(title, desc, categoryIds, type, pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type == null) {
                 return repo.findByCategoryIdInAndDescriptionContainingIgnoreCase(categoryIds, desc, pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type != null) {
@@ -107,12 +103,8 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
             } else if (title != null && desc == null && type == null) {
                 return repo.findByTitleContainingIgnoreCase(title, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type == null) {
-                title = "%" + title + "%";
-                desc = "%" + desc + "%";
                 return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(title, desc, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type != null) {
-                title = "%" + title + "%";
-                desc = "%" + desc + "%";
                 return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAdType(title, desc, type, pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type == null) {
                 return repo.findByDescriptionContainingIgnoreCase(desc, pageAndSortByIdDesc(page));
