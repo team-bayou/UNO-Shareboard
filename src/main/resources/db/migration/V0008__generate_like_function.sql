@@ -1,1 +1,0 @@
-CREATE FUNCTION create_wildcard_string(text) RETURNS text AS 'SELECT concat(''%'', $1, ''%'');' LANGUAGE SQL;

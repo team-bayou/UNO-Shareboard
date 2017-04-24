@@ -37,15 +37,15 @@ public interface IAdvertisementRepository extends PagingAndSortingRepository<Adv
 
     Page<Advertisement> findByCategoryIdInAndDescriptionContainingIgnoreCase(Long[] ids, String desc, Pageable pageable);
 
-//    @Query("SELECT ads FROM Advertisement ads WHERE category_id IN (:ids) AND (upper(title) LIKE upper('%' || :title || '%') OR upper(description) LIKE upper('%' || :description || '%'))")
-    Page<Advertisement> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdIn(String title, String desc, Long[] ids, Pageable pageable);
+    @Query("SELECT ads FROM Advertisement ads WHERE category_id IN (:ids) AND (locate(upper(:title), upper(title)) > 0 OR locate(upper(:description), upper(description)) > 0)")
+    Page<Advertisement> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdIn(@Param("title") String title, @Param("description") String desc, @Param("ids") Long[] ids, Pageable pageable);
 
     Page<Advertisement> findByCategoryIdInAndTitleContainingIgnoreCaseAndAdType(Long[] ids, String title, AdType type, Pageable pageable);
 
     Page<Advertisement> findByCategoryIdInAndDescriptionContainingIgnoreCaseAndAdType(Long[] ids, String title, AdType type, Pageable pageable);
 
- //   @Query(value = "SELECT ads FROM Advertisement ads WHERE category_id IN (:ids) AND CAST(ad_type AS text) = CAST(:ad_type AS text) AND (upper(title) LIKE upper('%' || :title || '%') OR upper(description) LIKE upper('%' || :description || '%'))")
-    Page<Advertisement> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdInAndAdType(String title, String desc, Long[] ids, AdType type, Pageable pageable);
+    @Query(value = "SELECT ads FROM Advertisement ads WHERE category_id IN (:ids) AND CAST(ad_type AS text) = :ad_type AND (locate(upper(:title), upper(title)) > 0 OR locate(upper(:description), upper(description)) > 0)")
+    Page<Advertisement> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdInAndAdType(@Param("title") String title, @Param("description") String desc, @Param("ids") Long[] ids, @Param("ad_type") String type, Pageable pageable);
 
     Page<Advertisement> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 
@@ -57,8 +57,8 @@ public interface IAdvertisementRepository extends PagingAndSortingRepository<Adv
 
     Page<Advertisement> findByDescriptionContainingIgnoreCaseAndAdType(String title, AdType type, Pageable pageable);
 
-//    @Query(value = "SELECT ads FROM Advertisement ads WHERE CAST(ad_type AS text) = CAST(:ad_type AS text) AND (upper(title) LIKE upper('%' || :title || '%') OR upper(description) LIKE upper('%' || :description || '%'))")
-    Page<Advertisement> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAdType(String title, String desc, AdType type, Pageable pageable);
+    @Query(value = "SELECT ads FROM Advertisement ads WHERE CAST(ad_type AS text) = :ad_type AND (locate(upper(:title), upper(title)) > 0 OR locate(upper(:description), upper(description)) > 0)")
+    Page<Advertisement> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAdType(@Param("title") String title, @Param("description") String desc, @Param("ad_type") String type, Pageable pageable);
 
     Integer countByOwner(Long id);
 }
