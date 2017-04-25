@@ -103,7 +103,7 @@ public class UserConverter {
         if (updatedUserState.getViewFlag() == null) {
             updatedUserState.setViewFlag(oldUserState.getViewFlag());
         }
-        
+
         if(updatedUserState.getImageId() != null) {
             if (updatedUserState.getImageId() == -1) {   //null out the image id to let the delete happen
                 updatedUserState.setImageId(null);
