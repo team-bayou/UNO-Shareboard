@@ -85,9 +85,9 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
             } else if (title != null && desc == null && type == null) {
                 return repo.findByCategoryIdInAndTitleContainingIgnoreCase(categoryIds, title, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type == null) {
-                return repo.findByCategoryIdInAndTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCase(categoryIds, title, desc, pageAndSortByIdDesc(page));
+                return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdIn(title, desc, categoryIds, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type != null) {
-                return repo.findByCategoryIdInAndTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCaseAndAdType(categoryIds, title, desc, type, pageAndSortByIdDesc(page));
+                return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndCategoryIdInAndAdType(title, desc, categoryIds, type.toString(), pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type == null) {
                 return repo.findByCategoryIdInAndDescriptionContainingIgnoreCase(categoryIds, desc, pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type != null) {
@@ -103,9 +103,9 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
             } else if (title != null && desc == null && type == null) {
                 return repo.findByTitleContainingIgnoreCase(title, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type == null) {
-                return repo.findByTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCase(title, desc, pageAndSortByIdDesc(page));
+                return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(title, desc, pageAndSortByIdDesc(page));
             } else if (title != null && desc != null && type != null) {
-                return repo.findByTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCaseAndAdType(title, desc, type, pageAndSortByIdDesc(page));
+                return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAdType(title, desc, type.toString(), pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type == null) {
                 return repo.findByDescriptionContainingIgnoreCase(desc, pageAndSortByIdDesc(page));
             } else if (title == null && desc != null && type != null) {
@@ -156,6 +156,9 @@ public class AdvertisementResourceAccessor implements IResourceAccessor<Advertis
 
     @Loggable
     private PageRequest pageAndSortByIdDesc(Integer page) {
+        if(page == -1) {
+            return null;
+        }
         return new PageRequest(page - 1, MAX_RESULTS,
                 new Sort(Sort.Direction.DESC, "id"));
     }
