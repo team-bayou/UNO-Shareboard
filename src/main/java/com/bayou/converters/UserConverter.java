@@ -104,10 +104,14 @@ public class UserConverter {
             updatedUserState.setViewFlag(oldUserState.getViewFlag());
         }
 
-        if (oldUserState.getImageId() != null && updatedUserState.getImageId() == -1) { //handles case of update to delete an image
-            updatedUserState.setImageId(null);
-        } else if (updatedUserState.getImageId() == null) {    //handles case if update that doesnt change existing image
-            updatedUserState.setImageId(oldUserState.getImageId());
+        if(updatedUserState.getImageId() != null) {
+            if (updatedUserState.getImageId() == -1) {   //null out the image id to let the delete happen
+                updatedUserState.setImageId(null);
+            } //else the updateUser id is not null and not -1 then do not reassign it a value
+        } else {
+            if(updatedUserState.getImageId() == null && oldUserState.getImageId() != null) { //preserve the old image id
+                updatedUserState.setImageId(oldUserState.getImageId());
+            } //else the the old user state is null also so do nothing
         }
 
         return updatedUserState;
