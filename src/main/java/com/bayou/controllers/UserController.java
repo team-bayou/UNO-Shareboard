@@ -3,6 +3,7 @@ package com.bayou.controllers;
 import com.bayou.exceptions.ValidationException;
 import com.bayou.loggers.Loggable;
 import com.bayou.managers.impl.UserManager;
+import com.bayou.views.EmailView;
 import com.bayou.views.UserView;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.NotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -152,6 +154,23 @@ public class UserController {
             responseEntity = new ResponseEntity(verificationCode != null ? HttpStatus.OK : HttpStatus.NO_CONTENT);
         } catch (NotFoundException nfe) {
             responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+
+        return responseEntity;
+    }
+
+    @Loggable
+    @ApiOperation(value = "Sends a mass email to all users in the system", response = ResponseEntity.class)
+    @RequestMapping(value = "/emailUsers", method = RequestMethod.POST)
+    public ResponseEntity emailAllUsers(@RequestBody EmailView view) {
+
+        ResponseEntity responseEntity;
+
+        try {
+            manager.emailAllUsers(view);
+            responseEntity = new ResponseEntity(HttpStatus.OK);
+        } catch (IOException e) {
+            responseEntity = new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         return responseEntity;

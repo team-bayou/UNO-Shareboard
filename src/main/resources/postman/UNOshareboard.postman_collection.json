@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "UNOshareboard",
-		"_postman_id": "f6f685d9-bdd8-8726-eeef-e402ccc40c5a",
+		"_postman_id": "23a7bf65-b190-3fa4-25d4-31491a18774d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -1284,6 +1284,31 @@
 							"raw": "{\n  \"accountName\": \"jleaton8\",\n  \"passwordHash\": \"jjjjjjj3\",\n  \"passwordSalt\": \"hhhhhhh3\",\n  \"userType\": \"standard\",\n  \"firstName\": \"Joshua3\",\n  \"lastName\": \"Eaton3\",\n  \"email\": \"jleaton@uno.edu8\",\n  \"phoneNumber\": \"5046555038\",\n  \"facebookId\": \"Josh Eaton\",\n  \"twitterHandle\": \"twitterHandleName\",\n  \"showFullName\" : \"true\",\n  \"showEmail\" : \"true\",\n  \"showPhoneNumber\" : \"true\"\n}"
 						},
 						"description": "Adds an user"
+					},
+					"response": []
+				},
+				{
+					"name": "Email All Users",
+					"request": {
+						"url": "{{unoshareboard.api.host}}/service/v1/users/emailUsers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YXV0aFNoYXJlYm9hcmQ6OTFiMGNjNTktYzUyNy00YzE2LTkxZjUtM2ZmYzgyMjhmZmU0",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sender\": \"unoshareboard.dev@gmail.com\",\n\t\"subject\": \"Mass Email\",\n\t\"content\": \"This is a test\"\n}"
+						},
+						"description": "Sends a mass email to all users in the system"
 					},
 					"response": []
 				},
