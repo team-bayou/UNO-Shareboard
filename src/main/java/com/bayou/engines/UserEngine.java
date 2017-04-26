@@ -1,10 +1,14 @@
 package com.bayou.engines;
 
+import com.bayou.domains.User;
 import com.bayou.loggers.Loggable;
+import com.bayou.views.EmailView;
+import com.bayou.views.UserView;
 import com.sendgrid.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Rachel on 4/6/2017.
@@ -21,6 +25,30 @@ public class UserEngine {
                         + System.getenv("HEROKU_URL") + "/resetpassword?email=" + recipient) //set the content of the email
         );
 
+        send(mail);
+    }
+
+    @Loggable
+    public void emailUsers(List<UserView> users, EmailView view) throws IOException {
+
+        for (UserView u: users) {
+            Mail mail = prepareMessage(view.getSender(), view.getSubject(), u.getEmail(), new Content("text/plain", view.getContent()));
+            send(mail);
+        }
+    }
+
+    @Loggable
+    private Mail prepareMessage( String sender, String subject, String recipient , Content content ) {
+        return new Mail(
+                new Email(sender), //set who the email is from
+                subject, //set the subject of the email
+                new Email(recipient), //set who the email is to be sent to
+                content //set the content of the email
+        );
+    }
+
+    @Loggable
+    private void send(Mail mail) throws IOException {
         Request request = new Request();
         request.method = Method.POST;
         request.endpoint = "mail/send"; //hits the endpoint on Sendgrid
