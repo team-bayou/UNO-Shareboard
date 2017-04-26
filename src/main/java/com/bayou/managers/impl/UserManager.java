@@ -8,6 +8,7 @@ import com.bayou.exceptions.ValidationException;
 import com.bayou.exceptions.VerificationException;
 import com.bayou.managers.IManager;
 import com.bayou.ras.impl.UserResourceAccessor;
+import com.bayou.views.EmailView;
 import com.bayou.views.LoginView;
 import com.bayou.views.UserView;
 import com.bayou.views.VerifyUserView;
@@ -186,5 +187,10 @@ public class UserManager implements IManager<UserView> {
         } else {
             throw new VerificationException("Verification code does not match.");
         }
+    }
+
+    public void emailAllUsers(EmailView view) throws IOException {
+        List<UserView> userList = getAll();
+        userEngine.emailUsers(userList, view);
     }
 }

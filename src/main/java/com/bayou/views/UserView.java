@@ -18,9 +18,9 @@ public class UserView extends BaseEntityView {
     private String twitterHandle;
     private Integer imageId;
     private Integer verificationCode;
-    private boolean showFullName;
-    private boolean showEmail;
-    private boolean showPhoneNumber;
+    private Boolean showFullName;
+    private Boolean showEmail;
+    private Boolean showPhoneNumber;
 
     public String getAccountName() {
         return accountName;
@@ -118,7 +118,7 @@ public class UserView extends BaseEntityView {
         this.verificationCode = verificationCode;
     }
 
-    public boolean isShowFullName() {
+    public Boolean isShowFullName() {
         return showFullName;
     }
 
@@ -126,7 +126,7 @@ public class UserView extends BaseEntityView {
         this.showFullName = showName;
     }
 
-    public boolean isShowEmail() {
+    public Boolean isShowEmail() {
         return showEmail;
     }
 
@@ -134,7 +134,7 @@ public class UserView extends BaseEntityView {
         this.showEmail = showEmail;
     }
 
-    public boolean isShowPhoneNumber() {
+    public Boolean isShowPhoneNumber() {
         return showPhoneNumber;
     }
 

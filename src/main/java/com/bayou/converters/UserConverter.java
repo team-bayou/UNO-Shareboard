@@ -55,7 +55,12 @@ public class UserConverter {
         domain.setTwitterHandle(view.getTwitterHandle());
         domain.setImageId(view.getImageId());
         domain.setVerificationCode(view.getVerificationCode());
-        domain.setViewFlag(getBinaryFlag(view));    //sets the binary flag for the domain object
+
+        if(view.isShowPhoneNumber() == null || view.isShowEmail() == null || view.isShowFullName() == null) {
+           domain.setViewFlag(-1); //the -1 will indicate that flags were not sent back. Used later on in update conversion
+        } else {
+            domain.setViewFlag(getBinaryFlag(view));    //sets the binary flag for the domain object
+        }
         
         if (validator.isValidFlag(domain.getViewFlag())) {
             return domain;  //return the Domain version of the given view Object
@@ -100,14 +105,18 @@ public class UserConverter {
         if (updatedUserState.getTwitterHandle() == null) {
             updatedUserState.setTwitterHandle(oldUserState.getTwitterHandle());
         }
-        if (updatedUserState.getViewFlag() == null) {
+        if (updatedUserState.getViewFlag() == null || updatedUserState.getViewFlag() == -1) {
             updatedUserState.setViewFlag(oldUserState.getViewFlag());
         }
 
-        if (oldUserState.getImageId() != null && updatedUserState.getImageId() == -1) { //handles case of update to delete an image
-            updatedUserState.setImageId(null);
-        } else if (updatedUserState.getImageId() == null) {    //handles case if update that doesnt change existing image
-            updatedUserState.setImageId(oldUserState.getImageId());
+        if(updatedUserState.getImageId() != null) {
+            if (updatedUserState.getImageId() == -1) {   //null out the image id to let the delete happen
+                updatedUserState.setImageId(null);
+            } //else the updateUser id is not null and not -1 then do not reassign it a value
+        } else {
+            if(updatedUserState.getImageId() == null && oldUserState.getImageId() != null) { //preserve the old image id
+                updatedUserState.setImageId(oldUserState.getImageId());
+            } //else the the old user state is null also so do nothing
         }
 
         return updatedUserState;
@@ -116,13 +125,13 @@ public class UserConverter {
     public UserView setBooleanFlags(UserView view, int flag) {
         if ((flag & Constants.CODE_SHOW_FULL_NAME) != 0) {  //show full name
             view.setShowFullName(true);
-        }
+        } else { view.setShowFullName(false); }
         if ((flag & Constants.CODE_SHOW_EMAIL) != 0) {  //show email
             view.setShowEmail(true);
-        }
+        } else { view.setShowEmail(false); }
         if ((flag & Constants.CODE_SHOW_PHONE_NUMBER) != 0) { //show phone number
             view.setShowPhoneNumber(true);
-        }
+        } else { view.setShowPhoneNumber(false);}
 
         return view;
     }
@@ -130,13 +139,13 @@ public class UserConverter {
     private int getBinaryFlag(UserView view) {
         int flag = 0;
 
-        if (view.isShowFullName()) {
+        if (view.isShowFullName() != null && view.isShowFullName()) {
             flag |= Constants.CODE_SHOW_FULL_NAME;
         }
-        if (view.isShowEmail()) {
+        if (view.isShowEmail() != null && view.isShowEmail()) {
             flag |= Constants.CODE_SHOW_EMAIL;
         }
-        if (view.isShowPhoneNumber()) {
+        if (view.isShowPhoneNumber() != null && view.isShowPhoneNumber()) {
             flag |= Constants.CODE_SHOW_PHONE_NUMBER;
         }
 
