@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.0" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.2.0" icons="false" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="true" nesting-relationships="true" 
+  router="FAN">  
   <package id="1" language="java" name="com.bayou.configurations" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/configurations" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="286" y="56"/>    
+    <position height="-1" width="-1" x="317" y="61"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="2" language="java" name="com.bayou.views" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/views" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="46" width="123" x="634" y="209"/>    
+    <position height="-1" width="-1" x="696" y="247"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="3" language="java" name="com.bayou.controllers" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/controllers" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="46" width="152" x="971" y="123"/>    
+    <position height="-1" width="-1" x="894" y="249"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="4" language="java" name="com.bayou.engines" project="unoshareboard" 
@@ -23,7 +24,7 @@
   </package>  
   <package id="5" language="java" name="com.bayou.converters" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/converters" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="46" width="153" x="743" y="37"/>    
+    <position height="-1" width="-1" x="785" y="62"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="6" language="java" name="com.bayou.managers" project="unoshareboard" 
@@ -38,7 +39,7 @@
   </package>  
   <package id="8" language="java" name="com.bayou.domains" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/domains" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="340" y="241"/>    
+    <position height="-1" width="-1" x="371" y="234"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="9" language="java" name="com.bayou.ras" project="unoshareboard" 
@@ -48,7 +49,7 @@
   </package>  
   <package id="10" language="java" name="com.bayou.repository" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/repository" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="46" width="149" x="41" y="123"/>    
+    <position height="-1" width="-1" x="348" y="315"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="11" language="java" name="com.bayou.types" project="unoshareboard" 
@@ -58,53 +59,52 @@
   </package>  
   <package id="12" language="java" name="com.bayou.validators" project="unoshareboard" 
     file="/unoshareboard/src/main/java/com/bayou/validators" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="46" width="147" x="575" y="123"/>    
+    <position height="-1" width="-1" x="648" y="157"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <dependency id="13">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="15">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <dependency id="14">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="15">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
   <dependency id="16">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
   <dependency id="17">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
   <dependency id="18">    
-    <bendpoint x="377" y="99"/>    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="19">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="20">    
-    <bendpoint x="164" y="314"/>    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <dependency id="21">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="22">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="20">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
   <dependency id="23">    
-    <end type="SOURCE" refId="10"/>    
+    <bendpoint x="377" y="99"/>    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
   <dependency id="24">    
@@ -113,25 +113,23 @@
   </dependency>  
   <dependency id="25">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="TARGET" refId="8"/>  
   </dependency>  
   <dependency id="26">    
-    <bendpoint x="923" y="307"/>    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="11"/>  
+    <end type="TARGET" refId="7"/>  
   </dependency>  
   <dependency id="27">    
-    <end type="SOURCE" refId="8"/>    
+    <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
   <dependency id="28">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="11"/>  
   </dependency>  
   <dependency id="29">    
-    <bendpoint x="752" y="123"/>    
     <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="TARGET" refId="7"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
