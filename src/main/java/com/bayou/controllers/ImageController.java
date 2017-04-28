@@ -1,27 +1,34 @@
 package com.bayou.controllers;
 
-import com.bayou.domains.Image;
-import com.bayou.loggers.Loggable;
-import com.bayou.managers.impl.ImageManager;
-import com.bayou.views.ImageInfoView;
-import com.bayou.views.ImageView;
-import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.List;
+import com.bayou.loggers.Loggable;
+import com.bayou.managers.impl.ImageManager;
+import com.bayou.views.ImageInfoView;
+import com.bayou.views.ImageView;
+
+import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 
 /**
  * Created by Rachel on 3/19/2017.
