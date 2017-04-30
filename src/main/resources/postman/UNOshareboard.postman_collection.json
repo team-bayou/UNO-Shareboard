@@ -14,7 +14,7 @@
 				{
 					"name": "Get Advertisements",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings",
 						"method": "GET",
 						"header": [
 							{
@@ -34,7 +34,7 @@
 				{
 					"name": "Get Advertisements by Page",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/page/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/page/1",
 						"method": "GET",
 						"header": [
 							{
@@ -54,7 +54,7 @@
 				{
 					"name": "Get By ID",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/2",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/2",
 						"method": "GET",
 						"header": [
 							{
@@ -74,7 +74,7 @@
 				{
 					"name": "Get Advertisements by Owner",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/users/1",
 						"method": "GET",
 						"header": [
 							{
@@ -94,7 +94,7 @@
 				{
 					"name": "Get Advertisements by Owner and Page",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/1/page/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/users/1/page/1",
 						"method": "GET",
 						"header": [
 							{
@@ -114,7 +114,7 @@
 				{
 					"name": "Get Advertisements by Category",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/categories/1",
 						"method": "GET",
 						"header": [
 							{
@@ -134,7 +134,7 @@
 				{
 					"name": "Get Advertisements by Category and Page",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/categories/1/page/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/categories/1/page/1",
 						"method": "GET",
 						"header": [
 							{
@@ -154,7 +154,7 @@
 				{
 					"name": "Get Advertisements by Ad Type",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/adType/offer",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/adType/offer",
 						"method": "GET",
 						"header": [
 							{
@@ -174,7 +174,7 @@
 				{
 					"name": "Get Advertisements by Ad Type and Page",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/adType/offer/page/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/adType/offer/page/1",
 						"method": "GET",
 						"header": [
 							{
@@ -194,7 +194,7 @@
 				{
 					"name": "Add Advertisement",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/add",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/add",
 						"method": "POST",
 						"header": [
 							{
@@ -219,7 +219,7 @@
 				{
 					"name": "Update Advertisement",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/update",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/update",
 						"method": "PUT",
 						"header": [
 							{
@@ -244,7 +244,7 @@
 				{
 					"name": "Delete Advertisement",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/5/delete",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/5/delete",
 						"method": "DELETE",
 						"header": [
 							{
@@ -264,7 +264,7 @@
 				{
 					"name": "Add Image to Advertisement",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/addImage/1/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/addImage/1/1",
 						"method": "PUT",
 						"header": [
 							{
@@ -289,7 +289,7 @@
 				{
 					"name": "Remove Image from Advertisement",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/removeImage/1/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/removeImage/1/1",
 						"method": "PUT",
 						"header": [
 							{
@@ -314,7 +314,7 @@
 				{
 					"name": "Count of User's Advertisements",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/users/count/1",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/users/count/1",
 						"method": "GET",
 						"header": [
 							{
@@ -339,7 +339,7 @@
 				{
 					"name": "Search Advertisements",
 					"request": {
-						"url": "{{unoshareboard.api.host}}/service/v1/advertisements/search?page=1&title=ad&description=ad&categoryId=1&adType=offer",
+						"url": "{{unoshareboard.api.host}}/service/v1/listings/search?page=1&title=ad&description=ad&categoryId=1&adType=offer",
 						"method": "GET",
 						"header": [
 							{

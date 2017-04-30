@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 public class AdvertisementControllerTests {
     private static final String USERS_URL = "/users";
     private static final String CATEGORIES_URL = "/categories";
-    private static final String RESOURCE_URL = "/advertisements";
+    private static final String RESOURCE_URL = "/listings";
     private static final String PAGE_URL = "/page/1";
 
     @Autowired
