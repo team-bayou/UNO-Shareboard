@@ -34,7 +34,7 @@ public class UserEngine {
     public void emailUsers(List<UserView> users, EmailView view) throws IOException {
 
         for (UserView u: users) {
-            Mail mail = prepareMessage(view.getSender(), view.getSubject(), u.getEmail(), new Content("text/plain", view.getContent()));
+            Mail mail = prepareMessage(view.getSender(), view.getSubject(), u.getEmail(), new Content("text/html", view.getContent()));
             mail.setTemplateId("ff14104f-0a13-4b81-8ccd-d470e6ab5d4d");
             send(mail);
         }
