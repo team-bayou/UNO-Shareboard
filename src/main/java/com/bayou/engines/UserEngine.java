@@ -28,11 +28,14 @@ public class UserEngine {
         send(mail);
     }
 
+
+    //see for template format: http://stackoverflow.com/questions/37327375/send-mail-using-sendgrid-templates-from-java
     @Loggable
     public void emailUsers(List<UserView> users, EmailView view) throws IOException {
 
         for (UserView u: users) {
             Mail mail = prepareMessage(view.getSender(), view.getSubject(), u.getEmail(), new Content("text/plain", view.getContent()));
+            mail.setTemplateId("ff14104f-0a13-4b81-8ccd-d470e6ab5d4d");
             send(mail);
         }
     }
