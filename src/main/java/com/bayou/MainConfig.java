@@ -38,7 +38,8 @@ public class MainConfig extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("PUT", "DELETE", "GET", "POST")
-                .allowCredentials(true).maxAge(3600);
+                .allowCredentials(true).maxAge(3600).allowedOrigins("*");
+
     }
     //add the below back once a postman whitelist solution is found
     //.allowedOrigins("http://localhost:3000","https://uno-shareboard-webapp-dev.herokuapp.com/","https://uno-shareboard-webapp-staging.herokuapp.com/","https://uno-shareboard-webapp-prod.herokuapp.com/")
