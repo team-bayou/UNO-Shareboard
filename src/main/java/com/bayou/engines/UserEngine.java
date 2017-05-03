@@ -21,18 +21,21 @@ public class UserEngine {
                 new Email("unoshareboard@uno.edu"), //set who the email is from
                 "UNO Shareboard Verification Code", //set the subject of the email
                 new Email(recipient), //set who the email is to be sent to
-                new Content("text/plain", "Verification Code: " + verCode + "\nVerification Link: "
+                new Content("text/html", "Verification Code: " + verCode + "\nVerification Link: "
                         + System.getenv("HEROKU_URL") + "/resetpassword?email=" + recipient) //set the content of the email
         );
-
+        mail.setTemplateId("ff14104f-0a13-4b81-8ccd-d470e6ab5d4d");
         send(mail);
     }
 
+
+    //see for template format: http://stackoverflow.com/questions/37327375/send-mail-using-sendgrid-templates-from-java
     @Loggable
     public void emailUsers(List<UserView> users, EmailView view) throws IOException {
 
         for (UserView u: users) {
-            Mail mail = prepareMessage(view.getSender(), view.getSubject(), u.getEmail(), new Content("text/plain", view.getContent()));
+            Mail mail = prepareMessage(view.getSender(), view.getSubject(), u.getEmail(), new Content("text/html", view.getContent()));
+            mail.setTemplateId("ff14104f-0a13-4b81-8ccd-d470e6ab5d4d");
             send(mail);
         }
     }
