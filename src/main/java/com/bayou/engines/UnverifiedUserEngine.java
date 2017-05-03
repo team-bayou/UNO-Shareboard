@@ -18,10 +18,10 @@ public class UnverifiedUserEngine {
                 new Email("unoshareboard@uno.edu"), //set who the email is from
                 "UNO Shareboard Verification Code", //set the subject of the email
                 new Email(recipient), //set who the email is to be sent to
-                new Content("text/plain", "Verification Code: " + verCode + "\nVerification Link: "
+                new Content("text/html", "Verification Code: " + verCode + "\nVerification Link: "
                         + System.getenv("HEROKU_URL") + "/verify?email=" + recipient) //set the content of the email
         );
-
+        mail.setTemplateId("ff14104f-0a13-4b81-8ccd-d470e6ab5d4d");
         Request request = new Request();
         request.method = Method.POST;
         request.endpoint = "mail/send"; //hits the endpoint on Sendgrid
